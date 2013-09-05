@@ -10,7 +10,7 @@ release to "C:\Users\jlautzenheiser\Documents\Inform\Projects\WIPs\BeeHive\BeeHi
 
 ! Blorb instructions
 
-storyfile leafname "BeeHive.zblorb"
+storyfile leafname "HornetsNest.zblorb"
 storyfile "C:\Users\jlautzenheiser\Documents\Inform\Projects\WIPs\BeeHive\BeeHive.inform\Build\output.z8" include
 ifiction "C:\Users\jlautzenheiser\Documents\Inform\Projects\WIPs\BeeHive\BeeHive.inform\Metadata.iFiction" include
 cover "C:\Program Files (x86)\Inform 7\Inform7\Extensions\Reserved\DefaultCover.jpg"
@@ -21,7 +21,7 @@ picture 1 "C:\Program Files (x86)\Inform 7\Inform7\Extensions\Reserved\DefaultCo
 placeholder [IFID] = "876C2E38-C05C-4AE6-A38B-AB806A5B0E08"
 placeholder [RELEASE] = "1"
 placeholder [YEAR] = "2013"
-placeholder [TITLE] = "BeeHive"
+placeholder [TITLE] = "HornetsNest"
 placeholder [AUTHOR] = "Jason Lautzenheiser"
 placeholder [BLURB] = "You weren't going to let the bee hive in the shade tree out front stop you from enjoying your summer."
 
