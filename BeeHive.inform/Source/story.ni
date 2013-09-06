@@ -1,4 +1,4 @@
-"HornetsNest" by Jason Lautzenheiser
+"Hornets Nest" by Jason Lautzenheiser
 
 Use no scoring and full-length room descriptions. 
 Use American dialect.
@@ -22,7 +22,7 @@ test spray with "s/take ladder/take can/n/lean ladder on tree/u/spray".
 Book  - Not for release
 
 Include Object Response Tests by Juhana Leinonen.
-[Include Property Checking by Emily Short.]
+Include Property Checking by Emily Short.
 
 Volume - Game Settings
 
@@ -34,7 +34,7 @@ Understand the command "credits" or "info" as "about".
 
 Report abouting:
 	say "[italic type][Story title][roman type] was created in the fall of 2013 as an exercise.[paragraph break]";
-	say "[italic type][Story title][roman type] is copyright © 2013 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
+	say "[italic type][Story title][roman type] is copyright e© 2013 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
 
 Book - Uberstart
 
@@ -58,7 +58,7 @@ Book - Nouns
 
 Chapter - Player Character
 
-Myself is a male person.  The player is myself.
+Myself is a male person.  The player is myself.  The description of myself is "You're a third generation farmer who is.....no not really, you bought this old farm house because it was falling down and you got the it and the land cheap."
 
 Book - Verbs
 
@@ -97,7 +97,6 @@ Leaning it on is an action applying to two visible things.
 understand "lean [something] on [something]" as leaning it on.
 understand "lean [something] against [something]" as leaning it on.
 understand "lean [something]" as leaning it on.
-
 
 Rule for supplying a missing noun while leaning:
 	change the noun to Myself.
@@ -149,14 +148,45 @@ Carry out spraying:
 	otherwise:
 		say "There is not much left, you probably don't want to waste it." instead.
 	
+Part - Old Actions
 
+Chapter - Throwing
+
+The futile to throw things at inanimate objects rule is not listed in the check throwing it at rules.
+The block throwing at rule is not listed in the check throwing it at rules.
+
+Check throwing:
+	if the noun is bug killer:
+		if the second noun is the tree:
+			say "You throw [the noun] at [the second noun] and miss horribly.";
+			now bug killer is in under-the-tree instead;
+		if the second noun is the house:
+			say "You would wind up just breaking a window so you decide not to." instead;
+	if the noun is the ladder:
+		if the location is under-the-tree:
+			say "You give the ladder a heave and if by magic it lands upright leaning against the tree.";
+			now ladder is on the tree;
+		otherwise:
+			say "You awkwardly throw the ladder and it falls just as awkwardly to the ground.";
+			now the ladder is in the location instead;
+	otherwise:
+		say "As frustrated as you are, throwing [the noun] will not help." instead.
+	
+
+Check throwing it at (this is the block juggling rule): 
+	if the player is carrying the second noun, say "It would be difficult to throw at something you are yourself holding." instead.
+	
+Check throwing it at (this is the avoid throwing things into themselves rule): 
+	if the second noun is within the noun, say "That would be a nice magic trick." instead.	
+	
+	
 Volume - The World
 
 Book - Rooms
 
 Part - Under the Tree
 
-Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  To the south is your ancient utility shed where you store all the essentials. [if ladder is on tree]The ladder is leaning up against the tree.[end if]".
+Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade that you take advantage of whenever you can.  However, there seems to be a hornet's nest that is disrupting your relaxation.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. [if ladder is on tree]Your ladder is leaning up against the tree.[end if]".
 
 Before going up from under-the-tree:
 	if ladder is not on the tree:
@@ -234,6 +264,17 @@ The shade tree is a supporter in under-the-tree.   The shade tree is scenery. Th
 before climbing the tree:
 	try going up instead;
 	
+instead of listening to the tree:
+	say "You hear the buzz of the hornet's as the fly around the nest."
+	
+instead of listening:
+	if location is under-the-tree:
+		try listening to the tree;
+	if location is in-the-shed:
+		say "Even from within the shed, you can hear the faint sounds of the hornet's nest.";
+	if location is on-the-porch:
+		say "Though you can't see the nest from here, you can hear it."
+		
 	
 Chapter - House
 
@@ -263,4 +304,6 @@ When trying-the-bug-killer ends:
 	
 
 	
+
+
 	
