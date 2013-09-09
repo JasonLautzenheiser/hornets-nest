@@ -2,7 +2,6 @@
 
 Use no scoring and full-length room descriptions. 
 Use American dialect.
-After printing the banner text, say "Copyright © 2013, Jason Lautzenheiser."
 
 Volume - Bibliography
 
@@ -12,17 +11,37 @@ The story description is "You weren't going to let the bee hive in the shade tre
 The release number is 1.
 The story creation year is 2013.
 
-Volume - Testing & Debugging (not for release)
+Volume - Extensions
 
-Book - Tests
+Include Small Kindnesses by Aaron Reed.
+Include Default Messages by Ron Newcomb.
 
-test spray with "s/take ladder/take can/n/lean ladder on tree/u/spray".
+
+
+
 
 
 Book  - Not for release
 
 Include Object Response Tests by Juhana Leinonen.
 Include Property Checking by Emily Short.
+[Use library message alerts.]
+
+
+[Include Direction Response Testing by Andrew Schultz.]
+
+Volume - Testing & Debugging (not for release)
+
+Book - Test commands
+
+ 	 	 
+Book - Tests
+
+test spray with "s/in/take ladder/take can/out/n/lean ladder on tree/u/spray/z/z".
+
+
+
+
 
 Volume - Game Settings
 
@@ -53,12 +72,22 @@ Book - Definitions
 
 A room can be a safe-zone.
 
+Book - Easter Eggs
+
+understand "xyzzy" as a mistake("Though that kind of sounds like the buzz surrounding the hornet's nest, they do not look impressed.").
+Understand "* [text]" as a mistake ("Noted.").
+
 
 Book - Nouns
 
 Chapter - Player Character
 
 Myself is a male person.  The player is myself.  The description of myself is "You're a third generation farmer who is.....no not really, you bought this old farm house because it was falling down and you got the it and the land cheap."
+
+A person can be hiding or not-hiding.
+
+Check going when the player is hiding:
+	now the player is not-hiding.
 
 Book - Verbs
 
@@ -143,8 +172,11 @@ Carry out spraying:
 		now the hornets are angry;
 		say "You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, 'Sprays up to 8 feet!'...well crap, I've got to get closer.[paragraph break]You shake the can one more time and you seem to have just a little left." instead;
 	if location is up-the-tree:
-		say "You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your air in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....[run paragraph on]";
+		say "You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your air in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....[paragraph break]";
 		now the bug killer is empty;
+		say "...You shake the can and look at it in horror.  Just a little spray dribbled out of the can....just enough to grab the hornets attention.  They have noticed you and are headed in your direction.";
+		now the hornets are aggressive;
+		hornets attack in 1 turn from now;
 	otherwise:
 		say "There is not much left, you probably don't want to waste it." instead.
 	
@@ -152,6 +184,7 @@ Part - Old Actions
 
 Chapter - Throwing
 
+[Get rid of those few rules I don't need]
 The futile to throw things at inanimate objects rule is not listed in the check throwing it at rules.
 The block throwing at rule is not listed in the check throwing it at rules.
 
@@ -179,6 +212,14 @@ Check throwing it at (this is the block juggling rule):
 Check throwing it at (this is the avoid throwing things into themselves rule): 
 	if the second noun is within the noun, say "That would be a nice magic trick." instead.	
 	
+Book - Default Messages
+
+Table of custom library messages (continued)
+library-action	library-message-id	library-message-text
+--	37	"As much as you would like to, you don't think it would be of much use."
+going action	2	"You can't go [noun] from here."
+jumping action 	1	"[if location is not up-the-tree]When you were little jumping made you happy, now it is just sad looking[otherwise]At your age, jumping down from this height might result in something broken.  Then where would be, laid up with a broken leg and the hornet's nest still in the tree[end if]."
+
 	
 Volume - The World
 
@@ -190,15 +231,50 @@ Under-the-tree is a room.  The printed name is "Under the Tree".   The descripti
 
 Before going up from under-the-tree:
 	if ladder is not on the tree:
-		say " You never were much of a tree climber." instead.
+		say " You never were much of a tree climber, besides it wouldn't be pretty if the bees attack while you were trying to pull yourself up the tree." instead.
 
+
+	
 Part - In the shed
 
-In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "In the Shed".  The description is "Your utility shed stands was built back in the 1860s and is falling down around you, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out."  In-the-shed is south of under-the-tree.
+In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard."  In-the-shed is inside from outside-the-shed.  
+
+before going north in in-the-shed:
+	try exiting instead;
+
+A dirty window is in in-the-shed.  The dirty window is scenery. The description of the dirty window is "The window is covered in cobwebs and dust.  It doesn't look like it's been cleaned for decades, if ever.  [if horsefly is in in-the-shed]In the corner of the window is a large horsefly, buzzing up against the window trying to get out.[end if]"
+
+Understand "look out [something]" as searching.
+
+Instead of looking north when location is in-the-shed:
+	try searching the window.
+
+
+Instead of searching the window:
+	say "As you look out the hazy window, you can still barely make out the hornets in the tree.   [view-hornets-out-window]".
+	
+To say view-hornets-out-window:
+	if the hornets are swarming:
+		say "They are swarming and from here it looks like a haze around the nest.";
+	if the hornets are angry:
+		say "The haze around the nest appears to be boiling with activity.";
+	if the hornets are aggressive:
+		say "As you stand next to the window, the hornets still appear to know where you are.  One breaks from the swarm and flies right into the window with an audible thunk.";
+	if the hornets are subdued:
+		say "You can see the nest still in the tree, but through the dust and haze of the window you can't make out much more."
+	
+
+Part - Outside the shed
+
+Outside-the-shed is a room.  Outside-the-shed is a safe-zone.  The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down, however it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
+
+before of going south in outside-the-shed:
+	try going inside instead.
+	
 
 Part - On the porch
 
-On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "On the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer.  Sitting on the swing and drinking a beer."  The on-the-porch is west of under-the-tree and northwest of in-the-shed.
+On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer.  Sitting on the swing and drinking a beer."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
 
 Part - Up the tree
 
@@ -211,10 +287,12 @@ Part - Carried items
 
 Chapter - Bug Killer
 
-The bug killer is a thing in in-the-shed.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" as bug killer.
+The bug killer is a thing in in-the-shed.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" as bug killer.  
 The bug killer is either empty, half-full or full.  The bug killer is full.
 The bug killer is either shaken or settled.  The bug killer is settled.
 
+	
+	
 Chapter - Ladder
 
 A ladder is a thing.  A ladder is in in-the-shed.  The description is "The step ladder your Dad gave you for a house warming gift when you moved in twenty years ago is still laying where you left it.....oh....twenty years ago."
@@ -247,11 +325,11 @@ To say description-of-hornets:
 	if the hornets are angry:
 		say "The hornets look pissed, more so than usual.  None are going back in the nest, they are steadily pouring out and if you look closely enough, they appear to be readying an all out assault.";
 	if the hornets are aggressive:
-		say "Oh boy, you better move it.....they are flying every which way that looks chaotic yet orchestrated at the same time. [if location is under-the-tree]It would be wise to move quickly, they are headed your way.[end if]";
+		say "Oh boy, you better move it.....they are flying every which way that looks chaotic yet orchestrated at the same time. [if location is under-the-tree]It would be wise to move quickly, they are headed your way[otherwise if location is up-the-tree]They are dive-boming you in a synchronized pattern that would be strangely beautiful if they weren't out to make you hurt[end if].";
 	if the hornets are subdued:
 		say "Just a few hornets remain on the outside and even they appear as if they have had enough and are ready to call it a day."
 
-The hornets  can be swarming, subdued, angry or aggressive.  The hornets are swarming.
+The hornets can be swarming, subdued, angry or aggressive.  The hornets are swarming.
 
 Before taking hornets:
 	say "Sure, if you tried that, you would regret it." instead.
@@ -280,6 +358,74 @@ Chapter - House
 
 The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got it's problems....but it's home."  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
 
+Chapter - Shed
+
+The shed is a backdrop which is everywhere.  The description of the shed is "The tool shed was built back in the 1860s and is falling down, however it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard."
+
+before entering shed:
+	say "You wonder off to the shed.";
+	now myself is in in-the-shed instead.
+
+Chapter - Pile of wood
+
+The woodpile is a supporter. The woodpile is scenery.  The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.
+
+Before taking woodpile:
+	if large spider is on-stage:
+		say "As you go to take some of the wood, the large spider turns towards your hand and rears up as if to bite." instead;
+	otherwise:
+		say "You brush the web aside and take a handful of the dry wood.";
+		now the player carries some twigs instead.
+		
+Chapter - Some wood	
+
+Some twigs is a thing.  The description of some twigs is "A few logs....ok maybe just a few twigs and sticks."  Understand "wood" as some twigs when spider is off-stage.
+The indefinite article is "a small pile of".	
+
+Chapter - Spider web
+
+The web is a supporter on the woodpile.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've seen this side of National Geographic[end if]."
+
+Instead of attacking the web:
+	try attacking the large spider.
+
+Chapter - spider	
+
+The large spider is a animal on the web.  The  description of large spider is "The spider is at least as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.
+
+Instead of taking the large spider:
+	say "You start to reach for the spider to brush it and it's web out of the way, but as your hand approaches, the spider actually turns and appears to rear up at you as if ready to bite."
+	
+Instead of attacking the large spider:
+	try taking large spider.
+	
+check throwing it into:
+	if the noun is horsefly:
+		if the second noun is web:
+			if player is carrying horsefly:
+				say "You toss the fly into the web and the spider instantly pounces on it and begins to wrap it up.  When it's done wraping, it drags the fly off the web and underneath the wood pile.";
+				now spider is off-stage;
+				now horsefly is off-stage instead;
+		otherwise:
+			try dropping the noun instead.
+			
+		
+		
+Chapter - horsefly
+
+The horsefly is a thing in in-the-shed.  The description of horsefly is "The large horsefly is at least two inches long and [if player carries horsefly]it struggles to get out of your grip[otherwise if location is in-the-shed]keeps buzzing around the window trying to get out[end if]."  Understand "fly" as horsefly.
+
+Before taking horsefly:
+	say "You spend several minutes trying to get your hands on the fly.  It is only after it gets hung up in some cobwebs that you are finally able to catch it.  You grab it holding on by it's wings to keep it from moving around too much."
+
+after dropping horsefly:
+	say "You let the horsefly go and you watch it fly away, right back into the shed, right back into the window.";
+	now horsefly is in in-the-shed.
+	
+Chapter - wood-burner
+
+The wood-burner is a backdrop which is everywhere.  The description of wood-burner is "The wood burner was in the house when you bought it and you thought for sure you would use it every winter.  Then came that first year of chopping wood....that was too much like work, so you stacked that little pile by the shed and never thought about it again."  Understand "woodburner/burner" or "wood burner" as wood-burner.
+
 
 Volume - Scenes
 
@@ -287,23 +433,239 @@ Book - Recurring events
 
 Part - Hornets Attack
 
+Hornet attack count is a number that varies.  Hornet attack count is 0.
+
 at the time when the hornets attack:
 	if location is up-the-tree or location is under-the-tree:
+		now Hornet attack count is the hornet attack count plus 1;
 		say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms .  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildely.  For a few moments you don't even realize that after the hornets got you [if location is up-the-tree]out of[otherwise if location is under-the-tree]away from[end if] the tree, they went back to their nest.";
-		now hornets are swarming;
-		now player is in a random safe-zone room.
+		now the player is hiding;
+		now player is in a random safe-zone room;
+		Hornets calm down in two turns from now.
+
+at the time when the hornets calm down:
+	now the hornets are swarming.
+	
+Book - Aggressive Hornets
+
+Aggressive-hornets is a recurring scene.   Aggressive-hornets begins when hornets are aggressive.  Aggressive-hornets ends when hornets are not aggressive
+
+Every turn while aggressive-hornets is happening:
+	if location is under-the-tree:
+		say "As soon as walk back under the tree the hornets seem to take notice of you again.  The reform into a tight group and launch an attack.  You hastily retreat back to where you came.";
+		try retreating;
+	if location is up-the-tree:
+		do nothing;
+	otherwise:
+		say "[one of]From here you can hear the angry buzz of the hornets.[or]You can see the hornets swarming as if looking for something to sting.[or]You must have really made them mad this time.[or]Occassionally a hornet seems to locate you.  It buzzes your head and you manage to swat it away before it does much damage.  It flys back towards the nest....you hope it doesn't bring back friends.[then at random]".
+		
+		
 
 Book - Trying the bug killer
 
-Trying-the-bug-killer is a scene.  Trying-the-bug-killer begins when play begins.  Trying-the-bug-killer ends when bug killer is empty.
+Trying-the-bug-killer is a scene.  Trying-the-bug-killer begins when play begins.  Trying-the-bug-killer ends when hornet attack count is 1.
 
-When trying-the-bug-killer ends:
-	say "You shake the can and look at it in horror.  Just a little spray dribbled out of the can....just enough to grab the hornets attention.  They have noticed you and are headed in your direction.";
-	now the hornets are aggressive;
-	hornets attack in 1 turn from now.
+Book - Smoking them out
+
+Smoking-them-out is a scene.  Smoking-them-out begins when Trying-the-bug-killer ends.  Smoking-them-out ends when hornet attack count is 2.
+
+When smoking-them-out begins:
+	say "Well that didn't work too well.  [bug-killer-drop-description]a thought comes to you; hornets don't like smoke, why don't I try smoking them out.[paragraph break]";
+	now woodpile is in outside-the-shed.
+	
+to say bug-killer-drop-description:
+	if player carries bug killer:
+		say "You throw the can away in disgust and as it bounces off [if location is in-the-shed]the wall[otherwise if location is on-the-porch]the porch floor[end if] it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty.  As you look on in disbelief, [run paragraph on]" ;
+		now bug killer is in location;
+		change the printed name of the bug killer to "[if bug killer is empty]now empty [end if]bug killer";
+	otherwise:
+		say "As you pause to catch your breath, [run paragraph on]";
 	
 
-	
-
 
 	
+Volume - Looking from Supplemental Actions by Al Golden
+
+looking north is an action applying to nothing.
+looking south is an action applying to nothing.
+looking east is an action applying to nothing.
+looking west is an action applying to nothing.
+looking northeast is an action applying to nothing.
+looking northwest is an action applying to nothing.
+looking southeast is an action applying to nothing.
+looking southwest is an action applying to nothing.
+looking up is an action applying to nothing.
+looking down is an action applying to nothing.
+
+understand "look north" or "look n" as looking north.
+understand "look south" or "look s" as looking south.
+understand "look east" or "look e" as looking east.
+understand "look west" or "look w" as looking west.
+understand "look northeast" or "look ne" as looking northeast.
+understand "look northwest" or "look nw" as looking northwest.
+understand "look southeast" or "look se" as looking southeast.
+understand "look southwest" or "look sw" as looking southwest.
+understand "look up" or "l u" or "lu" as looking up.
+understand "look down" or "l d" or "ld" as looking down.
+
+report looking north
+(this is the looking north rule):
+say "You can't look to the north."
+
+report looking south
+(this is the looking south rule):
+say "You can't look to the south."
+
+report looking east
+(this is the looking east rule):
+say "You can't look to the east."
+
+report looking west
+(this is the looking west rule):
+say "You can't look to the west."
+
+report looking northeast
+(this is the looking northeast rule):
+say "You can't look to the northeast."
+
+report looking northwest
+(this is the looking northwest rule):
+say "You can't look to the northwest."
+
+report looking southeast:
+say "You can't look to the southeast."
+
+report looking southwest:
+say "You can't look to the southwest."
+
+report looking up
+(this is the looking up rule):
+say "You can't look up.".
+
+report looking down
+(this is the looking down rule):
+say "You can't look down.".
+
+
+Volume - Throwing from Supplemental Actions by Al Golden
+
+To say verbword: (- print (address) verb_word; -).
+
+understand the command "throw" as something new.
+
+throwing is an action applying to one thing.
+understand "chuck [things]" as throwing. 
+understand "heave [things]" as throwing. 
+understand "throw [things]" as throwing.
+understand "toss [things]" as throwing.
+understand "hurl [things]" as throwing. 
+understand "pitch [things]" as throwing.
+
+understand "throw [something] at [something]" as throwing it at.
+understand "chuck [things] at[something]" as throwing it at.
+understand "heave [things] at [something]" as throwing it at.
+understand "throw [things] at [something]" as throwing it at. 
+understand "toss [things] at [something]" as throwing it at.
+understand "hurl [things] at[something]" as throwing it at.
+understand "pitch [things] at [something]" as throwing it at.
+
+throwing it into is an action applying to two things.
+understand "chuck [things] in/into [something]" as throwing it into. 
+understand "heave [things] in/into [something]" as throwing it into. 
+understand "throw [things] in/into [something]" as throwing it into. 
+understand "toss [things] in/into [something]" as throwing it into. 
+understand "hurl [things] in/into [something]" as throwing it into. 
+understand "pitch [things] in/into [something]" as throwing it into.
+
+throwing it onto is an action applying to two things. 
+understand "chuck [things] on/onto [something]" as throwing it onto.
+understand "heave [things] on/onto [something]" as throwing it onto. 
+understand "throw [things] on/onto [something]" as throwing it onto. 
+understand "toss [things] on/onto [something]" as throwing it onto. 
+understand "hurl [things] on/onto [something]" as throwing it onto. 
+understand "pitch [things] on/onto [something]" as throwing it onto.
+
+throwing it down is an action applying to two things.
+understand "chuck [things] down [something]" as throwing it down. 
+understand "throw [things] down [something]" as throwing it down. 
+understand "heave [things] down [something]" as throwing it down. 
+understand "toss [things] down [something]" as throwing it down. 
+understand "hurl [things] down [something]" as throwing it down.
+understand "pitch [things] down [something]" as throwing it down.
+
+throwing it off is an action applying to two things.
+understand "chuck [things] off [something]" as throwing it off. 
+understand "heave [things] off [something]" as throwing it off. 
+understand "throw [things] off [something]" as throwing it off. 
+understand "toss [things] off [something]" as throwing it off. 
+understand "hurl [things] off [something]" as throwing it off.
+understand "pitch [things] off [something]" as throwing it off.
+
+throwing it out of is an action applying to two things.
+understand "chuck [things] out/out of [something]" as throwing it out of. 
+understand "heave [things] out/out of [something]" as throwing it out of. 
+understand "throw [things] out/out of [something]" as throwing it out of. 
+understand "toss [things] out/out of [something]" as throwing it out of. 
+understand "hurl [things] out/out of [something]" as throwing it out of.
+understand "pitch [things] out/ouf of [something]" as throwing it out of.
+
+throwing it over is an action applying to two things.
+understand "chuck [things] over [something]" as throwing it over. 
+understand "throw [things] over [something]" as throwing it over. 
+understand "heave [things] over [something]" as throwing it over. 
+understand "toss [things] over [something]" as throwing it over. 
+understand "hurl [things] over [something]" as throwing it over. 
+understand "pitch [things] over [something]" as throwing it over. 
+
+throwing it under is an action applying to two things.
+understand "chuck [things] under [something]" as throwing it under. 
+understand "throw [things] under [something]" as throwing it under. 
+understand "heave [things] under [something]" as throwing it under. 
+understand "toss [things] under [something]" as throwing it under. 
+understand "hurl [things] under [something]" as throwing it under. 
+understand "pitch [things] under [something]" as throwing it under. 
+
+throwing it through is an action applying to two things.
+understand "chuck [things] through [something]" as throwing it through. 
+understand "throw [things] through [something]" as throwing it through. 
+understand "heave [things] through [something]" as throwing it through. 
+understand "toss [things] through [something]" as throwing it through. 
+understand "hurl [things] through [something]" as throwing it through.
+understand "pitch [things] through [something]" as throwing it through.
+
+check throwing something at a second noun
+(this is the can't throw what you don't have rule):
+if the noun is not carried by the player,
+say "You don't have [the noun]." instead.
+
+report throwing something
+(this is the throwing rule):
+say "You can't throw [the noun].".
+
+report throwing something into something
+(this is the throwing something into something rule) :
+say "You can't [verbword] [the noun] into [the second noun].".
+
+report throwing something off a second noun
+(this is the throwing something off something rule) ::
+say "You can't [verbword] [the noun] off [the second noun].". 
+
+report throwing something over something
+(this is the throwing something over something rule) ::
+say "You can't [verbword] [the noun] over [the second noun].". 
+
+report throwing something under a second noun
+(this is the throwing something under something rule) ::
+say "You can't [verbword] [the noun] under [the second noun].". 
+
+report throwing something down a second noun
+(this is the throwing something down something rule) ::
+say "You can't [verbword] [the noun] down [the second noun].". 
+
+report throwing something through a second noun
+(this is the throwing something through something rule) ::
+say "You can't [verbword] [the noun]through [the second noun].". 
+
+report throwing something out of a second noun
+(this is the throwing something out of something rule) ::
+say "You can't [verbword] [the noun] out of [the second noun]."
