@@ -17,10 +17,6 @@ Include Small Kindnesses by Aaron Reed.
 Include Default Messages by Ron Newcomb.
 
 
-
-
-
-
 Book  - Not for release
 
 Include Object Response Tests by Juhana Leinonen.
@@ -38,10 +34,6 @@ Book - Test commands
 Book - Tests
 
 test spray with "s/in/take ladder/take can/out/n/lean ladder on tree/u/spray/z/z".
-
-
-
-
 
 Volume - Game Settings
 
@@ -172,7 +164,7 @@ Carry out spraying:
 		now the hornets are angry;
 		say "You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, 'Sprays up to 8 feet!'...well crap, I've got to get closer.[paragraph break]You shake the can one more time and you seem to have just a little left." instead;
 	if location is up-the-tree:
-		say "You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your air in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....[paragraph break]";
+		say "You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....[paragraph break]";
 		now the bug killer is empty;
 		say "...You shake the can and look at it in horror.  Just a little spray dribbled out of the can....just enough to grab the hornets attention.  They have noticed you and are headed in your direction.";
 		now the hornets are aggressive;
