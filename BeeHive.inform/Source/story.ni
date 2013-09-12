@@ -37,7 +37,7 @@ test spray with "s/in/take ladder/take can/out/n/lean ladder on tree/u/spray/z/z
 
 Volume - Game Settings
 
-The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.
+[The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.]
 
 Abouting is an action out of world applying to nothing.
 Understand "about" as abouting.
@@ -63,6 +63,7 @@ An uberstart rule:
 Book - Definitions
 
 A room can be a safe-zone.
+A thing can be lost or found.  A thing is usually found.
 
 Book - Easter Eggs
 
@@ -223,23 +224,23 @@ Under-the-tree is a room.  The printed name is "Under the Tree".   The descripti
 Before going up from under-the-tree:
 	if ladder is not on the tree:
 		say " You never were much of a tree climber, besides it wouldn't be pretty if the bees attack while you were trying to pull yourself up the tree." instead.
-
-
 	
+
 Part - In the shed
 
-In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard."  In-the-shed is inside from outside-the-shed.  
+In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway."  In-the-shed is inside from outside-the-shed.  
 
 before going north in in-the-shed:
 	try exiting instead;
 
 A dirty window is in in-the-shed.  The dirty window is scenery. The description of the dirty window is "The window is covered in cobwebs and dust.  It doesn't look like it's been cleaned for decades, if ever.  [if horsefly is in in-the-shed]In the corner of the window is a large horsefly, buzzing up against the window trying to get out.[end if]"
 
+A shelf is scenery supporter in in-the-shed.  The description of the shelf is "The shelf is just inside the door and looks to be where things were just thrown.  There is piles of junk on it."
+
 Understand "look out [something]" as searching.
 
 Instead of looking north when location is in-the-shed:
 	try searching the window.
-
 
 Instead of searching the window:
 	say "As you look out the hazy window, you can still barely make out the hornets in the tree.   [view-hornets-out-window]".
@@ -253,6 +254,15 @@ To say view-hornets-out-window:
 		say "As you stand next to the window, the hornets still appear to know where you are.  One breaks from the swarm and flies right into the window with an audible thunk.";
 	if the hornets are subdued:
 		say "You can see the nest still in the tree, but through the dust and haze of the window you can't make out much more."
+
+Instead of examining the shelf for the first time:
+	try searching the shelf.
+
+Before searching the shelf:
+	say "As you rumage through the junk on the shelf, you notice a can of bug killer that must have been thrown up there years ago.";
+	move the bug killer to the shelf;
+	now the bug killer is found instead.
+	
 	
 
 Part - Outside the shed
@@ -278,9 +288,10 @@ Part - Carried items
 
 Chapter - Bug Killer
 
-The bug killer is a thing in in-the-shed.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" as bug killer.  
+The bug killer is a thing.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" as bug killer.  
 The bug killer is either empty, half-full or full.  The bug killer is full.
 The bug killer is either shaken or settled.  The bug killer is settled.
+The bug killer is lost.
 
 	
 	
