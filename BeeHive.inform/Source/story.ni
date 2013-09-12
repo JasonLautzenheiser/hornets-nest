@@ -165,9 +165,9 @@ Carry out spraying:
 		now the hornets are angry;
 		say "You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, 'Sprays up to 8 feet!'...well crap, I've got to get closer.[paragraph break]You shake the can one more time and you seem to have just a little left." instead;
 	if location is up-the-tree:
-		say "You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....[paragraph break]";
+		say "You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[paragraph break]";
 		now the bug killer is empty;
-		say "...You shake the can and look at it in horror.  Just a little spray dribbled out of the can....just enough to grab the hornets attention.  They have noticed you and are headed in your direction.";
+		say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets attention and they begin to mass an attack.";
 		hornets attack in 1 turn from now;
 	otherwise:
 		say "There is not much left, you probably don't want to waste it." instead.
@@ -303,6 +303,8 @@ Before climbing the ladder:
 	if location is under-the-tree:
 		if the ladder is on the tree:
 			say "You climb as quietly as possible up the ladder until you are just a few feet away from the nest.  The hornets didn't see you coming, but now a few start to buzz around your head.";
+		otherwise:
+			try leaning the ladder on the tree;
 		try going up instead.
 
 Instead of putting the ladder on something (called the leaned-on):
