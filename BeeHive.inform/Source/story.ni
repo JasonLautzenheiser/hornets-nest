@@ -167,7 +167,6 @@ Carry out spraying:
 		say "You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....[paragraph break]";
 		now the bug killer is empty;
 		say "...You shake the can and look at it in horror.  Just a little spray dribbled out of the can....just enough to grab the hornets attention.  They have noticed you and are headed in your direction.";
-		now the hornets are aggressive;
 		hornets attack in 1 turn from now;
 	otherwise:
 		say "There is not much left, you probably don't want to waste it." instead.
@@ -430,14 +429,27 @@ Hornet attack count is a number that varies.  Hornet attack count is 0.
 at the time when the hornets attack:
 	if location is up-the-tree or location is under-the-tree:
 		now Hornet attack count is the hornet attack count plus 1;
-		say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms .  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildely.  For a few moments you don't even realize that after the hornets got you [if location is up-the-tree]out of[otherwise if location is under-the-tree]away from[end if] the tree, they went back to their nest.";
+		say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms .  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildely.  For a few moments you don't even realize that after the hornets got you [if location is up-the-tree]out of[otherwise if location is under-the-tree]away from[end if] the tree, they went back to their nest.[paragraph break]";
+		if hornet attack count is 1:
+			say "Well that didn't work too well.  [bug-killer-drop-description]a thought comes to you; hornets don't like smoke, why don't I try smoking them out.[line break][line break]";
 		now the player is hiding;
 		now player is in a random safe-zone room;
+		now the hornets are aggressive;
 		Hornets calm down in two turns from now.
 
 at the time when the hornets calm down:
 	now the hornets are swarming.
-	
+
+
+to say bug-killer-drop-description:
+	if player carries bug killer:
+		say "You throw the can away in disgust and as it bounces off [if location is in-the-shed]the wall[otherwise if location is on-the-porch]the porch floor[end if] it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty.  As you look on in disbelief, [run paragraph on]" ;
+		now bug killer is in location;
+		change the printed name of the bug killer to "[if bug killer is empty]now empty [end if]bug killer";
+	otherwise:
+		say "As you pause to catch your breath, [run paragraph on]".
+		
+		
 Book - Aggressive Hornets
 
 Aggressive-hornets is a recurring scene.   Aggressive-hornets begins when hornets are aggressive.  Aggressive-hornets ends when hornets are not aggressive
@@ -457,21 +469,15 @@ Book - Trying the bug killer
 
 Trying-the-bug-killer is a scene.  Trying-the-bug-killer begins when play begins.  Trying-the-bug-killer ends when hornet attack count is 1.
 
+
+
 Book - Smoking them out
 
 Smoking-them-out is a scene.  Smoking-them-out begins when Trying-the-bug-killer ends.  Smoking-them-out ends when hornet attack count is 2.
 
 When smoking-them-out begins:
-	say "Well that didn't work too well.  [bug-killer-drop-description]a thought comes to you; hornets don't like smoke, why don't I try smoking them out.[paragraph break]";
 	now woodpile is in outside-the-shed.
 	
-to say bug-killer-drop-description:
-	if player carries bug killer:
-		say "You throw the can away in disgust and as it bounces off [if location is in-the-shed]the wall[otherwise if location is on-the-porch]the porch floor[end if] it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty.  As you look on in disbelief, [run paragraph on]" ;
-		now bug killer is in location;
-		change the printed name of the bug killer to "[if bug killer is empty]now empty [end if]bug killer";
-	otherwise:
-		say "As you pause to catch your breath, [run paragraph on]";
 	
 
 

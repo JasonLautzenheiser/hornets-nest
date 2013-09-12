@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Skein rootNode="node-0x026D6230" xmlns="http://www.logicalshift.org.uk/IF/Skein">
   <generator>Inform 7 for Windows</generator>
-  <activeNode nodeId="node-0x026EA270"/>
+  <activeNode nodeId="node-0x026D6230"/>
   <item nodeId="node-0x026D6230">
     <command xml:space="preserve">- start -</command>
     <result xml:space="preserve">Hornets Nest&#x000A;An Interactive Experience in Pest Removal by Jason Lautzenheiser&#x000A;Release 1 / Serial number 130911 / Inform 7 build 6G60 (I6/v6.32 lib 6/12N) SD&#x000A;Copyright &#x00A9; 2013, Jason Lautzenheiser.&#x000A;&#x000A;Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade that you take advantage of whenever you can.  However, there seems to be a hornet's nest that is disrupting your relaxation.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
     <played>YES</played>
-    <changed>YES</changed>
+    <changed>NO</changed>
     <temporary score="0">NO</temporary>
     <children>
       <child nodeId="node-0x02701C68"/>
