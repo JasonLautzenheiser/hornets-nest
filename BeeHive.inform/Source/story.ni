@@ -15,6 +15,9 @@ Volume - Extensions
 
 Include Small Kindnesses by Aaron Reed.
 Include Default Messages by Ron Newcomb.
+Include Trinity Inventory by Mikael Segercrantz.
+
+
 
 
 Book  - Not for release
@@ -81,6 +84,9 @@ A person can be hiding or not-hiding.
 
 Check going when the player is hiding:
 	now the player is not-hiding.
+
+Myself is wearing reading glasses, t-shirt, jean shorts and baseball cap.
+
 
 Book - Verbs
 
@@ -150,6 +156,7 @@ Chapter - Catching
 		
 Catching it is an action applying to one visible thing.
 Understand "catch [something]" as catching it.
+Understand "catch a cold" or "catch cold" as a mistake("Now why would you want to do that?")
 
 Check catching:
 	if the noun is the hornets, say "I'm sure that would be quite painful.  Stick around long enough and they may catch you." instead;
@@ -338,7 +345,36 @@ Before climbing the ladder:
 Instead of putting the ladder on something (called the leaned-on):
 	try leaning the ladder on the leaned-on instead.
 	
+Chapter - Reading glasses
+
+The reading glasses are a wearable thing.  The description of reading glasses is "A pair of very thick glasses, you like to call them reading glasses, but in fact you're quite blind without them on."	Understand "spectacles" as reading glasses.
+
+Chapter - Baseball cap
+
+The baseball cap is a wearable thing.  The description of baseball cap is "You never really liked baseball, but this hat is very comfortable and it conveniently hides your slightly balding head." The indefinite article is "a".   Understand "hat" as baseball cap.
+
+Instead of dropping the baseball cap, say "You're pretty self-conscious about your hair, or lack of, so you'll just keep it on."
+Instead of taking off the baseball cap:
+	try dropping the baseball cap instead.
 	
+Chapter - Jean shorts
+
+The jean shorts is a wearable thing.  The description of jean shorts is "Your wife always is always trying to throw these shorts out...she says they are too tight on you.  I don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts
+
+Instead of dropping the shorts, say "Even though they feel like you're wearing nothing, they really do serve a purpose....let's not expose your no-no places."
+
+Instead of taking off the jean shorts:
+	try dropping the jean shorts instead.
+	
+Chapter - T-shirt
+
+The t-shirt is a wearable thing.  The description of the t-shirt is "Just a plain white t-shirt, nothing fancy." The indefinite article is "a". 
+Understand "tshirt/shirt/tee/tee-shirt/teeshirt" as t-shirt.
+Instead of dropping the t-shirt, say "You decide to keep your six-pack covered."
+Instead of taking off the t-shirt:
+	try dropping the t-shirt instead.
+
+
 Part - Scenery
 
 Chapter - Hornest Nest
