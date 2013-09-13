@@ -23,7 +23,6 @@ Include Object Response Tests by Juhana Leinonen.
 Include Property Checking by Emily Short.
 [Use library message alerts.]
 
-
 [Include Direction Response Testing by Andrew Schultz.]
 
 Volume - Testing & Debugging (not for release)
@@ -33,7 +32,8 @@ Book - Test commands
  	 	 
 Book - Tests
 
-test spray with "s/in/take ladder/take can/out/n/lean ladder on tree/u/spray/z/z".
+test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tree/u/spray/z/z".
+test wood with "test spray/s/catch fly/n/throw fly in web/get wood"
 
 Volume - Game Settings
 
@@ -67,7 +67,7 @@ A thing can be lost or found.  A thing is usually found.
 
 Book - Easter Eggs
 
-understand "xyzzy" as a mistake("Though that kind of sounds like the buzz surrounding the hornet's nest, they do not look impressed.").
+understand "xyzzy" as a mistake("You face the tree and wave your fingers at the nest while chanting 'xyzzy xyzzy xyzzy ....' Nothing happens.").
 Understand "* [text]" as a mistake ("Noted.").
 
 
@@ -145,8 +145,23 @@ Check leaning:
 Before putting something on the tree: 
 	if the noun is not the ladder:
 		say "You try to put [the noun] on the tree, but it won't stay."
+
+Chapter - Catching
+		
+Catching it is an action applying to one visible thing.
+Understand "catch [something]" as catching it.
+
+Check catching:
+	if the noun is the hornets, say "I'm sure that would be quite painful.  Stick around long enough and they may catch you." instead;
+	if the noun is not the horsefly, say "Perhaps if [the noun] was running away, you could catch it.  It's not, so you can't." instead.
+	
+Carry out catching:
+	if the location is in-the-shed:
+		if the horsefly is in in-the-shed:
+			try  taking the horsefly instead.
 		
 		
+
 Chapter - Spraying
 
 Spraying it with is an action applying to two visible things.
@@ -172,6 +187,19 @@ Carry out spraying:
 	otherwise:
 		say "There is not much left, you probably don't want to waste it." instead.
 	
+Chapter - counting
+
+Counting is an action applying to one visible thing.  Understand "count [something]" as counting.
+
+Check counting:
+	if the noun is hornets:
+		say "You watch the hornets for a bit as they swarm in and out of the nest.  It's hard to be sure, but you think there are 69,105 hornets." instead.
+		
+Carry out counting:
+	say "Sure....maybe later."
+	
+Understand "count blessings" or "count your blessings" or "count my blessings" as a mistake("Well for one you haven't been stung yet...")
+
 Part - Old Actions
 
 Chapter - Throwing
@@ -420,10 +448,11 @@ Chapter - horsefly
 The horsefly is a thing in in-the-shed.  The description of horsefly is "The large horsefly is at least two inches long and [if player carries horsefly]it struggles to get out of your grip[otherwise if location is in-the-shed]keeps buzzing around the window trying to get out[end if]."  Understand "fly" as horsefly.
 
 Before taking horsefly:
-	say "You spend several minutes trying to get your hands on the fly.  It is only after it gets hung up in some cobwebs that you are finally able to catch it.  You grab it holding on by it's wings to keep it from moving around too much."
+	say "You spend several minutes trying to get your hands on the fly.  It is only after it gets hung up in some cobwebs that you are finally able to catch it.  You grab it holding on by it's wings to keep it from moving around too much.";
+	now the player carries the horsefly instead; 
 
 after dropping horsefly:
-	say "You let the horsefly go and you watch it fly away, right back into the shed, right back into the window.";
+	say "You let the horsefly go and you watch it fly away, [if location is not in-the-shed]right back into the shed, [end if]right back into the window.";
 	now horsefly is in in-the-shed.
 	
 Chapter - wood-burner
