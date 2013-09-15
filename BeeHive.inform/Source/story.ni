@@ -18,8 +18,6 @@ Include Default Messages by Ron Newcomb.
 Include Trinity Inventory by Mikael Segercrantz.
 
 
-
-
 Book  - Not for release
 
 Include Object Response Tests by Juhana Leinonen.
@@ -32,7 +30,7 @@ Volume - Testing & Debugging (not for release)
 
 Book - Test commands
 
- 	 	 
+ 	 
 Book - Tests
 
 test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tree/u/spray/z/z".
@@ -67,6 +65,9 @@ Book - Definitions
 
 A room can be a safe-zone.
 A thing can be lost or found.  A thing is usually found.
+A thing can be flammable or impervious. A thing is usually impervious.
+Flame-state is a kind of value. The flame-states are burnt, flaming, and new. Understand "burning" or "lit" as flaming.   A thing has a flame-state.  A thing is usually new.
+
 
 Book - Easter Eggs
 
@@ -174,25 +175,32 @@ Chapter - Spraying
 Spraying it with is an action applying to two visible things.
 understand "spray [something] with [something]" as spraying it with.
 understand "spray [something]" as spraying it with.
+understand "spray" as spraying it with.
 
 Rule for supplying a missing second noun while spraying:
 	change the second noun to bug killer.
+	
+Rule for supplying a missing noun while spraying:
+	change the noun to hornets-nest.
 	
 Check spraying:
 	if the second noun is not the bug killer , say "You could try spraying it with [the second noun] but I don't think you would be very successful."
 	
 Carry out spraying:
-	if location is under-the-tree:	
-		now the bug killer is half-full;
-		now the hornets are angry;
-		say "You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, 'Sprays up to 8 feet!'...well crap, I've got to get closer.[paragraph break]You shake the can one more time and you seem to have just a little left." instead;
-	if location is up-the-tree:
-		say "You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[paragraph break]";
-		now the bug killer is empty;
-		say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets attention and they begin to mass an attack.";
-		hornets attack in 1 turn from now;
+	if player is carrying the bug killer:
+		if location is under-the-tree:	
+			now the bug killer is half-full;
+			now the hornets are angry;
+			say "You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, 'Sprays up to 8 feet!'...well crap, I've got to get closer.[paragraph break]You shake the can one more time and you seem to have just a little left." instead;
+		if location is up-the-tree:
+			say "You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[paragraph break]";
+			now the bug killer is empty;
+			say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets attention and they begin to mass an attack.";
+			hornets attack in 1 turn from now;
+		otherwise:
+			say "There is not much left, you probably don't want to waste it." instead;
 	otherwise:
-		say "There is not much left, you probably don't want to waste it." instead.
+		say "You have nothing to spray with."
 	
 Chapter - counting
 
@@ -238,7 +246,43 @@ Check throwing it at (this is the block juggling rule):
 	
 Check throwing it at (this is the avoid throwing things into themselves rule): 
 	if the second noun is within the noun, say "That would be a nice magic trick." instead.	
+
+
+Chapter - Burning
+
+Understand the commands "light" and "burn" as something new.	
+
+Understand "burn [something] with [something preferably held]" as burning it with. 
+Burning it with is an action applying to one thing and one carried thing.
+Understand the command "light" as "burn".
+
+Before printing the name of something flaming: 
+	say "flaming ".
 	
+Check burning something with something:  
+	if the second noun is not reading glasses, say "You can't start a fire with [the second noun]." instead; 
+	if the noun is flammable:
+		if the noun is new:
+			if the player is carrying the noun:
+				say "You might want to set [the noun] down first." instead;
+			otherwise:
+				if location is not under-the-tree:
+					say "[if location is in-the-shed]You risk burning the entire shed down if you tried that.[otherwise if location is outside-the-shed]The fire could spread to the shed and you'd end up burning that down.[otherwise if location is on-the-porch]You might catch the house on fire if you tried that.[otherwise if location is up-the-tree]You couldn't manage to do that without setting the tree on fire or falling out of it, probably both.[end if]" instead;
+		if the noun is flaming:
+			say "That is already on fire." instead;
+		if the noun is burnt:
+			say "You try burning [the noun] again, but it only smokes a little then sputters out." instead;
+	otherwise: 
+		say "You can't set [the noun] on fire." instead;
+	
+Carry out burning something with something:
+	say "You take off your glasses and hold them at just the right angle so the sunlight makes a pinpoint on [the noun].  After a few moments a small stream of smoke rises from [the noun] and then suddenly a flame appears.";
+	now the noun is flaming;
+	now the smoke is on-stage.
+	
+Before taking something that is flaming:
+	say "It's way to hot to carry around." instead.
+
 Book - Default Messages
 
 Table of custom library messages (continued)
@@ -254,7 +298,7 @@ Book - Rooms
 
 Part - Under the Tree
 
-Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade that you take advantage of whenever you can.  However, there seems to be a hornet's nest that is disrupting your relaxation.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. [if ladder is on tree]Your ladder is leaning up against the tree.[end if]".
+Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now the as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  Now that the leaves are becoming sparse in the tree, you can now see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. [if ladder is on tree]Your ladder is leaning up against the tree.[end if]".
 
 Before going up from under-the-tree:
 	if ladder is not on the tree:
@@ -374,8 +418,59 @@ Instead of dropping the t-shirt, say "You decide to keep your six-pack covered."
 Instead of taking off the t-shirt:
 	try dropping the t-shirt instead.
 
+Chapter - Some wood	
 
+Some twigs is a thing.  The description of some twigs is "[describe-twigs]".  Understand "wood" as some twigs when spider is off-stage.  Some twigs are flammable.  
+The indefinite article is "a small pile of".	
+
+To say describe-twigs:
+	if twigs are new:
+		say "A few logs....ok maybe just a few twigs and sticks.";
+	if twigs are flaming:
+		if the smoke is light:
+			say "The pile of twigs is burning, but not really putting out much smoke and definitely not reaching the hornet's nest.";
+		otherwise if the smoke is heavy:
+			say "The pile of twigs and leaves is smoldering putting out a heavy smoke that is engulfing the hornet's nest."
+			
+		
 Part - Scenery
+
+Chapter - Leaves
+
+Some leaves are in under-the-tree.  The leaves are undescribed.  The description of the leaves is "The leaves are starting to come down and cover the ground around the tree.  Every step you take results in a crunch of dried leaves under your feet."
+
+After taking leaves:
+	say "You gather up a handful of leaves, but there are still plenty left to clean up."
+	
+Instead of counting leaves:
+	say "There are exactly 69,105 leaves...somehow that doesn't surprise you.";
+	
+check throwing it into:
+	if the noun is leaves:
+		if the second noun is twigs:
+			if player is carrying leaves:
+				say "You toss the leaves onto the fire and the smoke begins to build until a dark gray cloud begins to lift from the ground up into the tree.";
+				now the smoke is heavy;
+		otherwise:
+			try dropping the noun instead.
+			
+instead of throwing something at something:
+	try throwing something into something instead;
+	
+
+		
+Chapter - Smoke
+
+The smoke is scenery.  The smoke can be heavy or light.  The smoke is light.
+
+Instead of doing anything to the smoke: say "The smoke flitters away before you can do that."
+
+Instead of examining the smoke:
+	if the smoke is light:
+		say "Just a light tendril of smoke streams up from the burning twigs.";
+	if the smoke is heavy:
+		say "A heavy gray smoke pours out from the burning pile."
+
 
 Chapter - Hornest Nest
 
@@ -442,13 +537,11 @@ Before taking woodpile:
 	if large spider is on-stage:
 		say "As you go to take some of the wood, the large spider turns towards your hand and rears up as if to bite." instead;
 	otherwise:
-		say "You brush the web aside and take a handful of the dry wood.";
-		now the player carries some twigs instead.
+		if web is on-stage:
+			say "You brush the web aside and take a handful of the dry wood.";
+			now the player carries some twigs instead;
+			now the web is off-stage;
 		
-Chapter - Some wood	
-
-Some twigs is a thing.  The description of some twigs is "A few logs....ok maybe just a few twigs and sticks."  Understand "wood" as some twigs when spider is off-stage.
-The indefinite article is "a small pile of".	
 
 Chapter - Spider web
 
