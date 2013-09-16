@@ -22,6 +22,8 @@ Book  - Not for release
 
 Include Object Response Tests by Juhana Leinonen.
 Include Property Checking by Emily Short.
+Include Debugging by Al Golden.
+
 [Use library message alerts.]
 
 [Include Direction Response Testing by Andrew Schultz.]
@@ -34,7 +36,9 @@ Book - Test commands
 Book - Tests
 
 test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tree/u/spray/z/z".
-test wood with "test spray/s/catch fly/n/throw fly in web/get wood"
+test wood with "test spray/s/catch fly/n/throw fly in web/get wood".
+test fire with "test wood/n/drop wood/take leaves/burn wood with glasses/drop leaves on fire".
+
 
 Volume - Game Settings
 
@@ -66,6 +70,7 @@ Book - Definitions
 A room can be a safe-zone.
 A thing can be lost or found.  A thing is usually found.
 A thing can be flammable or impervious. A thing is usually impervious.
+A thing can be throwable.
 Flame-state is a kind of value. The flame-states are burnt, flaming, and new. Understand "burning" or "lit" as flaming.   A thing has a flame-state.  A thing is usually new.
 
 
@@ -223,6 +228,14 @@ Chapter - Throwing
 The futile to throw things at inanimate objects rule is not listed in the check throwing it at rules.
 The block throwing at rule is not listed in the check throwing it at rules.
 
+Check throwing it at (this is the block juggling rule): 
+	if the player is carrying the second noun, say "It would be difficult to throw at something you are yourself holding." instead.
+	
+Check throwing it at (this is the avoid throwing things into themselves rule): 
+	if the second noun is within the noun, say "That would be a nice magic trick." instead.	
+
+Understand "throw [something] in [something]" as throwing it at.
+
 Check throwing:
 	if the noun is bug killer:
 		if the second noun is the tree:
@@ -237,15 +250,15 @@ Check throwing:
 		otherwise:
 			say "You awkwardly throw the ladder and it falls just as awkwardly to the ground.";
 			now the ladder is in the location instead;
+	if the noun is the horsefly:
+		if the second noun is web:
+			try putting the horsefly on the web instead;
+		otherwise:
+			try dropping the horsefly instead;
 	otherwise:
 		say "As frustrated as you are, throwing [the noun] will not help." instead.
-	
 
-Check throwing it at (this is the block juggling rule): 
-	if the player is carrying the second noun, say "It would be difficult to throw at something you are yourself holding." instead.
-	
-Check throwing it at (this is the avoid throwing things into themselves rule): 
-	if the second noun is within the noun, say "That would be a nice magic trick." instead.	
+
 
 
 Chapter - Burning
@@ -298,7 +311,7 @@ Book - Rooms
 
 Part - Under the Tree
 
-Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now the as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  Now that the leaves are becoming sparse in the tree, you can now see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. [if ladder is on tree]Your ladder is leaning up against the tree.[end if]".
+Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. [if ladder is on tree]Your ladder is leaning up against the tree.[end if]".
 
 Before going up from under-the-tree:
 	if ladder is not on the tree:
@@ -360,7 +373,10 @@ Part - Up the tree
 
 Up-the-tree is a room.  The printed name is "Up the Tree".  The description is "You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head."  Up-the-tree is up from under-the-tree.
 
-
+Check dropping something while in up-the-tree:
+	say "[The noun] falls to the ground.";
+	move the noun to under-the-tree instead;
+	
 Book - Things
 
 Part - Carried items
@@ -376,7 +392,7 @@ The bug killer is lost.
 	
 Chapter - Ladder
 
-A ladder is a thing.  A ladder is in in-the-shed.  The description is "The step ladder your Dad gave you for a house warming gift when you moved in twenty years ago is still laying where you left it.....oh....twenty years ago."
+A ladder is a thing.  A ladder is in in-the-shed.  The description is "The aluminum step ladder your Dad gave you for a house warming gift when you moved in twenty years ago[first time] is still laying where you left it.....oh....twenty years ago[only]."
 
 Before climbing the ladder:
 	if location is under-the-tree:
@@ -421,7 +437,8 @@ Instead of taking off the t-shirt:
 Chapter - Some wood	
 
 Some twigs is a thing.  The description of some twigs is "[describe-twigs]".  Understand "wood" as some twigs when spider is off-stage.  Some twigs are flammable.  
-The indefinite article is "a small pile of".	
+Understand "fire" as twigs when twigs are flaming.
+The indefinite article of the twigs is "a small pile of".	
 
 To say describe-twigs:
 	if twigs are new:
@@ -439,24 +456,23 @@ Chapter - Leaves
 
 Some leaves are in under-the-tree.  The leaves are undescribed.  The description of the leaves is "The leaves are starting to come down and cover the ground around the tree.  Every step you take results in a crunch of dried leaves under your feet."
 
+
 After taking leaves:
 	say "You gather up a handful of leaves, but there are still plenty left to clean up."
 	
 Instead of counting leaves:
 	say "There are exactly 69,105 leaves...somehow that doesn't surprise you.";
-	
-check throwing it into:
-	if the noun is leaves:
-		if the second noun is twigs:
-			if player is carrying leaves:
-				say "You toss the leaves onto the fire and the smoke begins to build until a dark gray cloud begins to lift from the ground up into the tree.";
-				now the smoke is heavy;
-		otherwise:
-			try dropping the noun instead.
+
+instead of putting the leaves on the twigs:
+	if twigs are flaming:
+		say "You toss the leaves onto the fire and the smoke begins to build until a dark gray cloud begins to lift from the ground up into the tree.";
+		now leaves are off-stage;
+		now the smoke is heavy instead;
+	otherwise:
+		say "Tossing the leaves on the twigs would not serve any purpose right now."
 			
-instead of throwing something at something:
-	try throwing something into something instead;
-	
+
+
 
 		
 Chapter - Smoke
@@ -531,7 +547,7 @@ before entering shed:
 
 Chapter - Pile of wood
 
-The woodpile is a supporter. The woodpile is scenery.  The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.
+The woodpile is a supporter. The woodpile is undescribed. The woodpiile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.
 
 Before taking woodpile:
 	if large spider is on-stage:
@@ -545,14 +561,15 @@ Before taking woodpile:
 
 Chapter - Spider web
 
-The web is a supporter on the woodpile.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've seen this side of National Geographic[end if]."
+The web is a container on the woodpile.  The web is open.  The web is not openable.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've seen this side of National Geographic[end if]."
 
+The web-top is a supporter.  The web-top is a part of the web.
 Instead of attacking the web:
 	try attacking the large spider.
 
 Chapter - spider	
 
-The large spider is a animal on the web.  The  description of large spider is "The spider is at least as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.
+The large spider is a animal in the web.  The  description of large spider is "The spider is at least as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.
 
 Instead of taking the large spider:
 	say "You start to reach for the spider to brush it and it's web out of the way, but as your hand approaches, the spider actually turns and appears to rear up at you as if ready to bite."
@@ -560,15 +577,6 @@ Instead of taking the large spider:
 Instead of attacking the large spider:
 	try taking large spider.
 	
-check throwing it into:
-	if the noun is horsefly:
-		if the second noun is web:
-			if player is carrying horsefly:
-				say "You toss the fly into the web and the spider instantly pounces on it and begins to wrap it up.  When it's done wraping, it drags the fly off the web and underneath the wood pile.";
-				now spider is off-stage;
-				now horsefly is off-stage instead;
-		otherwise:
-			try dropping the noun instead.
 			
 		
 		
@@ -583,7 +591,24 @@ Before taking horsefly:
 after dropping horsefly:
 	say "You let the horsefly go and you watch it fly away, [if location is not in-the-shed]right back into the shed, [end if]right back into the window.";
 	now horsefly is in in-the-shed.
-	
+
+Before putting the horsefly on the web-top:
+	if player is carrying horsefly:
+		say "You toss the fly into the web and the spider instantly pounces on it and begins to wrap it up.  When it's done wraping, it drags the fly off the web and underneath the wood pile.";
+		now spider is off-stage;
+		now horsefly is off-stage instead;
+	otherwise:
+		try dropping the noun instead.
+			
+Before inserting the horsefly into the web:
+	try putting the horsefly on the web-top instead.
+
+Before putting the horsefly on the web:
+	try putting the horsefly on the web-top instead.
+
+Before throwing horsefly at spider:
+	try putting the horsefly on the web-top instead.
+
 Chapter - wood-burner
 
 The wood-burner is a backdrop which is everywhere.  The description of wood-burner is "The wood burner was in the house when you bought it and you thought for sure you would use it every winter.  Then came that first year of chopping wood....that was too much like work, so you stacked that little pile by the shed and never thought about it again."  Understand "woodburner/burner" or "wood burner" as wood-burner.
@@ -600,12 +625,14 @@ Hornet attack count is a number that varies.  Hornet attack count is 0.
 at the time when the hornets attack:
 	if location is up-the-tree or location is under-the-tree:
 		now Hornet attack count is the hornet attack count plus 1;
+[		silently move the player to a random safe-zone room;]
 		say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms .  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildely.  For a few moments you don't even realize that after the hornets got you [if location is up-the-tree]out of[otherwise if location is under-the-tree]away from[end if] the tree, they went back to their nest.[paragraph break]";
 		if hornet attack count is 1:
 			say "Well that didn't work too well.  [bug-killer-drop-description]a thought comes to you; hornets don't like smoke, why don't I try smoking them out.[line break][line break]";
+			now woodpile is in outside-the-shed;
 		now the player is hiding;
-		now player is in a random safe-zone room;
 		now the hornets are aggressive;
+		now the player is in a random safe-zone room;
 		Hornets calm down in two turns from now.
 
 at the time when the hornets calm down:
@@ -642,15 +669,17 @@ Trying-the-bug-killer is a scene.  Trying-the-bug-killer begins when play begins
 
 
 
+Book - Building a fire
+
+Building-a-fire  is a scene.  Building-a-fire begins when Trying-the-bug-killer ends.  Building-a-fire ends when hornet attack count is 2.
+
+	
 Book - Smoking them out
 
-Smoking-them-out is a scene.  Smoking-them-out begins when Trying-the-bug-killer ends.  Smoking-them-out ends when hornet attack count is 2.
+Smoking-them-out is a scene.  Smoking-them-out begins when smoke is heavy.  Smoking-them-out ends when hornet attack count is 2.	
 
 When smoking-them-out begins:
-	now woodpile is in outside-the-shed.
-	
-	
-
+	say "As the smoke rises it slowly begins to engulf the nest.  At first the hornets look confused as they their activity increases slightly, then suddenly they all retreat back into the nest.  Now the smoke is so heavy that you can't make out the nest at all.  You are feeling a little bit proud of yourself as you figure this will be the end of them all.";
 
 	
 Volume - Looking from Supplemental Actions by Al Golden
@@ -718,7 +747,7 @@ say "You can't look down.".
 
 Volume - Throwing from Supplemental Actions by Al Golden
 
-To say verbword: (- print (address) verb_word; -).
+[To say verbword: (- print (address) verb_word; -).
 
 understand the command "throw" as something new.
 
@@ -837,4 +866,4 @@ say "You can't [verbword] [the noun]through [the second noun].".
 
 report throwing something out of a second noun
 (this is the throwing something out of something rule) ::
-say "You can't [verbword] [the noun] out of [the second noun]."
+say "You can't [verbword] [the noun] out of [the second noun]."]
