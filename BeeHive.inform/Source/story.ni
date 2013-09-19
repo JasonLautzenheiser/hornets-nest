@@ -73,6 +73,23 @@ A thing can be flammable or impervious. A thing is usually impervious.
 A thing can be throwable.
 Flame-state is a kind of value. The flame-states are burnt, flaming, and new. Understand "burning" or "lit" as flaming.   A thing has a flame-state.  A thing is usually new.
 
+Chapter - Flimsy
+
+A flimsy is a kind of thing.  A flimsy has some text called the action-refusal.  The action-refusal of a flimsy is usually "".  A flimsy is usually fixed in place, undescribed.
+
+To say brush-off of (n - a thing):
+	say "You don't need to worry about [if n is plural-named]those[else]that[end if]."
+
+Rule for writing a paragraph about a flimsy (called xx):
+	now xx is mentioned.
+
+Instead of examining a flimsy:
+	if the initial appearance of the noun is "", say "[brush-off of noun]";
+	otherwise say "[initial appearance of the noun][paragraph break]".
+
+instead of doing anything to a flimsy:
+	if the action-refusal of the noun is "", say "[brush-off of noun]";
+	otherwise say "[action-refusal of the noun][paragraph break]".
 
 Book - Easter Eggs
 
@@ -311,7 +328,7 @@ Book - Rooms
 
 Part - Under the Tree
 
-Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. [if ladder is on tree]Your ladder is leaning up against the tree.[end if]".
+Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  [if pile of ashes is on-stage]There is a pile of ashes under the tree. [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. [if ladder is on tree]Your ladder is leaning up against the tree.[end if]".
 
 Before going up from under-the-tree:
 	if ladder is not on the tree:
@@ -320,7 +337,7 @@ Before going up from under-the-tree:
 
 Part - In the shed
 
-In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway."  In-the-shed is inside from outside-the-shed.  
+In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug killer.[end if]".  In-the-shed is inside from outside-the-shed.  
 
 before going north in in-the-shed:
 	try exiting instead;
@@ -405,6 +422,9 @@ Before climbing the ladder:
 Instead of putting the ladder on something (called the leaned-on):
 	try leaning the ladder on the leaned-on instead.
 	
+The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.
+
+	
 Chapter - Reading glasses
 
 The reading glasses are a wearable thing.  The description of reading glasses is "A pair of very thick glasses, you like to call them reading glasses, but in fact you're quite blind without them on."	Understand "spectacles" as reading glasses.
@@ -447,9 +467,16 @@ To say describe-twigs:
 		if the smoke is light:
 			say "The pile of twigs is burning, but not really putting out much smoke and definitely not reaching the hornet's nest.";
 		otherwise if the smoke is heavy:
-			say "The pile of twigs and leaves is smoldering putting out a heavy smoke that is engulfing the hornet's nest."
-			
+			say "The pile of twigs and leaves is smoldering putting out a heavy smoke that is engulfing the hornet's nest.";
+	if twigs are burnt:	
+		say "The remains of your wood, nothing left but lightly smoking ashes."
 		
+
+Chapter - Pile of ashes
+
+The pile of ashes is a fixed in place flimsy.  "Just the remains of your wood, now just a pile of grey ashes."  The pile of ashes is described.  Pile of ashes is plural-named.   
+
+
 Part - Scenery
 
 Chapter - Leaves
@@ -477,7 +504,7 @@ instead of putting the leaves on the twigs:
 		
 Chapter - Smoke
 
-The smoke is scenery.  The smoke can be heavy or light.  The smoke is light.
+The smoke is scenery.  The smoke is undescribed.  The smoke can be heavy or light.  The smoke is light.
 
 Instead of doing anything to the smoke: say "The smoke flitters away before you can do that."
 
@@ -532,7 +559,21 @@ instead of listening:
 	if location is on-the-porch:
 		say "Though you can't see the nest from here, you can hear it."
 		
+Instead of looking under the tree:
+	say "Throughout the [yard] you see the tree's [roots] that stretch out from it's base."
 	
+Instead of touching the tree:
+	say "The tree's [bark] is rough."
+	
+Instead of pushing the tree:
+	say "You strain against the tree but you fail to budge it."
+	
+The bark is a flimsy.  The bark is part of the shade tree.
+The roots are a flimsy.  The roots are part of the shade tree.  the action-refusal is  "The roots are pretty necessary to the health of the tree.  You don't want to risk anything."
+
+The yard is a backdrop which is everywhere.  The description is "A large yard and you take care of it as well as you can."
+
+
 Chapter - House
 
 The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got it's problems....but it's home."  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
@@ -547,7 +588,7 @@ before entering shed:
 
 Chapter - Pile of wood
 
-The woodpile is a supporter. The woodpile is undescribed. The woodpiile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.
+The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.
 
 Before taking woodpile:
 	if large spider is on-stage:
@@ -630,6 +671,11 @@ at the time when the hornets attack:
 		if hornet attack count is 1:
 			say "Well that didn't work too well.  [bug-killer-drop-description]a thought comes to you; hornets don't like smoke, why don't I try smoking them out.[line break][line break]";
 			now woodpile is in outside-the-shed;
+		if hornet attack count is 2:
+			say "As they swarm around your head, you notice there is something different about them....you swear they are wearing gas masks.";
+			now twigs are off-stage;
+			now woodpile is off-stage;
+			now pile of ashes is in under-the-tree;
 		now the player is hiding;
 		now the hornets are aggressive;
 		now the player is in a random safe-zone room;
@@ -679,8 +725,10 @@ Book - Smoking them out
 Smoking-them-out is a scene.  Smoking-them-out begins when smoke is heavy.  Smoking-them-out ends when hornet attack count is 2.	
 
 When smoking-them-out begins:
-	say "As the smoke rises it slowly begins to engulf the nest.  At first the hornets look confused as they their activity increases slightly, then suddenly they all retreat back into the nest.  Now the smoke is so heavy that you can't make out the nest at all.  You are feeling a little bit proud of yourself as you figure this will be the end of them all.";
-
+	say "As the smoke rises it slowly begins to engulf the nest.  At first the hornets look confused as they their activity increases slightly, then suddenly they all retreat back into the nest.  Now the smoke is so heavy that you can't make out the nest at all.  You are feeling a little bit proud of yourself as you figure this will be the end of them all.
+	
+What is that noise?  You hear a faint buzz coming from the tree.  Looking up, the smoke begins to clear and you see a mass of hornets around the entrance to the nest.  Just as you see them, they see you and attack.";
+	hornets attack in 1 turn from now;
 	
 Volume - Looking from Supplemental Actions by Al Golden
 
