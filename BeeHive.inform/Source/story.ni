@@ -169,7 +169,7 @@ Check leaning:
 		-- ladder:
 			if the second noun is the tree:
 				say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
-				now ladder is on the tree.
+				now the ladder is on the tree.
 		
 Before putting something on the tree: 
 	if the noun is not the ladder:
@@ -337,7 +337,7 @@ Before going up from under-the-tree:
 
 Part - In the shed
 
-In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug killer.[end if]".  In-the-shed is inside from outside-the-shed.  
+In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug killer.[end if]  [describe-the-hand-saw]".  In-the-shed is inside from outside-the-shed.  
 
 before going north in in-the-shed:
 	try exiting instead;
@@ -353,7 +353,15 @@ Instead of looking north when location is in-the-shed:
 
 Instead of searching the window:
 	say "As you look out the hazy window, you can still barely make out the hornets in the tree.   [view-hornets-out-window]".
-	
+
+To say describe-the-hand-saw:
+	if the hand-saw is on-stage: 
+		if the hand-saw is hanging:
+			say "[one of]You look around for something else that might help you in your mission and notice for the first time a handsaw hanging on a nail in the dark back wall of the shed.[or]There is a handsaw hanging on a nail in the dark back wall of the shed.[stopping]";
+[		otherwise:
+			if hand-saw is in in-the-shed:
+				say "There is a handsaw here.";]
+		
 To say view-hornets-out-window:
 	if the hornets are swarming:
 		say "They are swarming and from here it looks like a haze around the nest.";
@@ -384,7 +392,12 @@ before of going south in outside-the-shed:
 
 Part - On the porch
 
-On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer.  Sitting on the swing and drinking a beer."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
+On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the swing and drinking a beer."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
+
+The porch swing is a enterable supporter in on-the-porch.  The description of porch swing is "The porch swing sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
+
+The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."
+
 
 Part - Up the tree
 
@@ -405,7 +418,19 @@ The bug killer is either empty, half-full or full.  The bug killer is full.
 The bug killer is either shaken or settled.  The bug killer is settled.
 The bug killer is lost.
 
+Chapter - Hand saw	
+
+The hand-saw is an undescribed thing.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" as hand-saw.
+The description of hand-saw is "Nope you didn't use this much either.  The saw is new and shiny." 	
+The hand-saw can be hanging.  The hand-saw is hanging.
+
+Check taking the hand-saw for the first time:
+	now the hand-saw is not hanging.
 	
+	
+Chapter - Shovel
+
+The shovel is a thing in on-the-porch.  The description of shovel is "The shovel is handy for cleaning up the dog-doo.  That's why you just leave it laying around on the porch within easy reach."
 	
 Chapter - Ladder
 
@@ -543,8 +568,29 @@ Before taking hornets:
 
 Chapter - Tree
 
-The shade tree is a supporter in under-the-tree.   The shade tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The trees branches spread over the front porch and shade the house well from the morning sun.  [if hornets-nest is part of the shade tree]About ten feet up is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
+The shade tree is a supporter which is in under-the-tree. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The trees branches spread over the front porch and shade the house well from the morning sun.  [if hornets-nest is part of the shade tree]About ten feet up is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
 
+after deciding the scope of the player:
+	place the tree in scope;
+
+Rule for reaching inside a room:
+	if the location is up-the-tree:
+		if the noun is the shade tree:
+			allow access;
+		otherwise:
+			say "You can only look at [the noun] from a distance.";
+			deny access;
+	otherwise:
+		say "You can only look at [the noun] from a distance.";
+		deny access.
+	
+instead of touching the tree:
+	say "You affectionately touch the tree."
+
+Before examining tree:
+	if location is in-the-shed:
+		say "You look out the window and see the tree in front of your house." instead.
+		
 before climbing the tree:
 	try going up instead;
 	
@@ -562,12 +608,19 @@ instead of listening:
 Instead of looking under the tree:
 	say "Throughout the [yard] you see the tree's [roots] that stretch out from it's base."
 	
-Instead of touching the tree:
-	say "The tree's [bark] is rough."
-	
 Instead of pushing the tree:
 	say "You strain against the tree but you fail to budge it."
 	
+Understand "saw [something]" as cutting.
+Instead of cutting the tree:
+	if location is up-the-tree:
+		if player carries the hand-saw:
+			say "You cut the tree.";
+		otherwise:
+			say "You make a cutting motion on the tree with your hand and succeed in nothing more than scraping up your hand.";
+	otherwise:
+		say "You give the tree your best karate chop, but nothing happens except for your sore hand."
+		
 The bark is a flimsy.  The bark is part of the shade tree.
 The roots are a flimsy.  The roots are part of the shade tree.  the action-refusal is  "The roots are pretty necessary to the health of the tree.  You don't want to risk anything."
 
@@ -676,6 +729,7 @@ at the time when the hornets attack:
 			now twigs are off-stage;
 			now woodpile is off-stage;
 			now pile of ashes is in under-the-tree;
+			now hand-saw is in in-the-shed;
 		now the player is hiding;
 		now the hornets are aggressive;
 		now the player is in a random safe-zone room;
@@ -688,7 +742,7 @@ at the time when the hornets calm down:
 to say bug-killer-drop-description:
 	if player carries bug killer:
 		say "You throw the can away in disgust and as it bounces off [if location is in-the-shed]the wall[otherwise if location is on-the-porch]the porch floor[end if] it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty.  As you look on in disbelief, [run paragraph on]" ;
-		now bug killer is in location;
+		try dropping bug killer;
 		change the printed name of the bug killer to "[if bug killer is empty]now empty [end if]bug killer";
 	otherwise:
 		say "As you pause to catch your breath, [run paragraph on]".
@@ -728,7 +782,7 @@ When smoking-them-out begins:
 	say "As the smoke rises it slowly begins to engulf the nest.  At first the hornets look confused as they their activity increases slightly, then suddenly they all retreat back into the nest.  Now the smoke is so heavy that you can't make out the nest at all.  You are feeling a little bit proud of yourself as you figure this will be the end of them all.
 	
 What is that noise?  You hear a faint buzz coming from the tree.  Looking up, the smoke begins to clear and you see a mass of hornets around the entrance to the nest.  Just as you see them, they see you and attack.";
-	hornets attack in 1 turn from now;
+	hornets attack in 0 turn from now;
 	
 Volume - Looking from Supplemental Actions by Al Golden
 
