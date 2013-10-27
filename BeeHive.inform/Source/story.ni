@@ -615,7 +615,8 @@ Understand "saw [something]" as cutting.
 Instead of cutting the tree:
 	if location is up-the-tree:
 		if player carries the hand-saw:
-			say "You cut the tree.";
+			say "You take the hand saw and begin to cut through the branch that the hornet's nest is hanging from.  After a moment the branch cracks and falls to the ground taking the nest with it.  You start to raise your arms in triumph, but then remembering you are standing on a ladder, you think better of it and just grin happily to yourself.  As the nest hits the ground, it bursts into pieces and the hornets scatter in all directions.......only to regroup high up in the tree where they hover for a moment, then as if shot from a pistol, head in your direction.";
+			hornets attack in 1 turn from now;
 		otherwise:
 			say "You make a cutting motion on the tree with your hand and succeed in nothing more than scraping up your hand.";
 	otherwise:
@@ -784,6 +785,10 @@ When smoking-them-out begins:
 What is that noise?  You hear a faint buzz coming from the tree.  Looking up, the smoke begins to clear and you see a mass of hornets around the entrance to the nest.  Just as you see them, they see you and attack.";
 	hornets attack in 0 turn from now;
 	
+Book - Cutting them down
+
+Cutting-them-down is a scene.  Cutting-them-down begins when Smoking-them-out ends.  Cutting-them-down ends when hornet attack count is 3.
+
 Volume - Looking from Supplemental Actions by Al Golden
 
 looking north is an action applying to nothing.
