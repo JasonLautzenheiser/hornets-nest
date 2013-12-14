@@ -10,8 +10,8 @@ release to "C:\Users\jlautzenheiser\Documents\Inform\Projects\WIPs\BeeHive\BeeHi
 
 ! Blorb instructions
 
-storyfile leafname "Hornets Nest.zblorb"
-storyfile "C:\Users\jlautzenheiser\Documents\Inform\Projects\WIPs\BeeHive\BeeHive.inform\Build\output.z8" include
+storyfile leafname "Hornets Nest.gblorb"
+storyfile "C:\Users\jlautzenheiser\Documents\Inform\Projects\WIPs\BeeHive\BeeHive.inform\Build\output.ulx" include
 ifiction "C:\Users\jlautzenheiser\Documents\Inform\Projects\WIPs\BeeHive\BeeHive.inform\Metadata.iFiction" include
 cover "C:\Program Files (x86)\Inform 7\Inform7\Extensions\Reserved\DefaultCover.jpg"
 picture 1 "C:\Program Files (x86)\Inform 7\Inform7\Extensions\Reserved\DefaultCover.jpg"

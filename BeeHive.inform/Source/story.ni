@@ -17,12 +17,12 @@ Include Small Kindnesses by Aaron Reed.
 Include Default Messages by Ron Newcomb.
 Include Trinity Inventory by Mikael Segercrantz.
 
-
 Book  - Not for release
 
 Include Object Response Tests by Juhana Leinonen.
 Include Property Checking by Emily Short.
 Include Debugging by Al Golden.
+Include Basic Screen Effects by Emily Short.
 
 [Use library message alerts.]
 
@@ -32,12 +32,39 @@ Volume - Testing & Debugging (not for release)
 
 Book - Test commands
 
+Include (-
+[ CheckTranscriptStatus;
+#ifdef TARGET_ZCODE;
+return ((0-->8) & 1);
+#ifnot;
+return (gg_scriptstr ~= 0);
+#endif;
+];
+-).
+ 
+To decide whether currently transcripting: (- CheckTranscriptStatus() -)
+ 
+ignore-transcript-nag is a truth state that varies.
+ 
+After reading a command:
+	if the player's command matches the regular expression "^<\*\p>":
+		if currently transcripting:
+			say "Noted.";
+		otherwise:
+			if ignore-transcript-nag is false:
+				say "You've made a comment-style command, but Transcript is off. Type TRANSCRIPT to turn it on, if you wish to make notes.[paragraph break]The long version of this nag will only appear once. You may press any key to continue.";
+				wait for any key;
+				now ignore-transcript-nag is true;
+			else:
+				say "(Comment not sent to transcript.)";
+		reject the player's command.
  	 
 Book - Tests
 
 test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tree/u/spray/z/z".
 test wood with "test spray/s/catch fly/n/throw fly in web/get wood".
 test fire with "test wood/n/drop wood/take leaves/burn wood with glasses/drop leaves on fire".
+test cut with "test fire/se/in/take saw/n/climb ladder/cut tree/d/se/z/n".
 
 
 Volume - Game Settings
@@ -49,8 +76,7 @@ Understand "about" as abouting.
 Understand the command "credits" or "info" as "about".
 
 Report abouting:
-	say "[italic type][Story title][roman type] was created in the fall of 2013 as an exercise.[paragraph break]";
-	say "[italic type][Story title][roman type] is copyright e© 2013 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
+	say "[italic type][Story title][roman type] is copyright © 2013 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
 
 Book - Uberstart
 
@@ -93,27 +119,48 @@ instead of doing anything to a flimsy:
 
 Book - Easter Eggs
 
-understand "xyzzy" as a mistake("You face the tree and wave your fingers at the nest while chanting 'xyzzy xyzzy xyzzy ....' Nothing happens.").
-Understand "* [text]" as a mistake ("Noted.").
+understand "xyzzy" as a mistake("You face the tree and wave your fingers at the nest while chanting 'xyzzy, xyzzy, xyzzy ....' Nothing happens.").
+
+[Understand "* [text]" as a mistake ("Noted.").]
 
 
 Book - Nouns
 
 Chapter - Player Character
 
-Myself is a male person.  The player is myself.  The description of myself is "You're a third generation farmer who is.....no not really, you bought this old farm house because it was falling down and you got the it and the land cheap."
+Myself is a male person.  The player is myself.  
+The description of the player is "You're a third generation farmer who is.....no not really, you bought this old farm house because it was falling down and you got it and the land cheap."
 
 A person can be hiding or not-hiding.
 
 Check going when the player is hiding:
 	now the player is not-hiding.
 
-Myself is wearing reading glasses, t-shirt, jean shorts and baseball cap.
+The player is wearing reading glasses, t-shirt, jean shorts and baseball cap.
 
 
 Book - Verbs
 
 Part - New actions
+
+Chapter - Digging
+
+Digging is an action applying to nothing. Understand "dig", "dig hole", "dig a hole", "dig a", "dig in ground", "dig a hole in the ground", "dig hole in ground", "dig a hole in ground", and "dig hole in the ground" as digging.
+
+Instead of digging:
+	if the player is carrying the shovel:
+		if the location is under-the-tree:
+			if the hole is in under-the-tree:
+				say "The ground is too hard and full of roots to expand the hole any further.";
+			otherwise:
+				now the hole is in under-the-tree;
+				say "It's tough digging, but you manage to dig around the roots and make a hole directly underneath the nest.";
+		otherwise if the location is in-the-shed:
+			say "Why would you want to dig a hole in the shed floor?";
+		otherwise if the location is on-the-porch:
+			say "The shovel won't dig through the concrete porch.";
+	otherwise:
+		say "Digging with your hands just doesn't sound like a good use of your time."
 
 Chapter - Shaking
 
@@ -126,8 +173,8 @@ Rule for supplying a missing noun while shaking:
 	
 Check shaking:
 	if the noun is:
-		-- Myself:
-			say "You shake and shake your whole body like a dog climbing out of the water, but the hornets don't seem impressed.";
+		-- myself:
+			say "You shake your enitire body like a dog climbing out of the water, but the hornets don't seem impressed.";
 		-- the tree:
 			say "You try to shake the tree, but luckily for you, it is too large and you can't budge it.";
 		-- the bug killer:
@@ -140,7 +187,7 @@ Carry out shaking:
 		now the noun is shaken.
 	
 Report shaking the bug killer:
-	say "You shake and shake listening to that little ball inside bounce on the sides of the can[if bug killer is full] and there seems to be a some spray left[otherwise if bug killer is half-full]and there seems to be very little spray left[otherwise], but the can feels empty[end if]."
+	say "You shake the can listening to that little ball inside bounce on the inside[if bug killer is full]. There seems to be some spray left[otherwise if bug killer is half-full].  There seems to be very little spray left[otherwise], but the can feels empty[end if]."
 
 Chapter - Leaning
 
@@ -149,8 +196,8 @@ understand "lean [something] on [something]" as leaning it on.
 understand "lean [something] against [something]" as leaning it on.
 understand "lean [something]" as leaning it on.
 
-Rule for supplying a missing noun while leaning:
-	change the noun to Myself.
+Rule for supplying a missing noun while leaning (this is the leaning on rule):
+	change the noun to the player.
 	
 Rule for supplying a missing second noun while leaning:
 	if location is under-the-tree:
@@ -163,9 +210,9 @@ Rule for supplying a missing second noun while leaning:
 	
 Check leaning:
 	if the noun is:
-		-- Myself:
+		-- myself:
 			if the second noun is the tree:
-				say "You lean against the tree nonchalantley...that didn't work...the hornets notice you and become a bit agitated.";
+				say "You lean against the tree nonchalantly...well that didn't work, the hornets notice you and become a bit agitated.";
 		-- ladder:
 			if the second noun is the tree:
 				say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
@@ -215,7 +262,7 @@ Carry out spraying:
 			now the hornets are angry;
 			say "You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, 'Sprays up to 8 feet!'...well crap, I've got to get closer.[paragraph break]You shake the can one more time and you seem to have just a little left." instead;
 		if location is up-the-tree:
-			say "You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[paragraph break]";
+			say "You are close enough now, there is no way you'll miss.  You'll have these damn hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[paragraph break]";
 			now the bug killer is empty;
 			say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets attention and they begin to mass an attack.";
 			hornets attack in 1 turn from now;
@@ -249,7 +296,7 @@ Check throwing it at (this is the block juggling rule):
 	if the player is carrying the second noun, say "It would be difficult to throw at something you are yourself holding." instead.
 	
 Check throwing it at (this is the avoid throwing things into themselves rule): 
-	if the second noun is within the noun, say "That would be a nice magic trick." instead.	
+	if the second noun is within the noun, say "That would be a neat trick." instead.	
 
 Understand "throw [something] in [something]" as throwing it at.
 
@@ -328,7 +375,7 @@ Book - Rooms
 
 Part - Under the Tree
 
-Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  [if pile of ashes is on-stage]There is a pile of ashes under the tree. [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. [if ladder is on tree]Your ladder is leaning up against the tree.[end if]".
+Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [if ladder is on tree]Your ladder is leaning up against the tree[end if][if cut branch is in under-the-tree] and the branch you just cut is laying on the ground[end if].".
 
 Before going up from under-the-tree:
 	if ladder is not on the tree:
@@ -352,12 +399,12 @@ Instead of looking north when location is in-the-shed:
 	try searching the window.
 
 Instead of searching the window:
-	say "As you look out the hazy window, you can still barely make out the hornets in the tree.   [view-hornets-out-window]".
+	say "As you look out the hazy window[if the hornets-nest is part of the tree], you can still barely make out the hornets in the tree.   [view-hornets-out-window][else] you can see the tree.[end if].".
 
 To say describe-the-hand-saw:
 	if the hand-saw is on-stage: 
 		if the hand-saw is hanging:
-			say "[one of]You look around for something else that might help you in your mission and notice for the first time a handsaw hanging on a nail in the dark back wall of the shed.[or]There is a handsaw hanging on a nail in the dark back wall of the shed.[stopping]";
+			say "[paragraph break][one of]You look around for something else that might help you in your mission and notice for the first time a handsaw hanging on a nail in the dark back wall of the shed.[or]There is a handsaw hanging on a nail in the dark back wall of the shed.[stopping]";
 [		otherwise:
 			if hand-saw is in in-the-shed:
 				say "There is a handsaw here.";]
@@ -392,11 +439,26 @@ before of going south in outside-the-shed:
 
 Part - On the porch
 
-On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the swing and drinking a beer."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
+On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the glider and drinking a beer."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
 
-The porch swing is a enterable supporter in on-the-porch.  The description of porch swing is "The porch swing sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
+The glider is a enterable supporter in on-the-porch.  The description of glider is "The glider sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
+
+Instead of swinging the glider:
+	if the player is on the glider:
+		say "You lean back and swing for a bit, but as much as you hoped, the hornets didn't leave on their own.";
+	otherwise:
+		say "You give the glider a soft kick and it rocks back and forth for a bit."
 
 The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."
+
+before going up when the player is on the glider:
+	if player is on the glider:
+		try getting off the glider instead.
+
+Does the player mean entering the glider when the player is in on-the-porch: it is likely.
+Does the player mean swinging the glider when the player is in on-the-porch: it is likely.
+Does the player mean swinging the glider when the player is on the glider: it is likely.
+
 
 
 Part - Up the tree
@@ -523,10 +585,14 @@ instead of putting the leaves on the twigs:
 	otherwise:
 		say "Tossing the leaves on the twigs would not serve any purpose right now."
 			
+Chapter - Hole
 
+The hole is a fixed in place container.   The description is "The hole isn't very deep, but you think it is big enough for the nest to fit into."
 
-
-		
+Instead of taking the hole:
+	say "Really, did you really just try to pick up the hole?"
+	
+	
 Chapter - Smoke
 
 The smoke is scenery.  The smoke is undescribed.  The smoke can be heavy or light.  The smoke is light.
@@ -540,15 +606,20 @@ Instead of examining the smoke:
 		say "A heavy gray smoke pours out from the burning pile."
 
 
-Chapter - Hornest Nest
+Chapter - Hornets Nest
 
 The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [first time]It must have appeared overnight as you don't recall seeing it yesterday.[only]". The printed name is "hornet's nest".  The indefinite article is "a".  
 
-Understand "hive/hives/nest" or "bee's nest" as the hornets-nest.
+Understand "hive/hives/nest" or "bee's nest" or "hornets nest" as the hornets-nest.
+
+instead of taking the hornets-nest:
+	say "Not going to be that easy."
 
 Chapter - Hornets	
 
 Some hornets are a thing in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets]".
+
+understand "hornet/bee/bees/soldiers/workers" as hornets.
 
 To say description-of-hornets:
 	if the hornets are swarming:
@@ -591,6 +662,8 @@ Before examining tree:
 	if location is in-the-shed:
 		say "You look out the window and see the tree in front of your house." instead.
 		
+does the player mean climbing the tree when the player is in under-the-tree: it is very likely.
+
 before climbing the tree:
 	try going up instead;
 	
@@ -613,20 +686,35 @@ Instead of pushing the tree:
 	
 Understand "saw [something]" as cutting.
 Instead of cutting the tree:
-	if location is up-the-tree:
-		if player carries the hand-saw:
-			say "You take the hand saw and begin to cut through the branch that the hornet's nest is hanging from.  After a moment the branch cracks and falls to the ground taking the nest with it.  You start to raise your arms in triumph, but then remembering you are standing on a ladder, you think better of it and just grin happily to yourself.  As the nest hits the ground, it bursts into pieces and the hornets scatter in all directions.......only to regroup high up in the tree where they hover for a moment, then as if shot from a pistol, head in your direction.";
-			hornets attack in 1 turn from now;
+	if player carries the hand-saw:
+		if location is up-the-tree:
+			if cut branch is in under-the-tree:
+				say "The hornet's have built their new nest in a branch too high for you to reach.";
+			otherwise:
+				say "You take the hand saw and begin to cut through the branch that the hornet's nest is hanging from.  After a moment the branch cracks and falls to the ground taking the nest with it.  You start to raise your arms in triumph, but then remembering you are standing on a ladder, you think better of it and just grin happily to yourself.";
+				if  the hole is in under-the-tree:
+					say "[paragraph break]The nest falls right into the hole.  You clamber down the ladder and quickly fill in the hole covering the nest.  ";
+					now the hole is off-stage;
+					now the hornets-nest is off-stage;
+					now the player is in under-the-tree;
+				otherwise:
+					say "[paragraph break]As the nest hits the ground, it bursts into pieces and the hornets scatter in all directions.......only to regroup high up in the tree where they hover for a moment, then as if shot from a pistol, head in your direction.";
+					now the cut branch is in under-the-tree;
+					hornets attack in 1 turn from now;
 		otherwise:
-			say "You make a cutting motion on the tree with your hand and succeed in nothing more than scraping up your hand.";
+			say "Cutting down the entire tree is a bit of overkill don't you think?";
 	otherwise:
-		say "You give the tree your best karate chop, but nothing happens except for your sore hand."
+		say "You make a cutting motion on the tree with your hand and succeed in nothing more than scraping up your hand.";
 		
 The bark is a flimsy.  The bark is part of the shade tree.
 The roots are a flimsy.  The roots are part of the shade tree.  the action-refusal is  "The roots are pretty necessary to the health of the tree.  You don't want to risk anything."
 
 The yard is a backdrop which is everywhere.  The description is "A large yard and you take care of it as well as you can."
 
+The cut branch is scenery.  The description of cut branch is "The large branch you just cut from the tree is laying on the ground and the remenents of the old nest have scattered in the light breeze."  
+
+instead of doing anything with the cut branch:
+	say "It is much too heavy."
 
 Chapter - House
 
@@ -638,7 +726,7 @@ The shed is a backdrop which is everywhere.  The description of the shed is "The
 
 before entering shed:
 	say "You wonder off to the shed.";
-	now myself is in in-the-shed instead.
+	now the player is in in-the-shed instead.
 
 Chapter - Pile of wood
 
@@ -656,7 +744,7 @@ Before taking woodpile:
 
 Chapter - Spider web
 
-The web is a container on the woodpile.  The web is open.  The web is not openable.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've seen this side of National Geographic[end if]."
+The web is a container on the woodpile.  The web is open.  The web is not openable.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've ever seen.[end if]."
 
 The web-top is a supporter.  The web-top is a part of the web.
 Instead of attacking the web:
@@ -664,20 +752,21 @@ Instead of attacking the web:
 
 Chapter - spider	
 
-The large spider is a animal in the web.  The  description of large spider is "The spider is at least as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.
+The large spider is a animal in the web.  The  description of large spider is "The spider is as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.
 
 Instead of taking the large spider:
-	say "You start to reach for the spider to brush it and it's web out of the way, but as your hand approaches, the spider actually turns and appears to rear up at you as if ready to bite."
+	say "You start to reach for the spider to brush it and it's web out of the way, but as your hand approaches, the spider actually turns and rears up at you ready to bite."
 	
 Instead of attacking the large spider:
 	try taking large spider.
 	
-			
-		
-		
 Chapter - horsefly
 
-The horsefly is a thing in in-the-shed.  The description of horsefly is "The large horsefly is at least two inches long and [if player carries horsefly]it struggles to get out of your grip[otherwise if location is in-the-shed]keeps buzzing around the window trying to get out[end if]."  Understand "fly" as horsefly.
+Every turn when the player is in in-the-shed and the horsefly is on-stage and the player does not carry the horsefly:
+	if a random chance of 1 in 2 succeeds:
+		say "[one of]You hear a fly in the window as it tries to escape[or]You notice a fly walking up the window[or]A fly buzzes past your nose, just to circle around and fly right back into the window[at random]."
+
+The horsefly is an undescribed thing in in-the-shed.  The description of horsefly is "The large horsefly is at least two inches long and [if player carries horsefly]it struggles to get out of your grip[otherwise if location is in-the-shed]keeps buzzing around the window trying to get out[end if]."  Understand "fly" as horsefly.
 
 Before taking horsefly:
 	say "You spend several minutes trying to get your hands on the fly.  It is only after it gets hung up in some cobwebs that you are finally able to catch it.  You grab it holding on by it's wings to keep it from moving around too much.";
@@ -689,7 +778,7 @@ after dropping horsefly:
 
 Before putting the horsefly on the web-top:
 	if player is carrying horsefly:
-		say "You toss the fly into the web and the spider instantly pounces on it and begins to wrap it up.  When it's done wraping, it drags the fly off the web and underneath the wood pile.";
+		say "You toss the fly into the web and the spider instantly pounces on it and begins to wrap it up.  When it's done wrapping, it drags the fly off the web and underneath the wood pile.";
 		now spider is off-stage;
 		now horsefly is off-stage instead;
 	otherwise:
@@ -721,12 +810,12 @@ at the time when the hornets attack:
 	if location is up-the-tree or location is under-the-tree:
 		now Hornet attack count is the hornet attack count plus 1;
 [		silently move the player to a random safe-zone room;]
-		say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms .  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildely.  For a few moments you don't even realize that after the hornets got you [if location is up-the-tree]out of[otherwise if location is under-the-tree]away from[end if] the tree, they went back to their nest.[paragraph break]";
+		say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms .  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
 		if hornet attack count is 1:
 			say "Well that didn't work too well.  [bug-killer-drop-description]a thought comes to you; hornets don't like smoke, why don't I try smoking them out.[line break][line break]";
 			now woodpile is in outside-the-shed;
 		if hornet attack count is 2:
-			say "As they swarm around your head, you notice there is something different about them....you swear they are wearing gas masks.";
+			say "As they swarm around your head, you notice there is something different about them.... they are now wearing minature gas masks.";
 			now twigs are off-stage;
 			now woodpile is off-stage;
 			now pile of ashes is in under-the-tree;
@@ -737,7 +826,9 @@ at the time when the hornets attack:
 		Hornets calm down in two turns from now.
 
 at the time when the hornets calm down:
-	now the hornets are swarming.
+	now the hornets are swarming;
+	if hornet attack count is 3:
+		say "Amazingly as you look back at the tree, the hornets are swarming wildly around another branch.  Their activity grows in intensity and soon you can see nothing but a large mass of hornets all moving together.  [paragraph break]After a few moments, the activity ceases, most of the hornets retreat into a new nest that is now hanging from another branch.";
 
 
 to say bug-killer-drop-description:
@@ -761,6 +852,7 @@ Every turn while aggressive-hornets is happening:
 		do nothing;
 	otherwise:
 		say "[one of]From here you can hear the angry buzz of the hornets.[or]You can see the hornets swarming as if looking for something to sting.[or]You must have really made them mad this time.[or]Occassionally a hornet seems to locate you.  It buzzes your head and you manage to swat it away before it does much damage.  It flys back towards the nest....you hope it doesn't bring back friends.[then at random]".
+
 		
 		
 
