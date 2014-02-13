@@ -47,7 +47,7 @@ To decide whether currently transcripting: (- CheckTranscriptStatus() -)
 ignore-transcript-nag is a truth state that varies.
  
 After reading a command:
-	if the player's command matches the regular expression "^<\*\p>":
+	if the player's command matches the regular expression "^\*.+":
 		if currently transcripting:
 			say "Noted.";
 		otherwise:
@@ -76,12 +76,12 @@ Understand "about" as abouting.
 Understand the command "credits" or "info" as "about".
 
 Report abouting:
-	say "[italic type][Story title][roman type] is copyright © 2013 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
+	say "[italic type][Story title][roman type] is copyright © 2014 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
 
 Book - Uberstart
 
 The uberstart rules are a rulebook.
-After printing the banner text, say "Copyright © 2013, Jason Lautzenheiser."
+After printing the banner text, say "Copyright © 2014, Jason Lautzenheiser."
 The time of day is 6:05 AM.
 
 When play begins:
@@ -378,6 +378,8 @@ Part - Under the Tree
 Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [if ladder is on tree]Your ladder is leaning up against the tree[end if][if cut branch is in under-the-tree] and the branch you just cut is laying on the ground[end if].".
 
 Before going up from under-the-tree:
+	if the player is carrying ladder:
+		try leaning ladder on tree;
 	if ladder is not on the tree:
 		say " You never were much of a tree climber, besides it wouldn't be pretty if the bees attack while you were trying to pull yourself up the tree." instead.
 	
@@ -399,7 +401,7 @@ Instead of looking north when location is in-the-shed:
 	try searching the window.
 
 Instead of searching the window:
-	say "As you look out the hazy window[if the hornets-nest is part of the tree], you can still barely make out the hornets in the tree.   [view-hornets-out-window][else] you can see the tree.[end if].".
+	say "Looking out the hazy window[if the hornets-nest is part of the tree], you barely make out the hornets in the tree.  [view-hornets-out-window][else] you can see the tree.[end if]".
 
 To say describe-the-hand-saw:
 	if the hand-saw is on-stage: 
@@ -431,7 +433,7 @@ Before searching the shelf:
 
 Part - Outside the shed
 
-Outside-the-shed is a room.  Outside-the-shed is a safe-zone.  The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down, however it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
+Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down, however it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
 
 before of going south in outside-the-shed:
 	try going inside instead.
@@ -639,7 +641,9 @@ Before taking hornets:
 
 Chapter - Tree
 
-The shade tree is a supporter which is in under-the-tree. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The trees branches spread over the front porch and shade the house well from the morning sun.  [if hornets-nest is part of the shade tree]About ten feet up is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
+The shade tree is a supporter which is in under-the-tree. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]About ten feet up is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
+
+understand "branch" as tree when cut branch is not in under-the-tree.
 
 after deciding the scope of the player:
 	place the tree in scope;
@@ -683,6 +687,7 @@ Instead of looking under the tree:
 	
 Instead of pushing the tree:
 	say "You strain against the tree but you fail to budge it."
+
 	
 Understand "saw [something]" as cutting.
 Instead of cutting the tree:
@@ -809,20 +814,22 @@ Hornet attack count is a number that varies.  Hornet attack count is 0.
 at the time when the hornets attack:
 	if location is up-the-tree or location is under-the-tree:
 		now Hornet attack count is the hornet attack count plus 1;
-[		silently move the player to a random safe-zone room;]
-		say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms .  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
+		say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
+		now the player is hiding;
+		now the hornets are aggressive;
 		if hornet attack count is 1:
-			say "Well that didn't work too well.  [bug-killer-drop-description]a thought comes to you; hornets don't like smoke, why don't I try smoking them out.[line break][line break]";
+			now the player is in a random safe-zone room;
+			say "Well that didn't work too well.  [bug-killer-drop-description]a thought comes to you; hornets don't like smoke, why don't you try smoking them out.[line break][line break]";
 			now woodpile is in outside-the-shed;
 		if hornet attack count is 2:
+			now the player is in a random safe-zone room;
 			say "As they swarm around your head, you notice there is something different about them.... they are now wearing minature gas masks.";
 			now twigs are off-stage;
 			now woodpile is off-stage;
 			now pile of ashes is in under-the-tree;
 			now hand-saw is in in-the-shed;
-		now the player is hiding;
-		now the hornets are aggressive;
-		now the player is in a random safe-zone room;
+		if hornet attack count is 3:
+			now the player is in a random safe-zone room;
 		Hornets calm down in two turns from now.
 
 at the time when the hornets calm down:
@@ -833,8 +840,8 @@ at the time when the hornets calm down:
 
 to say bug-killer-drop-description:
 	if player carries bug killer:
+		silently try dropping bug killer;
 		say "You throw the can away in disgust and as it bounces off [if location is in-the-shed]the wall[otherwise if location is on-the-porch]the porch floor[end if] it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty.  As you look on in disbelief, [run paragraph on]" ;
-		try dropping bug killer;
 		change the printed name of the bug killer to "[if bug killer is empty]now empty [end if]bug killer";
 	otherwise:
 		say "As you pause to catch your breath, [run paragraph on]".
