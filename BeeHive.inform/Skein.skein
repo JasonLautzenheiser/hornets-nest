@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Skein rootNode="node-0x02819B90" xmlns="http://www.logicalshift.org.uk/IF/Skein">
+<Skein rootNode="node-0x02504468" xmlns="http://www.logicalshift.org.uk/IF/Skein">
   <generator>Inform 7 for Windows</generator>
-  <activeNode nodeId="node-0x02819B90"/>
-  <item nodeId="node-0x02819B90">
+  <activeNode nodeId="node-0x02504468"/>
+  <item nodeId="node-0x02504468">
     <command xml:space="preserve">- start -</command>
-    <result xml:space="preserve">beer has no description.&#x000A;pile of ashes has no description.&#x000A;smoke has no description.&#x000A;bark has no description.&#x000A;roots has no description.&#x000A;web-top has no description.&#x000A;&#x000A;Hornets Nest&#x000A;An Interactive Experience in Pest Removal by Jason Lautzenheiser&#x000A;Release 1 / Serial number 140212 / Inform 7 build 6G60 (I6/v6.32 lib 6/12N) SD&#x000A;Copyright &#x00A9; 2014, Jason Lautzenheiser.&#x000A;&#x000A;Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  .&#x000A;&#x000A;You can see a shade tree here.&#x000A;&#x000A;&gt;</result>
+    <result xml:space="preserve">beer has no description.&#x000A;pile of ashes has no description.&#x000A;smoke has no description.&#x000A;bark has no description.&#x000A;roots has no description.&#x000A;web-top has no description.&#x000A;&#x000A;Hornets Nest&#x000A;An Interactive Experience in Pest Removal by Jason Lautzenheiser&#x000A;Release 1 / Serial number 140513 / Inform 7 build 6L02 (I6/v6.33 lib 6/12N) SD&#x000A;Copyright &#x00A9; 2014, Jason Lautzenheiser.&#x000A;&#x000A;Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  .&#x000A;&#x000A;You can see a shade tree here.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
     <played>YES</played>
-    <changed>NO</changed>
+    <changed>YES</changed>
     <temporary score="0">NO</temporary>
     <children>
-      <child nodeId="node-0x02819C00"/>
-      <child nodeId="node-0x028647C8"/>
-      <child nodeId="node-0x0283C840"/>
-      <child nodeId="node-0x0283C920"/>
-      <child nodeId="node-0x0283C990"/>
+      <child nodeId="node-0x025044D8"/>
+      <child nodeId="node-0x02929C80"/>
+      <child nodeId="node-0x02900830"/>
+      <child nodeId="node-0x02900750"/>
+      <child nodeId="node-0x029008A0"/>
     </children>
   </item>
-  <item nodeId="node-0x02819C00">
+  <item nodeId="node-0x025044D8">
     <command xml:space="preserve">x tre</command>
     <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -25,10 +25,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02819C70"/>
+      <child nodeId="node-0x02504548"/>
     </children>
   </item>
-  <item nodeId="node-0x02819C70">
+  <item nodeId="node-0x02504548">
     <command xml:space="preserve"></command>
     <result xml:space="preserve">I beg your pardon?&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -36,10 +36,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02862B18"/>
+      <child nodeId="node-0x02929840"/>
     </children>
   </item>
-  <item nodeId="node-0x02862B18">
+  <item nodeId="node-0x02929840">
     <command xml:space="preserve">x tree</command>
     <result xml:space="preserve">The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The trees branches spread over the front porch and shade the house well from the morning sun&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -47,10 +47,10 @@
     <changed>YES</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02862B88"/>
+      <child nodeId="node-0x029298B0"/>
     </children>
   </item>
-  <item nodeId="node-0x02862B88">
+  <item nodeId="node-0x029298B0">
     <command xml:space="preserve">x hive</command>
     <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -58,10 +58,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02864498"/>
+      <child nodeId="node-0x02929950"/>
     </children>
   </item>
-  <item nodeId="node-0x02864498">
+  <item nodeId="node-0x02929950">
     <command xml:space="preserve">x beehive</command>
     <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -69,10 +69,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02864508"/>
+      <child nodeId="node-0x029299C0"/>
     </children>
   </item>
-  <item nodeId="node-0x02864508">
+  <item nodeId="node-0x029299C0">
     <command xml:space="preserve">x bees</command>
     <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -80,7 +80,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x028647C8">
+  <item nodeId="node-0x02929C80">
     <command xml:space="preserve">x tree</command>
     <result xml:space="preserve">The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The trees branches spread over the front porch and shade the house well from the morning sun.  About ten feet up is the largest hornet's nest you've ever seen.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -88,14 +88,14 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02864930"/>
-      <child nodeId="node-0x02864B40"/>
-      <child nodeId="node-0x028326A0"/>
-      <child nodeId="node-0x028374D0"/>
-      <child nodeId="node-0x02837620"/>
+      <child nodeId="node-0x02929E18"/>
+      <child nodeId="node-0x02929E88"/>
+      <child nodeId="node-0x028F63A8"/>
+      <child nodeId="node-0x028FB6E8"/>
+      <child nodeId="node-0x028FB758"/>
     </children>
   </item>
-  <item nodeId="node-0x02864930">
+  <item nodeId="node-0x02929E18">
     <command xml:space="preserve">x beehive</command>
     <result xml:space="preserve">The beehive is the largest you've seen, bending the branch it's hanging from.&#x000A;&#x000A;In the beehive are some bees.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -103,7 +103,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x02864B40">
+  <item nodeId="node-0x02929E88">
     <command xml:space="preserve">x nest</command>
     <result xml:space="preserve">You see a gigantic hornet's nest hanging from the branch of your shade tree.  It must have appeared overnight as you don't recall seeing it yesterday.&#x000A;&#x000A;In the hornet's nest are some hornets.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -111,13 +111,13 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02864BF8"/>
-      <child nodeId="node-0x028650A8"/>
-      <child nodeId="node-0x02865118"/>
-      <child nodeId="node-0x0282EEF0"/>
+      <child nodeId="node-0x02929EF8"/>
+      <child nodeId="node-0x02926BD8"/>
+      <child nodeId="node-0x02926E08"/>
+      <child nodeId="node-0x028F2BF8"/>
     </children>
   </item>
-  <item nodeId="node-0x02864BF8">
+  <item nodeId="node-0x02929EF8">
     <command xml:space="preserve">actions</command>
     <result xml:space="preserve">Actions listing on.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -125,10 +125,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02864C68"/>
+      <child nodeId="node-0x02929F68"/>
     </children>
   </item>
-  <item nodeId="node-0x02864C68">
+  <item nodeId="node-0x02929F68">
     <command xml:space="preserve">x next</command>
     <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -136,10 +136,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02864E78"/>
+      <child nodeId="node-0x029264D0"/>
     </children>
   </item>
-  <item nodeId="node-0x02864E78">
+  <item nodeId="node-0x029264D0">
     <command xml:space="preserve">x nest</command>
     <result xml:space="preserve">[examining the beehive]&#x000A;The beehive is the largest you've seen, bending the branch it's hanging from.&#x000A;&#x000A;In the beehive are some bees.&#x000A;&#x000A;[examining the beehive - succeeded]&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -147,10 +147,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02864EE8"/>
+      <child nodeId="node-0x02926660"/>
     </children>
   </item>
-  <item nodeId="node-0x02864EE8">
+  <item nodeId="node-0x02926660">
     <command xml:space="preserve">rules</command>
     <result xml:space="preserve">Rules tracing now switched on. Type "rules off" to switch it off again, or "rules all" to include even rules which do not apply.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -158,10 +158,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02865038"/>
+      <child nodeId="node-0x02926B68"/>
     </children>
   </item>
-  <item nodeId="node-0x02865038">
+  <item nodeId="node-0x02926B68">
     <command xml:space="preserve">x b ees</command>
     <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -169,10 +169,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02864F58"/>
+      <child nodeId="node-0x02926D98"/>
     </children>
   </item>
-  <item nodeId="node-0x02864F58">
+  <item nodeId="node-0x02926D98">
     <command xml:space="preserve">x bees</command>
     <result xml:space="preserve">[examining the bees]&#x000A;[Rule "standard examining rule" applies.]&#x000A;The bees look like normal honey bees, ones that aren't very happy, but normal ones.&#x000A;&#x000A;[Rule "examine directions rule" applies.]&#x000A;[Rule "examine containers rule" applies.]&#x000A;[Rule "examine supporters rule" applies.]&#x000A;[Rule "examine devices rule" applies.]&#x000A;[Rule "examine undescribed things rule" applies.]&#x000A;[Rule "report other people examining rule" applies.]&#x000A;[examining the bees - succeeded]&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -180,10 +180,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02864FC8"/>
+      <child nodeId="node-0x02926D28"/>
     </children>
   </item>
-  <item nodeId="node-0x02864FC8">
+  <item nodeId="node-0x02926D28">
     <command xml:space="preserve">x nest</command>
     <result xml:space="preserve">[examining the beehive]&#x000A;[Rule "standard examining rule" applies.]&#x000A;The beehive is the largest you've seen, bending the branch it's hanging from.&#x000A;&#x000A;[Rule "examine directions rule" applies.]&#x000A;[Rule "examine containers rule" applies.]&#x000A;In the beehive are some bees.&#x000A;&#x000A;[Rule "examine supporters rule" applies.]&#x000A;[Rule "examine devices rule" applies.]&#x000A;[Rule "examine undescribed things rule" applies.]&#x000A;[Rule "report other people examining rule" applies.]&#x000A;[examining the beehive - succeeded]&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -191,7 +191,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x028650A8">
+  <item nodeId="node-0x02926BD8">
     <command xml:space="preserve">x bees</command>
     <result xml:space="preserve">The bees look like normal honey bees, ones that aren't very happy, but normal ones.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -199,7 +199,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x02865118">
+  <item nodeId="node-0x02926E08">
     <command xml:space="preserve">x hornets</command>
     <result xml:space="preserve">The hornets are swarming around the nest, workers headed in and out, soldiers perched on the nest as if expecting a full frontal assault.&#x000A;&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -207,10 +207,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02865188"/>
+      <child nodeId="node-0x02926C48"/>
     </children>
   </item>
-  <item nodeId="node-0x02865188">
+  <item nodeId="node-0x02926C48">
     <command xml:space="preserve">s</command>
     <result xml:space="preserve">Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -218,10 +218,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F350"/>
+      <child nodeId="node-0x02926CB8"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F350">
+  <item nodeId="node-0x02926CB8">
     <command xml:space="preserve">s</command>
     <result xml:space="preserve">In the Shed&#x000A;You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard.&#x000A;&#x000A;You can see a can of bug killer, a ladder and a horsefly here.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -229,10 +229,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F0B0"/>
+      <child nodeId="node-0x02926AF8"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F0B0">
+  <item nodeId="node-0x02926AF8">
     <command xml:space="preserve">take can</command>
     <result xml:space="preserve">Taken.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -240,10 +240,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F190"/>
+      <child nodeId="node-0x028F2B88"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F190">
+  <item nodeId="node-0x028F2B88">
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -251,10 +251,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F270"/>
+      <child nodeId="node-0x028F2FE8"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F270">
+  <item nodeId="node-0x028F2FE8">
     <command xml:space="preserve">s</command>
     <result xml:space="preserve">In the Shed&#x000A;You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard.&#x000A;&#x000A;You can see a ladder and a horsefly here.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -262,10 +262,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F2E0"/>
+      <child nodeId="node-0x028F2CD8"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F2E0">
+  <item nodeId="node-0x028F2CD8">
     <command xml:space="preserve">take ladder</command>
     <result xml:space="preserve">Taken.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -273,10 +273,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F3C0"/>
+      <child nodeId="node-0x028F29C8"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F3C0">
+  <item nodeId="node-0x028F29C8">
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -284,10 +284,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F430"/>
+      <child nodeId="node-0x028F2A38"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F430">
+  <item nodeId="node-0x028F2A38">
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade that you take advantage of whenever you can.  However, there seems to be a hornet's nest that is disrupting your relaxation.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -295,10 +295,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F040"/>
+      <child nodeId="node-0x028F2B18"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F040">
+  <item nodeId="node-0x028F2B18">
     <command xml:space="preserve">climb ladder</command>
     <result xml:space="preserve">You never were much of a tree climber, besides it wouldn't be pretty if the bees attack while you were trying to pull yourself up the tree.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -306,10 +306,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F200"/>
+      <child nodeId="node-0x028F2E28"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F200">
+  <item nodeId="node-0x028F2E28">
     <command xml:space="preserve">lead ladder</command>
     <result xml:space="preserve">That's not a verb I recognize.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -317,10 +317,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F4A0"/>
+      <child nodeId="node-0x028F30C8"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F4A0">
+  <item nodeId="node-0x028F30C8">
     <command xml:space="preserve">lean ladder</command>
     <result xml:space="preserve">You lean the ladder against thin air and it promptly leans all the way to the ground.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -328,10 +328,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F120"/>
+      <child nodeId="node-0x028F2F08"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F120">
+  <item nodeId="node-0x028F2F08">
     <command xml:space="preserve">lean ladder against tree</command>
     <result xml:space="preserve">You lean the ladder against the tree, being careful not to bump the nest in the process.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -339,10 +339,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F5F0"/>
+      <child nodeId="node-0x028F2AA8"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F5F0">
+  <item nodeId="node-0x028F2AA8">
     <command xml:space="preserve">u</command>
     <result xml:space="preserve">Up the Tree&#x000A;You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -350,10 +350,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F510"/>
+      <child nodeId="node-0x028F2F78"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F510">
+  <item nodeId="node-0x028F2F78">
     <command xml:space="preserve">spray</command>
     <result xml:space="preserve">(the bug killer)&#x000A;You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....&#x000A;&#x000A;...You shake the can and look at it in horror.  Just a little spray dribbled out of the can....just enough to grab the hornets attention.  They have noticed you and are headed in your direction.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -361,10 +361,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282F580"/>
+      <child nodeId="node-0x028F3058"/>
     </children>
   </item>
-  <item nodeId="node-0x0282F580">
+  <item nodeId="node-0x028F3058">
     <command xml:space="preserve">d</command>
     <result xml:space="preserve">Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade that you take advantage of whenever you can.  However, there seems to be a hornet's nest that is disrupting your relaxation.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. Your ladder is leaning up against the tree.&#x000A;&#x000A;As soon as walk back under the tree the hornets seem to take notice of you again.  The reform into a tight group and launch an attack.  You hastily retreat back to where you came.&#x000A;&#x000A;Up the Tree&#x000A;You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head.&#x000A;&#x000A;The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms .  You jump out of the tree and run around screaming wildely.  For a few moments you don't even realize that after the hornets got you out of the tree, they went back to their nest.&#x000A;&#x000A;Hiding on the Porch&#x000A;The front porch is where you spend most of your evenings after work in the summer.  Sitting on the swing and drinking a beer.&#x000A;&#x000A;Well that didn't work too well.  You throw the can away in disgust and as it bounces off the porch floor it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty.  As you look on in disbelief, a thought comes to you; hornets don't like smoke, why don't I try smoking them out.&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -372,7 +372,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x0282EEF0">
+  <item nodeId="node-0x028F2BF8">
     <command xml:space="preserve">x nest</command>
     <result xml:space="preserve">You see a gigantic hornet's nest hanging from the branch of your shade tree.  &#x000A;&#x000A;In the hornet's nest are some hornets.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -380,10 +380,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282EF60"/>
+      <child nodeId="node-0x028F2DB8"/>
     </children>
   </item>
-  <item nodeId="node-0x0282EF60">
+  <item nodeId="node-0x028F2DB8">
     <command xml:space="preserve">x hornets</command>
     <result xml:space="preserve">The hornets are swarming around the nest, workers headed in and out, soldiers perched on the nest as if expecting a full frontal assault.&#x000A;&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -391,10 +391,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0282EFD0"/>
+      <child nodeId="node-0x028F2C68"/>
     </children>
   </item>
-  <item nodeId="node-0x0282EFD0">
+  <item nodeId="node-0x028F2C68">
     <command xml:space="preserve">x house</command>
     <result xml:space="preserve">Your century old farm house sits in the middle of your farm.  It's old, it's got it's problems....but it's home.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -402,10 +402,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x028327F0"/>
+      <child nodeId="node-0x028F2D48"/>
     </children>
   </item>
-  <item nodeId="node-0x028327F0">
+  <item nodeId="node-0x028F2D48">
     <command xml:space="preserve">x shed</command>
     <result xml:space="preserve">The tool shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -413,10 +413,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x028329B0"/>
+      <child nodeId="node-0x028F2E98"/>
     </children>
   </item>
-  <item nodeId="node-0x028329B0">
+  <item nodeId="node-0x028F2E98">
     <command xml:space="preserve">s</command>
     <result xml:space="preserve">Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -424,10 +424,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832D30"/>
+      <child nodeId="node-0x028F62C8"/>
     </children>
   </item>
-  <item nodeId="node-0x02832D30">
+  <item nodeId="node-0x028F62C8">
     <command xml:space="preserve">x pile</command>
     <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -435,10 +435,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832A20"/>
+      <child nodeId="node-0x028F6178"/>
     </children>
   </item>
-  <item nodeId="node-0x02832A20">
+  <item nodeId="node-0x028F6178">
     <command xml:space="preserve">x wood</command>
     <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -446,10 +446,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832B70"/>
+      <child nodeId="node-0x028F6488"/>
     </children>
   </item>
-  <item nodeId="node-0x02832B70">
+  <item nodeId="node-0x028F6488">
     <command xml:space="preserve">s</command>
     <result xml:space="preserve">In the Shed&#x000A;You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.&#x000A;&#x000A;You can see a ladder and a horsefly here.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -457,10 +457,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832BE0"/>
+      <child nodeId="node-0x028F6338"/>
     </children>
   </item>
-  <item nodeId="node-0x02832BE0">
+  <item nodeId="node-0x028F6338">
     <command xml:space="preserve">x ladder</command>
     <result xml:space="preserve">The aluminum step ladder your Dad gave you for a house warming gift when you moved in twenty years ago is still laying where you left it.....oh....twenty years ago.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -468,10 +468,10 @@
     <changed>YES</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832860"/>
+      <child nodeId="node-0x028F6808"/>
     </children>
   </item>
-  <item nodeId="node-0x02832860">
+  <item nodeId="node-0x028F6808">
     <command xml:space="preserve">take ladder</command>
     <result xml:space="preserve">Taken.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -479,10 +479,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832DA0"/>
+      <child nodeId="node-0x028F61E8"/>
     </children>
   </item>
-  <item nodeId="node-0x02832DA0">
+  <item nodeId="node-0x028F61E8">
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -490,10 +490,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x028328D0"/>
+      <child nodeId="node-0x028F6728"/>
     </children>
   </item>
-  <item nodeId="node-0x028328D0">
+  <item nodeId="node-0x028F6728">
     <command xml:space="preserve">x ladder</command>
     <result xml:space="preserve">The aluminum step ladder your Dad gave you for a house warming gift when you moved in twenty years ago.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -501,10 +501,10 @@
     <changed>YES</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832A90"/>
+      <child nodeId="node-0x028F6258"/>
     </children>
   </item>
-  <item nodeId="node-0x02832A90">
+  <item nodeId="node-0x028F6258">
     <command xml:space="preserve">l</command>
     <result xml:space="preserve">Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -512,10 +512,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832940"/>
+      <child nodeId="node-0x028F6418"/>
     </children>
   </item>
-  <item nodeId="node-0x02832940">
+  <item nodeId="node-0x028F6418">
     <command xml:space="preserve">test wood</command>
     <result xml:space="preserve">(Testing.)&#x000A;&#x000A;&gt;[1] test spray&#x000A;(Testing.)&#x000A;&#x000A;&gt;[2] s&#x000A;&#x000A;In the Shed&#x000A;You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.&#x000A;&#x000A;You can see a horsefly here.&#x000A;&#x000A;&gt;[3] in&#x000A;You can't go inside from here.&#x000A;&#x000A;The only way to go is outside.&#x000A;&#x000A;&gt;[4] take ladder&#x000A;You already have that.&#x000A;&#x000A;&gt;[5] search shelf&#x000A;As you rumage through the junk on the shelf, you notice a can of bug killer that must have been thrown up there years ago.&#x000A;&#x000A;&gt;[6] take can&#x000A;Taken.&#x000A;&#x000A;&gt;[7] out&#x000A;&#x000A;Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;[8] n&#x000A;&#x000A;Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. &#x000A;&#x000A;&gt;[9] lean ladder on tree&#x000A;You lean the ladder against the tree, being careful not to bump the nest in the process.&#x000A;&#x000A;&gt;[10] u&#x000A;&#x000A;Up the Tree&#x000A;You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head.&#x000A;&#x000A;&gt;[11] spray&#x000A;You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....&#x000A;&#x000A;...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets attention and they begin to mass an attack.&#x000A;&#x000A;&gt;[12] z&#x000A;Time passes.&#x000A;&#x000A;The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms .  You jump out of the tree and run around screaming wildely.  For a few moments you don't even realize that after the hornets got you out of the tree, they went back to their nest.&#x000A;&#x000A;Well that didn't work too well.  You throw the can away in disgust and as it bounces off  it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty.  As you look on in disbelief, a thought comes to you; hornets don't like smoke, why don't I try smoking them out.&#x000A;&#x000A;Hiding outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;[13] z&#x000A;Time passes.&#x000A;&#x000A;From here you can hear the angry buzz of the hornets.&#x000A;&#x000A;&gt;[14] s&#x000A;&#x000A;In the Shed&#x000A;You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.&#x000A;&#x000A;You can see a horsefly here.&#x000A;&#x000A;You can see the hornets swarming as if looking for something to sting.&#x000A;&#x000A;&gt;[15] catch fly&#x000A;You spend several minutes trying to get your hands on the fly.  It is only after it gets hung up in some cobwebs that you are finally able to catch it.  You grab it holding on by it's wings to keep it from moving around too much.&#x000A;&#x000A;You must have really made them mad this time.&#x000A;&#x000A;&gt;[16] n&#x000A;&#x000A;Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  Stacked to one side of the shed is a woodpile.&#x000A;&#x000A;On the woodpile is a web (on which is a large spider).&#x000A;&#x000A;&gt;[17] throw fly in web&#x000A;That can't contain things.&#x000A;&#x000A;&gt;[18] get wood&#x000A;As you go to take some of the wood, the large spider turns towards your hand and rears up as if to bite.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -523,7 +523,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x028326A0">
+  <item nodeId="node-0x028F63A8">
     <command xml:space="preserve">s</command>
     <result xml:space="preserve">Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -531,12 +531,12 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832B00"/>
-      <child nodeId="node-0x02832710"/>
-      <child nodeId="node-0x02837380"/>
+      <child nodeId="node-0x028F6648"/>
+      <child nodeId="node-0x028F6798"/>
+      <child nodeId="node-0x028FBA68"/>
     </children>
   </item>
-  <item nodeId="node-0x02832B00">
+  <item nodeId="node-0x028F6648">
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  To the south is your ancient utility shed where you store all the essentials. &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -544,10 +544,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832780"/>
+      <child nodeId="node-0x028F64F8"/>
     </children>
   </item>
-  <item nodeId="node-0x02832780">
+  <item nodeId="node-0x028F64F8">
     <command xml:space="preserve">x hornets</command>
     <result xml:space="preserve">The hornets are swarming around the nest, workers headed in and out, soldiers perched on the nest as if expecting a full frontal assault.&#x000A;&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -555,10 +555,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832C50"/>
+      <child nodeId="node-0x028F6568"/>
     </children>
   </item>
-  <item nodeId="node-0x02832C50">
+  <item nodeId="node-0x028F6568">
     <command xml:space="preserve">showme hornets</command>
     <result xml:space="preserve">hornets - thing&#x000A;location: in the hornet's nest , which is part of the shade tree in Under the Tree&#x000A;plural-named, improper-named; unlit, inedible, portable&#x000A;printed name: "hornets"&#x000A;printed plural name: none&#x000A;indefinite article: "some"&#x000A;description: "The hornets are swarming around the nest, workers headed in and out, soldiers perched on the nest as if expecting a full frontal assault.&#x000A;"&#x000A;initial appearance: none&#x000A;hornets condition: swarming&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -566,7 +566,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x02832710">
+  <item nodeId="node-0x028F6798">
     <command xml:space="preserve">take ladder</command>
     <result xml:space="preserve">Taken.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -574,10 +574,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02832CC0"/>
+      <child nodeId="node-0x028F66B8"/>
     </children>
   </item>
-  <item nodeId="node-0x02832CC0">
+  <item nodeId="node-0x028F66B8">
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  To the south is your ancient utility shed where you store all the essentials. &#x000A;&#x000A;The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The trees branches spread over the front porch and shade the house well from the morning sun.  About ten feet up is the largest hornet's nest you've ever seen.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -585,10 +585,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x028378C0"/>
+      <child nodeId="node-0x028F6878"/>
     </children>
   </item>
-  <item nodeId="node-0x028378C0">
+  <item nodeId="node-0x028F6878">
     <command xml:space="preserve">lean ladder on tree</command>
     <result xml:space="preserve">You lean the ladder against the tree, being careful not to bump the nest in the process.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -596,10 +596,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02837310"/>
+      <child nodeId="node-0x028F65D8"/>
     </children>
   </item>
-  <item nodeId="node-0x02837310">
+  <item nodeId="node-0x028F65D8">
     <command xml:space="preserve">l</command>
     <result xml:space="preserve">Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  To the south is your ancient utility shed where you store all the essentials. The ladder is leaning up against the tree.&#x000A;&#x000A;The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The trees branches spread over the front porch and shade the house well from the morning sun.  About ten feet up is the largest hornet's nest you've ever seen. The ladder is leaning against the tree.&#x000A;&#x000A;On the shade tree is a ladder.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -607,7 +607,7 @@
     <changed>YES</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x02837380">
+  <item nodeId="node-0x028FBA68">
     <command xml:space="preserve">x tree</command>
     <result xml:space="preserve">The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The trees branches spread over the front porch and shade the house well from the morning sun.  About ten feet up is the largest hornet's nest you've ever seen.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -615,10 +615,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02837690"/>
+      <child nodeId="node-0x028FB8A8"/>
     </children>
   </item>
-  <item nodeId="node-0x02837690">
+  <item nodeId="node-0x028FB8A8">
     <command xml:space="preserve">s</command>
     <result xml:space="preserve">In the Shed&#x000A;You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.  &#x000A;&#x000A;You can see a ladder and a horsefly here.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -626,10 +626,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02837850"/>
+      <child nodeId="node-0x028FBBB8"/>
     </children>
   </item>
-  <item nodeId="node-0x02837850">
+  <item nodeId="node-0x028FBBB8">
     <command xml:space="preserve">x tree</command>
     <result xml:space="preserve">You look out the window and see the tree in front of your house.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -637,10 +637,10 @@
     <changed>YES</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x028375B0"/>
+      <child nodeId="node-0x028FBC98"/>
     </children>
   </item>
-  <item nodeId="node-0x028375B0">
+  <item nodeId="node-0x028FBC98">
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -648,10 +648,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x028373F0"/>
+      <child nodeId="node-0x028FBD78"/>
     </children>
   </item>
-  <item nodeId="node-0x028373F0">
+  <item nodeId="node-0x028FBD78">
     <command xml:space="preserve">x tree</command>
     <result xml:space="preserve">The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The trees branches spread over the front porch and shade the house well from the morning sun.  About ten feet up is the largest hornet's nest you've ever seen.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -659,10 +659,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x028379A0"/>
+      <child nodeId="node-0x028FBDE8"/>
     </children>
   </item>
-  <item nodeId="node-0x028379A0">
+  <item nodeId="node-0x028FBDE8">
     <command xml:space="preserve">s</command>
     <result xml:space="preserve">In the Shed&#x000A;You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.  &#x000A;&#x000A;You can see a ladder and a horsefly here.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -670,10 +670,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02837770"/>
+      <child nodeId="node-0x028FBC28"/>
     </children>
   </item>
-  <item nodeId="node-0x02837770">
+  <item nodeId="node-0x028FBC28">
     <command xml:space="preserve">x tree</command>
     <result xml:space="preserve">You look out the window and see the tree in front of your house.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -681,10 +681,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02837930"/>
+      <child nodeId="node-0x028FBD08"/>
     </children>
   </item>
-  <item nodeId="node-0x02837930">
+  <item nodeId="node-0x028FBD08">
     <command xml:space="preserve">search shelf</command>
     <result xml:space="preserve">As you rumage through the junk on the shelf, you notice a can of bug killer that must have been thrown up there years ago.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -692,10 +692,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02837A10"/>
+      <child nodeId="node-0x028FBAD8"/>
     </children>
   </item>
-  <item nodeId="node-0x02837A10">
+  <item nodeId="node-0x028FBAD8">
     <command xml:space="preserve">take can</command>
     <result xml:space="preserve">You can't reach the tree from here.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -703,10 +703,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02837460"/>
+      <child nodeId="node-0x028FBB48"/>
     </children>
   </item>
-  <item nodeId="node-0x02837460">
+  <item nodeId="node-0x028FBB48">
     <command xml:space="preserve">take bug killer</command>
     <result xml:space="preserve">You can't reach the tree from here.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -714,7 +714,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x028374D0">
+  <item nodeId="node-0x028FB6E8">
     <command xml:space="preserve">exits</command>
     <result xml:space="preserve">That's not a verb I recognize.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -722,7 +722,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x02837620">
+  <item nodeId="node-0x028FB758">
     <command xml:space="preserve">test fire</command>
     <result xml:space="preserve">(Testing.)&#x000A;&#x000A;&gt;[1] test wood&#x000A;(Testing.)&#x000A;&#x000A;&gt;[2] test spray&#x000A;(Testing.)&#x000A;&#x000A;&gt;[3] s&#x000A;&#x000A;Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;[4] in&#x000A;&#x000A;In the Shed&#x000A;You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.  &#x000A;&#x000A;You can see a ladder and a horsefly here.&#x000A;&#x000A;&gt;[5] take ladder&#x000A;Taken.&#x000A;&#x000A;&gt;[6] search shelf&#x000A;As you rumage through the junk on the shelf, you notice a can of bug killer that must have been thrown up there years ago.&#x000A;&#x000A;&gt;[7] take can&#x000A;Taken.&#x000A;&#x000A;&gt;[8] out&#x000A;&#x000A;Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;[9] n&#x000A;&#x000A;Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. &#x000A;&#x000A;&gt;[10] lean ladder on tree&#x000A;You lean the ladder against the tree, being careful not to bump the nest in the process.&#x000A;&#x000A;&gt;[11] u&#x000A; You never were much of a tree climber, besides it wouldn't be pretty if the bees attack while you were trying to pull yourself up the tree.&#x000A;&#x000A;&gt;[12] spray&#x000A;You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, "Sprays up to 8 feet!"...well crap, I've got to get closer.&#x000A;&#x000A;You shake the can one more time and you seem to have just a little left.&#x000A;&#x000A;&gt;[13] z&#x000A;Time passes.&#x000A;&#x000A;&gt;[14] z&#x000A;Time passes.&#x000A;&#x000A;&gt;[15] s&#x000A;&#x000A;Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;[16] catch fly&#x000A;You can't see any such thing.&#x000A;&#x000A;&gt;[17] n&#x000A;&#x000A;Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. &#x000A;&#x000A;&gt;[18] throw fly in web&#x000A;You can't see any such thing.&#x000A;&#x000A;&gt;[19] get wood&#x000A;You can't see any such thing.&#x000A;&#x000A;&gt;[20] n&#x000A;You can't go north from here.&#x000A;&#x000A;From here, you can go south, west and up.&#x000A;&#x000A;&gt;[21] drop wood&#x000A;You can't see any such thing.&#x000A;&#x000A;&gt;[22] take leaves&#x000A;You gather up a handful of leaves, but there are still plenty left to clean up.&#x000A;&#x000A;&gt;[23] burn wood with glasses&#x000A;You can't see any such thing.&#x000A;&#x000A;&gt;[24] drop leaves on fire&#x000A;You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -730,11 +730,11 @@
     <changed>YES</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x02837700"/>
-      <child nodeId="node-0x02837540"/>
+      <child nodeId="node-0x028FB7C8"/>
+      <child nodeId="node-0x028FB838"/>
     </children>
   </item>
-  <item nodeId="node-0x02837700">
+  <item nodeId="node-0x028FB7C8">
     <command xml:space="preserve">l</command>
     <result xml:space="preserve">Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. Your ladder is leaning up against the tree.&#x000A;&#x000A;On the shade tree is a The ladder is leaning against the tree.&#x000A;&#x000A;You can also see a small pile of flaming twigs here.&#x000A;&#x000A;The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms .  You run around screaming wildely.  For a few moments you don't even realize that after the hornets got you away from the tree, they went back to their nest.&#x000A;&#x000A;As they swarm around your head, you notice there is something different about them....you swear they are wearing gas masks.&#x000A;&#x000A;Hiding outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -742,7 +742,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x02837540">
+  <item nodeId="node-0x028FB838">
     <command xml:space="preserve"></command>
     <result xml:space="preserve">I beg your pardon?&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -750,10 +750,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x028377E0"/>
+      <child nodeId="node-0x028FB918"/>
     </children>
   </item>
-  <item nodeId="node-0x028377E0">
+  <item nodeId="node-0x028FB918">
     <command xml:space="preserve">;</command>
     <result xml:space="preserve">That's not a verb I recognize.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -761,10 +761,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283CAE0"/>
+      <child nodeId="node-0x028FB988"/>
     </children>
   </item>
-  <item nodeId="node-0x0283CAE0">
+  <item nodeId="node-0x028FB988">
     <command xml:space="preserve">l</command>
     <result xml:space="preserve">Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -772,10 +772,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283C610"/>
+      <child nodeId="node-0x028FB9F8"/>
     </children>
   </item>
-  <item nodeId="node-0x0283C610">
+  <item nodeId="node-0x028FB9F8">
     <command xml:space="preserve">x lader</command>
     <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -783,10 +783,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283C680"/>
+      <child nodeId="node-0x029006E0"/>
     </children>
   </item>
-  <item nodeId="node-0x0283C680">
+  <item nodeId="node-0x029006E0">
     <command xml:space="preserve">x ladder</command>
     <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -794,10 +794,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283C5A0"/>
+      <child nodeId="node-0x02900520"/>
     </children>
   </item>
-  <item nodeId="node-0x0283C5A0">
+  <item nodeId="node-0x02900520">
     <command xml:space="preserve">i</command>
     <result xml:space="preserve">You're holding some leaves and a can of bug killer. You're wearing reading glasses, t-shirt, jean shorts and baseball cap. &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -805,10 +805,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283C6F0"/>
+      <child nodeId="node-0x02900590"/>
     </children>
   </item>
-  <item nodeId="node-0x0283C6F0">
+  <item nodeId="node-0x02900590">
     <command xml:space="preserve">l</command>
     <result xml:space="preserve">Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree and you can see a hornet's nest about ten feet up on a branch.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -816,10 +816,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283CB50"/>
+      <child nodeId="node-0x02900AD0"/>
     </children>
   </item>
-  <item nodeId="node-0x0283CB50">
+  <item nodeId="node-0x02900AD0">
     <command xml:space="preserve">showme ladder </command>
     <result xml:space="preserve">ladder - thing&#x000A;location: the shade tree in Under the Tree&#x000A;singular-named, improper-named; unlit, inedible, portable, handled, listed when worn, listed when carried, not empty-listed, found, impervious&#x000A;printed name: "ladder"&#x000A;printed plural name: none&#x000A;indefinite article: none&#x000A;description: "The aluminum step ladder your Dad gave you for a house warming gift when you moved in twenty years ago is still laying where you left it.....oh....twenty years ago."&#x000A;initial appearance: none&#x000A;inventory listing: none&#x000A;flame-state: new&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -827,7 +827,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x0283C840">
+  <item nodeId="node-0x02900830">
     <command xml:space="preserve">x beess</command>
     <result xml:space="preserve">You can't see any such thing.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -835,10 +835,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283C530"/>
+      <child nodeId="node-0x02900600"/>
     </children>
   </item>
-  <item nodeId="node-0x0283C530">
+  <item nodeId="node-0x02900600">
     <command xml:space="preserve">x bees</command>
     <result xml:space="preserve">The bees look like normal honey bees, ones that aren't very happy, but normal ones.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -846,10 +846,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283C450"/>
+      <child nodeId="node-0x02900910"/>
     </children>
   </item>
-  <item nodeId="node-0x0283C450">
+  <item nodeId="node-0x02900910">
     <command xml:space="preserve">x self</command>
     <result xml:space="preserve">As good-looking as ever.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -857,10 +857,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283C760"/>
+      <child nodeId="node-0x029007C0"/>
     </children>
   </item>
-  <item nodeId="node-0x0283C760">
+  <item nodeId="node-0x029007C0">
     <command xml:space="preserve">x me</command>
     <result xml:space="preserve">As good-looking as ever.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -868,10 +868,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283C8B0"/>
+      <child nodeId="node-0x02900670"/>
     </children>
   </item>
-  <item nodeId="node-0x0283C8B0">
+  <item nodeId="node-0x02900670">
     <command xml:space="preserve">about</command>
     <result xml:space="preserve">BeeHive was created in the fall of 2013 as an exercise.&#x000A;&#x000A;BeeHive is copyright &#x00A9; 2013 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -879,7 +879,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x0283C920">
+  <item nodeId="node-0x02900750">
     <command xml:space="preserve">showme bees</command>
     <result xml:space="preserve">bees - thing&#x000A;location: in the beehive , which is part of the shade tree in Under the Tree&#x000A;plural-named, improper-named; unlit, inedible, portable&#x000A;printed name: "bees"&#x000A;printed plural name: none&#x000A;indefinite article: "some"&#x000A;description: "The bees look like normal honey bees, ones that aren't very happy, but normal ones."&#x000A;initial appearance: "There are bees swarming around the hive."&#x000A;bees condition: subdued&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -887,7 +887,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x0283C990">
+  <item nodeId="node-0x029008A0">
     <command xml:space="preserve">s</command>
     <result xml:space="preserve">Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -895,10 +895,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283C4C0"/>
+      <child nodeId="node-0x02900980"/>
     </children>
   </item>
-  <item nodeId="node-0x0283C4C0">
+  <item nodeId="node-0x02900980">
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade that you take advantage of whenever you can.  However, there seems to be a hornet's nest that is disrupting your relaxation.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. &#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -906,11 +906,11 @@
     <changed>YES</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283C7D0"/>
-      <child nodeId="node-0x0283F870"/>
+      <child nodeId="node-0x029009F0"/>
+      <child nodeId="node-0x02903990"/>
     </children>
   </item>
-  <item nodeId="node-0x0283C7D0">
+  <item nodeId="node-0x029009F0">
     <command xml:space="preserve">s</command>
     <result xml:space="preserve">In the Shed&#x000A;Your utility shed stands was built back in the 1860s and is falling down around you, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.&#x000A;&#x000A;You can see a can of bug killer and a ladder here.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -918,11 +918,11 @@
     <changed>YES</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283CA00"/>
-      <child nodeId="node-0x0283F800"/>
+      <child nodeId="node-0x02900A60"/>
+      <child nodeId="node-0x02903B50"/>
     </children>
   </item>
-  <item nodeId="node-0x0283CA00">
+  <item nodeId="node-0x02900A60">
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">On the Porch&#x000A;The front porch is where you spend most of your evenings after work in the summer.  Sitting on the swing and drinking a beer.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -930,10 +930,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283CA70"/>
+      <child nodeId="node-0x02900B40"/>
     </children>
   </item>
-  <item nodeId="node-0x0283CA70">
+  <item nodeId="node-0x02900B40">
     <command xml:space="preserve">e</command>
     <result xml:space="preserve">Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  To the south is your ancient utility shed where you store all the essentials.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -941,10 +941,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283F640"/>
+      <child nodeId="node-0x02900BB0"/>
     </children>
   </item>
-  <item nodeId="node-0x0283F640">
+  <item nodeId="node-0x02900BB0">
     <command xml:space="preserve">s</command>
     <result xml:space="preserve">In the Shed&#x000A;Your utility shed stands was built back in the 1860s and is falling down around you, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.&#x000A;&#x000A;You can see a spray can here.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -952,10 +952,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283F1E0"/>
+      <child nodeId="node-0x02900C20"/>
     </children>
   </item>
-  <item nodeId="node-0x0283F1E0">
+  <item nodeId="node-0x02900C20">
     <command xml:space="preserve">take can</command>
     <result xml:space="preserve">Taken.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -963,10 +963,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283F5D0"/>
+      <child nodeId="node-0x02903A70"/>
     </children>
   </item>
-  <item nodeId="node-0x0283F5D0">
+  <item nodeId="node-0x02903A70">
     <command xml:space="preserve">x can</command>
     <result xml:space="preserve">The can of bug killer has been laying in the shed for a number of years.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -974,10 +974,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283F330"/>
+      <child nodeId="node-0x02903840"/>
     </children>
   </item>
-  <item nodeId="node-0x0283F330">
+  <item nodeId="node-0x02903840">
     <command xml:space="preserve">shake</command>
     <result xml:space="preserve">That's not a verb I recognize.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -985,10 +985,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283F2C0"/>
+      <child nodeId="node-0x02903CA0"/>
     </children>
   </item>
-  <item nodeId="node-0x0283F2C0">
+  <item nodeId="node-0x02903CA0">
     <command xml:space="preserve">shake can</command>
     <result xml:space="preserve">That's not a verb I recognize.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -996,10 +996,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283F250"/>
+      <child nodeId="node-0x02903C30"/>
     </children>
   </item>
-  <item nodeId="node-0x0283F250">
+  <item nodeId="node-0x02903C30">
     <command xml:space="preserve">smile</command>
     <result xml:space="preserve">That's not a verb I recognize.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -1007,10 +1007,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283F410"/>
+      <child nodeId="node-0x02903AE0"/>
     </children>
   </item>
-  <item nodeId="node-0x0283F410">
+  <item nodeId="node-0x02903AE0">
     <command xml:space="preserve">spray</command>
     <result xml:space="preserve">That's not a verb I recognize.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -1018,7 +1018,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x0283F800">
+  <item nodeId="node-0x02903B50">
     <command xml:space="preserve">tak ladder</command>
     <result xml:space="preserve">That's not a verb I recognize.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -1026,10 +1026,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283F3A0"/>
+      <child nodeId="node-0x02903A00"/>
     </children>
   </item>
-  <item nodeId="node-0x0283F3A0">
+  <item nodeId="node-0x02903A00">
     <command xml:space="preserve">n</command>
     <result xml:space="preserve">Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  To the south is your ancient utility shed where you store all the essentials.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -1037,7 +1037,7 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
   </item>
-  <item nodeId="node-0x0283F870">
+  <item nodeId="node-0x02903990">
     <command xml:space="preserve">test spray</command>
     <result xml:space="preserve">(Testing.)&#x000A;&#x000A;&gt;[1] s&#x000A;&#x000A;Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;[2] in&#x000A;&#x000A;In the Shed&#x000A;You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.&#x000A;&#x000A;You can see a can of bug killer and a ladder here.&#x000A;&#x000A;&gt;[3] take ladder&#x000A;Taken.&#x000A;&#x000A;&gt;[4] take can&#x000A;Taken.&#x000A;&#x000A;&gt;[5] out&#x000A;&#x000A;Outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;&gt;[6] n&#x000A;&#x000A;Under the Tree&#x000A;You are standing under the large shade tree in the front yard.  The tree provides a wonderous shade that you take advantage of whenever you can.  However, there seems to be a hornet's nest that is disrupting your relaxation.  To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch. &#x000A;&#x000A;&gt;[7] lean ladder on tree&#x000A;You lean the ladder against the tree, being careful not to bump the nest in the process.&#x000A;&#x000A;&gt;[8] u&#x000A;&#x000A;Up the Tree&#x000A;You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head.&#x000A;&#x000A;&gt;[9] spray&#x000A;(the bug killer)&#x000A;You are close enough now, there is no way you'll miss.  You'll have these doggone hornets out of your air in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....&#x000A;&#x000A;...You shake the can and look at it in horror.  Just a little spray dribbled out of the can....just enough to grab the hornets attention.  They have noticed you and are headed in your direction.&#x000A;&#x000A;&gt;[10] z&#x000A;Time passes.&#x000A;&#x000A;The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms .  You jump out of the tree and run around screaming wildely.  For a few moments you don't even realize that after the hornets got you out of the tree, they went back to their nest.&#x000A;&#x000A;Hiding outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  &#x000A;&#x000A;Well that didn't work too well.  You throw the can away in disgust and as it bounces off  it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty.  As you look on in disbelief, a thought comes to you; hornets don't like smoke, why don't I try smoking them out.&#x000A;&gt;[11] z&#x000A;Time passes.&#x000A;&#x000A;From here you can hear the angry buzz of the hornets.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -1045,10 +1045,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283F480"/>
+      <child nodeId="node-0x02903E60"/>
     </children>
   </item>
-  <item nodeId="node-0x0283F480">
+  <item nodeId="node-0x02903E60">
     <command xml:space="preserve">z</command>
     <result xml:space="preserve">Time passes.&#x000A;&#x000A;You can see the hornets swarming as if looking for something to sting.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -1056,10 +1056,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283F4F0"/>
+      <child nodeId="node-0x02903920"/>
     </children>
   </item>
-  <item nodeId="node-0x0283F4F0">
+  <item nodeId="node-0x02903920">
     <command xml:space="preserve">l</command>
     <result xml:space="preserve">Hiding outside the Shed&#x000A;Your utility shed was built back in the 1860s and is falling down, however it's close to the house, easy to get to and large enough to store just about anything you need around the yard.  Stacked to one side of the shed is a pile of wood.&#x000A;&#x000A;You can see a can of now empty bug killer here.&#x000A;&#x000A;You must have really made them mad this time.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>
@@ -1067,10 +1067,10 @@
     <changed>NO</changed>
     <temporary score="0">YES</temporary>
     <children>
-      <child nodeId="node-0x0283F8E0"/>
+      <child nodeId="node-0x02903D10"/>
     </children>
   </item>
-  <item nodeId="node-0x0283F8E0">
+  <item nodeId="node-0x02903D10">
     <command xml:space="preserve">x wood</command>
     <result xml:space="preserve">You stacked this wood here years ago in the misguided thought that you would actually use the wood-burner in the house to save on heating costs in the winter.  Well here it still is, nicely stacked.&#x000A;&#x000A;&gt;</result>
     <commentary xml:space="preserve"></commentary>

@@ -14,8 +14,8 @@ The story creation year is 2013.
 Volume - Extensions
 
 Include Small Kindnesses by Aaron Reed.
-Include Default Messages by Ron Newcomb.
-Include Trinity Inventory by Mikael Segercrantz.
+[Include Default Messages by Ron Newcomb.]
+[Include Trinity Inventory by Mikael Segercrantz.]
 
 Book  - Not for release
 
@@ -169,7 +169,7 @@ Understand "shake [something]" as shaking.
 Understand "shake" as shaking.
 
 Rule for supplying a missing noun while shaking:
-	change the noun to the player.
+	now the noun is the player.
 	
 Check shaking:
 	if the noun is:
@@ -197,13 +197,13 @@ understand "lean [something] against [something]" as leaning it on.
 understand "lean [something]" as leaning it on.
 
 Rule for supplying a missing noun while leaning (this is the leaning on rule):
-	change the noun to the player.
+	now the noun is the player.
 	
 Rule for supplying a missing second noun while leaning:
 	if location is under-the-tree:
-		change the second noun to bug killer;
+		now the second noun is the bug killer;
 	if location is on-the-porch:
-		change the second noun to house;
+		now the second noun is the house;
 	otherwise:
 		say "You lean [the noun] against thin air and it promptly leans all the way to the ground.";
 		now the noun is in the location.
@@ -247,10 +247,10 @@ understand "spray [something]" as spraying it with.
 understand "spray" as spraying it with.
 
 Rule for supplying a missing second noun while spraying:
-	change the second noun to bug killer.
+	now the second noun is the bug killer.
 	
 Rule for supplying a missing noun while spraying:
-	change the noun to hornets-nest.
+	now the noun is the hornets-nest.
 	
 Check spraying:
 	if the second noun is not the bug killer , say "You could try spraying it with [the second noun] but I don't think you would be very successful."
@@ -362,12 +362,12 @@ Before taking something that is flaming:
 
 Book - Default Messages
 
-Table of custom library messages (continued)
+[Table of custom library messages (continued)
 library-action	library-message-id	library-message-text
 --	37	"As much as you would like to, you don't think it would be of much use."
 going action	2	"You can't go [noun] from here."
 jumping action 	1	"[if location is not up-the-tree]When you were little jumping made you happy, now it is just sad looking[otherwise]At your age, jumping down from this height might result in something broken.  Then where would be, laid up with a broken leg and the hornet's nest still in the tree[end if]."
-
+]
 	
 Volume - The World
 
@@ -467,7 +467,7 @@ Part - Up the tree
 
 Up-the-tree is a room.  The printed name is "Up the Tree".  The description is "You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head."  Up-the-tree is up from under-the-tree.
 
-Check dropping something while in up-the-tree:
+Check dropping something while location is up-the-tree:
 	say "[The noun] falls to the ground.";
 	move the noun to under-the-tree instead;
 	
@@ -842,7 +842,7 @@ to say bug-killer-drop-description:
 	if player carries bug killer:
 		silently try dropping bug killer;
 		say "You throw the can away in disgust and as it bounces off [if location is in-the-shed]the wall[otherwise if location is on-the-porch]the porch floor[end if] it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty.  As you look on in disbelief, [run paragraph on]" ;
-		change the printed name of the bug killer to "[if bug killer is empty]now empty [end if]bug killer";
+		now the printed name of the bug killer is "[if bug killer is empty]now empty [end if]bug killer";
 	otherwise:
 		say "As you pause to catch your breath, [run paragraph on]".
 		
