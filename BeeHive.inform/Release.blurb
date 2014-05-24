@@ -19,10 +19,10 @@ picture 1 "C:\Program Files (x86)\Inform 7.2014\Inform7\Extensions\Reserved\Defa
 
 placeholder [IFID] = "876C2E38-C05C-4AE6-A38B-AB806A5B0E08"
 placeholder [RELEASE] = "1"
-placeholder [YEAR] = "2013"
+placeholder [YEAR] = "2014"
 placeholder [TITLE] = "Hornets Nest"
 placeholder [AUTHOR] = "Jason Lautzenheiser"
-placeholder [BLURB] = "You weren't going to let the bee hive in the shade tree out front stop you from enjoying your summer."
+placeholder [BLURB] = "You weren't going to let the hornet's nest in the shade tree out front stop you from enjoying your summer."
 
 ! Other material to release
 

@@ -10,15 +10,15 @@
             <author>Jason Lautzenheiser</author>
             <headline>An Interactive Experience in Pest Removal</headline>
             <genre>Comedy</genre>
-            <firstpublished>2013</firstpublished>
-            <description>You weren't going to let the bee hive in the shade tree out front stop you from enjoying your summer.</description>
+            <firstpublished>2014</firstpublished>
+            <description>You weren't going to let the hornet's nest in the shade tree out front stop you from enjoying your summer.</description>
             <language>en</language>
             <group>Inform</group>
         </bibliographic>
         <releases>
             <attached>
                 <release>
-                    <releasedate>2014-05-13</releasedate>
+                    <releasedate>2014-05-24</releasedate>
                     <version>1</version>
                     <compiler>Inform 7</compiler>
                     <compilerversion>6L02</compilerversion>
@@ -28,10 +28,10 @@
         <colophon>
             <generator>Inform 7</generator>
             <generatorversion>6L02</generatorversion>
-            <originated>2014-05-13</originated>
+            <originated>2014-05-24</originated>
         </colophon>
         <glulx>
-            <serial>140513</serial>
+            <serial>140524</serial>
             <release>1</release>
             <compiler>Inform 7 build 6L02</compiler>
         </glulx>

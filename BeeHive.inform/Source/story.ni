@@ -7,30 +7,41 @@ Volume - Bibliography
 
 The story genre is "Comedy".
 The story headline is "An Interactive Experience in Pest Removal".
-The story description is "You weren't going to let the bee hive in the shade tree out front stop you from enjoying your summer."
+The story description is "You weren't going to let the hornet's nest in the shade tree out front stop you from enjoying your summer."
 The release number is 1.
-The story creation year is 2013.
+The story creation year is 2014.
 
 Volume - Extensions
 
 Include Small Kindnesses by Aaron Reed.
-[Include Default Messages by Ron Newcomb.]
-[Include Trinity Inventory by Mikael Segercrantz.]
+[Include Adaptive Hints by Eric Eve.]
 
 Book  - Not for release
 
-Include Object Response Tests by Juhana Leinonen.
+[Include Object Response Tests by Juhana Leinonen.
 Include Property Checking by Emily Short.
 Include Debugging by Al Golden.
 Include Basic Screen Effects by Emily Short.
+]
 
-[Use library message alerts.]
-
-[Include Direction Response Testing by Andrew Schultz.]
-
-Volume - Testing & Debugging (not for release)
+Volume - Testing & Debugging
 
 Book - Test commands
+
+ 	 
+Book - Tests
+
+test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tree/u/spray/z/z".
+test wood with "test spray/s/catch fly/n/throw fly in web/get wood".
+test fire with "test wood/n/drop wood/take leaves/burn wood with glasses/drop leaves on fire".
+test cut with "test fire/s/in/take saw/n/n/climb ladder/cut tree/d/se/z/n".
+
+Book - Transcripting
+
+Include Basic Screen Effects by Emily Short.
+
+To say email:
+	say "lautzenheiser.jason@gmail.com".
 
 Include (-
 [ CheckTranscriptStatus;
@@ -47,26 +58,26 @@ To decide whether currently transcripting: (- CheckTranscriptStatus() -)
 ignore-transcript-nag is a truth state that varies.
  
 After reading a command:
-	if the player's command matches the regular expression "^\*.+":
+	if the player's command matches the regular expression "^\*+|\;.+":
 		if currently transcripting:
 			say "Noted.";
 		otherwise:
 			if ignore-transcript-nag is false:
-				say "You've made a comment-style command, but Transcript is off. Type TRANSCRIPT to turn it on, if you wish to make notes.[paragraph break]The long version of this nag will only appear once. You may press any key to continue.";
+				say "You've made a comment-style command, but the transcript is off. Type TRANSCRIPT to turn it on, if you wish to make notes.[paragraph break]The long version of this nag will only appear once. You may press any key to continue.";
 				wait for any key;
 				now ignore-transcript-nag is true;
 			else:
 				say "(Comment not sent to transcript.)";
 		reject the player's command.
- 	 
-Book - Tests
+		
+report switching the story transcript on:
+	if currently transcripting:
+		say "Thanks for doing this! Email can go to [email].";
 
-test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tree/u/spray/z/z".
-test wood with "test spray/s/catch fly/n/throw fly in web/get wood".
-test fire with "test wood/n/drop wood/take leaves/burn wood with glasses/drop leaves on fire".
-test cut with "test fire/se/in/take saw/n/climb ladder/cut tree/d/se/z/n".
-
-
+check quitting the game when currently transcripting:
+	say "Thanks for taking the time to create a transcript.  Please send it to [email] and I'll be grateful.  Thanks!"
+	
+	
 Volume - Game Settings
 
 [The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.]
@@ -195,6 +206,11 @@ Leaning it on is an action applying to two visible things.
 understand "lean [something] on [something]" as leaning it on.
 understand "lean [something] against [something]" as leaning it on.
 understand "lean [something]" as leaning it on.
+understand "set [something]" as leaning it on.
+understand "set [something] on [something]" as leaning it on.
+understand "set [something] against [something]" as leaning it on.
+understand "put [something] on [something]" as leaning it on.
+understand "put [something] against [something]" as leaning it on.
 
 Rule for supplying a missing noun while leaning (this is the leaning on rule):
 	now the noun is the player.
@@ -216,8 +232,11 @@ Check leaning:
 		-- ladder:
 			if the second noun is the tree:
 				say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
-				now the ladder is on the tree.
-		
+				now the ladder is on the tree;
+			if the second noun is the shed:
+				say "You don't think the shed would hold you if you managed to climb up on top of it.  You decide to hold on to the ladder.";
+
+			
 Before putting something on the tree: 
 	if the noun is not the ladder:
 		say "You try to put [the noun] on the tree, but it won't stay."
@@ -360,14 +379,7 @@ Carry out burning something with something:
 Before taking something that is flaming:
 	say "It's way to hot to carry around." instead.
 
-Book - Default Messages
 
-[Table of custom library messages (continued)
-library-action	library-message-id	library-message-text
---	37	"As much as you would like to, you don't think it would be of much use."
-going action	2	"You can't go [noun] from here."
-jumping action 	1	"[if location is not up-the-tree]When you were little jumping made you happy, now it is just sad looking[otherwise]At your age, jumping down from this height might result in something broken.  Then where would be, laid up with a broken leg and the hornet's nest still in the tree[end if]."
-]
 	
 Volume - The World
 
@@ -393,8 +405,25 @@ before going north in in-the-shed:
 
 A dirty window is in in-the-shed.  The dirty window is scenery. The description of the dirty window is "The window is covered in cobwebs and dust.  It doesn't look like it's been cleaned for decades, if ever.  [if horsefly is in in-the-shed]In the corner of the window is a large horsefly, buzzing up against the window trying to get out.[end if]"
 
+Before opening the window:
+	say "The window probably hasn't been opened in a hundred years, it's not going to happen now." instead.
+
+Before attacking the window when the location is in-the-shed:
+	say "You wouldn't want to break the window, you'd just have to replace it." instead.
+
 A shelf is scenery supporter in in-the-shed.  The description of the shelf is "The shelf is just inside the door and looks to be where things were just thrown.  There is piles of junk on it."
 
+Junk is scenery in in-the-shed.  
+
+Before examining junk:
+	try examining shelf instead.
+
+Before searching junk:
+	try searching shelf instead.
+
+Before searching while location is in-the-shed:
+	try searching shelf instead.
+	
 Understand "look out [something]" as searching.
 
 Instead of looking north when location is in-the-shed:
@@ -433,7 +462,7 @@ Before searching the shelf:
 
 Part - Outside the shed
 
-Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down, however it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
+Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down, however it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
 
 before of going south in outside-the-shed:
 	try going inside instead.
@@ -498,7 +527,7 @@ The shovel is a thing in on-the-porch.  The description of shovel is "The shovel
 	
 Chapter - Ladder
 
-A ladder is a thing.  A ladder is in in-the-shed.  The description is "The aluminum step ladder your Dad gave you for a house warming gift when you moved in twenty years ago[first time] is still laying where you left it.....oh....twenty years ago[only]."
+A ladder is a thing.  A ladder is in in-the-shed.  The description is "It's a cheap aluminum step ladder your Dad gave you for a house warming gift when you moved in twenty years ago[one of][if location is in-the-shed and player is not carrying the ladder] is still laying where you left it.....oh....twenty years ago[end if][or][stopping]."
 
 Before climbing the ladder:
 	if location is under-the-tree:
@@ -610,13 +639,23 @@ Instead of examining the smoke:
 
 Chapter - Hornets Nest
 
-The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [first time]It must have appeared overnight as you don't recall seeing it yesterday.[only]". The printed name is "hornet's nest".  The indefinite article is "a".  
+The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [one of]It must have appeared overnight as you don't recall seeing it yesterday.[or][stopping]". The printed name is "hornet's nest".  The indefinite article is "a".  
 
 Understand "hive/hives/nest" or "bee's nest" or "hornets nest" as the hornets-nest.
 
 instead of taking the hornets-nest:
 	say "Not going to be that easy."
 
+before attacking the hornets-nest:
+	say "That wouldn't end pretty." instead.
+	
+instead of touching the hornets-nest:
+	if location is up-the-tree:
+		say "You reach out to touch the nest, but the hornet's begin to swarm around your hand and you think better of doing that.";
+	otherwise:
+		say "You are not sure that would be a good idea even if you could reach it from here."
+	
+	
 Chapter - Hornets	
 
 Some hornets are a thing in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets]".
@@ -636,12 +675,14 @@ To say description-of-hornets:
 The hornets can be swarming, subdued, angry or aggressive.  The hornets are swarming.
 
 Before taking hornets:
-	say "Sure, if you tried that, you would regret it." instead.
+	say "If you tried that, you would regret it." instead.
 	
+Before attacking hornets:
+	say "If you tried that, you would regret it." instead.
 
 Chapter - Tree
 
-The shade tree is a supporter which is in under-the-tree. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]About ten feet up is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
+The shade tree is a supporter which is in under-the-tree. The tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]About ten feet up is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
 
 understand "branch" as tree when cut branch is not in under-the-tree.
 
@@ -650,7 +691,7 @@ after deciding the scope of the player:
 
 Rule for reaching inside a room:
 	if the location is up-the-tree:
-		if the noun is the shade tree:
+		if the noun is the shade tree or the noun is the hornets or the noun is the hornets-nest:
 			allow access;
 		otherwise:
 			say "You can only look at [the noun] from a distance.";
@@ -836,6 +877,7 @@ at the time when the hornets calm down:
 	now the hornets are swarming;
 	if hornet attack count is 3:
 		say "Amazingly as you look back at the tree, the hornets are swarming wildly around another branch.  Their activity grows in intensity and soon you can see nothing but a large mass of hornets all moving together.  [paragraph break]After a few moments, the activity ceases, most of the hornets retreat into a new nest that is now hanging from another branch.";
+		end the story saying "Here ends the intro to Hornet's Nest.   Hope you enjoyed this and look for more to come."
 
 
 to say bug-killer-drop-description:
@@ -887,6 +929,39 @@ What is that noise?  You hear a faint buzz coming from the tree.  Looking up, th
 Book - Cutting them down
 
 Cutting-them-down is a scene.  Cutting-them-down begins when Smoking-them-out ends.  Cutting-them-down ends when hornet attack count is 3.
+
+
+
+Volume - Hints
+
+
+[Part 1 - Hint Tables
+
+Table of Potential Hints (continued)
+title	subtable
+"What do I do to get started?"	Table of Getting Started Hints
+"What can I do in the Shed?"	Table of Shed Hints
+
+Table of Getting Started Hints
+hint	used
+"Try exploring a bit."	a number
+"Then trying exploring a bit more."
+"Have you explored enough yet?"
+"OK, find your way to the shed."
+
+Table of Shed Hints
+hint	used
+"Search it thoroughly."
+"What did you find?"
+"Perhaps that tall cabinet is worth investigating."
+
+A hint deactivation rule:
+	if the number of visited rooms is the number of rooms - 1,
+		deactivate the Table of Getting Started Hints.
+
+
+Understand "help" as asking for hints.
+When play begins: activate the Table of Getting Started Hints.]
 
 Volume - Looking from Supplemental Actions by Al Golden
 
