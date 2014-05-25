@@ -72,7 +72,7 @@ After reading a command:
 		
 report switching the story transcript on:
 	if currently transcripting:
-		say "Thanks for doing this! Email can go to [email].";
+		say "Thanks for doing this! Email can go to [email]";
 
 check quitting the game when currently transcripting:
 	say "Thanks for taking the time to create a transcript.  Please send it to [email] and I'll be grateful.  Thanks!"
