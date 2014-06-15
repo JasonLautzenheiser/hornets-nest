@@ -394,12 +394,16 @@ Check burning something with something:
 		say "You can't set [the noun] on fire." instead;
 	
 Carry out burning something with something:
-	say "You take off your glasses and hold them at just the right angle so the sunlight makes a pinpoint on [the noun].  After a few moments a small stream of smoke rises from [the noun] and then suddenly a flame appears.";
-	now the fire is on-stage;
-	now the smoke is on-stage;
-	now the noun is flaming;
-	now build-a-fire is completed;
-	now the last-puzzle-completed of the player is build-a-fire.
+	say "You take off your glasses and hold them at just the right angle so the sunlight makes a pinpoint on [the noun].  ";
+	if the noun is bug killer:
+		say "The can gets a little hot, but nothing else happens.";
+	otherwise:
+		say "  After a few moments a small stream of smoke rises from [the noun] and then suddenly a flame appears.";
+		now the fire is on-stage;
+		now the smoke is on-stage;
+		now the noun is flaming;
+		now build-a-fire is completed;
+		now the last-puzzle-completed of the player is build-a-fire.
 	
 Before taking something that is flaming:
 	say "It's way to hot to carry around." instead.
@@ -545,7 +549,8 @@ Part - Carried items
 
 Chapter - Bug Killer
 
-The bug killer is a thing.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" as bug killer.  
+The bug killer is a thing.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" as bug killer.   the bug killer is flammable.
+
 The bug killer is either empty, half-full or full.  The bug killer is full.
 The bug killer is either shaken or settled.  The bug killer is settled.
 The bug killer is lost.
@@ -651,6 +656,7 @@ Chapter - Fire
 
 The fire is a container.  The fire-top is a supporter.  The printed name of fire-top is "fire".  The fire-top is part of the fire.  The fire is scenery.
 
+
 Before inserting something (called the fuel) into the fire:
 	try putting the fuel on the fire-top instead.
 
@@ -660,11 +666,13 @@ Before putting something (called the fuel)  on the fire:
 Before throwing something (called the fuel)  at fire:
 	try putting the fuel on the fire-top instead.	
 	
-	
+Before putting something on the fire-top:
+	if the noun is not flammable:
+		say "You could put [the noun] in the fire, but it wouldn't burn." instead.
+
 Chapter - Leaves
 
 Some leaves are in under-the-tree.  The leaves are undescribed.  The description of the leaves is "The leaves are starting to come down and cover the ground around the tree.  Every step you take results in a crunch of dried leaves under your feet."
-
 
 After taking leaves:
 	say "You gather up a handful of leaves, but there are still plenty left to clean up."
@@ -807,7 +815,7 @@ Instead of cutting the tree:
 				say "The hornet's have built their new nest in a branch too high for you to reach.";
 			otherwise:
 				say "You take the hand saw and begin to cut through the branch that the hornet's nest is hanging from.  After a moment the branch cracks and falls to the ground taking the nest with it.  You start to raise your arms in triumph, but then remembering you are standing on a ladder, you think better of it and just grin happily to yourself.";
-				if  the hole is in under-the-tree:
+				if the hole is in under-the-tree:
 					say "[paragraph break]The nest falls right into the hole.  You clamber down the ladder and quickly fill in the hole covering the nest.  ";
 					now the hole is off-stage;
 					now the hornets-nest is off-stage;
@@ -816,6 +824,7 @@ Instead of cutting the tree:
 					say "[paragraph break]As the nest hits the ground, it bursts into pieces and the hornets scatter in all directions.......only to regroup high up in the tree where they hover for a moment, then as if shot from a pistol, head in your direction.";
 					now the cut branch is in under-the-tree;
 					hornets attack in 1 turn from now;
+				now cut-the-branch is completed;
 		otherwise:
 			say "Cutting down the entire tree is a bit of overkill don't you think?";
 	otherwise:
@@ -951,6 +960,10 @@ fire-the-missle is a puzzle.
 
 [puzzle activation rules]
 Every turn:
+	if  the number of not completed puzzles is 0 and the number of active puzzles is 0:
+		try requesting puzzle status;
+		say "Here ends the intro to Hornet's Nest.  I hope you enjoyed this introduction to this piece.  I hope to add more puzzles, more ways to try and achieve your goal of removing the nest from the tree.  ";
+		end the story;
 	if build-a-fire is uncompleted and build-a-fire is not impossible:
 		if twigs are on-stage:
 			now build-a-fire is active;
@@ -1004,8 +1017,11 @@ at the time when the hornets calm down:
 	now the hornets are swarming;
 	if the last-puzzle-completed of the player is cut-the-branch:
 		say "Amazingly as you look back at the tree, the hornets are swarming wildly around another branch.  Their activity grows in intensity and soon you can see nothing but a large mass of hornets all moving together.  [paragraph break]After a few moments, the activity ceases, most of the hornets retreat into a new nest that is now hanging from another branch.";
-	if the number of uncompleted puzzles is one:
-		end the story saying "Here ends the intro to Hornet's Nest.   Hope you enjoyed this and look for more to come."
+	if  the number of not completed puzzles is 0 and the number of active puzzles is 0 and the number of running puzzles is 0:
+		try requesting puzzle status;
+		end the story saying "Here ends the intro to Hornet's Nest.  I hope you enjoyed this introduction to this piece.  I hope to add more puzzles, more ways to try and achieve your goal of removing the nest from the tree.  ";
+[	if the number of uncompleted puzzles is zero:
+		end the story saying "Here ends the intro to Hornet's Nest.   Hope you enjoyed this and look for more to come."]
 
 
 to say bug-killer-drop-description:
