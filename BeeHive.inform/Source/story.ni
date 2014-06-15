@@ -1,6 +1,6 @@
 "Hornets Nest" by Jason Lautzenheiser
 
-Use no scoring and full-length room descriptions. 
+Use scoring and full-length room descriptions. 
 Use American dialect.
 
 Volume - Bibliography
@@ -99,9 +99,15 @@ When play begins:
 	follow the uberstart rules.
 	
 An uberstart rule:
-	now the left hand status line is "[the player's surroundings] / Moves: [turn count] ";
+	now the left hand status line is "[the player's surroundings]/[number of uncompleted puzzles]";
 	now the right hand status line is "Time: [time of day]";
 	
+
+Book - Rules
+
+Rule for printing room description details: stop.
+
+
 Book - Definitions
 
 A room can be a safe-zone.
@@ -274,6 +280,10 @@ Rule for supplying a missing noun while spraying:
 Check spraying:
 	if the second noun is not the bug killer , say "You could try spraying it with [the second noun] but I don't think you would be very successful."
 	
+Before spraying when the second noun is bug killer:
+	if bug killer is empty:
+		say "Well it's empty now,  spraying it won't help much now." instead.
+
 Carry out spraying:
 	if player is carrying the bug killer:
 		if location is under-the-tree:	
@@ -283,8 +293,10 @@ Carry out spraying:
 		if location is up-the-tree:
 			say "You are close enough now, there is no way you'll miss.  You'll have these damn hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[paragraph break]";
 			now the bug killer is empty;
-			say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets attention and they begin to mass an attack.";
+			say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets' attention and they begin to mass an attack.";
 			hornets attack in 1 turn from now;
+			now spray-the-nest is completed;
+			now the last-puzzle-completed of the player is spray-the-nest;
 		otherwise:
 			say "There is not much left, you probably don't want to waste it." instead;
 	otherwise:
@@ -317,15 +329,19 @@ Check throwing it at (this is the block juggling rule):
 Check throwing it at (this is the avoid throwing things into themselves rule): 
 	if the second noun is within the noun, say "That would be a neat trick." instead.	
 
+
 Understand "throw [something] in [something]" as throwing it at.
 
 Check throwing:
+	say "[noun] - [second noun]";
 	if the noun is bug killer:
 		if the second noun is the tree:
 			say "You throw [the noun] at [the second noun] and miss horribly.";
 			now bug killer is in under-the-tree instead;
 		if the second noun is the house:
 			say "You would wind up just breaking a window so you decide not to." instead;
+		if the second noun is a flaming thing:
+			now fire-the-missle is running;
 	if the noun is the ladder:
 		if the location is under-the-tree:
 			say "You give the ladder a heave and if by magic it lands upright leaning against the tree.";
@@ -373,13 +389,14 @@ Check burning something with something:
 	
 Carry out burning something with something:
 	say "You take off your glasses and hold them at just the right angle so the sunlight makes a pinpoint on [the noun].  After a few moments a small stream of smoke rises from [the noun] and then suddenly a flame appears.";
-	now the noun is flaming;
+	now the noun is off-stage;
+	now the fire is on-stage;
 	now the smoke is on-stage.
 	
 Before taking something that is flaming:
 	say "It's way to hot to carry around." instead.
 
-
+The fire is a container.  The fire-top is a supporter.  The fire-top is part of the fire.  The fire is scenery.
 	
 Volume - The World
 
@@ -387,18 +404,33 @@ Book - Rooms
 
 Part - Under the Tree
 
-Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [if ladder is on tree]Your ladder is leaning up against the tree[end if][if cut branch is in under-the-tree] and the branch you just cut is laying on the ground[end if].".
+Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area]".
 
+To say other-stuff-in-area:
+	let need_period be false;
+	if ladder is on tree:
+		now need_period is true;
+		say  "Your ladder is leaning up against the tree";
+	if cut branch is in under-the-tree:
+		now need_period is true;
+		if ladder is on tree:
+			say " and  the";
+		otherwise:
+			say "The ";
+		say "branch you just cut is laying on the ground";
+	if need_period is true:
+		say ".".
+		
 Before going up from under-the-tree:
 	if the player is carrying ladder:
 		try leaning ladder on tree;
 	if ladder is not on the tree:
-		say " You never were much of a tree climber, besides it wouldn't be pretty if the bees attack while you were trying to pull yourself up the tree." instead.
+		say " You never were much of a tree climber.  Besides it wouldn't be pretty if the bees attack while you were trying to pull yourself up the tree." instead.
 	
 
 Part - In the shed
 
-In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  You see piles and piles of junk. In fact, there is probably over a hundred years of junk in here that you keep saying someday you'll clean out.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug killer.[end if]  [describe-the-hand-saw]".  In-the-shed is inside from outside-the-shed.  
+In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug killer.[end if]  [describe-the-hand-saw]".  In-the-shed is inside from outside-the-shed.  
 
 before going north in in-the-shed:
 	try exiting instead;
@@ -406,7 +438,7 @@ before going north in in-the-shed:
 A dirty window is in in-the-shed.  The dirty window is scenery. The description of the dirty window is "The window is covered in cobwebs and dust.  It doesn't look like it's been cleaned for decades, if ever.  [if horsefly is in in-the-shed]In the corner of the window is a large horsefly, buzzing up against the window trying to get out.[end if]"
 
 Before opening the window:
-	say "The window probably hasn't been opened in a hundred years, it's not going to happen now." instead.
+	say "The window probably hasn't been opened in a hundred years. It's not going to happen now." instead.
 
 Before attacking the window when the location is in-the-shed:
 	say "You wouldn't want to break the window, you'd just have to replace it." instead.
@@ -421,8 +453,11 @@ Before examining junk:
 Before searching junk:
 	try searching shelf instead.
 
+before overly elaborate looking:
+	try searching the location instead.
+	
 Before searching while location is in-the-shed:
-	try searching shelf instead.
+	try searching junk instead.
 	
 Understand "look out [something]" as searching.
 
@@ -433,13 +468,9 @@ Instead of searching the window:
 	say "Looking out the hazy window[if the hornets-nest is part of the tree], you barely make out the hornets in the tree.  [view-hornets-out-window][else] you can see the tree.[end if]".
 
 To say describe-the-hand-saw:
-	if the hand-saw is on-stage: 
-		if the hand-saw is hanging:
-			say "[paragraph break][one of]You look around for something else that might help you in your mission and notice for the first time a handsaw hanging on a nail in the dark back wall of the shed.[or]There is a handsaw hanging on a nail in the dark back wall of the shed.[stopping]";
-[		otherwise:
-			if hand-saw is in in-the-shed:
-				say "There is a handsaw here.";]
-		
+	if the hand-saw is hanging and the hand-saw is found:
+		say "Hanging on the wall near the back is a handsaw.[run paragraph on]";
+
 To say view-hornets-out-window:
 	if the hornets are swarming:
 		say "They are swarming and from here it looks like a haze around the nest.";
@@ -454,7 +485,7 @@ Instead of examining the shelf for the first time:
 	try searching the shelf.
 
 Before searching the shelf:
-	say "As you rumage through the junk on the shelf, you notice a can of bug killer that must have been thrown up there years ago.";
+	say "As you rummage through the junk on the shelf, you notice a can of bug killer that must have been thrown up there years ago.";
 	move the bug killer to the shelf;
 	now the bug killer is found instead.
 	
@@ -462,7 +493,7 @@ Before searching the shelf:
 
 Part - Outside the shed
 
-Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down, however it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
+Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
 
 before of going south in outside-the-shed:
 	try going inside instead.
@@ -472,7 +503,7 @@ Part - On the porch
 
 On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the glider and drinking a beer."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
 
-The glider is a enterable supporter in on-the-porch.  The description of glider is "The glider sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
+The glider is a enterable supporter in on-the-porch.  The glider is scenery.  The description of glider is "The glider sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
 
 Instead of swinging the glider:
 	if the player is on the glider:
@@ -511,14 +542,32 @@ The bug killer is either empty, half-full or full.  The bug killer is full.
 The bug killer is either shaken or settled.  The bug killer is settled.
 The bug killer is lost.
 
+Before putting the bug killer on the fire-top:
+	if the player is carrying the bug killer:
+		now fire-the-missle is running instead.
+
+Before inserting the bug killer into the fire:
+	try putting the bug killer on the fire-top instead.
+
+Before putting the bug killer on the fire:
+	try putting the bug killer on the fire-top instead.
+
+Before throwing bug killer at fire:
+	try putting the bug killer on the fire-top instead.	
+	
+	
 Chapter - Hand saw	
 
-The hand-saw is an undescribed thing.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" as hand-saw.
+The hand-saw is an undescribed thing in in-the-shed.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" as hand-saw.  
 The description of hand-saw is "Nope you didn't use this much either.  The saw is new and shiny." 	
-The hand-saw can be hanging.  The hand-saw is hanging.
+The hand-saw can be hanging.  The hand-saw is hanging.  
 
 Check taking the hand-saw for the first time:
 	now the hand-saw is not hanging.
+	
+Rule for deciding whether all includes the hand-saw: it does.
+	
+	
 	
 	
 Chapter - Shovel
@@ -575,7 +624,6 @@ Instead of taking off the t-shirt:
 Chapter - Some wood	
 
 Some twigs is a thing.  The description of some twigs is "[describe-twigs]".  Understand "wood" as some twigs when spider is off-stage.  Some twigs are flammable.  
-Understand "fire" as twigs when twigs are flaming.
 The indefinite article of the twigs is "a small pile of".	
 
 To say describe-twigs:
@@ -589,6 +637,7 @@ To say describe-twigs:
 	if twigs are burnt:	
 		say "The remains of your wood, nothing left but lightly smoking ashes."
 		
+
 
 Chapter - Pile of ashes
 
@@ -776,7 +825,7 @@ before entering shed:
 
 Chapter - Pile of wood
 
-The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.
+The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.  The woodpile is in outside-the-shed.
 
 Before taking woodpile:
 	if large spider is on-stage:
@@ -795,6 +844,10 @@ The web is a container on the woodpile.  The web is open.  The web is not openab
 The web-top is a supporter.  The web-top is a part of the web.
 Instead of attacking the web:
 	try attacking the large spider.
+
+before taking the web:
+	try taking the spider instead.
+	
 
 Chapter - spider	
 
@@ -846,49 +899,110 @@ The wood-burner is a backdrop which is everywhere.  The description of wood-burn
 
 Volume - Scenes
 
+Book - Puzzles
+
+Requesting puzzle status is an action out of world.
+Report requesting puzzle status: 
+	repeat with puzzle-status running through all running puzzles:
+		say "[puzzle-status] is now running.";
+	repeat with puzzle-status running through all active uncompleted puzzles:
+		say "[puzzle-status] is active.";
+	repeat with puzzle-status running through all uncompleted inactive puzzles:
+		say "[puzzle-status] is not completed.";
+	repeat with puzzle-status running through all completed puzzles:
+		say "[puzzle-status] is completed.";
+	repeat with puzzle-status running through all impossible puzzles:
+		say "[puzzle-status] is now impossible.";
+	if the last-puzzle-completed of the player is not no-puzzle:
+		say "The last completed puzzle is [last-puzzle-completed of the player]."
+
+Understand "puzzles" as requesting puzzle status.
+
+A puzzle is a kind of thing.  A puzzle is always undescribed.  A puzzle can be completed, uncompleted, running, default or impossible.  A puzzle is usually uncompleted.   A puzzle can be active or inactive.  A puzzle are usually inactive.
+
+The player has a puzzle called last-puzzle-completed.  The last-puzzle-completed of the player is usually no-puzzle.
+
+no-puzzle is a default puzzle.
+spray-the-nest is a puzzle.
+build-a-fire is a puzzle.
+smoke-the-nest is a puzzle.
+cut-the-branch is a puzzle.
+fire-the-missle is a puzzle.
+
+[puzzle activation rules]
+Every turn:
+	if build-a-fire is uncompleted and build-a-fire is not impossible:
+		if twigs are on-stage:
+			now build-a-fire is active;
+		otherwise:
+			now build-a-fire is inactive;
+	if spray-the-nest is uncompleted and spray-the-nest is not impossible:
+		if bug killer is not empty and the player carries the bug killer:
+			now spray-the-nest is active;
+		otherwise:
+			now spray-the-nest is inactive;
+	if smoke-the-nest is uncompleted:
+		if the twigs are flaming:
+			now smoke-the-nest is active;
+		otherwise:
+			now smoke-the-nest is inactive;
+	if cut-the-branch is uncompleted:
+		if the player carries the hand-saw:
+			now cut-the-branch is active;
+		otherwise:
+			now cut-the-branch is inactive;
+	if fire-the-missle is uncompleted:
+		if the the player carries the bug killer and the twigs are on-stage:
+			now fire-the-missle is active;
+		otherwise:
+			now fire-the-missle is inactive;
+			
+
 Book - Recurring events
 
 Part - Hornets Attack
 
-Hornet attack count is a number that varies.  Hornet attack count is 0.
-
 at the time when the hornets attack:
 	if location is up-the-tree or location is under-the-tree:
-		now Hornet attack count is the hornet attack count plus 1;
 		say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
 		now the player is hiding;
 		now the hornets are aggressive;
-		if hornet attack count is 1:
-			now the player is in a random safe-zone room;
-			say "Well that didn't work too well.  [bug-killer-drop-description]a thought comes to you; hornets don't like smoke, why don't you try smoking them out.[line break][line break]";
+		now the player is in a random safe-zone room;
+		if the last-puzzle-completed of the player is spray-the-nest:
+			say "Well that didn't work too well.  [bug-killer-drop-description][line break][clue-next-puzzle]";
 			now woodpile is in outside-the-shed;
-		if hornet attack count is 2:
-			now the player is in a random safe-zone room;
-			say "As they swarm around your head, you notice there is something different about them.... they are now wearing minature gas masks.";
-			now twigs are off-stage;
+		if the last-puzzle-completed of the player is smoke-the-nest:
+[			now twigs are off-stage;
 			now woodpile is off-stage;
-			now pile of ashes is in under-the-tree;
+			now pile of ashes is in under-the-tree;]
 			now hand-saw is in in-the-shed;
-		if hornet attack count is 3:
+		if the last-puzzle-completed of the player is cut-the-branch:
 			now the player is in a random safe-zone room;
 		Hornets calm down in two turns from now.
 
 at the time when the hornets calm down:
 	now the hornets are swarming;
-	if hornet attack count is 3:
+	if the last-puzzle-completed of the player is cut-the-branch:
 		say "Amazingly as you look back at the tree, the hornets are swarming wildly around another branch.  Their activity grows in intensity and soon you can see nothing but a large mass of hornets all moving together.  [paragraph break]After a few moments, the activity ceases, most of the hornets retreat into a new nest that is now hanging from another branch.";
+	if the number of uncompleted puzzles is one:
 		end the story saying "Here ends the intro to Hornet's Nest.   Hope you enjoyed this and look for more to come."
 
 
 to say bug-killer-drop-description:
 	if player carries bug killer:
 		silently try dropping bug killer;
-		say "You throw the can away in disgust and as it bounces off [if location is in-the-shed]the wall[otherwise if location is on-the-porch]the porch floor[end if] it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty.  As you look on in disbelief, [run paragraph on]" ;
+		say "You throw the can away in disgust and as it bounces off [if location is in-the-shed]the wall[otherwise if location is on-the-porch]the porch floor[end if] it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty." ;
 		now the printed name of the bug killer is "[if bug killer is empty]now empty [end if]bug killer";
-	otherwise:
-		say "As you pause to catch your breath, [run paragraph on]".
 		
+to say clue-next-puzzle:
+	if spray-the-nest is uncompleted:
+		say "test 1";
+	else if smoke-the-nest is uncompleted:
+		say "As you look on in disbelief, a thought comes to you; hornets don't like smoke, why don't you try smoking them out.[line break][line break]";
+	else if cut-the-branch is uncompleted:
+		say "As you pause to catch your breath, you wonder what to do.   Maybe if you try cutting it down, they'll just pick up and leave."
 		
+	
 Book - Aggressive Hornets
 
 Aggressive-hornets is a recurring scene.   Aggressive-hornets begins when hornets are aggressive.  Aggressive-hornets ends when hornets are not aggressive
@@ -902,33 +1016,43 @@ Every turn while aggressive-hornets is happening:
 	otherwise:
 		say "[one of]From here you can hear the angry buzz of the hornets.[or]You can see the hornets swarming as if looking for something to sting.[or]You must have really made them mad this time.[or]Occassionally a hornet seems to locate you.  It buzzes your head and you manage to swat it away before it does much damage.  It flys back towards the nest....you hope it doesn't bring back friends.[then at random]".
 
-		
-		
 
 Book - Trying the bug killer
 
-Trying-the-bug-killer is a scene.  Trying-the-bug-killer begins when play begins.  Trying-the-bug-killer ends when hornet attack count is 1.
+Trying-the-bug-killer is a scene.  Trying-the-bug-killer begins when spray-the-nest is active.  Trying-the-bug-killer ends when spray-the-nest is completed.
 
+Book - Exploding Can
+
+Exploding Can is a scene.  Exploding Can begins when fire-the-missle is running.  Exploding Can ends when fire-the-missle is completed.
+When exploding can begins:
+	say "The can sits in the fire for a few moments and then it starts to turn a hot red as it heats up.  As the sides of the can start to bulge out at the center you quickly decide it's time to hide behind the tree.  Just as you retreat behind the tree you hear a large explosion and you hit the ground.  You hear a whistle as the exploded can flys towards the nest hitting it right in the bottom, plugging up the entrance to the nest.";
+	now the bug killer is a part of the hornets-nest;
+	
+	
 
 
 Book - Building a fire
 
-Building-a-fire  is a scene.  Building-a-fire begins when Trying-the-bug-killer ends.  Building-a-fire ends when hornet attack count is 2.
+Building-a-fire  is a scene.  Building-a-fire begins when Trying-the-bug-killer ends.  Building-a-fire ends when the twigs are flaming.
 
 	
 Book - Smoking them out
 
-Smoking-them-out is a scene.  Smoking-them-out begins when smoke is heavy.  Smoking-them-out ends when hornet attack count is 2.	
+Smoking-them-out is a scene.  Smoking-them-out begins when smoke is heavy.  Smoking-them-out ends when smoke-the-nest is completed.	
 
 When smoking-them-out begins:
 	say "As the smoke rises it slowly begins to engulf the nest.  At first the hornets look confused as they their activity increases slightly, then suddenly they all retreat back into the nest.  Now the smoke is so heavy that you can't make out the nest at all.  You are feeling a little bit proud of yourself as you figure this will be the end of them all.
 	
-What is that noise?  You hear a faint buzz coming from the tree.  Looking up, the smoke begins to clear and you see a mass of hornets around the entrance to the nest.  Just as you see them, they see you and attack.";
+What is that noise?  You hear a faint buzz coming from the tree.  Looking up, the smoke begins to clear and you see a mass of hornets around the entrance to the nest.  Just as you see them, they see you and attack.
+
+As they begin to swarm around your head, you notice there is something different about them.... they are now wearing minature gas masks.";
+	now the last-puzzle-completed of the player is smoke-the-nest;
 	hornets attack in 0 turn from now;
+	now smoke-the-nest is completed;
 	
 Book - Cutting them down
 
-Cutting-them-down is a scene.  Cutting-them-down begins when Smoking-them-out ends.  Cutting-them-down ends when hornet attack count is 3.
+Cutting-them-down is a scene.  Cutting-them-down begins when Smoking-them-out ends.  Cutting-them-down ends when cut-the-branch is completed.
 
 
 
@@ -962,6 +1086,8 @@ A hint deactivation rule:
 
 Understand "help" as asking for hints.
 When play begins: activate the Table of Getting Started Hints.]
+
+
 
 Volume - Looking from Supplemental Actions by Al Golden
 
