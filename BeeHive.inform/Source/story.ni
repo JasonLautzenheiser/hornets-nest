@@ -34,7 +34,7 @@ Book - Tests
 test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tree/u/spray/z/z".
 test wood with "test spray/s/catch fly/n/throw fly in web/get wood".
 test fire with "test wood/n/drop wood/take leaves/burn wood with glasses/drop leaves on fire".
-test cut with "test fire/s/in/take saw/n/n/climb ladder/cut tree/d/se/z/n".
+test cut with "test fire/s/in/take saw/n/n/climb ladder/cut tree/d/z/n".
 
 Book - Transcripting
 
@@ -159,6 +159,12 @@ The player is wearing reading glasses, t-shirt, jean shorts and baseball cap.
 Book - Verbs
 
 Part - New actions
+
+Chapter - Scoring
+
+carry out requesting the score:
+	say " You have completed [number of completed puzzles] of [number of not default puzzles] puzzles.";
+	stop the action.
 
 Chapter - Digging
 
@@ -391,7 +397,10 @@ Carry out burning something with something:
 	say "You take off your glasses and hold them at just the right angle so the sunlight makes a pinpoint on [the noun].  After a few moments a small stream of smoke rises from [the noun] and then suddenly a flame appears.";
 	now the noun is off-stage;
 	now the fire is on-stage;
-	now the smoke is on-stage.
+	now the smoke is on-stage;
+	now the noun is flaming;
+	now build-a-fire is completed;
+	now the last-puzzle-completed of the player is build-a-fire.
 	
 Before taking something that is flaming:
 	say "It's way to hot to carry around." instead.
@@ -1017,9 +1026,7 @@ Every turn while aggressive-hornets is happening:
 		say "[one of]From here you can hear the angry buzz of the hornets.[or]You can see the hornets swarming as if looking for something to sting.[or]You must have really made them mad this time.[or]Occassionally a hornet seems to locate you.  It buzzes your head and you manage to swat it away before it does much damage.  It flys back towards the nest....you hope it doesn't bring back friends.[then at random]".
 
 
-Book - Trying the bug killer
 
-Trying-the-bug-killer is a scene.  Trying-the-bug-killer begins when spray-the-nest is active.  Trying-the-bug-killer ends when spray-the-nest is completed.
 
 Book - Exploding Can
 
@@ -1031,9 +1038,7 @@ When exploding can begins:
 	
 
 
-Book - Building a fire
 
-Building-a-fire  is a scene.  Building-a-fire begins when Trying-the-bug-killer ends.  Building-a-fire ends when the twigs are flaming.
 
 	
 Book - Smoking them out
@@ -1050,9 +1055,7 @@ As they begin to swarm around your head, you notice there is something different
 	hornets attack in 0 turn from now;
 	now smoke-the-nest is completed;
 	
-Book - Cutting them down
 
-Cutting-them-down is a scene.  Cutting-them-down begins when Smoking-them-out ends.  Cutting-them-down ends when cut-the-branch is completed.
 
 
 
