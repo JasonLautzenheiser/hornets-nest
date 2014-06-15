@@ -442,7 +442,7 @@ Before going up from under-the-tree:
 
 Part - In the shed
 
-In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug killer.[end if]  [describe-the-hand-saw]".  In-the-shed is inside from outside-the-shed.  
+In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway to the north.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug killer.[end if]  [describe-the-hand-saw]".  In-the-shed is inside from outside-the-shed.  
 
 before going north in in-the-shed:
 	try exiting instead;
@@ -505,7 +505,7 @@ Before searching the shelf:
 
 Part - Outside the shed
 
-Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
+Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
 
 before of going south in outside-the-shed:
 	try going inside instead.
@@ -513,31 +513,32 @@ before of going south in outside-the-shed:
 
 Part - On the porch
 
-On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the glider and drinking a beer."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
+On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the [porch-swing] and drinking a beer.  To the east right off the porch is the large tree and to the southeast is your shed."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
 
-The glider is a enterable supporter in on-the-porch.  The glider is scenery.  The description of glider is "The glider sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
+The porch-swing is a enterable supporter in on-the-porch.  The porch-swing is scenery.  The printed name of porch-swing is "porch swing".  The description of porch-swing is "The porch swing sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
+Understand "swing" or "porch swing" or "glider" as porch-swing.
 
-Instead of swinging the glider:
-	if the player is on the glider:
+Instead of swinging the porch-swing:
+	if the player is on the porch-swing:
 		say "You lean back and swing for a bit, but as much as you hoped, the hornets didn't leave on their own.";
 	otherwise:
-		say "You give the glider a soft kick and it rocks back and forth for a bit."
+		say "You give the porch swing a soft kick and it rocks back and forth for a bit." 
 
 The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."
 
-before going up when the player is on the glider:
-	if player is on the glider:
-		try getting off the glider instead.
+before going up when the player is on the porch-swing:
+	if player is on the porch-swing:
+		try getting off the porch-swing instead.
 
-Does the player mean entering the glider when the player is in on-the-porch: it is likely.
-Does the player mean swinging the glider when the player is in on-the-porch: it is likely.
-Does the player mean swinging the glider when the player is on the glider: it is likely.
+Does the player mean entering the porch-swing when the player is in on-the-porch: it is likely.
+Does the player mean swinging the porch-swing when the player is in on-the-porch: it is likely.
+Does the player mean swinging the porch-swing when the player is on the  porch-swing: it is likely.
 
 
 
 Part - Up the tree
 
-Up-the-tree is a room.  The printed name is "Up the Tree".  The description is "You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head."  Up-the-tree is up from under-the-tree.
+Up-the-tree is a room.  The printed name is "Up the Tree".  The description is "You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head.  The only way is down."  Up-the-tree is up from under-the-tree.
 
 Check dropping something while location is up-the-tree:
 	say "[The noun] falls to the ground.";
