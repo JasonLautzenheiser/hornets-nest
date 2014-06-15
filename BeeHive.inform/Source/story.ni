@@ -395,7 +395,6 @@ Check burning something with something:
 	
 Carry out burning something with something:
 	say "You take off your glasses and hold them at just the right angle so the sunlight makes a pinpoint on [the noun].  After a few moments a small stream of smoke rises from [the noun] and then suddenly a flame appears.";
-	now the noun is off-stage;
 	now the fire is on-stage;
 	now the smoke is on-stage;
 	now the noun is flaming;
@@ -405,7 +404,7 @@ Carry out burning something with something:
 Before taking something that is flaming:
 	say "It's way to hot to carry around." instead.
 
-The fire is a container.  The fire-top is a supporter.  The fire-top is part of the fire.  The fire is scenery.
+
 	
 Volume - The World
 
@@ -555,14 +554,7 @@ Before putting the bug killer on the fire-top:
 	if the player is carrying the bug killer:
 		now fire-the-missle is running instead.
 
-Before inserting the bug killer into the fire:
-	try putting the bug killer on the fire-top instead.
 
-Before putting the bug killer on the fire:
-	try putting the bug killer on the fire-top instead.
-
-Before throwing bug killer at fire:
-	try putting the bug killer on the fire-top instead.	
 	
 	
 Chapter - Hand saw	
@@ -630,7 +622,7 @@ Instead of dropping the t-shirt, say "You decide to keep your six-pack covered."
 Instead of taking off the t-shirt:
 	try dropping the t-shirt instead.
 
-Chapter - Some wood	
+Chapter - Some twigs	
 
 Some twigs is a thing.  The description of some twigs is "[describe-twigs]".  Understand "wood" as some twigs when spider is off-stage.  Some twigs are flammable.  
 The indefinite article of the twigs is "a small pile of".	
@@ -655,6 +647,20 @@ The pile of ashes is a fixed in place flimsy.  "Just the remains of your wood, n
 
 Part - Scenery
 
+Chapter - Fire
+
+The fire is a container.  The fire-top is a supporter.  The printed name of fire-top is "fire".  The fire-top is part of the fire.  The fire is scenery.
+
+Before inserting something (called the fuel) into the fire:
+	try putting the fuel on the fire-top instead.
+
+Before putting something (called the fuel)  on the fire:
+	try putting the fuel on the fire-top instead.
+
+Before throwing something (called the fuel)  at fire:
+	try putting the fuel on the fire-top instead.	
+	
+	
 Chapter - Leaves
 
 Some leaves are in under-the-tree.  The leaves are undescribed.  The description of the leaves is "The leaves are starting to come down and cover the ground around the tree.  Every step you take results in a crunch of dried leaves under your feet."
@@ -673,7 +679,12 @@ instead of putting the leaves on the twigs:
 		now the smoke is heavy instead;
 	otherwise:
 		say "Tossing the leaves on the twigs would not serve any purpose right now."
-			
+
+Before putting the leaves on the fire-top:
+	if the player is carrying the leaves:
+		try putting the leaves on the twigs instead.
+		
+					
 Chapter - Hole
 
 The hole is a fixed in place container.   The description is "The hole isn't very deep, but you think it is big enough for the nest to fit into."
