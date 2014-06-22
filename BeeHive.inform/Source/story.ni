@@ -1014,7 +1014,7 @@ Part - Hornets Attack
 
 at the time when the hornets attack:
 	if location is up-the-tree or location is under-the-tree:
-		if the last-puzzle-completed is fire-the-missle:
+		if the last-puzzle-completed of the player is fire-the-missle:
 			say "With the can stuck in the opening of the nest, the nest begans to expand as the hornets attempt to escape.  Finally in a large explosion of pieces of nest and angry hornets, they escape and begin to swarm around you agressively.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
 		otherwise:
 			say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
