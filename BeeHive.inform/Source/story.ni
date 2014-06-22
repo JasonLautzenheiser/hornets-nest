@@ -3,6 +3,7 @@
 Use scoring and full-length room descriptions. 
 Use American dialect.
 
+
 Volume - Bibliography
 
 The story genre is "Comedy".
@@ -26,10 +27,9 @@ Include Basic Screen Effects by Emily Short.
 
 Volume - Testing & Debugging
 
-Book - Test commands
-
- 	 
-Book - Tests
+Book - Test commands - Not for release
+	 
+Book - Tests - Not for release
 
 test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tree/u/spray/z/z".
 test wood with "test spray/s/catch fly/n/throw fly in web/get wood".
@@ -89,17 +89,13 @@ Understand the command "credits" or "info" as "about".
 Report abouting:
 	say "[italic type][Story title][roman type] is copyright © 2014 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
 
-Book - Uberstart
+Book - Startup
 
-The uberstart rules are a rulebook.
 After printing the banner text, say "Copyright © 2014, Jason Lautzenheiser."
 The time of day is 6:05 AM.
 
 When play begins:
-	follow the uberstart rules.
-	
-An uberstart rule:
-	now the left hand status line is "[the player's surroundings]/[number of uncompleted puzzles]";
+	now the left hand status line is "[the player's surroundings] / [number of uncompleted puzzles]";
 	now the right hand status line is "Time: [time of day]";
 	
 
@@ -534,8 +530,6 @@ Does the player mean entering the porch-swing when the player is in on-the-porch
 Does the player mean swinging the porch-swing when the player is in on-the-porch: it is likely.
 Does the player mean swinging the porch-swing when the player is on the  porch-swing: it is likely.
 
-
-
 Part - Up the tree
 
 Up-the-tree is a room.  The printed name is "Up the Tree".  The description is "You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head.  The only way is down."  Up-the-tree is up from under-the-tree.
@@ -796,8 +790,13 @@ instead of listening to the tree:
 instead of listening:
 	if location is under-the-tree:
 		try listening to the tree;
+	if location is outside-the-shed:
+		say "The buzz of the nest in the tree, while lessened here is still the only noise you can hear.";
 	if location is in-the-shed:
-		say "Even from within the shed, you can hear the faint sounds of the hornet's nest.";
+		if the horsefly is on-stage and the player does not carry the horsefly:
+			say "The buzzing of the horsefly in the window drowns out any other noises.";
+		otherwise:
+			say "Even from within the shed, you can hear the faint sounds of the hornet's nest.";
 	if location is on-the-porch:
 		say "Though you can't see the nest from here, you can hear it."
 		
@@ -891,15 +890,19 @@ Instead of attacking the large spider:
 	
 Chapter - horsefly
 
-Every turn when the player is in in-the-shed and the horsefly is on-stage and the player does not carry the horsefly:
-	if a random chance of 1 in 2 succeeds:
-		say "[one of]You hear a fly in the window as it tries to escape[or]You notice a fly walking up the window[or]A fly buzzes past your nose, just to circle around and fly right back into the window[at random]."
+[http://inform7.com/learn/man/ex1.html]
+Every turn when the player is in in-the-shed and the horsefly is on-stage and the player does not carry the horsefly and the noun part of the current action is not the horsefly:
+	if a random chance of 1 in 4 succeeds:
+		say "[one of]You hear a fly in the window as it tries to escape[or]You notice a fly walking up the window[or]A fly buzzes past your nose, just to circle around and fly right back into the window[or]The fly unceasingly bangs into the window[or]A sudden silence startles you only to be interrupted by the fly in the window again[at random]."
 
 The horsefly is an undescribed thing in in-the-shed.  The description of horsefly is "The large horsefly is at least two inches long and [if player carries horsefly]it struggles to get out of your grip[otherwise if location is in-the-shed]keeps buzzing around the window trying to get out[end if]."  Understand "fly" as horsefly.
 
 Before taking horsefly:
-	say "You spend several minutes trying to get your hands on the fly.  It is only after it gets hung up in some cobwebs that you are finally able to catch it.  You grab it holding on by it's wings to keep it from moving around too much.";
-	now the player carries the horsefly instead; 
+	if the player is carrying the horsefly:
+		say "No need, you already have it." instead;
+	otherwise:
+		say "You spend several minutes trying to get your hands on the fly.  It is only after it gets hung up in some cobwebs that you are finally able to catch it.  You grab it holding on by it's wings to keep it from moving around too much.";
+		now the player carries the horsefly instead; 
 
 after dropping horsefly:
 	say "You let the horsefly go and you watch it fly away, [if location is not in-the-shed]right back into the shed, [end if]right back into the window.";
@@ -921,6 +924,16 @@ Before putting the horsefly on the web:
 
 Before throwing horsefly at spider:
 	try putting the horsefly on the web-top instead.
+	
+instead of giving the horsefly to the spider:
+	try putting the horsefly on the web-top instead.
+
+understand "smack [something]" or "swat [something]" as attacking.
+
+instead of attacking the horsefly:
+	try taking the horsefly instead.
+	
+
 
 Chapter - wood-burner
 
@@ -944,7 +957,12 @@ Report requesting puzzle status:
 	repeat with puzzle-status running through all impossible puzzles:
 		say "[puzzle-status] is now impossible.";
 	if the last-puzzle-completed of the player is not no-puzzle:
-		say "The last completed puzzle is [last-puzzle-completed of the player]."
+		say "The last completed puzzle is [last-puzzle-completed of the player].";
+	say "Not completed: [number of uncompleted inactive puzzles].";
+	say "Active: [number of active uncompleted puzzles].";
+	say "Running: [number of running puzzles].";
+
+	
 
 Understand "puzzles" as requesting puzzle status.
 
@@ -961,10 +979,6 @@ fire-the-missle is a puzzle.
 
 [puzzle activation rules]
 Every turn:
-	if  the number of not completed puzzles is 0 and the number of active puzzles is 0:
-		try requesting puzzle status;
-		say "Here ends the intro to Hornet's Nest.  I hope you enjoyed this introduction to this piece.  I hope to add more puzzles, more ways to try and achieve your goal of removing the nest from the tree.  ";
-		end the story;
 	if build-a-fire is uncompleted and build-a-fire is not impossible:
 		if twigs are on-stage:
 			now build-a-fire is active;
@@ -990,7 +1004,9 @@ Every turn:
 			now fire-the-missle is active;
 		otherwise:
 			now fire-the-missle is inactive;
-			
+	if fire-the-missle is completed:
+		if spray-the-nest is uncompleted:
+			now spray-the-nest is impossible.
 
 Book - Recurring events
 
@@ -998,31 +1014,21 @@ Part - Hornets Attack
 
 at the time when the hornets attack:
 	if location is up-the-tree or location is under-the-tree:
-		say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
+		if the last-puzzle-completed is fire-the-missle:
+			say "With the can stuck in the opening of the nest, the nest begans to expand as the hornets attempt to escape.  Finally in a large explosion of pieces of nest and angry hornets, they escape and begin to swarm around you agressively.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
+		otherwise:
+			say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
 		now the player is hiding;
 		now the hornets are aggressive;
 		now the player is in a random safe-zone room;
 		if the last-puzzle-completed of the player is spray-the-nest:
 			say "Well that didn't work too well.  [bug-killer-drop-description][line break][clue-next-puzzle]";
-			now woodpile is in outside-the-shed;
-		if the last-puzzle-completed of the player is smoke-the-nest:
-[			now twigs are off-stage;
-			now woodpile is off-stage;
-			now pile of ashes is in under-the-tree;]
-			now hand-saw is in in-the-shed;
-		if the last-puzzle-completed of the player is cut-the-branch:
-			now the player is in a random safe-zone room;
 		Hornets calm down in two turns from now.
 
 at the time when the hornets calm down:
 	now the hornets are swarming;
 	if the last-puzzle-completed of the player is cut-the-branch:
 		say "Amazingly as you look back at the tree, the hornets are swarming wildly around another branch.  Their activity grows in intensity and soon you can see nothing but a large mass of hornets all moving together.  [paragraph break]After a few moments, the activity ceases, most of the hornets retreat into a new nest that is now hanging from another branch.";
-	if  the number of not completed puzzles is 0 and the number of active puzzles is 0 and the number of running puzzles is 0:
-		try requesting puzzle status;
-		end the story saying "Here ends the intro to Hornet's Nest.  I hope you enjoyed this introduction to this piece.  I hope to add more puzzles, more ways to try and achieve your goal of removing the nest from the tree.  ";
-[	if the number of uncompleted puzzles is zero:
-		end the story saying "Here ends the intro to Hornet's Nest.   Hope you enjoyed this and look for more to come."]
 
 
 to say bug-killer-drop-description:
@@ -1042,7 +1048,10 @@ to say clue-next-puzzle:
 	
 Book - Aggressive Hornets
 
-Aggressive-hornets is a recurring scene.   Aggressive-hornets begins when hornets are aggressive.  Aggressive-hornets ends when hornets are not aggressive
+Aggressive-hornets is a recurring scene.   Aggressive-hornets begins when hornets are aggressive.  Aggressive-hornets ends when hornets are not aggressive.
+
+When aggressive-hornets ends:
+	say "Hornets are no longer aggressive."
 
 Every turn while aggressive-hornets is happening:
 	if location is under-the-tree:
@@ -1061,6 +1070,9 @@ Book - Exploding Can
 Exploding Can is a scene.  Exploding Can begins when fire-the-missle is running.  Exploding Can ends when fire-the-missle is completed.
 When exploding can begins:
 	say "The can sits in the fire for a few moments and then it starts to turn a hot red as it heats up.  As the sides of the can start to bulge out at the center you quickly decide it's time to hide behind the tree.  Just as you retreat behind the tree you hear a large explosion and you hit the ground.  You hear a whistle as the exploded can flys towards the nest hitting it right in the bottom, plugging up the entrance to the nest.";
+	now the last-puzzle-completed of the player is fire-the-missle;
+	now fire-the-missle is completed;
+	hornets attack in 1 turn from now;
 	now the bug killer is a part of the hornets-nest;
 	
 	
@@ -1083,6 +1095,16 @@ As they begin to swarm around your head, you notice there is something different
 	hornets attack in 0 turn from now;
 	now smoke-the-nest is completed;
 	
+
+Book - Scene - Running the Game 
+
+Running-the-game is a scene.  running-the-game begins when play begins.  
+Running-the-game ends when the number of uncompleted inactive puzzles is 0 and the number of active uncompleted puzzles is 0 and the number of running puzzles is 0 and aggressive-hornets is not happening:
+
+When running-the-game ends:
+	end the story saying "Here ends the intro to Hornet's Nest.  I hope you enjoyed this introduction to this piece.  I plan to add more ways to try and achieve your goal of removing the nest from the tree.  ";
+	
+
 
 
 
@@ -1185,7 +1207,7 @@ say "You can't look down.".
 
 Volume - Throwing from Supplemental Actions by Al Golden
 
-[To say verbword: (- print (address) verb_word; -).
+To say verbword: (- print (address) verb_word; -).
 
 understand the command "throw" as something new.
 
@@ -1269,7 +1291,7 @@ understand "toss [things] through [something]" as throwing it through.
 understand "hurl [things] through [something]" as throwing it through.
 understand "pitch [things] through [something]" as throwing it through.
 
-check throwing something at a second noun
+[check throwing something at a second noun
 (this is the can't throw what you don't have rule):
 if the noun is not carried by the player,
 say "You don't have [the noun]." instead.
@@ -1304,4 +1326,5 @@ say "You can't [verbword] [the noun]through [the second noun].".
 
 report throwing something out of a second noun
 (this is the throwing something out of something rule) ::
-say "You can't [verbword] [the noun] out of [the second noun]."]
+say "You can't [verbword] [the noun] out of [the second noun]."
+]
