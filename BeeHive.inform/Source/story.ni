@@ -333,9 +333,9 @@ Check throwing it at (this is the avoid throwing things into themselves rule):
 
 
 Understand "throw [something] in [something]" as throwing it at.
+Understand "throw [something] on [something]" as throwing it at.
 
 Check throwing:
-	say "[noun] - [second noun]";
 	if the noun is bug killer:
 		if the second noun is the tree:
 			say "You throw [the noun] at [the second noun] and miss horribly.";
@@ -651,43 +651,63 @@ Chapter - Fire
 
 The fire is a container.  The fire-top is a supporter.  The printed name of fire-top is "fire".  The fire-top is part of the fire.  The fire is scenery.
 
-
 Before inserting something (called the fuel) into the fire:
 	try putting the fuel on the fire-top instead.
 
 Before putting something (called the fuel)  on the fire:
 	try putting the fuel on the fire-top instead.
 
+Before throwing something (called the fuel) onto fire:
+	try putting the fuel on the fire-top instead.	
+
+Before throwing something (called the fuel) into fire:
+	try putting the fuel on the fire-top instead.	
+
 Before throwing something (called the fuel)  at fire:
 	try putting the fuel on the fire-top instead.	
 	
 Before putting something on the fire-top:
 	if the noun is not flammable:
-		say "You could put [the noun] in the fire, but it wouldn't burn." instead.
-
+		say "You could put [the noun] in the fire, but it wouldn't burn." instead;
+	otherwise:
+		say "here i am" instead.
+		
+	
 Chapter - Leaves
 
-Some leaves are in under-the-tree.  The leaves are undescribed.  The description of the leaves is "The leaves are starting to come down and cover the ground around the tree.  Every step you take results in a crunch of dried leaves under your feet."
+Some leaves are in under-the-tree.  Some leaves are undescribed.  The description of some leaves is "The leaves are starting to come down and cover the ground around the tree.  Every step you take results in a crunch of dried leaves under your feet."
+Some leaves is plural-named.
 
-After taking leaves:
+After taking some leaves:
 	say "You gather up a handful of leaves, but there are still plenty left to clean up."
 	
-Instead of counting leaves:
+Instead of counting some leaves:
 	say "There are exactly 69,105 leaves...somehow that doesn't surprise you.";
 
-instead of putting the leaves on the twigs:
+instead of throwing leaves when twigs are flaming:
+	try putting some leaves on the twigs instead.
+
+Before throwing some leaves at twigs:
+	try putting some leaves on the twigs instead.	
+
+Before throwing some leaves into twigs:
+	try putting some leaves on the twigs instead.	
+
+Before throwing some leaves onto twigs:
+	try putting some leaves on the twigs instead.	
+
+instead of putting some leaves on the twigs:
 	if twigs are flaming:
-		say "You toss the leaves onto the fire and the smoke begins to build until a dark gray cloud begins to lift from the ground up into the tree.";
+		say "[regarding the noun][if the player is not carrying some leaves]You gather up a handful of leaves and [otherwise]You [end if]toss [them] onto the fire and the smoke begins to build until a dark gray cloud begins to lift from the ground up into the tree.";
 		now leaves are off-stage;
 		now the smoke is heavy instead;
 	otherwise:
 		say "Tossing the leaves on the twigs would not serve any purpose right now."
 
-Before putting the leaves on the fire-top:
-	if the player is carrying the leaves:
-		try putting the leaves on the twigs instead.
+Before putting some leaves on the fire-top:
+	try putting some leaves on the twigs instead.
 		
-					
+
 Chapter - Hole
 
 The hole is a fixed in place container.   The description is "The hole isn't very deep, but you think it is big enough for the nest to fit into."
