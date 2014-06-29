@@ -587,7 +587,10 @@ Rule for deciding whether all includes the hand-saw: it does.
 	
 Chapter - Shovel
 
-The shovel is a thing in on-the-porch.  The description of shovel is "The shovel is handy for cleaning up the dog-doo.  That's why you just leave it laying around on the porch within easy reach."
+The shovel is a thing in on-the-porch.  The description of shovel is "[if the shovel is in on-the-porch and the shovel is not carried by the player]The shovel is handy for cleaning up the dog-doo.  That's why you just leave it laying around on the porch within easy reach.[otherwise]Simple spade wth long wooden handle.  I've only ever used it to clean up the mess the dog leaves in the yard.[end if]"
+
+Understand "spade" as shovel.
+
 	
 Chapter - Ladder
 
@@ -621,7 +624,7 @@ Instead of taking off the baseball cap:
 	
 Chapter - Jean shorts
 
-The jean shorts is a wearable thing.  The description of jean shorts is "Your wife always is always trying to throw these shorts out...she says they are too tight on you.  I don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts
+The jean shorts is a wearable thing.  The description of jean shorts is "Your wife is always trying to throw these shorts out...she says they are too tight on you.  I don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts
 
 Instead of dropping the shorts, say "Even though they feel like you're wearing nothing, they really do serve a purpose....let's not expose your no-no places."
 
@@ -944,7 +947,7 @@ Before taking horsefly:
 		now the player carries the horsefly instead; 
 
 after dropping horsefly:
-	say "You let the horsefly go and you watch it fly away, [if location is not in-the-shed]right back into the shed, [end if]right back into the window.";
+	say "You let the horsefly go and you watch it fly away, [if location is not in-the-shed]right back into the shed.[otherwise]right back into the window.[end if]";
 	now horsefly is in in-the-shed.
 
 Before putting the horsefly on the web-top:
@@ -954,7 +957,13 @@ Before putting the horsefly on the web-top:
 		now horsefly is off-stage instead;
 	otherwise:
 		try dropping the noun instead.
-			
+
+before throwing the horsefly:
+	try dropping the horsefly instead;
+
+before throwing the horsefly at something:
+	try dropping the horsefly instead;
+
 Before throwing the horsefly at web:
 	try putting the horsefly on the web-top instead.	
 
@@ -1341,40 +1350,36 @@ understand "toss [things] through [something]" as throwing it through.
 understand "hurl [things] through [something]" as throwing it through.
 understand "pitch [things] through [something]" as throwing it through.
 
-[check throwing something at a second noun
-(this is the can't throw what you don't have rule):
-if the noun is not carried by the player,
-say "You don't have [the noun]." instead.
+check throwing something at a second noun (this is the can't throw what you don't have rule):
+	if the noun is not carried by the player,
+		say "You don't have [the noun]." instead.
 
-report throwing something
-(this is the throwing rule):
-say "You can't throw [the noun].".
+report throwing something at a second noun (this is the throwing something at something rule):
+	say "You can't [verbword] [the noun] at [the second noun]."
 
-report throwing something into something
-(this is the throwing something into something rule) :
-say "You can't [verbword] [the noun] into [the second noun].".
+report throwing something on a second noun (this is the throwing something on something rule):
+	say "You can't [verbword] [the noun] on [the second noun]."
 
-report throwing something off a second noun
-(this is the throwing something off something rule) ::
-say "You can't [verbword] [the noun] off [the second noun].". 
+report throwing something (this is the throwing rule):
+	say "You can't throw [the noun].".
 
-report throwing something over something
-(this is the throwing something over something rule) ::
-say "You can't [verbword] [the noun] over [the second noun].". 
+report throwing something into something (this is the throwing something into something rule) :
+	say "You can't [verbword] [the noun] into [the second noun].".
 
-report throwing something under a second noun
-(this is the throwing something under something rule) ::
-say "You can't [verbword] [the noun] under [the second noun].". 
+report throwing something off a second noun (this is the throwing something off something rule) :
+	say "You can't [verbword] [the noun] off [the second noun].". 
 
-report throwing something down a second noun
-(this is the throwing something down something rule) ::
-say "You can't [verbword] [the noun] down [the second noun].". 
+report throwing something over something (this is the throwing something over something rule) :
+	say "You can't [verbword] [the noun] over [the second noun].". 
 
-report throwing something through a second noun
-(this is the throwing something through something rule) ::
-say "You can't [verbword] [the noun]through [the second noun].". 
+report throwing something under a second noun (this is the throwing something under something rule) :
+	say "You can't [verbword] [the noun] under [the second noun].". 
 
-report throwing something out of a second noun
-(this is the throwing something out of something rule) ::
-say "You can't [verbword] [the noun] out of [the second noun]."
-]
+report throwing something down a second noun (this is the throwing something down something rule) :
+	say "You can't [verbword] [the noun] down [the second noun].". 
+
+report throwing something through a second noun (this is the throwing something through something rule) :
+	say "You can't [verbword] [the noun]through [the second noun].". 
+
+report throwing something out of a second noun (this is the throwing something out of something rule) :
+	say "You can't [verbword] [the noun] out of [the second noun]."
