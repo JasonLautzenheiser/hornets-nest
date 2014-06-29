@@ -95,7 +95,7 @@ After printing the banner text, say "Copyright © 2014, Jason Lautzenheiser."
 The time of day is 6:05 AM.
 
 When play begins:
-	now the left hand status line is "[the player's surroundings] / [number of uncompleted puzzles]";
+	now the left hand status line is "[the player's surroundings] ";  [number of uncompleted puzzles]
 	now the right hand status line is "Time: [time of day]";
 	
 
@@ -150,6 +150,8 @@ Check going when the player is hiding:
 	now the player is not-hiding.
 
 The player is wearing reading glasses, t-shirt, jean shorts and baseball cap.
+
+Wife is a female person. 
 
 
 Book - Verbs
@@ -334,6 +336,7 @@ Check throwing it at (this is the avoid throwing things into themselves rule):
 
 Understand "throw [something] in [something]" as throwing it at.
 Understand "throw [something] on [something]" as throwing it at.
+Understand "throw [something] at [something]" as throwing it at.
 
 Check throwing:
 	if the noun is bug killer:
@@ -433,7 +436,7 @@ Before going up from under-the-tree:
 	if the player is carrying ladder:
 		try leaning ladder on tree;
 	if ladder is not on the tree:
-		say " You never were much of a tree climber.  Besides it wouldn't be pretty if the bees attack while you were trying to pull yourself up the tree." instead.
+		say " You never were much of a tree climber.  Besides it wouldn't be pretty if the hornets attack while you were trying to pull yourself up the tree." instead.
 	
 
 Part - In the shed
@@ -451,12 +454,15 @@ Before opening the window:
 Before attacking the window when the location is in-the-shed:
 	say "You wouldn't want to break the window, you'd just have to replace it." instead.
 
-A shelf is scenery supporter in in-the-shed.  The description of the shelf is "The shelf is just inside the door and looks to be where things were just thrown.  There is piles of junk on it."
+A shelf is scenery supporter in in-the-shed.  The description of the shelf is "The shelf is just inside the door and looks to be where things were just thrown.  There are piles of junk on it."
 
-Junk is scenery in in-the-shed.  
+Junk is scenery in in-the-shed.  The description of junk is "Just piles of stuff that has collected here over the years.  [if the bug killer is not found]You could try searching it to see if there is anything to help you current dilemma.[end if]";
 
-Before examining junk:
-	try examining shelf instead.
+Instead of taking junk:
+	say "[if the bug killer is not found]There is really no need to take all of this, but perhaps if you searched the junk you could find something useful.[otherwise]You've looked through the junk and couldn't find anything useful, so you'll just leave it all here for another day.[end if]"
+
+[Before examining junk:
+	try examining shelf instead.]
 
 Before searching junk:
 	try searching shelf instead.
@@ -493,9 +499,12 @@ Instead of examining the shelf for the first time:
 	try searching the shelf.
 
 Before searching the shelf:
-	say "As you rummage through the junk on the shelf, you notice a can of bug killer that must have been thrown up there years ago.";
-	move the bug killer to the shelf;
-	now the bug killer is found instead.
+	if the bug killer is not found:
+		say "As you rummage through the junk on the shelf, you notice a can of bug killer that must have been thrown up there years ago.";
+		move the bug killer to the shelf;
+		now the bug killer is found instead;
+	otherwise:
+		say "You find nothing that looks useful to your current plight." instead.
 	
 	
 
@@ -509,7 +518,7 @@ before of going south in outside-the-shed:
 
 Part - On the porch
 
-On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the [porch-swing] and drinking a beer.  To the east right off the porch is the large tree and to the southeast is your shed."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
+On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the [porch-swing] and drinking a [beer].  To the east right off the porch is the large tree and to the southeast is your shed."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
 
 The porch-swing is a enterable supporter in on-the-porch.  The porch-swing is scenery.  The printed name of porch-swing is "porch swing".  The description of porch-swing is "The porch swing sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
 Understand "swing" or "porch swing" or "glider" as porch-swing.
@@ -522,6 +531,10 @@ Instead of swinging the porch-swing:
 
 The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."
 
+The front door is a flimsy in on-the-porch. "The front door leading into your house, in fact it's the only way into your house and your wife locked the door behind you when you left this morning.  Her exact words were 'Don[']t bother coming back until that nest is gone.'".  The action-refusal is "You told your wife you were not coming in until the nest was gone (actually she told you that, but you won't admit that outloud will you?)".
+
+
+
 before going up when the player is on the porch-swing:
 	if player is on the porch-swing:
 		try getting off the porch-swing instead.
@@ -529,6 +542,7 @@ before going up when the player is on the porch-swing:
 Does the player mean entering the porch-swing when the player is in on-the-porch: it is likely.
 Does the player mean swinging the porch-swing when the player is in on-the-porch: it is likely.
 Does the player mean swinging the porch-swing when the player is on the  porch-swing: it is likely.
+
 
 Part - Up the tree
 
@@ -542,7 +556,7 @@ Book - Things
 
 Part - Carried items
 
-Chapter - Bug Killer
+Chapter - Can of Bug Killer
 
 The bug killer is a thing.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" as bug killer.   the bug killer is flammable.
 
@@ -805,7 +819,7 @@ before climbing the tree:
 	try going up instead;
 	
 instead of listening to the tree:
-	say "You hear the buzz of the hornet's as the fly around the nest."
+	say "You hear the buzz of the hornets as the fly around the nest."
 	
 instead of listening:
 	if location is under-the-tree:
@@ -895,7 +909,12 @@ Instead of attacking the web:
 	try attacking the large spider.
 
 before taking the web:
-	try taking the spider instead.
+	if spider is on-stage:
+		try taking the spider instead;
+	otherwise:
+		say "You brush the web aside only to have some of it stick to your hand.  You then spend the next ten minutes trying to get the web off your hand, first transferring it to your shorts, then back to your other hand until you finally manage to wipe most of it off on the ground.";
+		now the web is off-stage;
+		increase the time of day by 10 minutes instead.
 	
 
 Chapter - spider	
@@ -936,6 +955,15 @@ Before putting the horsefly on the web-top:
 	otherwise:
 		try dropping the noun instead.
 			
+Before throwing the horsefly at web:
+	try putting the horsefly on the web-top instead.	
+
+Before throwing the horsefly into web:
+	try putting the horsefly on the web-top instead.	
+
+Before throwing the horsefly onto web:
+	try putting the horsefly on the web-top instead.	
+
 Before inserting the horsefly into the web:
 	try putting the horsefly on the web-top instead.
 
@@ -952,7 +980,9 @@ understand "smack [something]" or "swat [something]" as attacking.
 
 instead of attacking the horsefly:
 	try taking the horsefly instead.
-	
+
+[before doing anything to the horsefly while the horsefly is off-stage:
+	say "I'm sure the spider is having a wonderful time with the fly, but you won't be able to do anything with it anymore." instead.]
 
 
 Chapter - wood-burner
