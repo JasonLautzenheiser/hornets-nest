@@ -3,7 +3,6 @@
 Use scoring and full-length room descriptions. 
 Use American dialect.
 
-
 Volume - Bibliography
 
 The story genre is "Comedy".
@@ -320,6 +319,17 @@ Carry out counting:
 Understand "count blessings" or "count your blessings" or "count my blessings" as a mistake("Well for one you haven't been stung yet...")
 
 Part - Old Actions
+
+Chapter - Attacking
+
+Attacking with is an action applying to two visible things
+
+Understand "Attack [something] with [something]" as attacking with.
+
+Check attacking with:
+	if the noun is the hornets-nest:
+		say "Hitting the nest is not really a good idea.  To keep from becoming a pin cushion, you'll have to think a little harder than that."
+
 
 Chapter - Throwing
 
