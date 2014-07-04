@@ -10,6 +10,8 @@ The story headline is "An Interactive Experience in Pest Removal".
 The story description is "You weren't going to let the hornet's nest in the shade tree out front stop you from enjoying your summer."
 The release number is 1.
 The story creation year is 2014.
+Release along with a website.
+Release along with an interpreter.
 
 Volume - Extensions
 
@@ -23,6 +25,9 @@ Include Property Checking by Emily Short.
 Include Debugging by Al Golden.
 Include Basic Screen Effects by Emily Short.
 ]
+ Include Response Assistant by Aaron Reed.
+
+
 
 Volume - Testing & Debugging
 
@@ -285,7 +290,7 @@ Check spraying:
 	
 Before spraying when the second noun is bug killer:
 	if bug killer is empty:
-		say "Well it's empty now,  spraying it won't help much now." instead.
+		say "Well the can is empty now so spraying [the noun] won't help much now." instead.
 
 Carry out spraying:
 	if player is carrying the bug killer:
@@ -296,12 +301,12 @@ Carry out spraying:
 		if location is up-the-tree:
 			say "You are close enough now, there is no way you'll miss.  You'll have these damn hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[paragraph break]";
 			now the bug killer is empty;
-			say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets' attention and they begin to mass an attack.";
+			say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets attention.  They begin to mass an attack.";
 			hornets attack in 1 turn from now;
 			now spray-the-nest is completed;
 			now the last-puzzle-completed of the player is spray-the-nest;
 		otherwise:
-			say "There is not much left, you probably don't want to waste it." instead;
+			say "There is not much left.  You probably don't want to waste it." instead;
 	otherwise:
 		say "You have nothing to spray with."
 	
@@ -425,7 +430,7 @@ Book - Rooms
 
 Part - Under the Tree
 
-Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wonderous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area]".
+Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wondrous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area]".
 
 To say other-stuff-in-area:
 	let need_period be false;
@@ -520,7 +525,7 @@ Before searching the shelf:
 
 Part - Outside the shed
 
-Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
+Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However, it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
 
 before of going south in outside-the-shed:
 	try going inside instead.
@@ -529,6 +534,8 @@ before of going south in outside-the-shed:
 Part - On the porch
 
 On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the [porch-swing] and drinking a [beer].  To the east right off the porch is the large tree and to the southeast is your shed."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
+
+The porch is a backdrop.  The porch is everywhere.  The description of the porch is "The front porch is large and roomy.  Plenty of space to sit and relax...if it wasn't for those hornets."
 
 The porch-swing is a enterable supporter in on-the-porch.  The porch-swing is scenery.  The printed name of porch-swing is "porch swing".  The description of porch-swing is "The porch swing sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
 Understand "swing" or "porch swing" or "glider" as porch-swing.
@@ -541,9 +548,10 @@ Instead of swinging the porch-swing:
 
 The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."
 
-The front door is a flimsy in on-the-porch. "The front door leading into your house, in fact it's the only way into your house and your wife locked the door behind you when you left this morning.  Her exact words were 'Don[']t bother coming back until that nest is gone.'".  The action-refusal is "You told your wife you were not coming in until the nest was gone (actually she told you that, but you won't admit that outloud will you?)".
+The front door is a flimsy in on-the-porch. "The front door leading into your house, in fact it's the only way into your house and your wife locked the door behind you when you left this morning.  Her exact words were 'Don[']t bother coming back until that nest is gone.'".  The action-refusal is "You told your wife you were not coming in until the nest was gone (actually she told you that, but you won't admit that out loud will you?)".
 
-
+before going inside in on-the-porch:
+	try opening the front door instead.
 
 before going up when the player is on the porch-swing:
 	if player is on the porch-swing:
@@ -584,7 +592,7 @@ Before putting the bug killer on the fire-top:
 Chapter - Hand saw	
 
 The hand-saw is an undescribed thing in in-the-shed.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" as hand-saw.  
-The description of hand-saw is "Nope you didn't use this much either.  The saw is new and shiny." 	
+The description of hand-saw is "Nope, you didn't use this much either.  The saw is new and shiny." 	
 The hand-saw can be hanging.  The hand-saw is hanging.  
 
 Check taking the hand-saw for the first time:
@@ -873,7 +881,7 @@ Instead of cutting the tree:
 					hornets attack in 1 turn from now;
 				now cut-the-branch is completed;
 		otherwise:
-			say "Cutting down the entire tree is a bit of overkill don't you think?";
+			say "Cutting down the entire tree is a bit of overkill, don't you think?";
 	otherwise:
 		say "You make a cutting motion on the tree with your hand and succeed in nothing more than scraping up your hand.";
 		
@@ -935,7 +943,7 @@ Chapter - spider
 The large spider is a animal in the web.  The  description of large spider is "The spider is as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.
 
 Instead of taking the large spider:
-	say "You start to reach for the spider to brush it and it's web out of the way, but as your hand approaches, the spider actually turns and rears up at you ready to bite."
+	say "You start to reach for the spider to brush it and its web out of the way, but as your hand approaches, the spider actually turns and rears up at you ready to bite."
 	
 Instead of attacking the large spider:
 	try taking large spider.
@@ -953,7 +961,7 @@ Before taking horsefly:
 	if the player is carrying the horsefly:
 		say "No need, you already have it." instead;
 	otherwise:
-		say "You spend several minutes trying to get your hands on the fly.  It is only after it gets hung up in some cobwebs that you are finally able to catch it.  You grab it holding on by it's wings to keep it from moving around too much.";
+		say "You spend several minutes trying to get your hands on the fly.  It is only after it gets hung up in some cobwebs that you are finally able to catch it.  You grab it holding on by its wings to keep it from moving around too much.";
 		now the player carries the horsefly instead; 
 
 after dropping horsefly:
@@ -1110,7 +1118,7 @@ to say clue-next-puzzle:
 	if spray-the-nest is uncompleted:
 		say "test 1";
 	else if smoke-the-nest is uncompleted:
-		say "As you look on in disbelief, a thought comes to you; hornets don't like smoke, why don't you try smoking them out.[line break][line break]";
+		say "As you look on in disbelief, a thought comes to you; hornets don't like smoke.  Why don't you try smoking them out.[line break][line break]";
 	else if cut-the-branch is uncompleted:
 		say "As you pause to catch your breath, you wonder what to do.   Maybe if you try cutting it down, they'll just pick up and leave."
 		
@@ -1129,7 +1137,7 @@ Every turn while aggressive-hornets is happening:
 	if location is up-the-tree:
 		do nothing;
 	otherwise:
-		say "[one of]From here you can hear the angry buzz of the hornets.[or]You can see the hornets swarming as if looking for something to sting.[or]You must have really made them mad this time.[or]Occassionally a hornet seems to locate you.  It buzzes your head and you manage to swat it away before it does much damage.  It flys back towards the nest....you hope it doesn't bring back friends.[then at random]".
+		say "[one of]From here you can hear the angry buzz of the hornets.[or]You can see the hornets swarming as if looking for something to sting.[or]You must have really made them mad this time.[or]Occassionally a hornet seems to locate you.  It buzzes your head and you manage to swat it away before it does much damage.  It flies back towards the nest....you hope it doesn't bring back friends.[then at random]".
 
 
 
@@ -1138,7 +1146,7 @@ Book - Exploding Can
 
 Exploding Can is a scene.  Exploding Can begins when fire-the-missle is running.  Exploding Can ends when fire-the-missle is completed.
 When exploding can begins:
-	say "The can sits in the fire for a few moments and then it starts to turn a hot red as it heats up.  As the sides of the can start to bulge out at the center you quickly decide it's time to hide behind the tree.  Just as you retreat behind the tree you hear a large explosion and you hit the ground.  You hear a whistle as the exploded can flys towards the nest hitting it right in the bottom, plugging up the entrance to the nest.";
+	say "The can sits in the fire for a few moments and then it starts to turn a hot red as it heats up.  As the sides of the can start to bulge out at the center you quickly decide it's time to hide behind the tree.  Just as you retreat behind the tree you hear a large explosion and you hit the ground.  You hear a whistle as the exploded can flies towards the nest hitting it right in the bottom, plugging up the entrance to the nest.";
 	now the last-puzzle-completed of the player is fire-the-missle;
 	now fire-the-missle is completed;
 	hornets attack in 1 turn from now;
