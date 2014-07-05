@@ -16,6 +16,8 @@ Release along with an interpreter.
 Volume - Extensions
 
 Include Small Kindnesses by Aaron Reed.
+Include Trinity Inventory by Mikael Segercrantz.
+
 [Include Adaptive Hints by Eric Eve.]
 
 Book  - Not for release
@@ -93,6 +95,10 @@ Understand the command "credits" or "info" as "about".
 Report abouting:
 	say "[italic type][Story title][roman type] is copyright © 2014 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
 
+Book - Extension overrides
+
+Chapter - No valid directions showing (in place of Chapter - Show valid directions after going nowhere in Small Kindnesses by Aaron Reed)
+
 Book - Startup
 
 After printing the banner text, say "Copyright © 2014, Jason Lautzenheiser."
@@ -107,7 +113,29 @@ Book - Rules
 
 Rule for printing room description details: stop.
 
+The can't take scenery rule response (A) is "[The noun] can't be taken anywhere."
 
+Chapter - Sanity Checks
+
+The sanity-check rules are a rulebook.
+
+This is the sanity-check stage rule:
+	abide by the sanity-check rules.
+
+The sanity-check stage rule is listed before the before stage rule  in the action-processing rules.
+
+sanity-check eating an inedible thing:
+	say "Even if [the noun] looked appetizing, you don't have time to eat anything." instead.
+
+sanity-check wearing something which is not wearable:
+	say  "How in the world would you go about wearing [the noun]?" instead.
+	
+sanity-check taking something that is flaming:
+	say "It's way to hot to carry around." instead.
+	
+	
+	
+	
 Book - Definitions
 
 A room can be a safe-zone.
@@ -134,21 +162,51 @@ instead of doing anything to a flimsy:
 	if the action-refusal of the noun is "", say "[brush-off of noun]";
 	otherwise say "[action-refusal of the noun][paragraph break]".
 
+Chapter - Blind Text	
+
+Everything has some text called the blind-text.  The blind-text is usually "".
+A room has some text called the blind-text.  The blind-text of a room is usually "".
+
+instead of examining something when the player is blinded:
+	if the blind-text of the noun is "":
+		say "Without your glasses on, everything is a big blur.";
+	otherwise:
+		say "[blind-text of the noun][paragraph break]".
+
+instead of looking when the player is blinded:
+	if the blind-text of the location is "":
+		say "Without your glasses on, everything is a big blur.";
+	otherwise:
+		say "[blind-text of the location][paragraph break]".
+			
+instead of going somewhere when the player is blinded and the location is up-the-tree:
+	say "You start to move, but not seeing clearly,  you misjudge the next rung on the ladder and manage to fall, not to gently to the ground.";
+	now the player is in under-the-tree.
+
+instead of going somewhere when the player is blinded:
+	say "You put your hands out in front of you to keep from running into anything, but you manage to [blind-going-reject] and end up staying right where you are."
+	
+instead of going nowhere when the player is blinded:
+	say "You put your hands out in front of you to keep from running into anything, but you manage to [blind-going-reject] and end up staying right where you are."
+
+to say blind-going-reject:
+	say "trip".
+	
 Book - Easter Eggs
 
 understand "xyzzy" as a mistake("You face the tree and wave your fingers at the nest while chanting 'xyzzy, xyzzy, xyzzy ....' Nothing happens.").
 
-[Understand "* [text]" as a mistake ("Noted.").]
 
+Book - Characters
 
-Book - Nouns
-
-Chapter - Player Character
+Part  - Player Character
 
 Myself is a male person.  The player is myself.  
 The description of the player is "You're a third generation farmer who is.....no not really, you bought this old farm house because it was falling down and you got it and the land cheap."
 
 A person can be hiding or not-hiding.
+A person can be blinded.   
+
 
 Check going when the player is hiding:
 	now the player is not-hiding.
@@ -157,6 +215,50 @@ The player is wearing reading glasses, t-shirt, jean shorts and baseball cap.
 
 Wife is a female person. 
 
+Chapter - General Actions the player can perform
+
+instead of going nowhere:
+	say "As much as you want to shirk your responsibility, you promised to get those hornets out of the tree."
+
+Chapter - Reading glasses
+
+The reading glasses are a wearable thing.  The description of reading glasses is "A pair of very thick glasses, you like to call them reading glasses, but in fact you're quite blind without them on."	Understand "spectacles" as reading glasses.
+
+before of searching glasses:
+	if "[verbword]" exactly matches the text "look":
+		say "You can see clearly now." instead.
+	
+before wearing the glasses:
+	now the player is not blinded.
+	
+before taking off the glasses:
+	now the player is blinded.
+	
+	
+Chapter - Baseball cap
+
+The baseball cap is a wearable thing.  The description of baseball cap is "You never really liked baseball, but this hat is very comfortable and it conveniently hides your slightly balding head." The indefinite article is "a".   Understand "hat" as baseball cap.
+
+Instead of dropping the baseball cap, say "You're pretty self-conscious about your hair, or lack of, so you'll just keep it on."
+Instead of taking off the baseball cap:
+	try dropping the baseball cap instead.
+	
+Chapter - Jean shorts
+
+The jean shorts is a wearable thing.  The description of jean shorts is "Your wife is always trying to throw these shorts out...she says they are too tight on you.  You don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts
+
+Instead of dropping the shorts, say "Even though they feel like you're wearing nothing, they really do serve a purpose....let's not expose your no-no places."
+
+Instead of taking off the jean shorts:
+	try dropping the jean shorts instead.
+	
+Chapter - T-shirt
+
+The t-shirt is a wearable thing.  The description of the t-shirt is "Just a plain white t-shirt, nothing fancy." The indefinite article is "a". 
+Understand "tshirt/shirt/tee/tee-shirt/teeshirt" as t-shirt.
+Instead of dropping the t-shirt, say "You decide to keep your six-pack covered."
+Instead of taking off the t-shirt:
+	try dropping the t-shirt instead.
 
 Book - Verbs
 
@@ -325,15 +427,29 @@ Understand "count blessings" or "count your blessings" or "count my blessings" a
 
 Part - Old Actions
 
-Chapter - Attacking
+Chapter - Attacking it with
 
-Attacking with is an action applying to two visible things
+Understand the commands "attack" and "punch" and "destroy" and "kill" and "murder" and "hit" and "thump" and "break" and "smash" and "torture" and "wreck" as something new.
 
-Understand "Attack [something] with [something]" as attacking with.
+Attacking it with is an action applying to one visible thing and one carried thing. Understand "attack [something] with [something preferably held]" as attacking it with.
 
-Check attacking with:
+Understand the commands "punch" and "destroy" and "kill" and "murder" and "hit" and "thump" and "break" and "smash" and "torture" and "wreck" as "attack".
+
+sanity-check attacking something which is not attackable with something:
+	try attacking the noun instead.
+
+sanity-check attacking someone which is not attackable with something:
+	try attacking the noun instead.
+
+Check attacking it with:
 	if the noun is the hornets-nest:
-		say "Hitting the nest is not really a good idea.  To keep from becoming a pin cushion, you'll have to think a little harder than that."
+		say "Hitting the nest is not really a good idea.  To keep from becoming a pin cushion, you'll have to think a little harder than that.";
+	otherwise: 
+		follow the block attacking rule.
+
+Understand "swing [something preferably held] at [something]" as attacking it with (with nouns reversed).
+
+A thing can be attackable.
 
 
 Chapter - Throwing
@@ -382,17 +498,27 @@ Check throwing:
 
 Chapter - Burning
 
+Everything has some text called the burn-reject.  The burn-reject is usually "".
+burn-with-glasses is a truth state that varies.  burn-with-glasses is false.
+
 Understand the commands "light" and "burn" as something new.	
 
 Understand "burn [something] with [something preferably held]" as burning it with. 
 Burning it with is an action applying to one thing and one carried thing.
 Understand the command "light" as "burn".
 
+[The block burning rule is not listed in any rulebook.]
+
 Before printing the name of something flaming: 
 	say "flaming ".
-	
+
+understand "burn [something]" as burning it with when burn-with-glasses is true.
+
 Check burning something with something:  
 	if the second noun is not reading glasses, say "You can't start a fire with [the second noun]." instead; 
+	if burn-with-glasses is false:
+		say "[first time][italic type]Note: now you can just type BURN something and I'll use your glasses.[roman type][paragraph break][only]";
+	now burn-with-glasses is true;
 	if the noun is flammable:
 		if the noun is new:
 			if the player is carrying the noun:
@@ -404,23 +530,26 @@ Check burning something with something:
 			say "That is already on fire." instead;
 		if the noun is burnt:
 			say "You try burning [the noun] again, but it only smokes a little then sputters out." instead;
-	otherwise: 
-		say "You can't set [the noun] on fire." instead;
+	otherwise:
+		if the burn-reject of the noun is "":
+			say "You can't set [the noun] on fire." instead;
+		otherwise:
+			say "[burn-reject of the noun][paragraph break]" instead;
 	
 Carry out burning something with something:
-	say "You take off your glasses and hold them at just the right angle so the sunlight makes a pinpoint on [the noun].  ";
+	say "You take off your glasses and remembering your training from cub scouts, you hold them at just the right angle so the sunlight makes a pinpoint on [the noun]. [paragraph break]";
 	if the noun is bug killer:
 		say "The can gets a little hot, but nothing else happens.";
-	otherwise:
-		say "  After a few moments a small stream of smoke rises from [the noun] and then suddenly a flame appears.";
+	if the noun is twigs:
+		say "After a few moments a small stream of smoke rises from [the noun] and then suddenly a flame appears.";
 		now the fire is on-stage;
 		now the smoke is on-stage;
 		now the noun is flaming;
 		now build-a-fire is completed;
 		now the last-puzzle-completed of the player is build-a-fire.
-	
-Before taking something that is flaming:
-	say "It's way to hot to carry around." instead.
+
+rule for supplying a missing second noun when burn-with-glasses is true: 
+	now second noun is glasses
 
 
 	
@@ -431,6 +560,8 @@ Book - Rooms
 Part - Under the Tree
 
 Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wondrous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area]".
+
+The blind-text of under-the-tree is "You are blind, you can't see anything."
 
 To say other-stuff-in-area:
 	let need_period be false;
@@ -471,7 +602,7 @@ Before attacking the window when the location is in-the-shed:
 
 A shelf is scenery supporter in in-the-shed.  The description of the shelf is "The shelf is just inside the door and looks to be where things were just thrown.  There are piles of junk on it."
 
-Junk is scenery in in-the-shed.  The description of junk is "Just piles of stuff that has collected here over the years.  [if the bug killer is not found]You could try searching it to see if there is anything to help you current dilemma.[end if]";
+Junk is scenery in in-the-shed.  The description of junk is "Just piles of stuff that has collected here over the years.  [if the bug killer is not found]You could try searching it to see if there is anything to help you current dilemma.[end if]".  Understand "piles" as junk when the location is in-the-shed.
 
 Instead of taking junk:
 	say "[if the bug killer is not found]There is really no need to take all of this, but perhaps if you searched the junk you could find something useful.[otherwise]You've looked through the junk and couldn't find anything useful, so you'll just leave it all here for another day.[end if]"
@@ -537,6 +668,9 @@ On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if 
 
 The porch is a backdrop.  The porch is everywhere.  The description of the porch is "The front porch is large and roomy.  Plenty of space to sit and relax...if it wasn't for those hornets."
 
+Instead of taking the porch:
+	say "[one of]The thought had crossed your mind that if you could just move the porch to the back of the house, then you could sit out there unaccosted by the hornets.  Alas, if you could you probably would.[or]Moving the porch anywhere just isn't possible.[stopping]".
+
 The porch-swing is a enterable supporter in on-the-porch.  The porch-swing is scenery.  The printed name of porch-swing is "porch swing".  The description of porch-swing is "The porch swing sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
 Understand "swing" or "porch swing" or "glider" as porch-swing.
 
@@ -572,9 +706,7 @@ Check dropping something while location is up-the-tree:
 	
 Book - Things
 
-Part - Carried items
-
-Chapter - Can of Bug Killer
+Part - Can of Bug Killer
 
 The bug killer is a thing.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" as bug killer.   the bug killer is flammable.
 
@@ -586,10 +718,7 @@ Before putting the bug killer on the fire-top:
 	if the player is carrying the bug killer:
 		now fire-the-missle is running instead.
 
-
-	
-	
-Chapter - Hand saw	
+Part  - Hand saw	
 
 The hand-saw is an undescribed thing in in-the-shed.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" as hand-saw.  
 The description of hand-saw is "Nope, you didn't use this much either.  The saw is new and shiny." 	
@@ -600,17 +729,14 @@ Check taking the hand-saw for the first time:
 	
 Rule for deciding whether all includes the hand-saw: it does.
 	
-	
-	
-	
-Chapter - Shovel
+Part - Shovel
 
-The shovel is a thing in on-the-porch.  The description of shovel is "[if the shovel is in on-the-porch and the shovel is not carried by the player]The shovel is handy for cleaning up the dog-doo.  That's why you just leave it laying around on the porch within easy reach.[otherwise]Simple spade wth long wooden handle.  I've only ever used it to clean up the mess the dog leaves in the yard.[end if]"
+The shovel is a thing in on-the-porch.  The description of shovel is "[if the shovel is in on-the-porch and the shovel is not carried by the player]The shovel is handy for cleaning up the dog-doo.  That's why you just leave it laying around on the porch within easy reach.[otherwise]Simple spade wth long wooden handle.  You've only ever used it to clean up the mess the dog leaves in the yard.[end if]"
 
 Understand "spade" as shovel.
 
 	
-Chapter - Ladder
+Part - Ladder
 
 A ladder is a thing.  A ladder is in in-the-shed.  The description is "It's a cheap aluminum step ladder your Dad gave you for a house warming gift when you moved in twenty years ago[one of][if location is in-the-shed and player is not carrying the ladder] is still laying where you left it.....oh....twenty years ago[end if][or][stopping]."
 
@@ -628,38 +754,10 @@ Instead of putting the ladder on something (called the leaned-on):
 The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.
 
 	
-Chapter - Reading glasses
 
-The reading glasses are a wearable thing.  The description of reading glasses is "A pair of very thick glasses, you like to call them reading glasses, but in fact you're quite blind without them on."	Understand "spectacles" as reading glasses.
+Part - Some twigs	
 
-Chapter - Baseball cap
-
-The baseball cap is a wearable thing.  The description of baseball cap is "You never really liked baseball, but this hat is very comfortable and it conveniently hides your slightly balding head." The indefinite article is "a".   Understand "hat" as baseball cap.
-
-Instead of dropping the baseball cap, say "You're pretty self-conscious about your hair, or lack of, so you'll just keep it on."
-Instead of taking off the baseball cap:
-	try dropping the baseball cap instead.
-	
-Chapter - Jean shorts
-
-The jean shorts is a wearable thing.  The description of jean shorts is "Your wife is always trying to throw these shorts out...she says they are too tight on you.  I don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts
-
-Instead of dropping the shorts, say "Even though they feel like you're wearing nothing, they really do serve a purpose....let's not expose your no-no places."
-
-Instead of taking off the jean shorts:
-	try dropping the jean shorts instead.
-	
-Chapter - T-shirt
-
-The t-shirt is a wearable thing.  The description of the t-shirt is "Just a plain white t-shirt, nothing fancy." The indefinite article is "a". 
-Understand "tshirt/shirt/tee/tee-shirt/teeshirt" as t-shirt.
-Instead of dropping the t-shirt, say "You decide to keep your six-pack covered."
-Instead of taking off the t-shirt:
-	try dropping the t-shirt instead.
-
-Chapter - Some twigs	
-
-Some twigs is a thing.  The description of some twigs is "[describe-twigs]".  Understand "wood" as some twigs when spider is off-stage.  Some twigs are flammable.  
+Some twigs is a thing.  The description of some twigs is "[describe-twigs]".  Understand "wood/pile/piles" as some twigs when spider is off-stage and the location is not in-the-shed.  Some twigs are flammable.  
 The indefinite article of the twigs is "a small pile of".	
 
 To say describe-twigs:
@@ -673,16 +771,17 @@ To say describe-twigs:
 	if twigs are burnt:	
 		say "The remains of your wood, nothing left but lightly smoking ashes."
 		
+before taking some twigs:
+	if the player is carrying some twigs:
+		say "You have enough wood for right now." instead;
+		
 
-
-Chapter - Pile of ashes
+Part - Pile of ashes
 
 The pile of ashes is a fixed in place flimsy.  "Just the remains of your wood, now just a pile of grey ashes."  The pile of ashes is described.  Pile of ashes is plural-named.   
 
 
-Part - Scenery
-
-Chapter - Fire
+Part - Fire
 
 The fire is a container.  The fire-top is a supporter.  The printed name of fire-top is "fire".  The fire-top is part of the fire.  The fire is scenery.
 
@@ -708,7 +807,7 @@ Before putting something on the fire-top:
 		say "here i am" instead.
 		
 	
-Chapter - Leaves
+Part - Leaves
 
 Some leaves are in under-the-tree.  Some leaves are undescribed.  The description of some leaves is "The leaves are starting to come down and cover the ground around the tree.  Every step you take results in a crunch of dried leaves under your feet."
 Some leaves is plural-named.
@@ -743,7 +842,7 @@ Before putting some leaves on the fire-top:
 	try putting some leaves on the twigs instead.
 		
 
-Chapter - Hole
+Part - Hole
 
 The hole is a fixed in place container.   The description is "The hole isn't very deep, but you think it is big enough for the nest to fit into."
 
@@ -751,7 +850,7 @@ Instead of taking the hole:
 	say "Really, did you really just try to pick up the hole?"
 	
 	
-Chapter - Smoke
+Part - Smoke
 
 The smoke is scenery.  The smoke is undescribed.  The smoke can be heavy or light.  The smoke is light.
 
@@ -764,14 +863,14 @@ Instead of examining the smoke:
 		say "A heavy gray smoke pours out from the burning pile."
 
 
-Chapter - Hornets Nest
+Part - Hornets Nest
 
-The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [one of]It must have appeared overnight as you don't recall seeing it yesterday.[or][stopping]". The printed name is "hornet's nest".  The indefinite article is "a".  
+The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [one of]It must have appeared overnight as you don't recall seeing it yesterday.[or][stopping]". The printed name is "hornet's nest".  The indefinite article is "a".  The hornets-nest is attackable.
 
 Understand "hive/hives/nest" or "bee's nest" or "hornets nest" as the hornets-nest.
 
 instead of taking the hornets-nest:
-	say "Not going to be that easy."
+	say "It's not going to be that easy."
 
 before attacking the hornets-nest:
 	say "That wouldn't end pretty." instead.
@@ -783,9 +882,9 @@ instead of touching the hornets-nest:
 		say "You are not sure that would be a good idea even if you could reach it from here."
 	
 	
-Chapter - Hornets	
+Part - Hornets	
 
-Some hornets are a thing in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets]".
+Some hornets are a thing in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets]".  The hornets are attackable.
 
 understand "hornet/bee/bees/soldiers/workers" as hornets.
 
@@ -807,9 +906,11 @@ Before taking hornets:
 Before attacking hornets:
 	say "If you tried that, you would regret it." instead.
 
-Chapter - Tree
+Part - Tree
 
 The shade tree is a supporter which is in under-the-tree. The tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]About ten feet up is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
+
+The burn-reject of the shade tree is "Burning the tree is a bit overkill to remove the hornets."
 
 understand "branch" as tree when cut branch is not in under-the-tree.
 
@@ -838,6 +939,9 @@ does the player mean climbing the tree when the player is in under-the-tree: it 
 
 before climbing the tree:
 	try going up instead;
+	
+instead of taking the tree:
+	say "[one of]You think that if you could just move the tree to the other side of the yard your problem will be solved.  You wrap your arms as far as you can around the tree and lift.  Nothing happens except for an inaudible pop that comes from your back.[or]You know better than to try that again.[stopping]";
 	
 instead of listening to the tree:
 	say "You hear the buzz of the hornets as the fly around the nest."
@@ -895,11 +999,11 @@ The cut branch is scenery.  The description of cut branch is "The large branch y
 instead of doing anything with the cut branch:
 	say "It is much too heavy."
 
-Chapter - House
+Part - House
 
 The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got it's problems....but it's home."  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
 
-Chapter - Shed
+Part - Shed
 
 The shed is a backdrop which is everywhere.  The description of the shed is "The tool shed was built back in the 1860s and is falling down, however it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard."
 
@@ -907,7 +1011,7 @@ before entering shed:
 	say "You wonder off to the shed.";
 	now the player is in in-the-shed instead.
 
-Chapter - Pile of wood
+Part - Pile of wood
 
 The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.  The woodpile is in outside-the-shed.
 
@@ -915,13 +1019,37 @@ Before taking woodpile:
 	if large spider is on-stage:
 		say "As you go to take some of the wood, the large spider turns towards your hand and rears up as if to bite." instead;
 	otherwise:
-		if web is on-stage:
+		if the web is on-stage:
 			say "You brush the web aside and take a handful of the dry wood.";
+			now the player carries some twigs;
+			now the web is off-stage instead;
+		else if the player is carrying some twigs:
+			say "You have enough wood for now." instead;
+		otherwise:
+			say "You gather some more wood.";
 			now the player carries some twigs instead;
-			now the web is off-stage;
-		
+			
+before putting something on the woodpile:
+	if the noun is the horsefly:
+		try putting the horsefly on the web-top instead;
 
-Chapter - Spider web
+before throwing something at the woodpile:
+	if the noun is the horsefly:
+		try putting the horsefly on the web-top instead;
+
+before throwing something on the woodpile:
+	if the noun is the horsefly:
+		try putting the horsefly on the web-top instead;
+
+before throwing something onto the woodpile:
+	if the noun is the horsefly:
+		try putting the horsefly on the web-top instead;
+
+before throwing something into the woodpile:
+	if the noun is the horsefly:
+		try putting the horsefly on the web-top instead;
+
+Part - Spider web
 
 The web is a container on the woodpile.  The web is open.  The web is not openable.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've ever seen.[end if]."
 
@@ -938,9 +1066,10 @@ before taking the web:
 		increase the time of day by 10 minutes instead.
 	
 
-Chapter - spider	
+Part - spider	
 
 The large spider is a animal in the web.  The  description of large spider is "The spider is as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.
+The spider is attackable.
 
 Instead of taking the large spider:
 	say "You start to reach for the spider to brush it and its web out of the way, but as your hand approaches, the spider actually turns and rears up at you ready to bite."
@@ -948,7 +1077,7 @@ Instead of taking the large spider:
 Instead of attacking the large spider:
 	try taking large spider.
 	
-Chapter - horsefly
+Part - horsefly
 
 [http://inform7.com/learn/man/ex1.html]
 Every turn when the player is in in-the-shed and the horsefly is on-stage and the player does not carry the horsefly and the noun part of the current action is not the horsefly:
@@ -967,6 +1096,9 @@ Before taking horsefly:
 after dropping horsefly:
 	say "You let the horsefly go and you watch it fly away, [if location is not in-the-shed]right back into the shed.[otherwise]right back into the window.[end if]";
 	now horsefly is in in-the-shed.
+
+before putting the horsefly on anything:
+	try dropping horsefly instead.
 
 Before putting the horsefly on the web-top:
 	if player is carrying horsefly:
@@ -1007,12 +1139,15 @@ understand "smack [something]" or "swat [something]" as attacking.
 
 instead of attacking the horsefly:
 	try taking the horsefly instead.
+	
+before eating the horsefly:
+	say "As juicy as it looks, you don't find it near as appetizing as some other creatures.  Perhaps something else would enjoy eating it instead." instead.
 
 [before doing anything to the horsefly while the horsefly is off-stage:
 	say "I'm sure the spider is having a wonderful time with the fly, but you won't be able to do anything with it anymore." instead.]
 
 
-Chapter - wood-burner
+Part - wood-burner
 
 The wood-burner is a backdrop which is everywhere.  The description of wood-burner is "The wood burner was in the house when you bought it and you thought for sure you would use it every winter.  Then came that first year of chopping wood....that was too much like work, so you stacked that little pile by the shed and never thought about it again."  Understand "woodburner/burner" or "wood burner" as wood-burner.
 
