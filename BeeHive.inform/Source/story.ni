@@ -41,6 +41,8 @@ test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tre
 test wood with "test spray/s/catch fly/n/throw fly in web/get wood".
 test fire with "test wood/n/drop wood/take leaves/burn wood with glasses/drop leaves on fire".
 test cut with "test fire/s/in/take saw/n/n/climb ladder/cut tree/d/z/n".
+test rocket with "s/in/search junk/take can/take fly/n/give fly to spider/take wood/n/drop wood/burn wood with glasses/put can in fire".
+
 
 Book - Transcripting
 
@@ -378,6 +380,9 @@ Chapter - Spraying
 
 Spraying it with is an action applying to two visible things.
 understand "spray [something] with [something]" as spraying it with.
+understand "spray [something] on [something]" as spraying it with (with nouns reversed).
+understand "spray [something] at [something]" as spraying it with (with nouns reversed).
+understand "spray [something] towards [something]" as spraying it with (with nouns reversed).
 understand "spray [something]" as spraying it with.
 understand "spray" as spraying it with.
 
@@ -388,29 +393,40 @@ Rule for supplying a missing noun while spraying:
 	now the noun is the hornets-nest.
 	
 Check spraying:
-	if the second noun is not the bug killer , say "You could try spraying it with [the second noun] but I don't think you would be very successful."
+	if the second noun is not the bug killer , say "You could try spraying it with [the second noun] but I don't think you would be very successful." instead;
+	if player is not carrying the bug killer, say "You have nothing to spray with." instead;
+	if bug killer is empty, say "Well the can is empty now so spraying [the noun] won't help much now." instead;		
+	if noun is the large spider:
+		say "You read the back of the can and it doesn't mention spiders as something it is effective on, so you don't bother as there is not much spray left." instead;
+	if noun is the horsefly:
+		say "[one of]Spraying the fly seems like such a waste of good bug spray.[or]You are going to need every last drop of bug spray for the hornets.[or]Against your better judgement, you lift the can to spray the fly.  Just as you are about to end it's miserable life, it flies away from the window.[then at random]" instead;
+	otherwise:
+		if location is not under-the-tree and the location is not up-the-tree:
+			if noun is hornets or noun is hornets-nest:
+				say "You'll need to get closer to the nest before attempting to spray [if noun is hornets]them[otherwise]it[end if]." instead;
+			otherwise:
+				say "Bug spray is used to kill bugs not [the noun]." instead;
 	
-Before spraying when the second noun is bug killer:
-	if bug killer is empty:
-		say "Well the can is empty now so spraying [the noun] won't help much now." instead.
+spray-count is a number that varies. spray-count is 0.
 
 Carry out spraying:
-	if player is carrying the bug killer:
-		if location is under-the-tree:	
+	if location is under-the-tree:	
+		if noun is hornets-nest or noun is hornets:
 			now the bug killer is half-full;
 			now the hornets are angry;
-			say "You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, 'Sprays up to 8 feet!'...well crap, I've got to get closer.[paragraph break]You shake the can one more time and you seem to have just a little left." instead;
-		if location is up-the-tree:
-			say "You are close enough now, there is no way you'll miss.  You'll have these damn hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[paragraph break]";
-			now the bug killer is empty;
-			say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets attention.  They begin to mass an attack.";
-			hornets attack in 1 turn from now;
-			now spray-the-nest is completed;
-			now the last-puzzle-completed of the player is spray-the-nest;
-		otherwise:
-			say "There is not much left.  You probably don't want to waste it." instead;
-	otherwise:
-		say "You have nothing to spray with."
+			if spray-count is 0:
+				now spray-count is spray-count plus one;
+				say "You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, 'Sprays up to 8 feet!'...well crap, I've got to get closer.[paragraph break]You shake the can one more time and you seem to have just a little left." instead;
+			otherwise:
+				say "You really should try to get closer to the nest." instead;
+	if location is up-the-tree:
+		say "You are close enough now, there is no way you'll miss.  You'll have these damn hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[paragraph break]";
+		now the bug killer is empty;
+		now spray-count is spray-count plus one;
+		say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets attention.  They begin to mass an attack.";
+		hornets attack in 1 turn from now;
+		now spray-the-nest is completed;
+		now the last-puzzle-completed of the player is spray-the-nest;
 	
 Chapter - counting
 
@@ -587,7 +603,7 @@ Before going up from under-the-tree:
 
 Part - In the shed
 
-In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway to the north.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug killer.[end if]  [describe-the-hand-saw]".  In-the-shed is inside from outside-the-shed.  
+In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway to the north.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug spray.[end if]  [describe-the-hand-saw]".  In-the-shed is inside from outside-the-shed.  
 
 before going north in in-the-shed:
 	try exiting instead;
@@ -646,7 +662,7 @@ Instead of examining the shelf for the first time:
 
 Before searching the shelf:
 	if the bug killer is not found:
-		say "As you rummage through the junk on the shelf, you notice a can of bug killer that must have been thrown up there years ago.";
+		say "As you rummage through the junk on the shelf, you notice a can of bug spray that must have been thrown up there years ago.";
 		move the bug killer to the shelf;
 		now the bug killer is found instead;
 	otherwise:
@@ -708,7 +724,7 @@ Book - Things
 
 Part - Can of Bug Killer
 
-The bug killer is a thing.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" as bug killer.   the bug killer is flammable.
+The bug killer is a thing.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" or "spray" as bug killer.   the bug killer is flammable.
 
 The bug killer is either empty, half-full or full.  The bug killer is full.
 The bug killer is either shaken or settled.  The bug killer is settled.
@@ -865,7 +881,7 @@ Instead of examining the smoke:
 
 Part - Hornets Nest
 
-The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [one of]It must have appeared overnight as you don't recall seeing it yesterday.[or][stopping]". The printed name is "hornet's nest".  The indefinite article is "a".  The hornets-nest is attackable.
+The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [if bug killer is part of the hornets-nest]Stuck in the bottom of the nest is the can of bug spray.[end if]". The printed name is "hornet's nest".  The indefinite article is "a".  The hornets-nest is attackable.
 
 Understand "hive/hives/nest" or "bee's nest" or "hornets nest" as the hornets-nest.
 
@@ -1247,7 +1263,7 @@ to say bug-killer-drop-description:
 	if player carries bug killer:
 		silently try dropping bug killer;
 		say "You throw the can away in disgust and as it bounces off [if location is in-the-shed]the wall[otherwise if location is on-the-porch]the porch floor[end if] it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty." ;
-		now the printed name of the bug killer is "[if bug killer is empty]now empty [end if]bug killer";
+		now the printed name of the bug killer is "[if bug killer is empty]now empty [end if]bug spray";
 		
 to say clue-next-puzzle:
 	if spray-the-nest is uncompleted:
@@ -1263,7 +1279,7 @@ Book - Aggressive Hornets
 Aggressive-hornets is a recurring scene.   Aggressive-hornets begins when hornets are aggressive.  Aggressive-hornets ends when hornets are not aggressive.
 
 When aggressive-hornets ends:
-	say "Hornets are no longer aggressive."
+	say "The hornets seemed to have settled down a bit."
 
 Every turn while aggressive-hornets is happening:
 	if location is under-the-tree:
