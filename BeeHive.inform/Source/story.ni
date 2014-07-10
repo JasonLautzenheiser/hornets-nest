@@ -13,6 +13,16 @@ The story creation year is 2014.
 Release along with a website.
 Release along with an interpreter.
 
+Chapter - Credits
+
+Abouting is an action out of world applying to nothing.
+Understand "about" as abouting.
+Understand the command "credits" or "info" as "about".
+
+Report abouting:
+	say "[italic type][Story title][roman type] is copyright © 2014 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[para]";
+	say "This work was created just for the fun of it beginning in early 2014.  This release is made for the IntroComp 2014 contest.  Special thanks to my great testers (in no particular order):  Andrew Schultz, Daniel Stelzer and Marshal Tenner Winter.  Also special thanks to my wife Holly and my four children, all of whom I was able to bounce ideas off of.[para]"; 
+
 Volume - Extensions
 
 Include Small Kindnesses by Aaron Reed.
@@ -28,8 +38,6 @@ Include Debugging by Al Golden.
 Include Basic Screen Effects by Emily Short.
 ]
  Include Response Assistant by Aaron Reed.
-
-
 
 Volume - Testing & Debugging
 
@@ -90,12 +98,12 @@ Volume - Game Settings
 
 [The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.]
 
-Abouting is an action out of world applying to nothing.
-Understand "about" as abouting.
-Understand the command "credits" or "info" as "about".
 
-Report abouting:
-	say "[italic type][Story title][roman type] is copyright © 2014 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[paragraph break]";
+
+Book - Utilities
+
+To say para -- running on: 
+	(- DivideParagraphPoint(); new_line; -). 
 
 Book - Extension overrides
 
@@ -116,6 +124,7 @@ Book - Rules
 Rule for printing room description details: stop.
 
 The can't take scenery rule response (A) is "[The noun] can't be taken anywhere."
+The block attacking rule response (A) is "[if the noun is hornets]Yes that is your ultimate goal, but it's not going to be that easy.[else if the noun is spider]You could probably squish the spider easily, but it's quite large and would make quite a mess.[otherwise]Really no need to do that.[end if]"
 
 Chapter - Sanity Checks
 
@@ -135,9 +144,9 @@ sanity-check wearing something which is not wearable:
 sanity-check taking something that is flaming:
 	say "It's way to hot to carry around." instead.
 	
-	
-	
-	
+sanity-check sleeping:
+	say "Sleeping before the job is done?  I don't think so." instead.
+
 Book - Definitions
 
 A room can be a safe-zone.
@@ -180,7 +189,10 @@ instead of looking when the player is blinded:
 		say "Without your glasses on, everything is a big blur.";
 	otherwise:
 		say "[blind-text of the location][paragraph break]".
-			
+
+before searching the location when blinded:
+	say "All you find are vague shapes and colors." instead;
+
 instead of going somewhere when the player is blinded and the location is up-the-tree:
 	say "You start to move, but not seeing clearly,  you misjudge the next rung on the ladder and manage to fall, not to gently to the ground.";
 	now the player is in under-the-tree.
@@ -192,12 +204,12 @@ instead of going nowhere when the player is blinded:
 	say "You put your hands out in front of you to keep from running into anything, but you manage to [blind-going-reject] and end up staying right where you are."
 
 to say blind-going-reject:
-	say "trip".
+	say "[one of]trip[or]stumble[or]fall[or]go in circles[then at random]".
 	
 Book - Easter Eggs
 
 understand "xyzzy" as a mistake("You face the tree and wave your fingers at the nest while chanting 'xyzzy, xyzzy, xyzzy ....' Nothing happens.").
-
+understand "cut the cheese" or "cut cheese" or "pass gas" or "fart" as a mistake("You pass a little gas.   Silent, but deadly.").
 
 Book - Characters
 
@@ -236,6 +248,10 @@ before wearing the glasses:
 before taking off the glasses:
 	now the player is blinded.
 	
+report wearing the glasses:
+	say "Ahhh...now you can see better.";
+	try looking;
+	stop the action.
 	
 Chapter - Baseball cap
 
@@ -265,6 +281,13 @@ Instead of taking off the t-shirt:
 Book - Verbs
 
 Part - New actions
+
+Chapter - Singing
+
+Singing is an action applying to nothing.  Understand "sing", "hum" as singing.
+
+sanity-check singing:
+	say "You start to [verbword] a simple tune, but that only seems to agitate the hornets more." instead;
 
 Chapter - Scoring
 
@@ -577,7 +600,7 @@ Part - Under the Tree
 
 Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wondrous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area]".
 
-The blind-text of under-the-tree is "You are blind, you can't see anything."
+The blind-text of under-the-tree is "You can make out the faint blur of the tree and the shadows created by the leaves.  You can definitely hear the hornets in their nest above you."
 
 To say other-stuff-in-area:
 	let need_period be false;
@@ -603,13 +626,22 @@ Before going up from under-the-tree:
 
 Part - In the shed
 
-In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway to the north.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug spray.[end if]  [describe-the-hand-saw]".  In-the-shed is inside from outside-the-shed.  
+In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway to the north.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug spray.[end if]  [describe-the-hand-saw]".  
+In-the-shed is inside from outside-the-shed.  
+
+The blind-text of in-the-shed is "Everything is dark except for a faint glow coming from the window and the slightly brighter glow of the doorway to the north."
 
 before going north in in-the-shed:
 	try exiting instead;
 
 A dirty window is in in-the-shed.  The dirty window is scenery. The description of the dirty window is "The window is covered in cobwebs and dust.  It doesn't look like it's been cleaned for decades, if ever.  [if horsefly is in in-the-shed]In the corner of the window is a large horsefly, buzzing up against the window trying to get out.[end if]"
 
+sanity-check rubbing up:
+	try rubbing the junk instead.
+	
+Sanity-check rubbing the window:
+	say "You rub and rub the window but it doesn't look much cleaner." instead.
+	
 Before opening the window:
 	say "The window probably hasn't been opened in a hundred years. It's not going to happen now." instead.
 
@@ -618,13 +650,16 @@ Before attacking the window when the location is in-the-shed:
 
 A shelf is scenery supporter in in-the-shed.  The description of the shelf is "The shelf is just inside the door and looks to be where things were just thrown.  There are piles of junk on it."
 
-Junk is scenery in in-the-shed.  The description of junk is "Just piles of stuff that has collected here over the years.  [if the bug killer is not found]You could try searching it to see if there is anything to help you current dilemma.[end if]".  Understand "piles" as junk when the location is in-the-shed.
+Junk is scenery in in-the-shed.  The description of junk is "Just piles of stuff that has collected here over the years.  [if the bug killer is not found]You could try searching it to see if there is anything to help you current dilemma.[end if]".  Understand "piles" or "mess" as junk when the location is in-the-shed.
+
+sanity-check rubbing the junk:
+	say "Cleaning would be a hopeless task." instead.
 
 Instead of taking junk:
 	say "[if the bug killer is not found]There is really no need to take all of this, but perhaps if you searched the junk you could find something useful.[otherwise]You've looked through the junk and couldn't find anything useful, so you'll just leave it all here for another day.[end if]"
 
-[Before examining junk:
-	try examining shelf instead.]
+instead of searching anything when the player is blinded and the location is in-the-shed:
+	say "You search and search but see only vague shapes."
 
 Before searching junk:
 	try searching shelf instead.
@@ -632,7 +667,7 @@ Before searching junk:
 before overly elaborate looking:
 	try searching the location instead.
 	
-Before searching while location is in-the-shed:
+Before searching while location is in-the-shed and the noun is not the window:
 	try searching junk instead.
 	
 Understand "look out [something]" as searching.
@@ -674,10 +709,29 @@ Part - Outside the shed
 
 Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However, it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
 
-before of going south in outside-the-shed:
+The blind-text of outside-the-shed is "The large shape that is your shed is to the south and you can make out the blur that is your house and you can hear the buzz of the hornets from the tree to the north."
+
+before going south in outside-the-shed when the player is blinded:
+	say "You start to head south into your shed, but you manage to miss the door and run into the side of the building." instead.
+	
+before going south in outside-the-shed:
 	try going inside instead.
 	
+Chapter - Shed Door
 
+The shed-door is a backdrop.  The shed-door is in outside-the-shed and in-the-shed.  The description of shed-door is "The shed door has fallen off it's hinges long ago and you used it for firewood soon after.  You've never bothered to replace it."  Understand "door" as shed-door when the location is outside-the-shed or the location is in-the-shed.
+
+shed-door-first-seen is a truth state that varies.  shed-door-first-seen is false.
+
+Before opening or closing the shed-door:
+	say "[described-shed-door]You act like you [verbword] the imaginary door.  You feel better inside.";
+	now shed-door-first-seen is true instead.
+
+To say described-shed-door:
+	if we have not examined the shed-door and shed-door-first-seen is false:
+		say "The shed door has fallen off years ago and you never bothered to replace it.  ".
+		
+		
 Part - On the porch
 
 On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the [porch-swing] and drinking a [beer].  To the east right off the porch is the large tree and to the southeast is your shed."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
@@ -900,7 +954,7 @@ instead of touching the hornets-nest:
 	
 Part - Hornets	
 
-Some hornets are a thing in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets]".  The hornets are attackable.
+Some hornets are an animal in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets]".  The hornets are attackable.
 
 understand "hornet/bee/bees/soldiers/workers" as hornets.
 
@@ -922,6 +976,10 @@ Before taking hornets:
 Before attacking hornets:
 	say "If you tried that, you would regret it." instead.
 
+before kissing the hornets:
+	say "Why???   Do you want big red lips?" instead.
+	
+
 Part - Tree
 
 The shade tree is a supporter which is in under-the-tree. The tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]About ten feet up is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
@@ -929,6 +987,7 @@ The shade tree is a supporter which is in under-the-tree. The tree is scenery. T
 The burn-reject of the shade tree is "Burning the tree is a bit overkill to remove the hornets."
 
 understand "branch" as tree when cut branch is not in under-the-tree.
+understand "branches" or "branchs" as tree.
 
 after deciding the scope of the player:
 	place the tree in scope;
@@ -981,7 +1040,10 @@ Instead of looking under the tree:
 Instead of pushing the tree:
 	say "You strain against the tree but you fail to budge it."
 
-	
+instead of attacking the tree:
+	say "It's really not the tree's fault [if the hornets-nest is part of the tree]that it has that hornet's nest in there[end if].";
+
+
 Understand "saw [something]" as cutting.
 Instead of cutting the tree:
 	if player carries the hand-saw:
@@ -1014,6 +1076,10 @@ The cut branch is scenery.  The description of cut branch is "The large branch y
 
 instead of doing anything with the cut branch:
 	say "It is much too heavy."
+
+Part - Sun
+
+The sun is a backdrop which is everywhere.  The description of the sun is "You start to stare at the sun, but realize that is probably why your eye sight is not so good anymore.  It's very bright and very hot."
 
 Part - House
 
