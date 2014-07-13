@@ -610,7 +610,7 @@ To say other-stuff-in-area:
 	if cut branch is in under-the-tree:
 		now need_period is true;
 		if ladder is on tree:
-			say " and  the";
+			say " and the ";
 		otherwise:
 			say "The ";
 		say "branch you just cut is laying on the ground";
@@ -879,7 +879,7 @@ Before putting something on the fire-top:
 	
 Part - Leaves
 
-Some leaves are in under-the-tree.  Some leaves are undescribed.  The description of some leaves is "The leaves are starting to come down and cover the ground around the tree.  Every step you take results in a crunch of dried leaves under your feet."
+Some leaves are in under-the-tree.  Some leaves are undescribed.  The description of some leaves is "The leaves are starting to come down and cover the ground around the tree."  The burn-reject of the leaves is "You gather a pile of leaves and try to light them with your glasses.  They begin to smoke profusely but quickly go out as they are too wet from a recent rain to ignite on their own."
 Some leaves is plural-named.
 
 After taking some leaves:
@@ -982,7 +982,7 @@ before kissing the hornets:
 
 Part - Tree
 
-The shade tree is a supporter which is in under-the-tree. The tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]About ten feet up is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
+The shade tree is a supporter which is in under-the-tree. The tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]Hanging from a branch is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
 
 The burn-reject of the shade tree is "Burning the tree is a bit overkill to remove the hornets."
 
@@ -1060,6 +1060,7 @@ Instead of cutting the tree:
 				otherwise:
 					say "[paragraph break]As the nest hits the ground, it bursts into pieces and the hornets scatter in all directions.......only to regroup high up in the tree where they hover for a moment, then as if shot from a pistol, head in your direction.";
 					now the cut branch is in under-the-tree;
+					now the last-puzzle-completed of the player is cut-the-branch;
 					hornets attack in 1 turn from now;
 				now cut-the-branch is completed;
 		otherwise:
@@ -1074,8 +1075,11 @@ The yard is a backdrop which is everywhere.  The description is "A large yard an
 
 The cut branch is scenery.  The description of cut branch is "The large branch you just cut from the tree is laying on the ground and the remenents of the old nest have scattered in the light breeze."  
 
-instead of doing anything with the cut branch:
-	say "It is much too heavy."
+instead of taking the cut branch:
+	say "It is much too heavy.";
+
+[instead of doing anything with the cut branch:
+	say "It is much too heavy."]
 
 Part - Sun
 
