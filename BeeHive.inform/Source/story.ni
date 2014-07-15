@@ -117,6 +117,7 @@ The time of day is 6:05 AM.
 When play begins:
 	now the left hand status line is "[the player's surroundings] ";  [number of uncompleted puzzles]
 	now the right hand status line is "Time: [time of day]";
+	say "You're wife's family is coming over for the first time since you've moved into this old farmhouse many years ago and they are scheduled to arrive at 4pm this afternoon.  They've never liked you much so you want to make a good impression.  Everything is in order.....except for one thing.....there's a hornet's nest in the front yard tree and you need to get rid of it before they arrive."
 	
 
 Book - Rules
@@ -482,7 +483,10 @@ sanity-check attacking someone which is not attackable with something:
 
 Check attacking it with:
 	if the noun is the hornets-nest:
-		say "Hitting the nest is not really a good idea.  To keep from becoming a pin cushion, you'll have to think a little harder than that.";
+		if the location is up-the-tree:
+			say "You take a test swing with [the second noun] but realize that you don't have the coordination to swing with enough force to be effective without knocking yourself off the ladder and down to the ground.";
+		otherwise:
+			say "You swing [the second noun] at the nest over and over but you're not tall enough to hit it and the wind generated from your incessent swinging does little.";
 	otherwise: 
 		follow the block attacking rule.
 
@@ -750,7 +754,7 @@ Instead of swinging the porch-swing:
 	otherwise:
 		say "You give the porch swing a soft kick and it rocks back and forth for a bit." 
 
-The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."
+The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."  The initial appearance of the beer is "Oh trust me, if you had a beer right now, you'd be doing more than just looking at it."
 
 The front door is a flimsy in on-the-porch. "The front door leading into your house, in fact it's the only way into your house and your wife locked the door behind you when you left this morning.  Her exact words were 'Don[']t bother coming back until that nest is gone.'".  The action-refusal is "You told your wife you were not coming in until the nest was gone (actually she told you that, but you won't admit that out loud will you?)".
 
@@ -801,7 +805,7 @@ Rule for deciding whether all includes the hand-saw: it does.
 	
 Part - Shovel
 
-The shovel is a thing in on-the-porch.  The description of shovel is "[if the shovel is in on-the-porch and the shovel is not carried by the player]The shovel is handy for cleaning up the dog-doo.  That's why you just leave it laying around on the porch within easy reach.[otherwise]Simple spade wth long wooden handle.  You've only ever used it to clean up the mess the dog leaves in the yard.[end if]"
+The shovel is a thing.  The description of shovel is "[if the shovel is in on-the-porch and the shovel is not carried by the player]The shovel is handy for cleaning up the dog-doo.  That's why you just leave it laying around on the porch within easy reach.[otherwise]Simple spade wth long wooden handle.  You've only ever used it to clean up the mess the dog leaves in the yard.[end if]"
 
 Understand "spade" as shovel.
 
@@ -935,7 +939,7 @@ Instead of examining the smoke:
 
 Part - Hornets Nest
 
-The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [if bug killer is part of the hornets-nest]Stuck in the bottom of the nest is the can of bug spray.[end if]". The printed name is "hornet's nest".  The indefinite article is "a".  The hornets-nest is attackable.
+The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [if bug killer is part of the hornets-nest]Stuck in the bottom of the nest is the can of bug spray.[end if][one of]You promised your wife you wouldn't come back until the nest was gone or you wouldn't come back at all.[or][stopping]". The printed name is "hornet's nest".  The indefinite article is "a".  The hornets-nest is attackable.
 
 Understand "hive/hives/nest" or "bee's nest" or "hornets nest" as the hornets-nest.
 
