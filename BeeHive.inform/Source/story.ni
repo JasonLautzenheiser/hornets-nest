@@ -125,7 +125,8 @@ Book - Rules
 Rule for printing room description details: stop.
 
 The can't take scenery rule response (A) is "[The noun] can't be taken anywhere."
-The block attacking rule response (A) is "[if the noun is hornets]Yes that is your ultimate goal, but it's not going to be that easy.[else if the noun is spider]You could probably squish the spider easily, but it's quite large and would make quite a mess.[otherwise]Really no need to do that.[end if]"
+The block attacking rule response (A) is "[if the noun is hornets]Yes that is your ultimate goal, but it's not going to be that easy.[otherwise]Really no need to do that.[end if]".
+The can't put onto what's not a supporter rule response (A) is "Putting [the noun] on [the second noun] wouldn't do anything exciting."
 
 Chapter - Sanity Checks
 
@@ -210,7 +211,7 @@ to say blind-going-reject:
 Book - Easter Eggs
 
 understand "xyzzy" as a mistake("You face the tree and wave your fingers at the nest while chanting 'xyzzy, xyzzy, xyzzy ....' Nothing happens.").
-understand "cut the cheese" or "cut cheese" or "pass gas" or "fart" as a mistake("You pass a little gas.   Silent, but deadly.").
+understand "cut the cheese" or "cut cheese" or "pass gas" or "fart" as a mistake("You pass a little gas.   The hornets seem somewhat amused.").
 
 Book - Characters
 
@@ -221,14 +222,31 @@ The description of the player is "You're a third generation farmer who is.....no
 
 A person can be hiding or not-hiding.
 A person can be blinded.   
-
+Every person has a number called the sting-count.
+The sting-count of the player is 0.
 
 Check going when the player is hiding:
 	now the player is not-hiding.
 
 The player is wearing reading glasses, t-shirt, jean shorts and baseball cap.
 
-Wife is a female person. 
+Chapter - wife
+
+Wife is a female person.  The description of wife is "Your wife is a very beautiful and smart woman.  Someone she has managed to put up with you for all these years and still stick around.  Maybe she just feels sorry for you."  The printed name of wife is "wife".
+
+After deciding the scope of the player: 
+	place the wife in scope.
+	
+before doing anything to wife:
+	if examining wife:
+		say "[description of wife][para]" instead;
+	otherwise:
+		say "You're not going to [verbword] her until the nest is out of the tree.  She's made that abundantly clear." instead.
+
+before taking wife:
+	say "You're not going to take her anywhere until the nest is out of the tree.  She's made that abundantly clear." instead.
+	
+
 
 Chapter - General Actions the player can perform
 
@@ -237,8 +255,11 @@ instead of going nowhere:
 
 Chapter - Reading glasses
 
-The reading glasses are a wearable thing.  The description of reading glasses is "A pair of very thick glasses, you like to call them reading glasses, but in fact you're quite blind without them on."	Understand "spectacles" as reading glasses.
+The reading glasses are a wearable thing.  The description of reading glasses is "A pair of very thick glasses, you like to call them reading glasses, but in fact you're quite blind without them on."	Understand "spectacles" as reading glasses.  The printed name of reading glasses is "your glasses".
 
+Rule for printing the name of the reading glasses:
+	say "your glasses".
+	
 before of searching glasses:
 	if "[verbword]" exactly matches the text "look":
 		say "You can see clearly now." instead.
@@ -256,32 +277,76 @@ report wearing the glasses:
 	
 Chapter - Baseball cap
 
-The baseball cap is a wearable thing.  The description of baseball cap is "You never really liked baseball, but this hat is very comfortable and it conveniently hides your slightly balding head." The indefinite article is "a".   Understand "hat" as baseball cap.
+A baseball cap is a wearable thing.  The description of baseball cap is "You never really liked baseball, but this hat is very comfortable and it conveniently hides your slightly balding head." The indefinite article is "a".   Understand "hat" as baseball cap.  the printed name of baseball cap is "your baseball cap".
 
+Rule for printing the name of the baseball cap when taking inventory:
+	say "a baseball cap".
+
+Rule for printing the name of the baseball cap:
+	say "your baseball cap".
+	
 Instead of dropping the baseball cap, say "You're pretty self-conscious about your hair, or lack of, so you'll just keep it on."
 Instead of taking off the baseball cap:
 	try dropping the baseball cap instead.
 	
 Chapter - Jean shorts
 
-The jean shorts is a wearable thing.  The description of jean shorts is "Your wife is always trying to throw these shorts out...she says they are too tight on you.  You don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts
+The jean shorts is a wearable thing.  The description of jean shorts is "Your wife is always trying to throw these shorts out...she says they are too tight on you.  You don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts.  The printed name of jean shorts is "your shorts".
 
 Instead of dropping the shorts, say "Even though they feel like you're wearing nothing, they really do serve a purpose....let's not expose your no-no places."
 
 Instead of taking off the jean shorts:
 	try dropping the jean shorts instead.
+
+Rule for printing the name of the jean shorts when taking inventory:
+	say "some shorts".
 	
+instead of doing anything with the jean shorts:
+	try dropping the shorts.
+	
+
 Chapter - T-shirt
 
-The t-shirt is a wearable thing.  The description of the t-shirt is "Just a plain white t-shirt, nothing fancy." The indefinite article is "a". 
+The t-shirt is a wearable thing.  The description of the t-shirt is "Just a plain white t-shirt, nothing fancy." The indefinite article is "a".   the printed name of t-shirt is "your t-shirt".
 Understand "tshirt/shirt/tee/tee-shirt/teeshirt" as t-shirt.
 Instead of dropping the t-shirt, say "You decide to keep your six-pack covered."
 Instead of taking off the t-shirt:
 	try dropping the t-shirt instead.
-
+Rule for printing the name of the t-shirt:
+	say "a t-shirt".
+	
 Book - Verbs
 
 Part - New actions
+
+Chapter - Dancing
+
+Dancing is an action applying to nothing.
+Understand "dance" as dancing.
+
+instead of dancing:
+	if location is under-the-tree and fire is on-stage:
+		say "[one of]You pick up a few of the flaming twigs and twirl them around as you dance around the fire.  After a few moments of intense dancing, you pause and see your wife looking at you from the house.  She just shakes her head and walks away.  You drop the sticks back in the fire and pretend that just didn't happen.[or]Haven't you made a fool of yourself enough already?[stopping]";
+	otherwise:
+		say "You dance a little jig.  Perhaps you managed to entertain the hornets, but they aren't any closer to being gone."
+
+Chapter - Kicking
+
+Kicking is an action applying to one thing.  
+Understand "kick [something]" as kicking.
+
+before kicking anything when the location is up-the-tree:
+	say "Kicking something while perched on the ladder would most likely make your trip to the ground very rapid." instead.
+
+Report kicking something (called the booted-item):
+	say "You kick [the booted-item] and you now feel a bit better."
+	
+
+Chapter - Praying
+
+Praying is an action applying to nothing.  Understand "pray" as praying.
+sanity-check praying:
+	say "You kneel down, close your eyes and pray that the nest will be gone.  You open your eyes and [if location is in-the-shed]look out the window expectantly[else]look up hopefully[end if], only to be disappointed to still see the nest in the tree."
 
 Chapter - Singing
 
@@ -381,7 +446,7 @@ Check leaning:
 			
 Before putting something on the tree: 
 	if the noun is not the ladder:
-		say "You try to put [the noun] on the tree, but it won't stay."
+		say "You try to put [the noun] on the tree, but it won't stay." instead.
 
 Chapter - Catching
 		
@@ -467,13 +532,37 @@ Understand "count blessings" or "count your blessings" or "count my blessings" a
 
 Part - Old Actions
 
+Chapter - Cutting with
+
+Cutting with is an action applying to two things.
+understand "cut [something] with [something]" as cutting with.
+
+instead of cutting with:
+	if the second noun is the hand-saw:
+		try cutting the noun;
+	otherwise:
+		say "You attempt to cut [the noun] with [the second noun], but it is not very effective."
+
+
+Chapter - Putting
+
+Putting under is an action applying to two things.
+Understand "put [something] under [something]" as putting under.
+
+instead of putting under:
+	try dropping the noun instead.
+
+Chapter - Taking
+
+understand the command "grab" as "take".
+
 Chapter - Attacking it with
 
 Understand the commands "attack" and "punch" and "destroy" and "kill" and "murder" and "hit" and "thump" and "break" and "smash" and "torture" and "wreck" as something new.
 
 Attacking it with is an action applying to one visible thing and one carried thing. Understand "attack [something] with [something preferably held]" as attacking it with.
 
-Understand the commands "punch" and "destroy" and "kill" and "murder" and "hit" and "thump" and "break" and "smash" and "torture" and "wreck" as "attack".
+Understand the commands "punch" and "destroy" and "kill" and "murder" and "hit" and "thump" and "break" and "smash" and "torture" and "wreck"  as "attack".
 
 sanity-check attacking something which is not attackable with something:
 	try attacking the noun instead.
@@ -486,7 +575,9 @@ Check attacking it with:
 		if the location is up-the-tree:
 			say "You take a test swing with [the second noun] but realize that you don't have the coordination to swing with enough force to be effective without knocking yourself off the ladder and down to the ground.";
 		otherwise:
-			say "You swing [the second noun] at the nest over and over but you're not tall enough to hit it and the wind generated from your incessent swinging does little.";
+			say "You swing [the printed name of the second noun] at the nest over and over but you're not tall enough to hit it and the wind generated from your incessent swinging does little.";
+	otherwise if the noun is the large spider:
+		say "You swat at the large spider with [the second noun], but each time it ducks into a crevice where you can't reach it.  The spider resumes it's place on the web, glaring at you with very little sympathy.";
 	otherwise: 
 		follow the block attacking rule.
 
@@ -588,6 +679,7 @@ Carry out burning something with something:
 		now the fire is on-stage;
 		now the smoke is on-stage;
 		now the noun is flaming;
+		flame goes out in 10 turns from now;
 		now build-a-fire is completed;
 		now the last-puzzle-completed of the player is build-a-fire.
 
@@ -639,6 +731,9 @@ before going north in in-the-shed:
 	try exiting instead;
 
 A dirty window is in in-the-shed.  The dirty window is scenery. The description of the dirty window is "The window is covered in cobwebs and dust.  It doesn't look like it's been cleaned for decades, if ever.  [if horsefly is in in-the-shed]In the corner of the window is a large horsefly, buzzing up against the window trying to get out.[end if]"
+
+instead of kicking the window:
+	say "You start to kick the window but then realize that it would probably be easier to just go through the open doorway."
 
 sanity-check rubbing up:
 	try rubbing the junk instead.
@@ -792,6 +887,14 @@ Before putting the bug killer on the fire-top:
 	if the player is carrying the bug killer:
 		now fire-the-missle is running instead.
 
+before kicking the bug killer:
+	if the location is not up-the-tree:
+		say "You give the can of bug spray the boot and it goes flying.";
+		now the bug killer is in a random adjacent room.
+
+Understand "kick the can" or "kick can" as a mistake("Dying may be preferable to seeing your inlaws, but that's not a viable option, so back to getting rid of the nest.").
+
+
 Part  - Hand saw	
 
 The hand-saw is an undescribed thing in in-the-shed.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" as hand-saw.  
@@ -800,6 +903,9 @@ The hand-saw can be hanging.  The hand-saw is hanging.
 
 Check taking the hand-saw for the first time:
 	now the hand-saw is not hanging.
+
+Before kicking the hand-saw:
+	say "You try to kick the saw, but only manage to slice your leg as you miss horribly." instead.
 	
 Rule for deciding whether all includes the hand-saw: it does.
 	
@@ -822,10 +928,14 @@ Before climbing the ladder:
 			try leaning the ladder on the tree;
 		try going up instead.
 
+instead of kicking the ladder:
+	say "You kick the ladder and manage to hurt your toe in the process.  The ladder doesn't appear to have noticed."
+	
 Instead of putting the ladder on something (called the leaned-on):
 	try leaning the ladder on the leaned-on instead.
 	
 The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.
+The examine supporters rule is not listed in any rulebook.
 
 	
 
@@ -848,8 +958,18 @@ To say describe-twigs:
 before taking some twigs:
 	if the player is carrying some twigs:
 		say "You have enough wood for right now." instead;
-		
 
+after dropping:
+	if the noun is the twigs and the location is under-the-tree:
+		say "You put the pile of twigs right under the nest."
+
+Instead of kicking the twigs:
+	if twigs are flaming:
+		try kicking the fire instead;
+	otherwise:
+		say "You kick the twigs scattering them throughtout the yard.";
+		now the twigs are off-stage.
+		
 Part - Pile of ashes
 
 The pile of ashes is a fixed in place flimsy.  "Just the remains of your wood, now just a pile of grey ashes."  The pile of ashes is described.  Pile of ashes is plural-named.   
@@ -858,6 +978,7 @@ The pile of ashes is a fixed in place flimsy.  "Just the remains of your wood, n
 Part - Fire
 
 The fire is a container.  The fire-top is a supporter.  The printed name of fire-top is "fire".  The fire-top is part of the fire.  The fire is scenery.
+Understand "flame" as fire.
 
 Before inserting something (called the fuel) into the fire:
 	try putting the fuel on the fire-top instead.
@@ -880,6 +1001,17 @@ Before putting something on the fire-top:
 	otherwise:
 		say "here i am" instead.
 		
+after kicking the fire:
+	say "You kick at the fire and manage to put it out.";
+	now the fire is off-stage;
+	now the smoke is off-stage;
+	now the smoke is light;
+	now the twigs are new;
+	now the twigs are off-stage.
+	
+	
+instead of examining the fire:
+	say "The fire is small but hot and [if smoke is light]not putting out much smoke[otherwise]putting out quite a bit of smoke[end if]."
 	
 Part - Leaves
 
@@ -912,6 +1044,9 @@ instead of putting some leaves on the twigs:
 	otherwise:
 		say "Tossing the leaves on the twigs would not serve any purpose right now."
 
+instead of kicking the leaves:
+	say "You kick at the leaves and they fly up into the air only to settle down again.  The yard looks no different."
+
 Before putting some leaves on the fire-top:
 	try putting some leaves on the twigs instead.
 		
@@ -930,6 +1065,9 @@ The smoke is scenery.  The smoke is undescribed.  The smoke can be heavy or ligh
 
 Instead of doing anything to the smoke: say "The smoke flitters away before you can do that."
 
+instead of kicking the smoke:
+	say "You kick at the smoke and your leg passes right through."
+
 Instead of examining the smoke:
 	if the smoke is light:
 		say "Just a light tendril of smoke streams up from the burning twigs.";
@@ -941,10 +1079,15 @@ Part - Hornets Nest
 
 The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [if bug killer is part of the hornets-nest]Stuck in the bottom of the nest is the can of bug spray.[end if][one of]You promised your wife you wouldn't come back until the nest was gone or you wouldn't come back at all.[or][stopping]". The printed name is "hornet's nest".  The indefinite article is "a".  The hornets-nest is attackable.
 
+The burn-reject of the hornets-nest is "The nest is up too high to set on fire without setting the whole tree ablaze."
+
 Understand "hive/hives/nest" or "bee's nest" or "hornets nest" as the hornets-nest.
 
 instead of taking the hornets-nest:
-	say "It's not going to be that easy."
+	if location is up-the-tree:
+		say "You reach out to grab the nest while balancing precarously on the ladder when the ladder begins to move.  You quickly decide that taking the nest by hand is probably not the brightest thing to do.";
+	otherwise:
+		say "You stretch on your very tippy toes but you are not tall enough or stretchy enough to reach it from here."
 
 before attacking the hornets-nest:
 	say "That wouldn't end pretty." instead.
@@ -955,10 +1098,23 @@ instead of touching the hornets-nest:
 	otherwise:
 		say "You are not sure that would be a good idea even if you could reach it from here."
 	
+instead of kicking the hornets-nest:
+	if location is under-the-tree:
+		say "You do your best high kick and come no where close to making contact with the nest.";	
+	otherwise:
+		say "You are too far away to even make the attempt.".
+		
+Instead of cutting the hornets-nest:	
+	If location is up-the-tree:
+		say "You reach out to cut the nest but you begin to lose your balance as it is too far to reach and being scared of falling from this height you wisely put both hands back on the ladder.";
+	otherwise:
+		say "The nest is too far away to effectively cut up into little pieces."
+		
 	
 Part - Hornets	
 
-Some hornets are an animal in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets]".  The hornets are attackable.
+Some hornets are an animal in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets][if the smoke is on-stage and the smoke is heavy]They appear to be wearing minture gas masks.[end if]".  The hornets are attackable.
+The hornets can be grabbed.
 
 understand "hornet/bee/bees/soldiers/workers" as hornets.
 
@@ -974,8 +1130,19 @@ To say description-of-hornets:
 
 The hornets can be swarming, subdued, angry or aggressive.  The hornets are swarming.
 
-Before taking hornets:
-	say "If you tried that, you would regret it." instead.
+before kicking the hornets:
+	try kicking the hornets-nest instead.
+	
+instead of taking hornets:
+	if the location is up-the-tree:
+		say "[one of]You swat at a hornet as it buzzes by you and actually manage to snag it between your fingers.  It promptly stings you causing you to shreak and nearly fall from the ladder after which you decide that perhaps catching the hornets won't work as you expected anyway.[or]Having been stung once already you'll refrain from grabbing another hornet as it wasn't a pleasant experience the first time.[stopping]";
+		increment the sting-count of the player;
+		now the hornets are grabbed;
+	otherwise:
+		if the hornets are grabbed:
+			say "You've been stung once by your foolish desire to hold one so you'll resist the urge this time as you don't want to get stung again.";
+		otherwise:
+			say "A hornet flys down to buzz your head and you reach out to snag it but luckily you only manage to grab thin air." 
 	
 Before attacking hornets:
 	say "If you tried that, you would regret it." instead.
@@ -1020,7 +1187,7 @@ before climbing the tree:
 	try going up instead;
 	
 instead of taking the tree:
-	say "[one of]You think that if you could just move the tree to the other side of the yard your problem will be solved.  You wrap your arms as far as you can around the tree and lift.  Nothing happens except for an inaudible pop that comes from your back.[or]You know better than to try that again.[stopping]";
+	say "[one of]You think that if you could just move the tree to the other side of the yard your problem will be solved.  You wrap your arms as far as you can around the tree and lift.  Nothing happens except for an inaudible pop that comes from your back.[or]You're back is still sore from your last attempt at moving the large tree, so you'll try to think of some other way to move the nest from the front yard.[stopping]";
 	
 instead of listening to the tree:
 	say "You hear the buzz of the hornets as the fly around the nest."
@@ -1044,11 +1211,12 @@ Instead of looking under the tree:
 Instead of pushing the tree:
 	say "You strain against the tree but you fail to budge it."
 
-instead of attacking the tree:
+instead of attacking or kicking the tree:
 	say "It's really not the tree's fault [if the hornets-nest is part of the tree]that it has that hornet's nest in there[end if].";
 
 
 Understand "saw [something]" as cutting.
+
 Instead of cutting the tree:
 	if player carries the hand-saw:
 		if location is up-the-tree:
@@ -1089,6 +1257,9 @@ Part - Sun
 
 The sun is a backdrop which is everywhere.  The description of the sun is "You start to stare at the sun, but realize that is probably why your eye sight is not so good anymore.  It's very bright and very hot."
 
+instead of kicking the sun:
+	say "Really??"
+
 Part - House
 
 The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got it's problems....but it's home."  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
@@ -1105,6 +1276,8 @@ Part - Pile of wood
 
 The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.  The woodpile is in outside-the-shed.
 
+
+
 Before taking woodpile:
 	if large spider is on-stage:
 		say "As you go to take some of the wood, the large spider turns towards your hand and rears up as if to bite." instead;
@@ -1115,6 +1288,8 @@ Before taking woodpile:
 			now the web is off-stage instead;
 		else if the player is carrying some twigs:
 			say "You have enough wood for now." instead;
+		if some twigs are flaming:
+			say "You have a fire going already and don't want to make too big of one this close to your house." instead;
 		otherwise:
 			say "You gather some more wood.";
 			now the player carries some twigs instead;
@@ -1147,6 +1322,9 @@ The web-top is a supporter.  The web-top is a part of the web.
 Instead of attacking the web:
 	try attacking the large spider.
 
+instead of kicking the web:
+	try kicking the large spider instead.
+	
 before taking the web:
 	if spider is on-stage:
 		try taking the spider instead;
@@ -1164,6 +1342,9 @@ The spider is attackable.
 Instead of taking the large spider:
 	say "You start to reach for the spider to brush it and its web out of the way, but as your hand approaches, the spider actually turns and rears up at you ready to bite."
 	
+before kicking the spider:
+	say "You kick at the spider, but your foot catches on the edge of the wood and manage to fall rather ungracefully." instead.
+
 Instead of attacking the large spider:
 	try taking large spider.
 	
@@ -1171,10 +1352,13 @@ Part - horsefly
 
 [http://inform7.com/learn/man/ex1.html]
 Every turn when the player is in in-the-shed and the horsefly is on-stage and the player does not carry the horsefly and the noun part of the current action is not the horsefly:
-	if a random chance of 1 in 4 succeeds:
+	if a random chance of 1 in 6 succeeds:
 		say "[one of]You hear a fly in the window as it tries to escape[or]You notice a fly walking up the window[or]A fly buzzes past your nose, just to circle around and fly right back into the window[or]The fly unceasingly bangs into the window[or]A sudden silence startles you only to be interrupted by the fly in the window again[at random]."
 
 The horsefly is an undescribed thing in in-the-shed.  The description of horsefly is "The large horsefly is at least two inches long and [if player carries horsefly]it struggles to get out of your grip[otherwise if location is in-the-shed]keeps buzzing around the window trying to get out[end if]."  Understand "fly" as horsefly.
+
+instead of kicking the horsefly:
+	say "You kick at the fly, but it is moving to fast and you too uncoordinated for you to make contact.".
 
 Before taking horsefly:
 	if the player is carrying the horsefly:
@@ -1311,6 +1495,17 @@ Every turn:
 			now spray-the-nest is impossible.
 
 Book - Recurring events
+
+Part  - Flame goes out
+
+at the time when the flame goes out:
+	if location is under-the-tree:
+		say "You notice that your fire has gone out.";
+	now the fire is off-stage;
+	now the smoke is off-stage;
+	now the smoke is light;
+	now the twigs are new;
+	now the twigs are off-stage.
 
 Part - Hornets Attack
 
