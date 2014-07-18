@@ -1,4 +1,4 @@
-"Hornets Nest" by Jason Lautzenheiser
+"Hornets' Nest" by Jason Lautzenheiser
 
 Use scoring and full-length room descriptions. 
 Use American dialect.
@@ -117,7 +117,23 @@ The time of day is 6:05 AM.
 When play begins:
 	now the left hand status line is "[the player's surroundings] ";  [number of uncompleted puzzles]
 	now the right hand status line is "Time: [time of day]";
-	say "You're wife's family is coming over for the first time since you've moved into this old farmhouse many years ago and they are scheduled to arrive at 4pm this afternoon.  They've never liked you much so you want to make a good impression.  Everything is in order.....except for one thing.....there's a hornet's nest in the front yard tree and you need to get rid of it before they arrive."
+	say "You pause to hide behind a tree.  You can hear the orc crashing through the underbrush searching for its prey, you.  Eluding them since they attacked your village, you hoped to lead them away from the others while trying to keep out of their cooking pot yourself.  You try to control your breathing as you rest for a moment, but you doubt it can hear it through all the noise it's making.
+
+Suddenly from behind, two arms like tree branches reach out and grab for you.  You slice out with your hunting the knife, the only weapon you managed to grab on your flight out, cutting deeply but not doing any real damage.  The orc keeps hold and slings you over its shoulder and begins to traipse back through the forest.
+
+Suddenly it stops, sniffing the air when suddenly you smell something too.  A smell you know oh too well. A flowery scent, one that strikes fear into the heart of any creature, large or small.  The orc drops you where he stands and runs off in a panic, leaving you lying there.  
+
+The world begins to blur as the smell becomes stronger, you suddenly realize that it's all been a dream and the orc attacking your village was nothing more than a result of some late night tacos.  But that smell, is one that is all too real.  The perfume your wife wears every day, announcing her presence as she enters the bedroom you share.
+
+'Will you get out of bed!!!', she screeches.  
+
+'You promised you'd get rid of that hornets' nest before my mother got here.  You know she's allergic.'
+
+You slowly roll out of bed, you had secretly hoped that perhaps your mother-in-law would get stung and never come back.  But your fear of your wife is stronger than your desire to see her mother disappear. 
+
+Getting up you manage to pull on your shorts and a t-shirt before she shoves you out the door.
+
+'Now don't come back until it's gone, ' she demands as she slams and locks the door behind you."
 	
 
 Book - Rules
@@ -144,10 +160,12 @@ sanity-check wearing something which is not wearable:
 	say  "How in the world would you go about wearing [the noun]?" instead.
 	
 sanity-check taking something that is flaming:
-	say "It's way to hot to carry around." instead.
+	say "It's way too hot to carry around." instead.
 	
 sanity-check sleeping:
 	say "Sleeping before the job is done?  I don't think so." instead.
+
+
 
 Book - Definitions
 
@@ -392,7 +410,7 @@ Rule for supplying a missing noun while shaking:
 Check shaking:
 	if the noun is:
 		-- myself:
-			say "You shake your enitire body like a dog climbing out of the water, but the hornets don't seem impressed.";
+			say "You shake your entire body like a dog climbing out of the water, but the hornets don't seem impressed.";
 		-- the tree:
 			say "You try to shake the tree, but luckily for you, it is too large and you can't budge it.";
 		-- the bug killer:
@@ -484,11 +502,11 @@ Rule for supplying a missing noun while spraying:
 Check spraying:
 	if the second noun is not the bug killer , say "You could try spraying it with [the second noun] but I don't think you would be very successful." instead;
 	if player is not carrying the bug killer, say "You have nothing to spray with." instead;
-	if bug killer is empty, say "Well the can is empty now so spraying [the noun] won't help much now." instead;		
+	if bug killer is empty, say "Well, the can is empty now, so spraying [the noun] won't help much now." instead;		
 	if noun is the large spider:
 		say "You read the back of the can and it doesn't mention spiders as something it is effective on, so you don't bother as there is not much spray left." instead;
 	if noun is the horsefly:
-		say "[one of]Spraying the fly seems like such a waste of good bug spray.[or]You are going to need every last drop of bug spray for the hornets.[or]Against your better judgement, you lift the can to spray the fly.  Just as you are about to end it's miserable life, it flies away from the window.[then at random]" instead;
+		say "[one of]Spraying the fly seems like such a waste of good bug spray.[or]You are going to need every last drop of bug spray for the hornets.[or]Against your better judgment, you lift the can to spray the fly.  Just as you are about to end it's miserable life, it flies away from the window.[then at random]" instead;
 	otherwise:
 		if location is not under-the-tree and the location is not up-the-tree:
 			if noun is hornets or noun is hornets-nest:
@@ -531,6 +549,15 @@ Carry out counting:
 Understand "count blessings" or "count your blessings" or "count my blessings" as a mistake("Well for one you haven't been stung yet...")
 
 Part - Old Actions
+
+sanity-check jumping:
+	if location is up-the-tree:
+		say "You prepare to leap off the ladder, only to realize that it's probaby just as easy to climb down safely." instead;
+	else if location is under-the-tree:
+		say "You jump as high as you can trying reach the nearest branch, but it is way out of your reach." instead;
+	otherwise:
+		say "You do your best impression of a basketball player (or is it a ballerina)?" instead.
+	
 
 Chapter - Cutting with
 
@@ -575,7 +602,7 @@ Check attacking it with:
 		if the location is up-the-tree:
 			say "You take a test swing with [the second noun] but realize that you don't have the coordination to swing with enough force to be effective without knocking yourself off the ladder and down to the ground.";
 		otherwise:
-			say "You swing [the printed name of the second noun] at the nest over and over but you're not tall enough to hit it and the wind generated from your incessent swinging does little.";
+			say "You swing [the printed name of the second noun] at the nest over and over but you're not tall enough to hit it and the wind generated from your incessant swinging does little.";
 	otherwise if the noun is the large spider:
 		say "You swat at the large spider with [the second noun], but each time it ducks into a crevice where you can't reach it.  The spider resumes it's place on the web, glaring at you with very little sympathy.";
 	otherwise: 
@@ -598,6 +625,9 @@ Check throwing it at (this is the block juggling rule):
 Check throwing it at (this is the avoid throwing things into themselves rule): 
 	if the second noun is within the noun, say "That would be a neat trick." instead.	
 
+Check throwing it at (this is the avoid throwing things being worn rule): 
+	if the player is wearing the noun, say "You'll want to keep that on instead of throwing it." instead.	
+
 
 Understand "throw [something] in [something]" as throwing it at.
 Understand "throw [something] on [something]" as throwing it at.
@@ -615,7 +645,7 @@ Check throwing:
 	if the noun is the ladder:
 		if the location is under-the-tree:
 			say "You give the ladder a heave and if by magic it lands upright leaning against the tree.";
-			now ladder is on the tree;
+			now ladder is on the tree instead;
 		otherwise:
 			say "You awkwardly throw the ladder and it falls just as awkwardly to the ground.";
 			now the ladder is in the location instead;
@@ -838,7 +868,7 @@ On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if 
 The porch is a backdrop.  The porch is everywhere.  The description of the porch is "The front porch is large and roomy.  Plenty of space to sit and relax...if it wasn't for those hornets."
 
 Instead of taking the porch:
-	say "[one of]The thought had crossed your mind that if you could just move the porch to the back of the house, then you could sit out there unaccosted by the hornets.  Alas, if you could you probably would.[or]Moving the porch anywhere just isn't possible.[stopping]".
+	say "[one of]The thought had crossed your mind that if you could just move the porch to the back of the house, then you could sit out there free of the hornets.  Alas, if you could you probably would.[or]Moving the porch anywhere just isn't possible.[stopping]".
 
 The porch-swing is a enterable supporter in on-the-porch.  The porch-swing is scenery.  The printed name of porch-swing is "porch swing".  The description of porch-swing is "The porch swing sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
 Understand "swing" or "porch swing" or "glider" as porch-swing.
@@ -851,7 +881,7 @@ Instead of swinging the porch-swing:
 
 The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."  The initial appearance of the beer is "Oh trust me, if you had a beer right now, you'd be doing more than just looking at it."
 
-The front door is a flimsy in on-the-porch. "The front door leading into your house, in fact it's the only way into your house and your wife locked the door behind you when you left this morning.  Her exact words were 'Don[']t bother coming back until that nest is gone.'".  The action-refusal is "You told your wife you were not coming in until the nest was gone (actually she told you that, but you won't admit that out loud will you?)".
+The front door is a flimsy in on-the-porch. "The front door leading into your house, in fact it's the only way into your house and your wife locked the door behind you when you left this morning.  Her exact words were 'Don[']t bother coming back until that nest is gone.'".  The action-refusal is "You told your wife you were not coming in until the nest was gone (actually, she told you that, but you won't admit that out loud, will you?)".
 
 before going inside in on-the-porch:
 	try opening the front door instead.
@@ -883,6 +913,10 @@ The bug killer is either empty, half-full or full.  The bug killer is full.
 The bug killer is either shaken or settled.  The bug killer is settled.
 The bug killer is lost.
 
+Before putting the bug killer on the twigs:
+	if the twigs are flaming:
+		try putting the bug killer on the fire-top instead.
+		
 Before putting the bug killer on the fire-top:
 	if the player is carrying the bug killer:
 		now fire-the-missle is running instead.
@@ -963,11 +997,14 @@ after dropping:
 	if the noun is the twigs and the location is under-the-tree:
 		say "You put the pile of twigs right under the nest."
 
+instead of cutting the twigs:
+	say "You break up a few of the twigs into pieces small enough to stand in for toothpicks, but you wisely decide that they may better serve as kindling so you leave the rest intact."
+
 Instead of kicking the twigs:
 	if twigs are flaming:
 		try kicking the fire instead;
 	otherwise:
-		say "You kick the twigs scattering them throughtout the yard.";
+		say "You kick the twigs scattering them throughout the yard.";
 		now the twigs are off-stage.
 		
 Part - Pile of ashes
@@ -1085,12 +1122,15 @@ Understand "hive/hives/nest" or "bee's nest" or "hornets nest" as the hornets-ne
 
 instead of taking the hornets-nest:
 	if location is up-the-tree:
-		say "You reach out to grab the nest while balancing precarously on the ladder when the ladder begins to move.  You quickly decide that taking the nest by hand is probably not the brightest thing to do.";
+		say "You reach out to grab the nest while balancing precariously on the ladder when the ladder begins to move.  You quickly decide that taking the nest by hand is probably not the brightest thing to do.";
 	otherwise:
 		say "You stretch on your very tippy toes but you are not tall enough or stretchy enough to reach it from here."
 
 before attacking the hornets-nest:
 	say "That wouldn't end pretty." instead.
+	
+instead of inserting something into the hornets-nest:
+	say "You reach out to try and plug the nest with [the noun] but it is too far away to do safely.";
 	
 instead of touching the hornets-nest:
 	if location is up-the-tree:
@@ -1100,7 +1140,7 @@ instead of touching the hornets-nest:
 	
 instead of kicking the hornets-nest:
 	if location is under-the-tree:
-		say "You do your best high kick and come no where close to making contact with the nest.";	
+		say "You do your best high kick and come nowhere close to making contact with the nest.";	
 	otherwise:
 		say "You are too far away to even make the attempt.".
 		
@@ -1113,7 +1153,7 @@ Instead of cutting the hornets-nest:
 	
 Part - Hornets	
 
-Some hornets are an animal in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets][if the smoke is on-stage and the smoke is heavy]They appear to be wearing minture gas masks.[end if]".  The hornets are attackable.
+Some hornets are an animal in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets][if the smoke is on-stage and the smoke is heavy]They appear to be wearing miniature gas masks.[end if]".  The hornets are attackable.
 The hornets can be grabbed.
 
 understand "hornet/bee/bees/soldiers/workers" as hornets.
@@ -1122,9 +1162,9 @@ To say description-of-hornets:
 	if the hornets are swarming:
 		say "The hornets are swarming around the nest, workers headed in and out, soldiers perched on the nest as if expecting a full frontal assault.";
 	if the hornets are angry:
-		say "The hornets look pissed, more so than usual.  None are going back in the nest, they are steadily pouring out and if you look closely enough, they appear to be readying an all out assault.";
+		say "The hornets look pissed, more so than usual.  None are going back in the nest, they are steadily pouring out and if you look closely enough, they appear to be readying an all-out assault.";
 	if the hornets are aggressive:
-		say "Oh boy, you better move it.....they are flying every which way that looks chaotic yet orchestrated at the same time. [if location is under-the-tree]It would be wise to move quickly, they are headed your way[otherwise if location is up-the-tree]They are dive-boming you in a synchronized pattern that would be strangely beautiful if they weren't out to make you hurt[end if].";
+		say "Oh boy, you better move it.....they are flying every which way that looks chaotic yet orchestrated at the same time. [if location is under-the-tree]It would be wise to move quickly, they are headed your way[otherwise if location is up-the-tree]They are dive-bombing you in a synchronized pattern that would be strangely beautiful if they weren't out to make you hurt[end if].";
 	if the hornets are subdued:
 		say "Just a few hornets remain on the outside and even they appear as if they have had enough and are ready to call it a day."
 
@@ -1135,14 +1175,14 @@ before kicking the hornets:
 	
 instead of taking hornets:
 	if the location is up-the-tree:
-		say "[one of]You swat at a hornet as it buzzes by you and actually manage to snag it between your fingers.  It promptly stings you causing you to shreak and nearly fall from the ladder after which you decide that perhaps catching the hornets won't work as you expected anyway.[or]Having been stung once already you'll refrain from grabbing another hornet as it wasn't a pleasant experience the first time.[stopping]";
+		say "[one of]You swat at a hornet as it buzzes by you and actually manage to snag it between your fingers.  It promptly stings you causing you to shriek and nearly fall from the ladder after which you decide that perhaps catching the hornets won't work as you expected anyway.[or]Having been stung once already you'll refrain from grabbing another hornet as it wasn't a pleasant experience the first time.[stopping]";
 		increment the sting-count of the player;
 		now the hornets are grabbed;
 	otherwise:
 		if the hornets are grabbed:
 			say "You've been stung once by your foolish desire to hold one so you'll resist the urge this time as you don't want to get stung again.";
 		otherwise:
-			say "A hornet flys down to buzz your head and you reach out to snag it but luckily you only manage to grab thin air." 
+			say "A hornet flies down to buzz your head and you reach out to snag it but luckily you only manage to grab thin air." 
 	
 Before attacking hornets:
 	say "If you tried that, you would regret it." instead.
@@ -1171,7 +1211,10 @@ Rule for reaching inside a room:
 			say "You can only look at [the noun] from a distance.";
 			deny access;
 	otherwise:
-		say "You can only look at [the noun] from a distance.";
+		if the noun is not scenery:
+			say "You can only look at [the second noun] from a distance.";
+		otherwise:
+			say "You can only look at [the noun] from a distance.";
 		deny access.
 	
 instead of touching the tree:
@@ -1206,7 +1249,7 @@ instead of listening:
 		say "Though you can't see the nest from here, you can hear it."
 		
 Instead of looking under the tree:
-	say "Throughout the [yard] you see the tree's [roots] that stretch out from it's base."
+	say "Throughout the [yard] you see the tree's [roots] that stretch out from its base."
 	
 Instead of pushing the tree:
 	say "You strain against the tree but you fail to budge it."
@@ -1221,7 +1264,7 @@ Instead of cutting the tree:
 	if player carries the hand-saw:
 		if location is up-the-tree:
 			if cut branch is in under-the-tree:
-				say "The hornet's have built their new nest in a branch too high for you to reach.";
+				say "The hornets have built their new nest in a branch too high for you to reach.";
 			otherwise:
 				say "You take the hand saw and begin to cut through the branch that the hornet's nest is hanging from.  After a moment the branch cracks and falls to the ground taking the nest with it.  You start to raise your arms in triumph, but then remembering you are standing on a ladder, you think better of it and just grin happily to yourself.";
 				if the hole is in under-the-tree:
@@ -1245,7 +1288,7 @@ The roots are a flimsy.  The roots are part of the shade tree.  the action-refus
 
 The yard is a backdrop which is everywhere.  The description is "A large yard and you take care of it as well as you can."
 
-The cut branch is scenery.  The description of cut branch is "The large branch you just cut from the tree is laying on the ground and the remenents of the old nest have scattered in the light breeze."  
+The cut branch is scenery.  The description of cut branch is "The large branch you just cut from the tree is laying on the ground and the remnants of the old nest have scattered in the light breeze."  
 
 instead of taking the cut branch:
 	say "It is much too heavy.";
@@ -1262,7 +1305,7 @@ instead of kicking the sun:
 
 Part - House
 
-The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got it's problems....but it's home."  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
+The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got its problems....but it's home."  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
 
 Part - Shed
 
@@ -1314,6 +1357,9 @@ before throwing something into the woodpile:
 	if the noun is the horsefly:
 		try putting the horsefly on the web-top instead;
 
+instead of cutting the woodpile:
+	say "You break up some of the wood into pieces small enough to stand in for toothpicks, but you wisely decide that they may better serve as kindling so you leave the rest intact."
+
 Part - Spider web
 
 The web is a container on the woodpile.  The web is open.  The web is not openable.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've ever seen.[end if]."
@@ -1347,6 +1393,16 @@ before kicking the spider:
 
 Instead of attacking the large spider:
 	try taking large spider.
+
+Instead of kissing the spider:
+	say "You close your eyes, pucker up and move in for the kiss.  You open them at the last second and see the spider right in your face ready to return your 'kiss' with a bite of it's own.  You quickly retreat and wonder what in the world you were thinking."
+
+before doing anything to the spider when the spider is off-stage:
+	say "You know the spider is under this pile of wood somewhere." instead
+	
+After deciding the scope of the player when location is outside-the-shed and the spider is off-stage: 
+	place the spider in scope.
+	
 	
 Part - horsefly
 
@@ -1417,8 +1473,11 @@ instead of attacking the horsefly:
 before eating the horsefly:
 	say "As juicy as it looks, you don't find it near as appetizing as some other creatures.  Perhaps something else would enjoy eating it instead." instead.
 
-[before doing anything to the horsefly while the horsefly is off-stage:
-	say "I'm sure the spider is having a wonderful time with the fly, but you won't be able to do anything with it anymore." instead.]
+After deciding the scope of the player when location is outside-the-shed and the horsefly is off-stage: 
+	place the horsefly in scope.
+
+before doing anything to the horsefly while the horsefly is off-stage:
+	say "I'm sure the spider is having a wonderful time with the fly, but you won't be able to do anything with it anymore." instead.
 
 
 Part - wood-burner
@@ -1512,7 +1571,7 @@ Part - Hornets Attack
 at the time when the hornets attack:
 	if location is up-the-tree or location is under-the-tree:
 		if the last-puzzle-completed of the player is fire-the-missle:
-			say "With the can stuck in the opening of the nest, the nest begans to expand as the hornets attempt to escape.  Finally in a large explosion of pieces of nest and angry hornets, they escape and begin to swarm around you agressively.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
+			say "With the can stuck in the opening of the nest, the nest begins to expand as the hornets attempt to escape.  Finally in a large explosion of pieces of nest and angry hornets, they escape and begin to swarm around you aggressively.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
 		otherwise:
 			say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
 		now the player is hiding;
@@ -1557,7 +1616,7 @@ Every turn while aggressive-hornets is happening:
 	if location is up-the-tree:
 		do nothing;
 	otherwise:
-		say "[one of]From here you can hear the angry buzz of the hornets.[or]You can see the hornets swarming as if looking for something to sting.[or]You must have really made them mad this time.[or]Occassionally a hornet seems to locate you.  It buzzes your head and you manage to swat it away before it does much damage.  It flies back towards the nest....you hope it doesn't bring back friends.[then at random]".
+		say "[one of]From here you can hear the angry buzz of the hornets.[or]You can see the hornets swarming as if looking for something to sting.[or]You must have really made them mad this time.[or]Occasionally a hornet seems to locate you.  It buzzes your head and you manage to swat it away before it does much damage.  It flies back towards the nest....you hope it doesn't bring back friends.[then at random]".
 
 
 
@@ -1566,7 +1625,7 @@ Book - Exploding Can
 
 Exploding Can is a scene.  Exploding Can begins when fire-the-missle is running.  Exploding Can ends when fire-the-missle is completed.
 When exploding can begins:
-	say "The can sits in the fire for a few moments and then it starts to turn a hot red as it heats up.  As the sides of the can start to bulge out at the center you quickly decide it's time to hide behind the tree.  Just as you retreat behind the tree you hear a large explosion and you hit the ground.  You hear a whistle as the exploded can flies towards the nest hitting it right in the bottom, plugging up the entrance to the nest.";
+	say "The can sits in the fire for a few moments and then it starts to turn a hot red as it heats up.  As the sides of the can start to bulge out at the center, you quickly decide it's time to hide behind the tree.  Just as you retreat behind the tree, you hear a large explosion and you hit the ground.  You hear a whistle as the exploded can flies towards the nest hitting it right in the bottom, plugging up the entrance to the nest.";
 	now the last-puzzle-completed of the player is fire-the-missle;
 	now fire-the-missle is completed;
 	hornets attack in 1 turn from now;
@@ -1587,7 +1646,7 @@ When smoking-them-out begins:
 	
 What is that noise?  You hear a faint buzz coming from the tree.  Looking up, the smoke begins to clear and you see a mass of hornets around the entrance to the nest.  Just as you see them, they see you and attack.
 
-As they begin to swarm around your head, you notice there is something different about them.... they are now wearing minature gas masks.";
+As they begin to swarm around your head, you notice there is something different about them.... they are now wearing miniature gas masks.";
 	now the last-puzzle-completed of the player is smoke-the-nest;
 	hornets attack in 0 turn from now;
 	now smoke-the-nest is completed;
