@@ -1,6 +1,6 @@
 "Hornets' Nest" by Jason Lautzenheiser
 
-Use scoring and full-length room descriptions. 
+Use full-length room descriptions. 
 Use American dialect.
 
 Volume - Bibliography
@@ -21,7 +21,7 @@ Understand the command "credits" or "info" as "about".
 
 Report abouting:
 	say "[italic type][Story title][roman type] is copyright © 2014 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[para]";
-	say "This work was created just for the fun of it beginning in early 2014.  This release is made for the IntroComp 2014 contest.  Special thanks to my great testers (in no particular order):  Andrew Schultz, Daniel Stelzer and Marshal Tenner Winter.  Also special thanks to my wife Holly and my four children, all of whom I was able to bounce ideas off of.[para]"; 
+	say "This work was created just for the fun of it beginning in early 2014.  This release is made for the IntroComp 2014 contest.  Special thanks to my great testers (in no particular order):  Andrew Schultz, Daniel Stelzer, Hanon Ondricek and Marshal Tenner Winter.  Also special thanks to my wife Holly and my four children, all of whom I was able to bounce ideas off of.[para]"; 
 
 Volume - Extensions
 
@@ -98,12 +98,15 @@ Volume - Game Settings
 
 [The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.]
 
-
-
 Book - Utilities
 
 To say para -- running on: 
 	(- DivideParagraphPoint(); new_line; -). 
+
+To set the/-- pronoun it to (O - an object): (- LanguagePronouns-->3 = {O}; -).
+To set the/-- pronoun him to (O - an object): (- LanguagePronouns-->6 = {O}; -).
+To set the/-- pronoun her to (O - an object): (- LanguagePronouns-->9 = {O}; -).
+To set the/-- pronoun them to (O - an object): (- LanguagePronouns-->12 = {O}; -).
 
 Book - Extension overrides
 
@@ -123,11 +126,11 @@ Suddenly from behind, two arms like tree branches reach out and grab for you.  Y
 
 Suddenly it stops, sniffing the air when suddenly you smell something too.  A smell you know oh too well. A flowery scent, one that strikes fear into the heart of any creature, large or small.  The orc drops you where he stands and runs off in a panic, leaving you lying there.  
 
-The world begins to blur as the smell becomes stronger, you suddenly realize that it's all been a dream and the orc attacking your village was nothing more than a result of some late night tacos.  But that smell, is one that is all too real.  The perfume your wife wears every day, announcing her presence as she enters the bedroom you share.
+The world begins to blur as the smell becomes stronger, you suddenly realize that it's all been a dream and the orc attacking your village was nothing more than a result of some late night tacos.  But that smell is one all too real.  The perfume your wife wears every day, announcing her presence as she enters the bedroom you share.
 
 'Will you get out of bed!!!', she screeches.  
 
-'You promised you'd get rid of that hornets' nest before my mother got here.  You know she's allergic.'
+'You promised you'd get rid of that hornets['] nest before my mother got here.  You know she's allergic.'
 
 You slowly roll out of bed, you had secretly hoped that perhaps your mother-in-law would get stung and never come back.  But your fear of your wife is stronger than your desire to see her mother disappear. 
 
@@ -143,6 +146,9 @@ Rule for printing room description details: stop.
 The can't take scenery rule response (A) is "[The noun] can't be taken anywhere."
 The block attacking rule response (A) is "[if the noun is hornets]Yes that is your ultimate goal, but it's not going to be that easy.[otherwise]Really no need to do that.[end if]".
 The can't put onto what's not a supporter rule response (A) is "Putting [the noun] on [the second noun] wouldn't do anything exciting."
+
+Rule for printing a parser error when the latest parser error is the I beg your pardon error:
+  say "[one of]Bzzzzzzz.[or]The hornets laugh at your indecision.[or]Your wife glares at you from the house wondering why you're just standing there.[or]Ahhh...if only I had a beer.[or]Daydreaming again?[or]Your blood pressure is rising.[or]What?[or]Come again?[or]Prithee, pardon?[in random order]"
 
 Chapter - Sanity Checks
 
@@ -165,6 +171,11 @@ sanity-check taking something that is flaming:
 sanity-check sleeping:
 	say "Sleeping before the job is done?  I don't think so." instead.
 
+sanity-check waiting:
+	if hornets are aggressive:
+		say "Probably not a bad idea to wait and let the hornets calm down a bit before venturing back out there." instead;
+	otherwise:
+		say "What are you waiting on?  You're running out of time." instead.
 
 
 Book - Definitions
@@ -174,6 +185,11 @@ A thing can be lost or found.  A thing is usually found.
 A thing can be flammable or impervious. A thing is usually impervious.
 A thing can be throwable.
 Flame-state is a kind of value. The flame-states are burnt, flaming, and new. Understand "burning" or "lit" as flaming.   A thing has a flame-state.  A thing is usually new.
+
+
+Chapter - Thinking
+
+Everything has some text called the think-text.  The think-text is usually "".
 
 Chapter - Flimsy
 
@@ -376,7 +392,12 @@ sanity-check singing:
 Chapter - Scoring
 
 carry out requesting the score:
-	say " You have completed [number of completed puzzles] of [number of not default puzzles] puzzles.";
+	if number of completed puzzles is 0:
+		say "You have not managed to annoy the hornets yet.";
+	otherwise:
+		let left-ways be number of not default puzzles minus number of completed puzzles;
+		say "You have annoyed the hornets [number of completed puzzles] way[if number of completed puzzles is greater than 1]s[end if].  Maybe you can find [left-ways] more.[para]";
+		say "The ways you've annoyed the hornets so far are: [list of completed puzzles].";
 	stop the action.
 
 Chapter - Digging
@@ -557,12 +578,27 @@ sanity-check jumping:
 		say "You jump as high as you can trying reach the nearest branch, but it is way out of your reach." instead;
 	otherwise:
 		say "You do your best impression of a basketball player (or is it a ballerina)?" instead.
-	
+
+Chapter - Thinking
+
+Thinking about is an action applying to one thing.
+Understand "think about [something]" as thinking about.
+Understand "think [something]" as thinking about.
+
+instead of thinking about:
+	if think-text of the noun is "":
+		say "You love thinking about [the noun].";
+	otherwise:
+		say "[think-text].";
+
+Instead of thinking:
+	say "Yep, that's a strong talent of yours, sitting around, drinking a beer and thinking."
 
 Chapter - Cutting with
 
 Cutting with is an action applying to two things.
 understand "cut [something] with [something]" as cutting with.
+understand "saw [something] with [something]" as cutting with.
 
 instead of cutting with:
 	if the second noun is the hand-saw:
@@ -664,6 +700,7 @@ Chapter - Burning
 
 Everything has some text called the burn-reject.  The burn-reject is usually "".
 burn-with-glasses is a truth state that varies.  burn-with-glasses is false.
+fire-is-out is a truth state that varies.  fire-is-out is false.
 
 Understand the commands "light" and "burn" as something new.	
 
@@ -695,8 +732,10 @@ Check burning something with something:
 		if the noun is burnt:
 			say "You try burning [the noun] again, but it only smokes a little then sputters out." instead;
 	otherwise:
+		if the noun is some leaves and the twigs are flaming:
+			try putting some leaves on the fire instead;
 		if the burn-reject of the noun is "":
-			say "You can't set [the noun] on fire." instead;
+			say "You could set [the noun] on fire, but you shouldn[']t.  You're not a kid anymore." instead;
 		otherwise:
 			say "[burn-reject of the noun][paragraph break]" instead;
 	
@@ -710,8 +749,8 @@ Carry out burning something with something:
 		now the smoke is on-stage;
 		now the noun is flaming;
 		flame goes out in 10 turns from now;
-		now build-a-fire is completed;
-		now the last-puzzle-completed of the player is build-a-fire.
+[		now build-a-fire is completed;
+		now the last-puzzle-completed of the player is build-a-fire.]
 
 rule for supplying a missing second noun when burn-with-glasses is true: 
 	now second noun is glasses
@@ -724,10 +763,16 @@ Book - Rooms
 
 Part - Under the Tree
 
-Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wondrous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area]".
+Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wondrous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area][say-fire-is-out]".
 
 The blind-text of under-the-tree is "You can make out the faint blur of the tree and the shadows created by the leaves.  You can definitely hear the hornets in their nest above you."
 
+To say say-fire-is-out:
+	if fire-is-out is true:
+		say "[para]You're fire appears to have gone out since you were gone.";
+		now fire-is-out is false;
+		
+		
 To say other-stuff-in-area:
 	let need_period be false;
 	if ladder is on tree:
@@ -931,7 +976,7 @@ Understand "kick the can" or "kick can" as a mistake("Dying may be preferable to
 
 Part  - Hand saw	
 
-The hand-saw is an undescribed thing in in-the-shed.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" as hand-saw.  
+The hand-saw is an undescribed thing in in-the-shed.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" or "hand saw" as hand-saw.  
 The description of hand-saw is "Nope, you didn't use this much either.  The saw is new and shiny." 	
 The hand-saw can be hanging.  The hand-saw is hanging.  
 
@@ -988,14 +1033,20 @@ To say describe-twigs:
 			say "The pile of twigs and leaves is smoldering putting out a heavy smoke that is engulfing the hornet's nest.";
 	if twigs are burnt:	
 		say "The remains of your wood, nothing left but lightly smoking ashes."
-		
+
+after doing something with the twigs:
+	set the pronoun it to the twigs;
+	continue the action.
+
 before taking some twigs:
 	if the player is carrying some twigs:
 		say "You have enough wood for right now." instead;
 
 after dropping:
 	if the noun is the twigs and the location is under-the-tree:
-		say "You put the pile of twigs right under the nest."
+		say "You put the pile of twigs right under the nest.";
+	otherwise:
+		continue the action.
 
 instead of cutting the twigs:
 	say "You break up a few of the twigs into pieces small enough to stand in for toothpicks, but you wisely decide that they may better serve as kindling so you leave the rest intact."
@@ -1073,6 +1124,7 @@ Before throwing some leaves into twigs:
 Before throwing some leaves onto twigs:
 	try putting some leaves on the twigs instead.	
 
+	
 instead of putting some leaves on the twigs:
 	if twigs are flaming:
 		say "[regarding the noun][if the player is not carrying some leaves]You gather up a handful of leaves and [otherwise]You [end if]toss [them] onto the fire and the smoke begins to build until a dark gray cloud begins to lift from the ground up into the tree.";
@@ -1194,6 +1246,8 @@ before kissing the hornets:
 Part - Tree
 
 The shade tree is a supporter which is in under-the-tree. The tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]Hanging from a branch is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
+
+The think-text of the shade tree is "You wonder how old this tree really is.  It would be a shame to damage it in any way getting the hornets['] out."
 
 The burn-reject of the shade tree is "Burning the tree is a bit overkill to remove the hornets."
 
@@ -1516,19 +1570,19 @@ A puzzle is a kind of thing.  A puzzle is always undescribed.  A puzzle can be c
 The player has a puzzle called last-puzzle-completed.  The last-puzzle-completed of the player is usually no-puzzle.
 
 no-puzzle is a default puzzle.
-spray-the-nest is a puzzle.
-build-a-fire is a puzzle.
-smoke-the-nest is a puzzle.
-cut-the-branch is a puzzle.
-fire-the-missle is a puzzle.
+spray-the-nest is a puzzle.  The printed name of spray-the-nest is "spraying the nest with bug spray".
+[build-a-fire is a puzzle.]
+smoke-the-nest is a puzzle.  The printed name of smoke-the-nest is "using heavy smoke to remove the hornets".
+cut-the-branch is a puzzle.  The printed name of cut-the-branch is "cutting the branch the nest is on out of the tree".
+fire-the-missle is a puzzle.  The printed name of fire-the-missle is "blowing up the can of spray".
 
 [puzzle activation rules]
 Every turn:
-	if build-a-fire is uncompleted and build-a-fire is not impossible:
+[	if build-a-fire is uncompleted and build-a-fire is not impossible:
 		if twigs are on-stage:
 			now build-a-fire is active;
 		otherwise:
-			now build-a-fire is inactive;
+			now build-a-fire is inactive;]
 	if spray-the-nest is uncompleted and spray-the-nest is not impossible:
 		if bug killer is not empty and the player carries the bug killer:
 			now spray-the-nest is active;
@@ -1560,6 +1614,8 @@ Part  - Flame goes out
 at the time when the flame goes out:
 	if location is under-the-tree:
 		say "You notice that your fire has gone out.";
+	otherwise:	
+		now fire-is-out is true;
 	now the fire is off-stage;
 	now the smoke is off-stage;
 	now the smoke is light;
@@ -1597,7 +1653,7 @@ to say clue-next-puzzle:
 	if spray-the-nest is uncompleted:
 		say "test 1";
 	else if smoke-the-nest is uncompleted:
-		say "As you look on in disbelief, a thought comes to you; hornets don't like smoke.  Why don't you try smoking them out.[line break][line break]";
+		say "As you look on in disbelief, a thought comes to you: hornets don't like smoke.  Why don't you try smoking them out.[line break][line break]";
 	else if cut-the-branch is uncompleted:
 		say "As you pause to catch your breath, you wonder what to do.   Maybe if you try cutting it down, they'll just pick up and leave."
 		
@@ -1611,7 +1667,7 @@ When aggressive-hornets ends:
 
 Every turn while aggressive-hornets is happening:
 	if location is under-the-tree:
-		say "As soon as walk back under the tree the hornets seem to take notice of you again.  The reform into a tight group and launch an attack.  You hastily retreat back to where you came.";
+		say "As soon as you walk back under the tree the hornets seem to take notice of you again.  The reform into a tight group and launch an attack.  You hastily retreat back to where you came.";
 		try retreating;
 	if location is up-the-tree:
 		do nothing;
@@ -1658,7 +1714,7 @@ Running-the-game is a scene.  running-the-game begins when play begins.
 Running-the-game ends when the number of uncompleted inactive puzzles is 0 and the number of active uncompleted puzzles is 0 and the number of running puzzles is 0 and aggressive-hornets is not happening:
 
 When running-the-game ends:
-	end the story saying "Here ends the intro to Hornet's Nest.  I hope you enjoyed this introduction to this piece.  I plan to add more ways to try and achieve your goal of removing the nest from the tree.  ";
+	end the story saying "Here ends the intro to Hornet's Nest.  I hope you enjoyed this introduction to this piece.  I plan to add more ways to try and achieve your goal of removing the nest from the tree.  [para]You've managed to annoy the hornets in the following ways: [list of completed puzzles].";
 	
 
 
