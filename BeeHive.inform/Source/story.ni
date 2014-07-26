@@ -1462,7 +1462,7 @@ Part - horsefly
 
 [http://inform7.com/learn/man/ex1.html]
 Every turn when the player is in in-the-shed and the horsefly is on-stage and the player does not carry the horsefly and the noun part of the current action is not the horsefly:
-	if a random chance of 1 in 6 succeeds:
+	if a random chance of 1 in 2 succeeds:
 		say "[one of]You hear a fly in the window as it tries to escape[or]You notice a fly walking up the window[or]A fly buzzes past your nose, just to circle around and fly right back into the window[or]The fly unceasingly bangs into the window[or]A sudden silence startles you only to be interrupted by the fly in the window again[at random]."
 
 The horsefly is an undescribed thing in in-the-shed.  The description of horsefly is "The large horsefly is at least two inches long and [if player carries horsefly]it struggles to get out of your grip[otherwise if location is in-the-shed]keeps buzzing around the window trying to get out[end if]."  Understand "fly" as horsefly.
