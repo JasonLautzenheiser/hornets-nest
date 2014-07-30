@@ -335,8 +335,10 @@ Instead of taking off the jean shorts:
 Rule for printing the name of the jean shorts when taking inventory:
 	say "some shorts".
 	
-instead of doing anything with the jean shorts:
+[instead of doing anything with the jean shorts:
 	try dropping the shorts.
+]
+
 	
 
 Chapter - T-shirt
@@ -352,6 +354,28 @@ Rule for printing the name of the t-shirt:
 Book - Verbs
 
 Part - New actions
+
+Chapter - Misc
+
+Instead of looking under something carried by the player:
+	say "It should be pretty obvious what is under [the noun] since you are carrying [it], but you can't help but to take a look anyway."
+	
+Instead of looking under something (called the underling) worn by the player:
+	if underling is the baseball cap:
+		say "Well you can't really bend your eyes in a way to see the top of your head, but you suspect it is relatively hairless.";
+	if underling is the glasses:
+		say "Well considering your eyes are under your glasses, you try to recursively look at your eyes through your eyes, but only manage to give yourself a headache from the eye strain.";
+	if underling is the t-shirt:
+		say "You look underneath your shirt just to find your hairy chest just like you left it.";
+	if underling is the jean shorts:
+		say "Well now, I think you know what's under there.".
+		
+
+Chapter - Knocking on
+
+Knocking on is an action applying to one thing.
+Understand "knock on [something]" or "knock [something]" as knocking on.
+understand the commands "bang" and "tap" and "rap" as "knock".
 
 Chapter - Dancing
 
