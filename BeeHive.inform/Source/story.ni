@@ -1585,17 +1585,15 @@ Report requesting puzzle status:
 	say "Active: [number of active uncompleted puzzles].";
 	say "Running: [number of running puzzles].";
 
-	
-
 Understand "puzzles" as requesting puzzle status.
 
 A puzzle is a kind of thing.  A puzzle is always undescribed.  A puzzle can be completed, uncompleted, running, default or impossible.  A puzzle is usually uncompleted.   A puzzle can be active or inactive.  A puzzle are usually inactive.
+A puzzle has some text called end-text. The end-text is usually "".
 
 The player has a puzzle called last-puzzle-completed.  The last-puzzle-completed of the player is usually no-puzzle.
 
 no-puzzle is a default puzzle.
-spray-the-nest is a puzzle.  The printed name of spray-the-nest is "spraying the nest with bug spray".
-[build-a-fire is a puzzle.]
+spray-the-nest is a puzzle.  The printed name of spray-the-nest is "spraying the nest with bug spray".  The end-text of spray-the-nest is "Well that didn't work too well.  [bug-killer-drop-description][line break]".
 smoke-the-nest is a puzzle.  The printed name of smoke-the-nest is "using heavy smoke to remove the hornets".
 cut-the-branch is a puzzle.  The printed name of cut-the-branch is "cutting the branch the nest is on out of the tree".
 fire-the-missle is a puzzle.  The printed name of fire-the-missle is "blowing up the can of spray".
@@ -1657,9 +1655,29 @@ at the time when the hornets attack:
 		now the player is hiding;
 		now the hornets are aggressive;
 		now the player is in a random safe-zone room;
-		if the last-puzzle-completed of the player is spray-the-nest:
-			say "Well that didn't work too well.  [bug-killer-drop-description][line break][clue-next-puzzle]";
+		if the end-text of the last-puzzle-completed of the player is not "":
+			say "[end-text of the last-puzzle-completed of the player]";
+		suggest next puzzle;
 		Hornets calm down in two turns from now.
+
+to suggest next puzzle:
+	if spray-the-nest is uncompleted and spray-the-nest is not impossible:
+		suggest spray the nest;
+	else if smoke-the-nest is uncompleted and smoke-the-nest is not impossible:
+		suggest smoke the nest;
+
+
+to suggest smoke the nest:
+	say "As you look on in disbelief, a thought comes to you: hornets don't like smoke.  Why don't you try smoking them out.".
+
+to suggest spray the nest:
+	if player carries bug killer:
+		say "Perhaps that bug spray you're carrying will be of some help.";
+	else:
+		if bug killer is on-stage:
+			say "You think you saw some bug spray around here somewhere.";
+		else:
+			say "Perhaps there is something to be found in the shed."
 
 at the time when the hornets calm down:
 	now the hornets are swarming;
@@ -1668,10 +1686,10 @@ at the time when the hornets calm down:
 
 
 to say bug-killer-drop-description:
+	say "You throw the can away in disgust and as it bounces off [if location is in-the-shed]the wall[otherwise if location is on-the-porch]the porch floor[end if] it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty." ;
+	now the printed name of the bug killer is "[if bug killer is empty]now empty [end if]bug spray";
 	if player carries bug killer:
 		silently try dropping bug killer;
-		say "You throw the can away in disgust and as it bounces off [if location is in-the-shed]the wall[otherwise if location is on-the-porch]the porch floor[end if] it hits square on the nozzle, which promptly breaks off and a long spray comes out until now the can is now truly empty." ;
-		now the printed name of the bug killer is "[if bug killer is empty]now empty [end if]bug spray";
 		
 to say clue-next-puzzle:
 	if spray-the-nest is uncompleted:
