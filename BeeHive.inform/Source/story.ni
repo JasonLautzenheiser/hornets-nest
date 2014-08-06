@@ -128,7 +128,7 @@ Suddenly it stops, sniffing the air when suddenly you smell something too.  A sm
 
 The world begins to blur as the smell becomes stronger, you suddenly realize that it's all been a dream and the orc attacking your village was nothing more than a result of some late night tacos.  But that smell is one all too real.  The perfume your wife wears every day, announcing her presence as she enters the bedroom you share.
 
-'Will you get out of bed!!!', she screeches.  
+'Will you get out of bed!!!' she screeches.  
 
 'You promised you'd get rid of that hornets['] nest before my mother got here.  You know she's allergic.'
 
@@ -136,7 +136,7 @@ You slowly roll out of bed, you had secretly hoped that perhaps your mother-in-l
 
 Getting up you manage to pull on your shorts and a t-shirt before she shoves you out the door.
 
-'Now don't come back until it's gone, ' she demands as she slams and locks the door behind you."
+'Now don't come back until it's gone,' she demands as she slams and locks the door behind you."
 	
 
 Book - Rules
@@ -575,7 +575,7 @@ Carry out spraying:
 		say "You are close enough now, there is no way you'll miss.  You'll have these damn hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[paragraph break]";
 		now the bug killer is empty;
 		now spray-count is spray-count plus one;
-		say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets attention.  They begin to mass an attack.";
+		say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets' attention.  They begin to mass an attack.";
 		hornets attack in 1 turn from now;
 		now spray-the-nest is completed;
 		now the last-puzzle-completed of the player is spray-the-nest;
@@ -597,7 +597,7 @@ Part - Old Actions
 
 sanity-check jumping:
 	if location is up-the-tree:
-		say "You prepare to leap off the ladder, only to realize that it's probaby just as easy to climb down safely." instead;
+		say "You prepare to leap off the ladder, only to realize that it's probably just as easy to climb down safely." instead;
 	else if location is under-the-tree:
 		say "You jump as high as you can trying reach the nearest branch, but it is way out of your reach." instead;
 	otherwise:
@@ -1194,7 +1194,7 @@ The hornets-nest is a container.  It is part of the shade tree.  It is fixed in 
 
 The burn-reject of the hornets-nest is "The nest is up too high to set on fire without setting the whole tree ablaze."
 
-Understand "hive/hives/nest" or "bee's nest" or "hornets nest" as the hornets-nest.
+Understand "hive/hives/nest" or "bee's nest" or "hornets nest" or "hornet's nest" or "hornets' nest" as the hornets-nest.
 
 instead of taking the hornets-nest:
 	if location is up-the-tree:
@@ -1390,7 +1390,7 @@ Part - Shed
 The shed is a backdrop which is everywhere.  The description of the shed is "The tool shed was built back in the 1860s and is falling down, however it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard."
 
 before entering shed:
-	say "You wonder off to the shed.";
+	say "You wander off to the shed.";
 	now the player is in in-the-shed instead.
 
 Part - Pile of wood
@@ -1440,7 +1440,7 @@ instead of cutting the woodpile:
 
 Part - Spider web
 
-The web is a container on the woodpile.  The web is open.  The web is not openable.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've ever seen.[end if]."
+The web is a container on the woodpile.  The web is open.  The web is not openable.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've ever seen[end if]."
 
 The web-top is a supporter.  The web-top is a part of the web.
 Instead of attacking the web:
@@ -1668,7 +1668,7 @@ to suggest next puzzle:
 
 
 to suggest smoke the nest:
-	say "As you look on in disbelief, a thought comes to you: hornets don't like smoke.  Why don't you try smoking them out.".
+	say "As you look on in disbelief, a thought comes to you: hornets don't like smoke.  Why don't you try smoking them out?".
 
 to suggest spray the nest:
 	if player carries bug killer:
