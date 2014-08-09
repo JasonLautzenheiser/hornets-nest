@@ -180,6 +180,21 @@ Part - Standard Actions
 Chapter - Synonyms
 
 Understand "climb [direction]" as going.
+Understand "escape"  as exiting.
+understand "escape [direction]" as going.
+
+understand "collect [something]" as taking.
+understand "collect [something] off/from [something]" as removing it from.
+
+understand the command "capture" as "collect".
+
+understand "jump up" as jumping.
+understand "leap" as jumping.
+
+
+
+
+
 
 Part - New actions
 
