@@ -44,6 +44,24 @@ Book - Extension overrides
 
 Chapter - No valid directions showing (in place of Chapter - Show valid directions after going nowhere in Small Kindnesses by Aaron Reed)
 
+
+Book - Objects
+
+Part - Things
+
+Chapter - Properties
+
+A room can be a safe-zone.
+A thing can be lost or found.  A thing is usually found.
+A thing can be flammable or impervious. A thing is usually impervious.
+A thing can be throwable.
+Flame-state is a kind of value. The flame-states are burnt, flaming, and new. Understand "burning" or "lit" as flaming.   A thing has a flame-state.  A thing is usually new.
+
+Everything has some text called the think-text.  The think-text is usually "".
+Everything has some text called the blind-text.  The blind-text is usually "".
+A room has some text called the blind-text.  The blind-text of a room is usually "".
+
+
 Book - General
 
 To say para -- running on: 
@@ -148,22 +166,6 @@ instead of going nowhere when the player is blinded:
 to say blind-going-reject:
 	say "[one of]trip[or]stumble[or]fall[or]go in circles[then at random]".
 	
-Book - Objects
-
-Part - Things
-
-Chapter - Properties
-
-A room can be a safe-zone.
-A thing can be lost or found.  A thing is usually found.
-A thing can be flammable or impervious. A thing is usually impervious.
-A thing can be throwable.
-Flame-state is a kind of value. The flame-states are burnt, flaming, and new. Understand "burning" or "lit" as flaming.   A thing has a flame-state.  A thing is usually new.
-
-Everything has some text called the think-text.  The think-text is usually "".
-Everything has some text called the blind-text.  The blind-text is usually "".
-A room has some text called the blind-text.  The blind-text of a room is usually "".
-
 
 Book - Easter Eggs
 
@@ -446,9 +448,13 @@ Instead of thinking:
 Chapter - Cutting with
 
 Cutting with is an action applying to two things.
-understand "cut [something] with [something]" as cutting with.
-understand "saw [something] with [something]" as cutting with.
 
+understand "cut [something] with/using  [something preferably held]" as cutting with.
+understand "saw [something] with/using [something preferably held]" as cutting with.
+
+[Check cutting with:
+	say "[We] don't need to cut [regarding the second noun][those]." instead.
+]
 instead of cutting with:
 	if the second noun is the hand-saw:
 		try cutting the noun;
@@ -618,7 +624,17 @@ Report abouting:
 	say "[italic type][Story title][roman type] is copyright © 2014 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[para]";
 	say "This work was created just for the fun of it beginning in early 2014.  This release is made for the IntroComp 2014 contest.  Special thanks to my great testers (in no particular order):  Andrew Schultz, Daniel Stelzer, Hanon Ondricek and Marshal Tenner Winter.  Also special thanks to my wife Holly and my four children, all of whom I was able to bounce ideas off of.[para]"; 
 
+After printing the banner text:
+	say "ABOUT for more information[para]".
 
+
+Chapter - License
+
+Requesting the license is an action out of world.
+Understand "license" and "lisense" and "lisence" as requesting the license.
+Carry out requesting the license:
+	say the license.
+	
 Chapter - Transcripting
 
 To say email:
