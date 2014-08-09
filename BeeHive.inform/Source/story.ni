@@ -3,7 +3,17 @@
 Use full-length room descriptions. 
 Use American dialect.
 
-Volume - Bibliography
+Volume - Metadata
+
+Book - License
+
+To say the license:
+say "Copyright (c) 2014 Jason Lautzenheiser
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+
+Book - Bibliography
 
 The story genre is "Comedy".
 The story headline is "An Interactive Experience in Pest Removal".
@@ -13,24 +23,15 @@ The story creation year is 2014.
 Release along with a website.
 Release along with an interpreter.
 
-Chapter - Credits
+Volume - Mechanics
 
-Abouting is an action out of world applying to nothing.
-Understand "about" as abouting.
-Understand the command "credits" or "info" as "about".
-
-Report abouting:
-	say "[italic type][Story title][roman type] is copyright © 2014 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[para]";
-	say "This work was created just for the fun of it beginning in early 2014.  This release is made for the IntroComp 2014 contest.  Special thanks to my great testers (in no particular order):  Andrew Schultz, Daniel Stelzer, Hanon Ondricek and Marshal Tenner Winter.  Also special thanks to my wife Holly and my four children, all of whom I was able to bounce ideas off of.[para]"; 
-
-Volume - Extensions
+Book - Extensions
 
 Include Small Kindnesses by Aaron Reed.
 Include Trinity Inventory by Mikael Segercrantz.
+Include Basic Screen Effects by Emily Short.
 
-[Include Adaptive Hints by Eric Eve.]
-
-Book  - Not for release
+Book - Extensions - Not for release 
 
 [Include Object Response Tests by Juhana Leinonen.
 Include Property Checking by Emily Short.
@@ -39,66 +40,11 @@ Include Basic Screen Effects by Emily Short.
 ]
  Include Response Assistant by Aaron Reed.
 
-Volume - Testing & Debugging
+Book - Extension overrides
 
-Book - Test commands - Not for release
-	 
-Book - Tests - Not for release
+Chapter - No valid directions showing (in place of Chapter - Show valid directions after going nowhere in Small Kindnesses by Aaron Reed)
 
-test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tree/u/spray/z/z".
-test wood with "test spray/s/catch fly/n/throw fly in web/get wood".
-test fire with "test wood/n/drop wood/take leaves/burn wood with glasses/drop leaves on fire".
-test cut with "test fire/s/in/take saw/n/n/climb ladder/cut tree/d/z/n".
-test rocket with "s/in/search junk/take can/take fly/n/give fly to spider/take wood/n/drop wood/burn wood with glasses/put can in fire".
-
-
-Book - Transcripting
-
-Include Basic Screen Effects by Emily Short.
-
-To say email:
-	say "lautzenheiser.jason@gmail.com".
-
-Include (-
-[ CheckTranscriptStatus;
-#ifdef TARGET_ZCODE;
-return ((0-->8) & 1);
-#ifnot;
-return (gg_scriptstr ~= 0);
-#endif;
-];
--).
- 
-To decide whether currently transcripting: (- CheckTranscriptStatus() -)
- 
-ignore-transcript-nag is a truth state that varies.
- 
-After reading a command:
-	if the player's command matches the regular expression "^\*+|\;.+":
-		if currently transcripting:
-			say "Noted.";
-		otherwise:
-			if ignore-transcript-nag is false:
-				say "You've made a comment-style command, but the transcript is off. Type TRANSCRIPT to turn it on, if you wish to make notes.[paragraph break]The long version of this nag will only appear once. You may press any key to continue.";
-				wait for any key;
-				now ignore-transcript-nag is true;
-			else:
-				say "(Comment not sent to transcript.)";
-		reject the player's command.
-		
-report switching the story transcript on:
-	if currently transcripting:
-		say "Thanks for doing this! Email can go to [email]";
-
-check quitting the game when currently transcripting:
-	say "Thanks for taking the time to create a transcript.  Please send it to [email] and I'll be grateful.  Thanks!"
-	
-	
-Volume - Game Settings
-
-[The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.]
-
-Book - Utilities
+Book - General
 
 To say para -- running on: 
 	(- DivideParagraphPoint(); new_line; -). 
@@ -108,38 +54,9 @@ To set the/-- pronoun him to (O - an object): (- LanguagePronouns-->6 = {O}; -).
 To set the/-- pronoun her to (O - an object): (- LanguagePronouns-->9 = {O}; -).
 To set the/-- pronoun them to (O - an object): (- LanguagePronouns-->12 = {O}; -).
 
-Book - Extension overrides
 
-Chapter - No valid directions showing (in place of Chapter - Show valid directions after going nowhere in Small Kindnesses by Aaron Reed)
 
-Book - Startup
-
-After printing the banner text, say "Copyright © 2014, Jason Lautzenheiser."
-The time of day is 6:05 AM.
-
-When play begins:
-	now the left hand status line is "[the player's surroundings] ";  [number of uncompleted puzzles]
-	now the right hand status line is "Time: [time of day]";
-	say "You pause to hide behind a tree.  You can hear the orc crashing through the underbrush searching for its prey, you.  Eluding them since they attacked your village, you hoped to lead them away from the others while trying to keep out of their cooking pot yourself.  You try to control your breathing as you rest for a moment, but you doubt it can hear it through all the noise it's making.
-
-Suddenly from behind, two arms like tree branches reach out and grab for you.  You slice out with your hunting the knife, the only weapon you managed to grab on your flight out, cutting deeply but not doing any real damage.  The orc keeps hold and slings you over its shoulder and begins to traipse back through the forest.
-
-Suddenly it stops, sniffing the air when suddenly you smell something too.  A smell you know oh too well. A flowery scent, one that strikes fear into the heart of any creature, large or small.  The orc drops you where he stands and runs off in a panic, leaving you lying there.  
-
-The world begins to blur as the smell becomes stronger, you suddenly realize that it's all been a dream and the orc attacking your village was nothing more than a result of some late night tacos.  But that smell is one all too real.  The perfume your wife wears every day, announcing her presence as she enters the bedroom you share.
-
-'Will you get out of bed!!!' she screeches.  
-
-'You promised you'd get rid of that hornets['] nest before my mother got here.  You know she's allergic.'
-
-You slowly roll out of bed, you had secretly hoped that perhaps your mother-in-law would get stung and never come back.  But your fear of your wife is stronger than your desire to see her mother disappear. 
-
-Getting up you manage to pull on your shorts and a t-shirt before she shoves you out the door.
-
-'Now don't come back until it's gone,' she demands as she slams and locks the door behind you."
-	
-
-Book - Rules
+Part - Rules
 
 Rule for printing room description details: stop.
 
@@ -150,7 +67,8 @@ The can't put onto what's not a supporter rule response (A) is "Putting [the nou
 Rule for printing a parser error when the latest parser error is the I beg your pardon error:
   say "[one of]Bzzzzzzz.[or]The hornets laugh at your indecision.[or]Your wife glares at you from the house wondering why you're just standing there.[or]Ahhh...if only I had a beer.[or]Daydreaming again?[or]Your blood pressure is rising.[or]What?[or]Come again?[or]Prithee, pardon?[in random order]"
 
-Chapter - Sanity Checks
+
+Part - Sanity Checks
 
 The sanity-check rules are a rulebook.
 
@@ -178,20 +96,10 @@ sanity-check waiting:
 		say "What are you waiting on?  You're running out of time." instead.
 
 
-Book - Definitions
-
-A room can be a safe-zone.
-A thing can be lost or found.  A thing is usually found.
-A thing can be flammable or impervious. A thing is usually impervious.
-A thing can be throwable.
-Flame-state is a kind of value. The flame-states are burnt, flaming, and new. Understand "burning" or "lit" as flaming.   A thing has a flame-state.  A thing is usually new.
 
 
-Chapter - Thinking
 
-Everything has some text called the think-text.  The think-text is usually "".
-
-Chapter - Flimsy
+Part - Flimsy
 
 A flimsy is a kind of thing.  A flimsy has some text called the action-refusal.  The action-refusal of a flimsy is usually "".  A flimsy is usually fixed in place, undescribed.
 
@@ -209,10 +117,8 @@ instead of doing anything to a flimsy:
 	if the action-refusal of the noun is "", say "[brush-off of noun]";
 	otherwise say "[action-refusal of the noun][paragraph break]".
 
-Chapter - Blind Text	
+Part - Blind Text	
 
-Everything has some text called the blind-text.  The blind-text is usually "".
-A room has some text called the blind-text.  The blind-text of a room is usually "".
 
 instead of examining something when the player is blinded:
 	if the blind-text of the noun is "":
@@ -242,116 +148,36 @@ instead of going nowhere when the player is blinded:
 to say blind-going-reject:
 	say "[one of]trip[or]stumble[or]fall[or]go in circles[then at random]".
 	
+Book - Objects
+
+Part - Things
+
+Chapter - Properties
+
+A room can be a safe-zone.
+A thing can be lost or found.  A thing is usually found.
+A thing can be flammable or impervious. A thing is usually impervious.
+A thing can be throwable.
+Flame-state is a kind of value. The flame-states are burnt, flaming, and new. Understand "burning" or "lit" as flaming.   A thing has a flame-state.  A thing is usually new.
+
+Everything has some text called the think-text.  The think-text is usually "".
+Everything has some text called the blind-text.  The blind-text is usually "".
+A room has some text called the blind-text.  The blind-text of a room is usually "".
+
+
 Book - Easter Eggs
 
 understand "xyzzy" as a mistake("You face the tree and wave your fingers at the nest while chanting 'xyzzy, xyzzy, xyzzy ....' Nothing happens.").
 understand "cut the cheese" or "cut cheese" or "pass gas" or "fart" as a mistake("You pass a little gas.   The hornets seem somewhat amused.").
 
-Book - Characters
 
-Part  - Player Character
+Book - Actions
 
-Myself is a male person.  The player is myself.  
-The description of the player is "You're a third generation farmer who is.....no not really, you bought this old farm house because it was falling down and you got it and the land cheap."
+Part - Standard Actions
 
-A person can be hiding or not-hiding.
-A person can be blinded.   
-Every person has a number called the sting-count.
-The sting-count of the player is 0.
+Chapter - Synonyms
 
-Check going when the player is hiding:
-	now the player is not-hiding.
-
-The player is wearing reading glasses, t-shirt, jean shorts and baseball cap.
-
-Chapter - wife
-
-Wife is a female person.  The description of wife is "Your wife is a very beautiful and smart woman.  Someone she has managed to put up with you for all these years and still stick around.  Maybe she just feels sorry for you."  The printed name of wife is "wife".
-
-After deciding the scope of the player: 
-	place the wife in scope.
-	
-before doing anything to wife:
-	if examining wife:
-		say "[description of wife][para]" instead;
-	otherwise:
-		say "You're not going to [verbword] her until the nest is out of the tree.  She's made that abundantly clear." instead.
-
-before taking wife:
-	say "You're not going to take her anywhere until the nest is out of the tree.  She's made that abundantly clear." instead.
-	
-
-
-Chapter - General Actions the player can perform
-
-instead of going nowhere:
-	say "As much as you want to shirk your responsibility, you promised to get those hornets out of the tree."
-
-Chapter - Reading glasses
-
-The reading glasses are a wearable thing.  The description of reading glasses is "A pair of very thick glasses, you like to call them reading glasses, but in fact you're quite blind without them on."	Understand "spectacles" as reading glasses.  The printed name of reading glasses is "your glasses".
-
-Rule for printing the name of the reading glasses:
-	say "your glasses".
-	
-before of searching glasses:
-	if "[verbword]" exactly matches the text "look":
-		say "You can see clearly now." instead.
-	
-before wearing the glasses:
-	now the player is not blinded.
-	
-before taking off the glasses:
-	now the player is blinded.
-	
-report wearing the glasses:
-	say "Ahhh...now you can see better.";
-	try looking;
-	stop the action.
-	
-Chapter - Baseball cap
-
-A baseball cap is a wearable thing.  The description of baseball cap is "You never really liked baseball, but this hat is very comfortable and it conveniently hides your slightly balding head." The indefinite article is "a".   Understand "hat" as baseball cap.  the printed name of baseball cap is "your baseball cap".
-
-Rule for printing the name of the baseball cap when taking inventory:
-	say "a baseball cap".
-
-Rule for printing the name of the baseball cap:
-	say "your baseball cap".
-	
-Instead of dropping the baseball cap, say "You're pretty self-conscious about your hair, or lack of, so you'll just keep it on."
-Instead of taking off the baseball cap:
-	try dropping the baseball cap instead.
-	
-Chapter - Jean shorts
-
-The jean shorts is a wearable thing.  The description of jean shorts is "Your wife is always trying to throw these shorts out...she says they are too tight on you.  You don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts.  The printed name of jean shorts is "your shorts".
-
-Instead of dropping the shorts, say "Even though they feel like you're wearing nothing, they really do serve a purpose....let's not expose your no-no places."
-
-Instead of taking off the jean shorts:
-	try dropping the jean shorts instead.
-
-Rule for printing the name of the jean shorts when taking inventory:
-	say "some shorts".
-	
-[instead of doing anything with the jean shorts:
-	try dropping the shorts.
-]
-
-	
-
-Chapter - T-shirt
-
-The t-shirt is a wearable thing.  The description of the t-shirt is "Just a plain white t-shirt, nothing fancy." The indefinite article is "a".   the printed name of t-shirt is "your t-shirt".
-Understand "tshirt/shirt/tee/tee-shirt/teeshirt" as t-shirt.
-Instead of dropping the t-shirt, say "You decide to keep your six-pack covered."
-Instead of taking off the t-shirt:
-	try dropping the t-shirt instead.
-Rule for printing the name of the t-shirt:
-	say "a t-shirt".
-	
-Book - Verbs
+Understand "climb [direction]" as going.
 
 Part - New actions
 
@@ -593,7 +419,6 @@ Carry out counting:
 	
 Understand "count blessings" or "count your blessings" or "count my blessings" as a mistake("Well for one you haven't been stung yet...")
 
-Part - Old Actions
 
 sanity-check jumping:
 	if location is up-the-tree:
@@ -781,13 +606,203 @@ rule for supplying a missing second noun when burn-with-glasses is true:
 
 
 	
+Part - Out of world
+
+Chapter - Credits
+
+Abouting is an action out of world applying to nothing.
+Understand "about" as abouting.
+Understand the command "credits" or "info" as "about".
+
+Report abouting:
+	say "[italic type][Story title][roman type] is copyright © 2014 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[para]";
+	say "This work was created just for the fun of it beginning in early 2014.  This release is made for the IntroComp 2014 contest.  Special thanks to my great testers (in no particular order):  Andrew Schultz, Daniel Stelzer, Hanon Ondricek and Marshal Tenner Winter.  Also special thanks to my wife Holly and my four children, all of whom I was able to bounce ideas off of.[para]"; 
+
+
+Chapter - Transcripting
+
+To say email:
+	say "lautzenheiser.jason@gmail.com".
+
+Include (-
+[ CheckTranscriptStatus;
+#ifdef TARGET_ZCODE;
+return ((0-->8) & 1);
+#ifnot;
+return (gg_scriptstr ~= 0);
+#endif;
+];
+-).
+ 
+To decide whether currently transcripting: (- CheckTranscriptStatus() -)
+ 
+ignore-transcript-nag is a truth state that varies.
+ 
+After reading a command:
+	if the player's command matches the regular expression "^\*+|\;.+":
+		if currently transcripting:
+			say "Noted.";
+		otherwise:
+			if ignore-transcript-nag is false:
+				say "You've made a comment-style command, but the transcript is off. Type TRANSCRIPT to turn it on, if you wish to make notes.[paragraph break]The long version of this nag will only appear once. You may press any key to continue.";
+				wait for any key;
+				now ignore-transcript-nag is true;
+			else:
+				say "(Comment not sent to transcript.)";
+		reject the player's command.
+		
+report switching the story transcript on:
+	if currently transcripting:
+		say "Thanks for doing this! Email can go to [email]";
+
+check quitting the game when currently transcripting:
+	say "Thanks for taking the time to create a transcript.  Please send it to [email] and I'll be grateful.  Thanks!"
+	
+	
+
 Volume - The World
 
-Book - Rooms
+Book - Startup
+
+After printing the banner text, say "Copyright © 2014, Jason Lautzenheiser."
+The time of day is 6:05 AM.
+
+When play begins:
+	now the left hand status line is "[the player's surroundings] ";  [number of uncompleted puzzles]
+	now the right hand status line is "Time: [time of day]";
+	say "You pause to hide behind a tree.  You can hear the orc crashing through the underbrush searching for its prey, you.  Eluding them since they attacked your village, you hoped to lead them away from the others while trying to keep out of their cooking pot yourself.  You try to control your breathing as you rest for a moment, but you doubt it can hear it through all the noise it's making.
+
+Suddenly from behind, two arms like tree branches reach out and grab for you.  You slice out with your hunting the knife, the only weapon you managed to grab on your flight out, cutting deeply but not doing any real damage.  The orc keeps hold and slings you over its shoulder and begins to traipse back through the forest.
+
+Suddenly it stops, sniffing the air when suddenly you smell something too.  A smell you know oh too well. A flowery scent, one that strikes fear into the heart of any creature, large or small.  The orc drops you where he stands and runs off in a panic, leaving you lying there.  
+
+The world begins to blur as the smell becomes stronger, you suddenly realize that it's all been a dream and the orc attacking your village was nothing more than a result of some late night tacos.  But that smell is one all too real.  The perfume your wife wears every day, announcing her presence as she enters the bedroom you share.
+
+'Will you get out of bed!!!' she screeches.  
+
+'You promised you'd get rid of that hornets['] nest before my mother got here.  You know she's allergic.'
+
+You slowly roll out of bed, you had secretly hoped that perhaps your mother-in-law would get stung and never come back.  But your fear of your wife is stronger than your desire to see her mother disappear. 
+
+Getting up you manage to pull on your shorts and a t-shirt before she shoves you out the door.
+
+'Now don't come back until it's gone,' she demands as she slams and locks the door behind you."
+
+
+
+Book - Characters
+
+Part  - Player Character
+
+Myself is a male person.  The player is myself.  
+The description of the player is "You're a third generation farmer who is.....no not really, you bought this old farm house because it was falling down and you got it and the land cheap."
+
+A person can be hiding or not-hiding.
+A person can be blinded.   
+Every person has a number called the sting-count.
+The sting-count of the player is 0.
+
+Check going when the player is hiding:
+	now the player is not-hiding.
+
+The player is wearing reading glasses, t-shirt, jean shorts and baseball cap.
+
+
+
+Chapter - wife
+
+Wife is a female person.  The description of wife is "Your wife is a very beautiful and smart woman.  Someone she has managed to put up with you for all these years and still stick around.  Maybe she just feels sorry for you."  The printed name of wife is "wife".
+
+After deciding the scope of the player: 
+	place the wife in scope.
+	
+before doing anything to wife:
+	if examining wife:
+		say "[description of wife][para]" instead;
+	otherwise:
+		say "You're not going to [verbword] her until the nest is out of the tree.  She's made that abundantly clear." instead.
+
+before taking wife:
+	say "You're not going to take her anywhere until the nest is out of the tree.  She's made that abundantly clear." instead.
+	
+
+
+Chapter - General Actions the player can perform
+
+instead of going nowhere:
+	say "As much as you want to shirk your responsibility, you promised to get those hornets out of the tree."
+
+Chapter - Reading glasses
+
+The reading glasses are a wearable thing.  The description of reading glasses is "A pair of very thick glasses, you like to call them reading glasses, but in fact you're quite blind without them on."	Understand "spectacles" as reading glasses.  The printed name of reading glasses is "your glasses".
+
+Rule for printing the name of the reading glasses:
+	say "your glasses".
+	
+before of searching glasses:
+	if "[verbword]" exactly matches the text "look":
+		say "You can see clearly now." instead.
+	
+before wearing the glasses:
+	now the player is not blinded.
+	
+before taking off the glasses:
+	now the player is blinded.
+	
+report wearing the glasses:
+	say "Ahhh...now you can see better.";
+	try looking;
+	stop the action.
+	
+Chapter - Baseball cap
+
+A baseball cap is a wearable thing.  The description of baseball cap is "You never really liked baseball, but this hat is very comfortable and it conveniently hides your slightly balding head." The indefinite article is "a".   Understand "hat" as baseball cap.  the printed name of baseball cap is "your baseball cap".
+
+Rule for printing the name of the baseball cap when taking inventory:
+	say "a baseball cap".
+
+Rule for printing the name of the baseball cap:
+	say "your baseball cap".
+	
+Instead of dropping the baseball cap, say "You're pretty self-conscious about your hair, or lack of, so you'll just keep it on."
+Instead of taking off the baseball cap:
+	try dropping the baseball cap instead.
+	
+Chapter - Jean shorts
+
+The jean shorts is a wearable thing.  The description of jean shorts is "Your wife is always trying to throw these shorts out...she says they are too tight on you.  You don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts.  The printed name of jean shorts is "your shorts".
+
+Instead of dropping the shorts, say "Even though they feel like you're wearing nothing, they really do serve a purpose....let's not expose your no-no places."
+
+Instead of taking off the jean shorts:
+	try dropping the jean shorts instead.
+
+Rule for printing the name of the jean shorts when taking inventory:
+	say "some shorts".
+	
+[instead of doing anything with the jean shorts:
+	try dropping the shorts.
+]
+
+	
+
+Chapter - T-shirt
+
+The t-shirt is a wearable thing.  The description of the t-shirt is "Just a plain white t-shirt, nothing fancy." The indefinite article is "a".   the printed name of t-shirt is "your t-shirt".
+Understand "tshirt/shirt/tee/tee-shirt/teeshirt" as t-shirt.
+Instead of dropping the t-shirt, say "You decide to keep your six-pack covered."
+Instead of taking off the t-shirt:
+	try dropping the t-shirt instead.
+Rule for printing the name of the t-shirt:
+	say "a t-shirt".
+		
+
+Book - Map
 
 Part - Under the Tree
 
 Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wondrous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area][say-fire-is-out]".
+
 
 The blind-text of under-the-tree is "You can make out the faint blur of the tree and the shadows created by the leaves.  You can definitely hear the hornets in their nest above you."
 
@@ -818,7 +833,51 @@ Before going up from under-the-tree:
 	if ladder is not on the tree:
 		say " You never were much of a tree climber.  Besides it wouldn't be pretty if the hornets attack while you were trying to pull yourself up the tree." instead.
 	
+Chapter - Pile of ashes
 
+The pile of ashes is a fixed in place flimsy.  "Just the remains of your wood, now just a pile of grey ashes."  The pile of ashes is described.  Pile of ashes is plural-named.   
+
+
+Chapter - Leaves
+
+Some leaves are in under-the-tree.  Some leaves are undescribed.  The description of some leaves is "The leaves are starting to come down and cover the ground around the tree."  The burn-reject of the leaves is "You gather a pile of leaves and try to light them with your glasses.  They begin to smoke profusely but quickly go out as they are too wet from a recent rain to ignite on their own."
+Some leaves is plural-named.
+
+After taking some leaves:
+	say "You gather up a handful of leaves, but there are still plenty left to clean up."
+	
+Instead of counting some leaves:
+	say "There are exactly 69,105 leaves...somehow that doesn't surprise you.";
+
+instead of throwing leaves when twigs are flaming:
+	try putting some leaves on the twigs instead.
+
+Before throwing some leaves at twigs:
+	try putting some leaves on the twigs instead.	
+
+Before throwing some leaves into twigs:
+	try putting some leaves on the twigs instead.	
+
+Before throwing some leaves onto twigs:
+	try putting some leaves on the twigs instead.	
+
+	
+instead of putting some leaves on the twigs:
+	if twigs are flaming:
+		say "[regarding the noun][if the player is not carrying some leaves]You gather up a handful of leaves and [otherwise]You [end if]toss [them] onto the fire and the smoke begins to build until a dark gray cloud begins to lift from the ground up into the tree.";
+		now leaves are off-stage;
+		now the smoke is heavy instead;
+	otherwise:
+		say "Tossing the leaves on the twigs would not serve any purpose right now."
+
+instead of kicking the leaves:
+	say "You kick at the leaves and they fly up into the air only to settle down again.  The yard looks no different."
+
+Before putting some leaves on the fire-top:
+	try putting some leaves on the twigs instead.
+		
+
+	
 Part - In the shed
 
 In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway to the north.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug spray.[end if]  [describe-the-hand-saw]".  
@@ -901,8 +960,142 @@ Before searching the shelf:
 	otherwise:
 		say "You find nothing that looks useful to your current plight." instead.
 	
-	
+Chapter - Can of Bug Killer
 
+The bug killer is a thing.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" or "spray" as bug killer.   the bug killer is flammable.
+
+The bug killer is either empty, half-full or full.  The bug killer is full.
+The bug killer is either shaken or settled.  The bug killer is settled.
+The bug killer is lost.
+
+Before putting the bug killer on the twigs:
+	if the twigs are flaming:
+		try putting the bug killer on the fire-top instead.
+		
+Before putting the bug killer on the fire-top:
+	if the player is carrying the bug killer:
+		now fire-the-missle is running instead.
+
+before kicking the bug killer:
+	if the location is not up-the-tree:
+		say "You give the can of bug spray the boot and it goes flying.";
+		now the bug killer is in a random adjacent room.
+
+Understand "kick the can" or "kick can" as a mistake("Dying may be preferable to seeing your inlaws, but that's not a viable option, so back to getting rid of the nest.").	
+
+Chapter  - Hand saw	
+
+The hand-saw is an undescribed thing in in-the-shed.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" or "hand saw" as hand-saw.  
+The description of hand-saw is "Nope, you didn't use this much either.  The saw is new and shiny." 	
+The hand-saw can be hanging.  The hand-saw is hanging.  
+
+Check taking the hand-saw for the first time:
+	now the hand-saw is not hanging.
+
+Before kicking the hand-saw:
+	say "You try to kick the saw, but only manage to slice your leg as you miss horribly." instead.
+	
+Rule for deciding whether all includes the hand-saw: it does.
+
+Chapter - Ladder
+
+A ladder is a thing.  A ladder is in in-the-shed.  The description is "It's a cheap aluminum step ladder your Dad gave you for a house warming gift when you moved in twenty years ago[one of][if location is in-the-shed and player is not carrying the ladder] is still laying where you left it.....oh....twenty years ago[end if][or][stopping]."
+
+Before climbing the ladder:
+	if location is under-the-tree:
+		if the ladder is on the tree:
+			say "You climb as quietly as possible up the ladder until you are just a few feet away from the nest.  The hornets didn't see you coming, but now a few start to buzz around your head.";
+		otherwise:
+			try leaning the ladder on the tree;
+		try going up instead.
+
+instead of kicking the ladder:
+	say "You kick the ladder and manage to hurt your toe in the process.  The ladder doesn't appear to have noticed."
+	
+Instead of putting the ladder on something (called the leaned-on):
+	try leaning the ladder on the leaned-on instead.
+	
+The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.
+The examine supporters rule is not listed in any rulebook.
+
+Chapter - horsefly
+
+[http://inform7.com/learn/man/ex1.html]
+Every turn when the player is in in-the-shed and the horsefly is on-stage and the player does not carry the horsefly and the noun part of the current action is not the horsefly:
+	if a random chance of 1 in 2 succeeds:
+		say "[one of]You hear a fly in the window as it tries to escape[or]You notice a fly walking up the window[or]A fly buzzes past your nose, just to circle around and fly right back into the window[or]The fly unceasingly bangs into the window[or]A sudden silence startles you only to be interrupted by the fly in the window again[at random]."
+
+The horsefly is an undescribed thing in in-the-shed.  The description of horsefly is "The large horsefly is at least two inches long and [if player carries horsefly]it struggles to get out of your grip[otherwise if location is in-the-shed]keeps buzzing around the window trying to get out[end if]."  Understand "fly" as horsefly.
+
+instead of kicking the horsefly:
+	say "You kick at the fly, but it is moving to fast and you too uncoordinated for you to make contact.".
+
+Before taking horsefly:
+	if the player is carrying the horsefly:
+		say "No need, you already have it." instead;
+	otherwise:
+		say "You spend several minutes trying to get your hands on the fly.  It is only after it gets hung up in some cobwebs that you are finally able to catch it.  You grab it holding on by its wings to keep it from moving around too much.";
+		now the player carries the horsefly instead; 
+
+after dropping horsefly:
+	say "You let the horsefly go and you watch it fly away, [if location is not in-the-shed]right back into the shed.[otherwise]right back into the window.[end if]";
+	now horsefly is in in-the-shed.
+
+before putting the horsefly on anything:
+	try dropping horsefly instead.
+
+Before putting the horsefly on the web-top:
+	if player is carrying horsefly:
+		say "You toss the fly into the web and the spider instantly pounces on it and begins to wrap it up.  When it's done wrapping, it drags the fly off the web and underneath the wood pile.";
+		now spider is off-stage;
+		now horsefly is off-stage instead;
+	otherwise:
+		try dropping the noun instead.
+
+before throwing the horsefly:
+	try dropping the horsefly instead;
+
+before throwing the horsefly at something:
+	try dropping the horsefly instead;
+
+Before throwing the horsefly at web:
+	try putting the horsefly on the web-top instead.	
+
+Before throwing the horsefly into web:
+	try putting the horsefly on the web-top instead.	
+
+Before throwing the horsefly onto web:
+	try putting the horsefly on the web-top instead.	
+
+Before inserting the horsefly into the web:
+	try putting the horsefly on the web-top instead.
+
+Before putting the horsefly on the web:
+	try putting the horsefly on the web-top instead.
+
+Before throwing horsefly at spider:
+	try putting the horsefly on the web-top instead.
+	
+instead of giving the horsefly to the spider:
+	try putting the horsefly on the web-top instead.
+
+understand "smack [something]" or "swat [something]" as attacking.
+
+instead of attacking the horsefly:
+	try taking the horsefly instead.
+	
+before eating the horsefly:
+	say "As juicy as it looks, you don't find it near as appetizing as some other creatures.  Perhaps something else would enjoy eating it instead." instead.
+
+After deciding the scope of the player when location is outside-the-shed and the horsefly is off-stage: 
+	place the horsefly in scope.
+
+before doing anything to the horsefly while the horsefly is off-stage:
+	say "I'm sure the spider is having a wonderful time with the fly, but you won't be able to do anything with it anymore." instead.
+
+
+	
+	
 Part - Outside the shed
 
 Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However, it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
@@ -929,120 +1122,7 @@ To say described-shed-door:
 	if we have not examined the shed-door and shed-door-first-seen is false:
 		say "The shed door has fallen off years ago and you never bothered to replace it.  ".
 		
-		
-Part - On the porch
-
-On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the [porch-swing] and drinking a [beer].  To the east right off the porch is the large tree and to the southeast is your shed."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
-
-The porch is a backdrop.  The porch is everywhere.  The description of the porch is "The front porch is large and roomy.  Plenty of space to sit and relax...if it wasn't for those hornets."
-
-Instead of taking the porch:
-	say "[one of]The thought had crossed your mind that if you could just move the porch to the back of the house, then you could sit out there free of the hornets.  Alas, if you could you probably would.[or]Moving the porch anywhere just isn't possible.[stopping]".
-
-The porch-swing is a enterable supporter in on-the-porch.  The porch-swing is scenery.  The printed name of porch-swing is "porch swing".  The description of porch-swing is "The porch swing sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
-Understand "swing" or "porch swing" or "glider" as porch-swing.
-
-Instead of swinging the porch-swing:
-	if the player is on the porch-swing:
-		say "You lean back and swing for a bit, but as much as you hoped, the hornets didn't leave on their own.";
-	otherwise:
-		say "You give the porch swing a soft kick and it rocks back and forth for a bit." 
-
-The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."  The initial appearance of the beer is "Oh trust me, if you had a beer right now, you'd be doing more than just looking at it."
-
-The front door is a flimsy in on-the-porch. "The front door leading into your house, in fact it's the only way into your house and your wife locked the door behind you when you left this morning.  Her exact words were 'Don[']t bother coming back until that nest is gone.'".  The action-refusal is "You told your wife you were not coming in until the nest was gone (actually, she told you that, but you won't admit that out loud, will you?)".
-
-before going inside in on-the-porch:
-	try opening the front door instead.
-
-before going up when the player is on the porch-swing:
-	if player is on the porch-swing:
-		try getting off the porch-swing instead.
-
-Does the player mean entering the porch-swing when the player is in on-the-porch: it is likely.
-Does the player mean swinging the porch-swing when the player is in on-the-porch: it is likely.
-Does the player mean swinging the porch-swing when the player is on the  porch-swing: it is likely.
-
-
-Part - Up the tree
-
-Up-the-tree is a room.  The printed name is "Up the Tree".  The description is "You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head.  The only way is down."  Up-the-tree is up from under-the-tree.
-
-Check dropping something while location is up-the-tree:
-	say "[The noun] falls to the ground.";
-	move the noun to under-the-tree instead;
-	
-Book - Things
-
-Part - Can of Bug Killer
-
-The bug killer is a thing.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" or "spray" as bug killer.   the bug killer is flammable.
-
-The bug killer is either empty, half-full or full.  The bug killer is full.
-The bug killer is either shaken or settled.  The bug killer is settled.
-The bug killer is lost.
-
-Before putting the bug killer on the twigs:
-	if the twigs are flaming:
-		try putting the bug killer on the fire-top instead.
-		
-Before putting the bug killer on the fire-top:
-	if the player is carrying the bug killer:
-		now fire-the-missle is running instead.
-
-before kicking the bug killer:
-	if the location is not up-the-tree:
-		say "You give the can of bug spray the boot and it goes flying.";
-		now the bug killer is in a random adjacent room.
-
-Understand "kick the can" or "kick can" as a mistake("Dying may be preferable to seeing your inlaws, but that's not a viable option, so back to getting rid of the nest.").
-
-
-Part  - Hand saw	
-
-The hand-saw is an undescribed thing in in-the-shed.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" or "hand saw" as hand-saw.  
-The description of hand-saw is "Nope, you didn't use this much either.  The saw is new and shiny." 	
-The hand-saw can be hanging.  The hand-saw is hanging.  
-
-Check taking the hand-saw for the first time:
-	now the hand-saw is not hanging.
-
-Before kicking the hand-saw:
-	say "You try to kick the saw, but only manage to slice your leg as you miss horribly." instead.
-	
-Rule for deciding whether all includes the hand-saw: it does.
-	
-Part - Shovel
-
-The shovel is a thing.  The description of shovel is "[if the shovel is in on-the-porch and the shovel is not carried by the player]The shovel is handy for cleaning up the dog-doo.  That's why you just leave it laying around on the porch within easy reach.[otherwise]Simple spade wth long wooden handle.  You've only ever used it to clean up the mess the dog leaves in the yard.[end if]"
-
-Understand "spade" as shovel.
-
-	
-Part - Ladder
-
-A ladder is a thing.  A ladder is in in-the-shed.  The description is "It's a cheap aluminum step ladder your Dad gave you for a house warming gift when you moved in twenty years ago[one of][if location is in-the-shed and player is not carrying the ladder] is still laying where you left it.....oh....twenty years ago[end if][or][stopping]."
-
-Before climbing the ladder:
-	if location is under-the-tree:
-		if the ladder is on the tree:
-			say "You climb as quietly as possible up the ladder until you are just a few feet away from the nest.  The hornets didn't see you coming, but now a few start to buzz around your head.";
-		otherwise:
-			try leaning the ladder on the tree;
-		try going up instead.
-
-instead of kicking the ladder:
-	say "You kick the ladder and manage to hurt your toe in the process.  The ladder doesn't appear to have noticed."
-	
-Instead of putting the ladder on something (called the leaned-on):
-	try leaning the ladder on the leaned-on instead.
-	
-The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.
-The examine supporters rule is not listed in any rulebook.
-
-	
-
-Part - Some twigs	
+Chapter - Some twigs	
 
 Some twigs is a thing.  The description of some twigs is "[describe-twigs]".  Understand "wood/pile/piles" as some twigs when spider is off-stage and the location is not in-the-shed.  Some twigs are flammable.  
 The indefinite article of the twigs is "a small pile of".	
@@ -1081,114 +1161,146 @@ Instead of kicking the twigs:
 	otherwise:
 		say "You kick the twigs scattering them throughout the yard.";
 		now the twigs are off-stage.
-		
-Part - Pile of ashes
 
-The pile of ashes is a fixed in place flimsy.  "Just the remains of your wood, now just a pile of grey ashes."  The pile of ashes is described.  Pile of ashes is plural-named.   
+Chapter - Pile of wood
+
+The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.  The woodpile is in outside-the-shed.
 
 
-Part - Fire
 
-The fire is a container.  The fire-top is a supporter.  The printed name of fire-top is "fire".  The fire-top is part of the fire.  The fire is scenery.
-Understand "flame" as fire.
-
-Before inserting something (called the fuel) into the fire:
-	try putting the fuel on the fire-top instead.
-
-Before putting something (called the fuel)  on the fire:
-	try putting the fuel on the fire-top instead.
-
-Before throwing something (called the fuel) onto fire:
-	try putting the fuel on the fire-top instead.	
-
-Before throwing something (called the fuel) into fire:
-	try putting the fuel on the fire-top instead.	
-
-Before throwing something (called the fuel)  at fire:
-	try putting the fuel on the fire-top instead.	
-	
-Before putting something on the fire-top:
-	if the noun is not flammable:
-		say "You could put [the noun] in the fire, but it wouldn't burn." instead;
+Before taking woodpile:
+	if large spider is on-stage:
+		say "As you go to take some of the wood, the large spider turns towards your hand and rears up as if to bite." instead;
 	otherwise:
-		say "here i am" instead.
-		
-after kicking the fire:
-	say "You kick at the fire and manage to put it out.";
-	now the fire is off-stage;
-	now the smoke is off-stage;
-	now the smoke is light;
-	now the twigs are new;
-	now the twigs are off-stage.
+		if the web is on-stage:
+			say "You brush the web aside and take a handful of the dry wood.";
+			now the player carries some twigs;
+			now the web is off-stage instead;
+		else if the player is carrying some twigs:
+			say "You have enough wood for now." instead;
+		if some twigs are flaming:
+			say "You have a fire going already and don't want to make too big of one this close to your house." instead;
+		otherwise:
+			say "You gather some more wood.";
+			now the player carries some twigs instead;
+			
+before putting something on the woodpile:
+	if the noun is the horsefly:
+		try putting the horsefly on the web-top instead;
+
+before throwing something at the woodpile:
+	if the noun is the horsefly:
+		try putting the horsefly on the web-top instead;
+
+before throwing something on the woodpile:
+	if the noun is the horsefly:
+		try putting the horsefly on the web-top instead;
+
+before throwing something onto the woodpile:
+	if the noun is the horsefly:
+		try putting the horsefly on the web-top instead;
+
+before throwing something into the woodpile:
+	if the noun is the horsefly:
+		try putting the horsefly on the web-top instead;
+
+instead of cutting the woodpile:
+	say "You break up some of the wood into pieces small enough to stand in for toothpicks, but you wisely decide that they may better serve as kindling so you leave the rest intact."
+
+
+Section - Spider web
+
+The web is a container on the woodpile.  The web is open.  The web is not openable.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've ever seen[end if]."
+
+The web-top is a supporter.  The web-top is a part of the web.
+Instead of attacking the web:
+	try attacking the large spider.
+
+instead of kicking the web:
+	try kicking the large spider instead.
 	
-	
-instead of examining the fire:
-	say "The fire is small but hot and [if smoke is light]not putting out much smoke[otherwise]putting out quite a bit of smoke[end if]."
-	
-Part - Leaves
-
-Some leaves are in under-the-tree.  Some leaves are undescribed.  The description of some leaves is "The leaves are starting to come down and cover the ground around the tree."  The burn-reject of the leaves is "You gather a pile of leaves and try to light them with your glasses.  They begin to smoke profusely but quickly go out as they are too wet from a recent rain to ignite on their own."
-Some leaves is plural-named.
-
-After taking some leaves:
-	say "You gather up a handful of leaves, but there are still plenty left to clean up."
-	
-Instead of counting some leaves:
-	say "There are exactly 69,105 leaves...somehow that doesn't surprise you.";
-
-instead of throwing leaves when twigs are flaming:
-	try putting some leaves on the twigs instead.
-
-Before throwing some leaves at twigs:
-	try putting some leaves on the twigs instead.	
-
-Before throwing some leaves into twigs:
-	try putting some leaves on the twigs instead.	
-
-Before throwing some leaves onto twigs:
-	try putting some leaves on the twigs instead.	
-
-	
-instead of putting some leaves on the twigs:
-	if twigs are flaming:
-		say "[regarding the noun][if the player is not carrying some leaves]You gather up a handful of leaves and [otherwise]You [end if]toss [them] onto the fire and the smoke begins to build until a dark gray cloud begins to lift from the ground up into the tree.";
-		now leaves are off-stage;
-		now the smoke is heavy instead;
+before taking the web:
+	if spider is on-stage:
+		try taking the spider instead;
 	otherwise:
-		say "Tossing the leaves on the twigs would not serve any purpose right now."
+		say "You brush the web aside only to have some of it stick to your hand.  You then spend the next ten minutes trying to get the web off your hand, first transferring it to your shorts, then back to your other hand until you finally manage to wipe most of it off on the ground.";
+		now the web is off-stage;
+		increase the time of day by 10 minutes instead.
 
-instead of kicking the leaves:
-	say "You kick at the leaves and they fly up into the air only to settle down again.  The yard looks no different."
 
-Before putting some leaves on the fire-top:
-	try putting some leaves on the twigs instead.
+Section - spider	
+
+The large spider is a animal in the web.  The  description of large spider is "The spider is as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.
+The spider is attackable.
+
+Instead of taking the large spider:
+	say "You start to reach for the spider to brush it and its web out of the way, but as your hand approaches, the spider actually turns and rears up at you ready to bite."
+	
+before kicking the spider:
+	say "You kick at the spider, but your foot catches on the edge of the wood and manage to fall rather ungracefully." instead.
+
+Instead of attacking the large spider:
+	try taking large spider.
+
+Instead of kissing the spider:
+	say "You close your eyes, pucker up and move in for the kiss.  You open them at the last second and see the spider right in your face ready to return your 'kiss' with a bite of it's own.  You quickly retreat and wonder what in the world you were thinking."
+
+before doing anything to the spider when the spider is off-stage:
+	say "You know the spider is under this pile of wood somewhere." instead
+	
+After deciding the scope of the player when location is outside-the-shed and the spider is off-stage: 
+	place the spider in scope.
 		
+				
+Part - On the porch
 
-Part - Hole
+On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the [porch-swing] and drinking a [beer].  To the east right off the porch is the large tree and to the southeast is your shed."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
 
-The hole is a fixed in place container.   The description is "The hole isn't very deep, but you think it is big enough for the nest to fit into."
+The porch is a backdrop.  The porch is everywhere.  The description of the porch is "The front porch is large and roomy.  Plenty of space to sit and relax...if it wasn't for those hornets."
 
-Instead of taking the hole:
-	say "Really, did you really just try to pick up the hole?"
+Instead of taking the porch:
+	say "[one of]The thought had crossed your mind that if you could just move the porch to the back of the house, then you could sit out there free of the hornets.  Alas, if you could you probably would.[or]Moving the porch anywhere just isn't possible.[stopping]".
+
+The porch-swing is a enterable supporter in on-the-porch.  The porch-swing is scenery.  The printed name of porch-swing is "porch swing".  The description of porch-swing is "The porch swing sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
+Understand "swing" or "porch swing" or "glider" as porch-swing.
+
+Instead of swinging the porch-swing:
+	if the player is on the porch-swing:
+		say "You lean back and swing for a bit, but as much as you hoped, the hornets didn't leave on their own.";
+	otherwise:
+		say "You give the porch swing a soft kick and it rocks back and forth for a bit." 
+
+The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."  The initial appearance of the beer is "Oh trust me, if you had a beer right now, you'd be doing more than just looking at it."
+
+The front door is a flimsy in on-the-porch. "The front door leading into your house, in fact it's the only way into your house and your wife locked the door behind you when you left this morning.  Her exact words were 'Don[']t bother coming back until that nest is gone.'".  The action-refusal is "You told your wife you were not coming in until the nest was gone (actually, she told you that, but you won't admit that out loud, will you?)".
+
+before going inside in on-the-porch:
+	try opening the front door instead.
+
+before going up when the player is on the porch-swing:
+	if player is on the porch-swing:
+		try getting off the porch-swing instead.
+
+Does the player mean entering the porch-swing when the player is in on-the-porch: it is likely.
+Does the player mean swinging the porch-swing when the player is in on-the-porch: it is likely.
+Does the player mean swinging the porch-swing when the player is on the  porch-swing: it is likely.
+
+Chapter - Shovel
+
+The shovel is a thing.  The description of shovel is "[if the shovel is in on-the-porch and the shovel is not carried by the player]The shovel is handy for cleaning up the dog-doo.  That's why you just leave it laying around on the porch within easy reach.[otherwise]Simple spade wth long wooden handle.  You've only ever used it to clean up the mess the dog leaves in the yard.[end if]"
+
+Understand "spade" as shovel.
+
 	
-	
-Part - Smoke
+Part - Up the tree
 
-The smoke is scenery.  The smoke is undescribed.  The smoke can be heavy or light.  The smoke is light.
+Up-the-tree is a room.  The printed name is "Up the Tree".  The description is "You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head.  The only way is down."  Up-the-tree is up from under-the-tree.
 
-Instead of doing anything to the smoke: say "The smoke flitters away before you can do that."
+Check dropping something while location is up-the-tree:
+	say "[The noun] falls to the ground.";
+	move the noun to under-the-tree instead;
 
-instead of kicking the smoke:
-	say "You kick at the smoke and your leg passes right through."
-
-Instead of examining the smoke:
-	if the smoke is light:
-		say "Just a light tendril of smoke streams up from the burning twigs.";
-	if the smoke is heavy:
-		say "A heavy gray smoke pours out from the burning pile."
-
-
-Part - Hornets Nest
+Chapter - Hornets Nest
 
 The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [if bug killer is part of the hornets-nest]Stuck in the bottom of the nest is the can of bug spray.[end if][one of]You promised your wife you wouldn't come back until the nest was gone or you wouldn't come back at all.[or][stopping]". The printed name is "hornet's nest".  The indefinite article is "a".  The hornets-nest is attackable.
 
@@ -1226,8 +1338,7 @@ Instead of cutting the hornets-nest:
 	otherwise:
 		say "The nest is too far away to effectively cut up into little pieces."
 		
-	
-Part - Hornets	
+Chapter - Hornets	
 
 Some hornets are an animal in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets][if the smoke is on-stage and the smoke is heavy]They appear to be wearing miniature gas masks.[end if]".  The hornets are attackable.
 The hornets can be grabbed.
@@ -1266,8 +1377,76 @@ Before attacking hornets:
 before kissing the hornets:
 	say "Why???   Do you want big red lips?" instead.
 	
+		
+Book - Things
 
-Part - Tree
+Chapter - Fire
+
+The fire is a container.  The fire-top is a supporter.  The printed name of fire-top is "fire".  The fire-top is part of the fire.  The fire is scenery.
+Understand "flame" as fire.
+
+Before inserting something (called the fuel) into the fire:
+	try putting the fuel on the fire-top instead.
+
+Before putting something (called the fuel)  on the fire:
+	try putting the fuel on the fire-top instead.
+
+Before throwing something (called the fuel) onto fire:
+	try putting the fuel on the fire-top instead.	
+
+Before throwing something (called the fuel) into fire:
+	try putting the fuel on the fire-top instead.	
+
+Before throwing something (called the fuel)  at fire:
+	try putting the fuel on the fire-top instead.	
+	
+Before putting something on the fire-top:
+	if the noun is not flammable:
+		say "You could put [the noun] in the fire, but it wouldn't burn." instead;
+	otherwise:
+		say "here i am" instead.
+		
+after kicking the fire:
+	say "You kick at the fire and manage to put it out.";
+	now the fire is off-stage;
+	now the smoke is off-stage;
+	now the smoke is light;
+	now the twigs are new;
+	now the twigs are off-stage.
+	
+	
+instead of examining the fire:
+	say "The fire is small but hot and [if smoke is light]not putting out much smoke[otherwise]putting out quite a bit of smoke[end if]."
+
+
+Chapter - Hole
+
+The hole is a fixed in place container.   The description is "The hole isn't very deep, but you think it is big enough for the nest to fit into."
+
+Instead of taking the hole:
+	say "Really, did you really just try to pick up the hole?"
+	
+	
+Chapter - Smoke
+
+The smoke is scenery.  The smoke is undescribed.  The smoke can be heavy or light.  The smoke is light.
+
+Instead of doing anything to the smoke: say "The smoke flitters away before you can do that."
+
+instead of kicking the smoke:
+	say "You kick at the smoke and your leg passes right through."
+
+Instead of examining the smoke:
+	if the smoke is light:
+		say "Just a light tendril of smoke streams up from the burning twigs.";
+	if the smoke is heavy:
+		say "A heavy gray smoke pours out from the burning pile."
+
+
+
+Book - Backdrops
+
+Chapter - Tree
 
 The shade tree is a supporter which is in under-the-tree. The tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]Hanging from a branch is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
 
@@ -1374,18 +1553,18 @@ instead of taking the cut branch:
 [instead of doing anything with the cut branch:
 	say "It is much too heavy."]
 
-Part - Sun
+Chapter - Sun
 
 The sun is a backdrop which is everywhere.  The description of the sun is "You start to stare at the sun, but realize that is probably why your eye sight is not so good anymore.  It's very bright and very hot."
 
 instead of kicking the sun:
 	say "Really??"
 
-Part - House
+Chapter - House
 
 The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got its problems....but it's home."  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
 
-Part - Shed
+Chapter - Shed
 
 The shed is a backdrop which is everywhere.  The description of the shed is "The tool shed was built back in the 1860s and is falling down, however it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard."
 
@@ -1393,172 +1572,10 @@ before entering shed:
 	say "You wander off to the shed.";
 	now the player is in in-the-shed instead.
 
-Part - Pile of wood
 
-The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.  The woodpile is in outside-the-shed.
-
-
-
-Before taking woodpile:
-	if large spider is on-stage:
-		say "As you go to take some of the wood, the large spider turns towards your hand and rears up as if to bite." instead;
-	otherwise:
-		if the web is on-stage:
-			say "You brush the web aside and take a handful of the dry wood.";
-			now the player carries some twigs;
-			now the web is off-stage instead;
-		else if the player is carrying some twigs:
-			say "You have enough wood for now." instead;
-		if some twigs are flaming:
-			say "You have a fire going already and don't want to make too big of one this close to your house." instead;
-		otherwise:
-			say "You gather some more wood.";
-			now the player carries some twigs instead;
-			
-before putting something on the woodpile:
-	if the noun is the horsefly:
-		try putting the horsefly on the web-top instead;
-
-before throwing something at the woodpile:
-	if the noun is the horsefly:
-		try putting the horsefly on the web-top instead;
-
-before throwing something on the woodpile:
-	if the noun is the horsefly:
-		try putting the horsefly on the web-top instead;
-
-before throwing something onto the woodpile:
-	if the noun is the horsefly:
-		try putting the horsefly on the web-top instead;
-
-before throwing something into the woodpile:
-	if the noun is the horsefly:
-		try putting the horsefly on the web-top instead;
-
-instead of cutting the woodpile:
-	say "You break up some of the wood into pieces small enough to stand in for toothpicks, but you wisely decide that they may better serve as kindling so you leave the rest intact."
-
-Part - Spider web
-
-The web is a container on the woodpile.  The web is open.  The web is not openable.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've ever seen[end if]."
-
-The web-top is a supporter.  The web-top is a part of the web.
-Instead of attacking the web:
-	try attacking the large spider.
-
-instead of kicking the web:
-	try kicking the large spider instead.
-	
-before taking the web:
-	if spider is on-stage:
-		try taking the spider instead;
-	otherwise:
-		say "You brush the web aside only to have some of it stick to your hand.  You then spend the next ten minutes trying to get the web off your hand, first transferring it to your shorts, then back to your other hand until you finally manage to wipe most of it off on the ground.";
-		now the web is off-stage;
-		increase the time of day by 10 minutes instead.
 	
 
-Part - spider	
-
-The large spider is a animal in the web.  The  description of large spider is "The spider is as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.
-The spider is attackable.
-
-Instead of taking the large spider:
-	say "You start to reach for the spider to brush it and its web out of the way, but as your hand approaches, the spider actually turns and rears up at you ready to bite."
-	
-before kicking the spider:
-	say "You kick at the spider, but your foot catches on the edge of the wood and manage to fall rather ungracefully." instead.
-
-Instead of attacking the large spider:
-	try taking large spider.
-
-Instead of kissing the spider:
-	say "You close your eyes, pucker up and move in for the kiss.  You open them at the last second and see the spider right in your face ready to return your 'kiss' with a bite of it's own.  You quickly retreat and wonder what in the world you were thinking."
-
-before doing anything to the spider when the spider is off-stage:
-	say "You know the spider is under this pile of wood somewhere." instead
-	
-After deciding the scope of the player when location is outside-the-shed and the spider is off-stage: 
-	place the spider in scope.
-	
-	
-Part - horsefly
-
-[http://inform7.com/learn/man/ex1.html]
-Every turn when the player is in in-the-shed and the horsefly is on-stage and the player does not carry the horsefly and the noun part of the current action is not the horsefly:
-	if a random chance of 1 in 2 succeeds:
-		say "[one of]You hear a fly in the window as it tries to escape[or]You notice a fly walking up the window[or]A fly buzzes past your nose, just to circle around and fly right back into the window[or]The fly unceasingly bangs into the window[or]A sudden silence startles you only to be interrupted by the fly in the window again[at random]."
-
-The horsefly is an undescribed thing in in-the-shed.  The description of horsefly is "The large horsefly is at least two inches long and [if player carries horsefly]it struggles to get out of your grip[otherwise if location is in-the-shed]keeps buzzing around the window trying to get out[end if]."  Understand "fly" as horsefly.
-
-instead of kicking the horsefly:
-	say "You kick at the fly, but it is moving to fast and you too uncoordinated for you to make contact.".
-
-Before taking horsefly:
-	if the player is carrying the horsefly:
-		say "No need, you already have it." instead;
-	otherwise:
-		say "You spend several minutes trying to get your hands on the fly.  It is only after it gets hung up in some cobwebs that you are finally able to catch it.  You grab it holding on by its wings to keep it from moving around too much.";
-		now the player carries the horsefly instead; 
-
-after dropping horsefly:
-	say "You let the horsefly go and you watch it fly away, [if location is not in-the-shed]right back into the shed.[otherwise]right back into the window.[end if]";
-	now horsefly is in in-the-shed.
-
-before putting the horsefly on anything:
-	try dropping horsefly instead.
-
-Before putting the horsefly on the web-top:
-	if player is carrying horsefly:
-		say "You toss the fly into the web and the spider instantly pounces on it and begins to wrap it up.  When it's done wrapping, it drags the fly off the web and underneath the wood pile.";
-		now spider is off-stage;
-		now horsefly is off-stage instead;
-	otherwise:
-		try dropping the noun instead.
-
-before throwing the horsefly:
-	try dropping the horsefly instead;
-
-before throwing the horsefly at something:
-	try dropping the horsefly instead;
-
-Before throwing the horsefly at web:
-	try putting the horsefly on the web-top instead.	
-
-Before throwing the horsefly into web:
-	try putting the horsefly on the web-top instead.	
-
-Before throwing the horsefly onto web:
-	try putting the horsefly on the web-top instead.	
-
-Before inserting the horsefly into the web:
-	try putting the horsefly on the web-top instead.
-
-Before putting the horsefly on the web:
-	try putting the horsefly on the web-top instead.
-
-Before throwing horsefly at spider:
-	try putting the horsefly on the web-top instead.
-	
-instead of giving the horsefly to the spider:
-	try putting the horsefly on the web-top instead.
-
-understand "smack [something]" or "swat [something]" as attacking.
-
-instead of attacking the horsefly:
-	try taking the horsefly instead.
-	
-before eating the horsefly:
-	say "As juicy as it looks, you don't find it near as appetizing as some other creatures.  Perhaps something else would enjoy eating it instead." instead.
-
-After deciding the scope of the player when location is outside-the-shed and the horsefly is off-stage: 
-	place the horsefly in scope.
-
-before doing anything to the horsefly while the horsefly is off-stage:
-	say "I'm sure the spider is having a wonderful time with the fly, but you won't be able to do anything with it anymore." instead.
-
-
-Part - wood-burner
+Chapter - wood-burner
 
 The wood-burner is a backdrop which is everywhere.  The description of wood-burner is "The wood burner was in the house when you bought it and you thought for sure you would use it every winter.  Then came that first year of chopping wood....that was too much like work, so you stacked that little pile by the shed and never thought about it again."  Understand "woodburner/burner" or "wood burner" as wood-burner.
 
@@ -1978,3 +1995,16 @@ report throwing something through a second noun (this is the throwing something 
 
 report throwing something out of a second noun (this is the throwing something out of something rule) :
 	say "You can't [verbword] [the noun] out of [the second noun]."
+
+
+Volume - Testing & Debugging
+
+Book - Test commands - Not for release
+	 
+Book - Tests - Not for release
+
+test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tree/u/spray/z/z".
+test wood with "test spray/s/catch fly/n/throw fly in web/get wood".
+test fire with "test wood/n/drop wood/take leaves/burn wood with glasses/drop leaves on fire".
+test cut with "test fire/s/in/take saw/n/n/climb ladder/cut tree/d/z/n".
+test rocket with "s/in/search junk/take can/take fly/n/give fly to spider/take wood/n/drop wood/burn wood with glasses/put can in fire".
