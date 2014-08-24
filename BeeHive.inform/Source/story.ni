@@ -83,7 +83,7 @@ The block attacking rule response (A) is "[if the noun is hornets]Yes that is yo
 The can't put onto what's not a supporter rule response (A) is "Putting [the noun] on [the second noun] wouldn't do anything exciting."
 
 Rule for printing a parser error when the latest parser error is the I beg your pardon error:
-  say "[one of]Bzzzzzzz.[or]The hornets laugh at your indecision.[or]Your wife glares at you from the house wondering why you're just standing there.[or]Ahhh...if only I had a beer.[or]Daydreaming again?[or]Your blood pressure is rising.[or]What?[or]Come again?[or]Prithee, pardon?[in random order]"
+  say "[one of]Bzzzzzzz.[or]The hornets laugh at your indecision.[or]Ahhh...if only I had a beer.[or]Daydreaming again?[or]Your blood pressure is rising.[or]What?[or]Come again?[or]Prithee, pardon?[in random order]"
 
 
 Part - Sanity Checks
@@ -102,7 +102,7 @@ sanity-check wearing something which is not wearable:
 	say  "How in the world would you go about wearing [the noun]?" instead.
 	
 sanity-check taking something that is flaming:
-	say "It's way too hot to carry around." instead.
+	say "[regarding the noun][They're] way too hot to carry around." instead.
 	
 sanity-check sleeping:
 	say "Sleeping before the job is done?  I don't think so." instead.
@@ -122,18 +122,18 @@ Part - Flimsy
 A flimsy is a kind of thing.  A flimsy has some text called the action-refusal.  The action-refusal of a flimsy is usually "".  A flimsy is usually fixed in place, undescribed.
 
 To say brush-off of (n - a thing):
-	say "You don't need to worry about [if n is plural-named]those[else]that[end if]."
+	say "You don't need to worry about [regarding the noun][those]."
 
 Rule for writing a paragraph about a flimsy (called xx):
 	now xx is mentioned.
 
 Instead of examining a flimsy:
 	if the initial appearance of the noun is "", say "[brush-off of noun]";
-	otherwise say "[initial appearance of the noun][paragraph break]".
+	otherwise say "[initial appearance of the noun][para]".
 
 instead of doing anything to a flimsy:
 	if the action-refusal of the noun is "", say "[brush-off of noun]";
-	otherwise say "[action-refusal of the noun][paragraph break]".
+	otherwise say "[action-refusal of the noun][para]".
 
 Part - Blind Text	
 
@@ -142,13 +142,13 @@ instead of examining something when the player is blinded:
 	if the blind-text of the noun is "":
 		say "Without your glasses on, everything is a big blur.";
 	otherwise:
-		say "[blind-text of the noun][paragraph break]".
+		say "[blind-text of the noun][para]".
 
 instead of looking when the player is blinded:
 	if the blind-text of the location is "":
 		say "Without your glasses on, everything is a big blur.";
 	otherwise:
-		say "[blind-text of the location][paragraph break]".
+		say "[blind-text of the location][para]".
 
 before searching the location when blinded:
 	say "All you find are vague shapes and colors." instead;
@@ -201,7 +201,7 @@ Part - New actions
 Chapter - Misc
 
 Instead of looking under something carried by the player:
-	say "It should be pretty obvious what is under [the noun] since you are carrying [it], but you can't help but to take a look anyway."
+	say "It should be pretty obvious what is under [the noun] since [we] are carrying [it], but [we] can't help but to take a look anyway."
 	
 Instead of looking under something (called the underling) worn by the player:
 	if underling is the baseball cap:
@@ -237,7 +237,7 @@ Kicking is an action applying to one thing.
 Understand "kick [something]" as kicking.
 
 before kicking anything when the location is up-the-tree:
-	say "Kicking something while perched on the ladder would most likely make your trip to the ground very rapid." instead.
+	say "Kicking [it] while perched on the ladder would most likely make your trip to the ground very rapid." instead.
 
 Report kicking something (called the booted-item):
 	say "You kick [the booted-item] and you now feel a bit better."
@@ -304,7 +304,7 @@ Check shaking:
 		-- the bug killer:
 			do nothing;
 		-- otherwise:
-			say "You shake it, but nothing happens other than your arm getting a little tired."
+			say "[regarding the noun]You shake [them], but nothing happens other than your arm getting a little tired."
 	
 Carry out shaking:
 	if the noun is the bug killer: 
@@ -316,26 +316,20 @@ Report shaking the bug killer:
 Chapter - Leaning
 
 Leaning it on is an action applying to two visible things.
-understand "lean [something] on [something]" as leaning it on.
-understand "lean [something] against [something]" as leaning it on.
+understand "lean [something] on/against [something]" as leaning it on.
 understand "lean [something]" as leaning it on.
 understand "set [something]" as leaning it on.
-understand "set [something] on [something]" as leaning it on.
-understand "set [something] against [something]" as leaning it on.
-understand "put [something] on [something]" as leaning it on.
-understand "put [something] against [something]" as leaning it on.
+understand "set [something] on/against [something]" as leaning it on.
+understand "put [something] on/against [something]" as leaning it on.
 
 Rule for supplying a missing noun while leaning (this is the leaning on rule):
 	now the noun is the player.
 	
 Rule for supplying a missing second noun while leaning:
 	if location is under-the-tree:
-		now the second noun is the bug killer;
+		now the second noun is the tree;
 	if location is on-the-porch:
 		now the second noun is the house;
-	otherwise:
-		say "You lean [the noun] against thin air and it promptly leans all the way to the ground.";
-		now the noun is in the location.
 	
 Check leaning:
 	if the noun is:
@@ -348,11 +342,15 @@ Check leaning:
 				now the ladder is on the tree;
 			if the second noun is the shed:
 				say "You don't think the shed would hold you if you managed to climb up on top of it.  You decide to hold on to the ladder.";
+		-- otherwise:
+			say "You lean [the noun] against thin air and [they] promptly leans all the way to the ground.";
+			now the noun is in the location.
+
 
 			
 Before putting something on the tree: 
 	if the noun is not the ladder:
-		say "You try to put [the noun] on the tree, but it won't stay." instead.
+		say "You try to put [the noun] on the tree, but [they] won't stay." instead.
 
 Chapter - Catching
 		
@@ -362,7 +360,7 @@ Understand "catch a cold" or "catch cold" as a mistake("Now why would you want t
 
 Check catching:
 	if the noun is the hornets, say "I'm sure that would be quite painful.  Stick around long enough and they may catch you." instead;
-	if the noun is not the horsefly, say "Perhaps if [the noun] was running away, you could catch it.  It's not, so you can't." instead.
+	if the noun is not the horsefly, say "Perhaps if [the noun] [are] running away, you could catch [them].  [They]['re] not, so you can't." instead.
 	
 Carry out catching:
 	if the location is in-the-shed:
@@ -388,9 +386,9 @@ Rule for supplying a missing noun while spraying:
 	now the noun is the hornets-nest.
 	
 Check spraying:
-	if the second noun is not the bug killer , say "You could try spraying it with [the second noun] but I don't think you would be very successful." instead;
+	if the second noun is not the bug killer , say "You could try spraying [regarding the noun][them] with [the second noun] but I don't think you would be very successful." instead;
 	if player is not carrying the bug killer, say "You have nothing to spray with." instead;
-	if bug killer is empty, say "Well, the can is empty now, so spraying [the noun] won't help much now." instead;		
+	if bug killer is empty, say "Well, the can is empty now, so spraying [regarding the noun][them] won't help much now." instead;		
 	if noun is the large spider:
 		say "You read the back of the can and it doesn't mention spiders as something it is effective on, so you don't bother as there is not much spray left." instead;
 	if noun is the horsefly:
@@ -398,7 +396,7 @@ Check spraying:
 	otherwise:
 		if location is not under-the-tree and the location is not up-the-tree:
 			if noun is hornets or noun is hornets-nest:
-				say "You'll need to get closer to the nest before attempting to spray [if noun is hornets]them[otherwise]it[end if]." instead;
+				say "You'll need to get closer to the nest before attempting to spray [regarding the noun][them]." instead;
 			otherwise:
 				say "Bug spray is used to kill bugs not [the noun]." instead;
 	
@@ -411,11 +409,11 @@ Carry out spraying:
 			now the hornets are angry;
 			if spray-count is 0:
 				now spray-count is spray-count plus one;
-				say "You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, 'Sprays up to 8 feet!'...well crap, I've got to get closer.[paragraph break]You shake the can one more time and you seem to have just a little left." instead;
+				say "You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, 'Sprays up to 8 feet!'...well crap, I've got to get closer.[para]You shake the can one more time and you seem to have just a little left." instead;
 			otherwise:
 				say "You really should try to get closer to the nest." instead;
 	if location is up-the-tree:
-		say "You are close enough now, there is no way you'll miss.  You'll have these damn hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[paragraph break]";
+		say "You are close enough now, there is no way you'll miss.  You'll have these damn hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[para]";
 		now the bug killer is empty;
 		now spray-count is spray-count plus one;
 		say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets' attention.  They begin to mass an attack.";
@@ -437,11 +435,13 @@ Carry out counting:
 Understand "count blessings" or "count your blessings" or "count my blessings" as a mistake("Well for one you haven't been stung yet...")
 
 
+Chapter - Jump
+
 sanity-check jumping:
 	if location is up-the-tree:
 		say "You prepare to leap off the ladder, only to realize that it's probably just as easy to climb down safely." instead;
 	else if location is under-the-tree:
-		say "You jump as high as you can trying reach the nearest branch, but it is way out of your reach." instead;
+		say "You jump as high as you can trying reach the nearest branch, but it is just out of your reach." instead;
 	otherwise:
 		say "You do your best impression of a basketball player (or is it a ballerina)?" instead.
 
@@ -474,7 +474,7 @@ instead of cutting with:
 	if the second noun is the hand-saw:
 		try cutting the noun;
 	otherwise:
-		say "You attempt to cut [the noun] with [the second noun], but it is not very effective."
+		say "[We] try to cut [the noun] with [the second noun], but [they] [are] not very effective."
 
 
 Chapter - Putting
@@ -588,7 +588,7 @@ understand "burn [something]" as burning it with when burn-with-glasses is true.
 Check burning something with something:  
 	if the second noun is not reading glasses, say "You can't start a fire with [the second noun]." instead; 
 	if burn-with-glasses is false:
-		say "[first time][italic type]Note: now you can just type BURN something and I'll use your glasses.[roman type][paragraph break][only]";
+		say "[first time][italic type]Note: now you can just type BURN something and I'll use your glasses.[roman type][para][only]";
 	now burn-with-glasses is true;
 	if the noun is flammable:
 		if the noun is new:
@@ -596,21 +596,21 @@ Check burning something with something:
 				say "You might want to set [the noun] down first." instead;
 			otherwise:
 				if location is not under-the-tree:
-					say "[if location is in-the-shed]You risk burning the entire shed down if you tried that.[otherwise if location is outside-the-shed]The fire could spread to the shed and you'd end up burning that down.[otherwise if location is on-the-porch]You might catch the house on fire if you tried that.[otherwise if location is up-the-tree]You couldn't manage to do that without setting the tree on fire or falling out of it, probably both.[end if]" instead;
+					say "[if location is in-the-shed]You risk burning the entire shed down if you tried that.[otherwise if location is outside-the-shed]The fire could spread to the shed and you'd end up burning that down also.[otherwise if location is on-the-porch]You might catch the house on fire if you tried that.[otherwise if location is up-the-tree]You couldn't manage to do that without setting the tree on fire or falling out of it, probably both.[end if]" instead;
 		if the noun is flaming:
-			say "That is already on fire." instead;
+			say "[They] [are] already on fire." instead;
 		if the noun is burnt:
-			say "You try burning [the noun] again, but it only smokes a little then sputters out." instead;
+			say "You try burning [the noun] again, but [they] only smoke[if the noun is singular-named]s[end if] a little then sputter[if the noun is singular-named]s[end if] out." instead;
 	otherwise:
 		if the noun is some leaves and the twigs are flaming:
 			try putting some leaves on the fire instead;
 		if the burn-reject of the noun is "":
 			say "You could set [the noun] on fire, but you shouldn[']t.  You're not a kid anymore." instead;
 		otherwise:
-			say "[burn-reject of the noun][paragraph break]" instead;
+			say "[burn-reject of the noun][para]" instead;
 	
 Carry out burning something with something:
-	say "You take off your glasses and remembering your training from cub scouts, you hold them at just the right angle so the sunlight makes a pinpoint on [the noun]. [paragraph break]";
+	say "You take off your glasses and remembering your training from cub scouts, you hold them at just the right angle so the sunlight makes a pinpoint on [the noun]. [para]";
 	if the noun is bug killer:
 		say "The can gets a little hot, but nothing else happens.";
 	if the noun is twigs:
@@ -619,8 +619,6 @@ Carry out burning something with something:
 		now the smoke is on-stage;
 		now the noun is flaming;
 		flame goes out in 10 turns from now;
-[		now build-a-fire is completed;
-		now the last-puzzle-completed of the player is build-a-fire.]
 
 rule for supplying a missing second noun when burn-with-glasses is true: 
 	now second noun is glasses
@@ -675,7 +673,7 @@ After reading a command:
 			say "Noted.";
 		otherwise:
 			if ignore-transcript-nag is false:
-				say "You've made a comment-style command, but the transcript is off. Type TRANSCRIPT to turn it on, if you wish to make notes.[paragraph break]The long version of this nag will only appear once. You may press any key to continue.";
+				say "You've made a comment-style command, but the transcript is off. Type TRANSCRIPT to turn it on, if you wish to make notes.[para]The long version of this nag will only appear once. You may press any key to continue.";
 				wait for any key;
 				now ignore-transcript-nag is true;
 			else:
@@ -801,7 +799,7 @@ Instead of taking off the baseball cap:
 	
 Chapter - Jean shorts
 
-The jean shorts is a wearable thing.  The description of jean shorts is "Your wife is always trying to throw these shorts out...she says they are too tight on you.  You don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts.  The printed name of jean shorts is "your shorts".
+The jean shorts is a wearable thing.  The description of jean shorts is "Your wife is always trying to throw these shorts out...she says they are too tight on you.  You don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts.  The printed name of jean shorts is "your shorts".  jean shorts is plural-named.
 
 Instead of dropping the shorts, say "Even though they feel like you're wearing nothing, they really do serve a purpose....let's not expose your no-no places."
 
@@ -839,7 +837,7 @@ The blind-text of under-the-tree is "You can make out the faint blur of the tree
 
 To say say-fire-is-out:
 	if fire-is-out is true:
-		say "[para]You're fire appears to have gone out since you were gone.";
+		say "[para]The fire appears to have gone out since you were gone.";
 		now fire-is-out is false;
 		
 		
@@ -847,7 +845,7 @@ To say other-stuff-in-area:
 	let need_period be false;
 	if ladder is on tree:
 		now need_period is true;
-		say  "Your ladder is leaning up against the tree";
+		say  "The ladder is leaning against the tree";
 	if cut branch is in under-the-tree:
 		now need_period is true;
 		if ladder is on tree:
@@ -895,7 +893,7 @@ Before throwing some leaves onto twigs:
 	
 instead of putting some leaves on the twigs:
 	if twigs are flaming:
-		say "[regarding the noun][if the player is not carrying some leaves]You gather up a handful of leaves and [otherwise]You [end if]toss [them] onto the fire and the smoke begins to build until a dark gray cloud begins to lift from the ground up into the tree.";
+		say "[regarding the noun][if the player is not carrying some leaves]You gather up a handful of leaves and [otherwise]You [end if]toss [them] onto the fire.  The smoke begins to build until a dark gray cloud rises from the ground up into the tree.";
 		now leaves are off-stage;
 		now the smoke is heavy instead;
 	otherwise:
@@ -922,11 +920,14 @@ before going north in in-the-shed:
 A dirty window is in in-the-shed.  The dirty window is scenery. The description of the dirty window is "The window is covered in cobwebs and dust.  It doesn't look like it's been cleaned for decades, if ever.  [if horsefly is in in-the-shed]In the corner of the window is a large horsefly, buzzing up against the window trying to get out.[end if]"
 
 instead of kicking the window:
-	say "You start to kick the window but then realize that it would probably be easier to just go through the open doorway."
+	say "You start to kick the window but then realize that it would probably be easier to just exit through the open doorway."
 
 sanity-check rubbing up:
 	try rubbing the junk instead.
 	
+sanity-check rubbing shed:
+	try rubbing the junk instead.
+
 Sanity-check rubbing the window:
 	say "You rub and rub the window but it doesn't look much cleaner." instead.
 	
@@ -1077,7 +1078,7 @@ before putting the horsefly on anything:
 
 Before putting the horsefly on the web-top:
 	if player is carrying horsefly:
-		say "You toss the fly into the web and the spider instantly pounces on it and begins to wrap it up.  When it's done wrapping, it drags the fly off the web and underneath the wood pile.";
+		say "You toss the fly into the web and the spider instantly pounces on it and begins to wrap it up.  When it's done, it drags the fly off the web and underneath the wood pile.";
 		now spider is off-stage;
 		now horsefly is off-stage instead;
 	otherwise:
@@ -1261,7 +1262,7 @@ before taking the web:
 
 Section - spider	
 
-The large spider is a animal in the web.  The  description of large spider is "The spider is as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.
+The large spider is a animal in the web.  The  description of large spider is "The spider is as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.   The spider is undescribed.
 The spider is attackable.
 
 Instead of taking the large spider:
@@ -1499,10 +1500,7 @@ Rule for reaching inside a room:
 			say "You can only look at [the noun] from a distance.";
 			deny access;
 	otherwise:
-		if the noun is not scenery:
-			say "You can only look at [the second noun] from a distance.";
-		otherwise:
-			say "You can only look at [the noun] from a distance.";
+		say "You can only look at [the noun] from a distance.";
 		deny access.
 	
 instead of touching the tree:
@@ -1556,12 +1554,12 @@ Instead of cutting the tree:
 			otherwise:
 				say "You take the hand saw and begin to cut through the branch that the hornet's nest is hanging from.  After a moment the branch cracks and falls to the ground taking the nest with it.  You start to raise your arms in triumph, but then remembering you are standing on a ladder, you think better of it and just grin happily to yourself.";
 				if the hole is in under-the-tree:
-					say "[paragraph break]The nest falls right into the hole.  You clamber down the ladder and quickly fill in the hole covering the nest.  ";
+					say "[para]The nest falls right into the hole.  You clamber down the ladder and quickly fill in the hole covering the nest.  ";
 					now the hole is off-stage;
 					now the hornets-nest is off-stage;
 					now the player is in under-the-tree;
 				otherwise:
-					say "[paragraph break]As the nest hits the ground, it bursts into pieces and the hornets scatter in all directions.......only to regroup high up in the tree where they hover for a moment, then as if shot from a pistol, head in your direction.";
+					say "[para]As the nest hits the ground, it bursts into pieces and the hornets scatter in all directions.......only to regroup high up in the tree where they hover for a moment, then as if shot from a pistol, head in your direction.";
 					now the cut branch is in under-the-tree;
 					now the last-puzzle-completed of the player is cut-the-branch;
 					hornets attack in 1 turn from now;
@@ -1569,7 +1567,7 @@ Instead of cutting the tree:
 		otherwise:
 			say "Cutting down the entire tree is a bit of overkill, don't you think?";
 	otherwise:
-		say "You make a cutting motion on the tree with your hand and succeed in nothing more than scraping up your hand.";
+		say "You make a cutting motion on the tree with your hand and succeed in nothing more than scraping up the side of your hand.";
 		
 The bark is a flimsy.  The bark is part of the shade tree.
 The roots are a flimsy.  The roots are part of the shade tree.  the action-refusal is  "The roots are pretty necessary to the health of the tree.  You don't want to risk anything."
@@ -1697,9 +1695,9 @@ Part - Hornets Attack
 at the time when the hornets attack:
 	if location is up-the-tree or location is under-the-tree:
 		if the last-puzzle-completed of the player is fire-the-missle:
-			say "With the can stuck in the opening of the nest, the nest begins to expand as the hornets attempt to escape.  Finally in a large explosion of pieces of nest and angry hornets, they escape and begin to swarm around you aggressively.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
+			say "With the can stuck in the opening of the nest, the nest begins to expand as the hornets attempt to escape.  Finally in a large explosion of pieces of nest and angry hornets, they escape and begin to swarm around you aggressively.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[para]";
 		otherwise:
-			say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[paragraph break]";
+			say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[para]";
 		now the player is hiding;
 		now the hornets are aggressive;
 		now the player is in a random safe-zone room;
@@ -1730,7 +1728,7 @@ to suggest spray the nest:
 at the time when the hornets calm down:
 	now the hornets are swarming;
 	if the last-puzzle-completed of the player is cut-the-branch:
-		say "Amazingly as you look back at the tree, the hornets are swarming wildly around another branch.  Their activity grows in intensity and soon you can see nothing but a large mass of hornets all moving together.  [paragraph break]After a few moments, the activity ceases, most of the hornets retreat into a new nest that is now hanging from another branch.";
+		say "Amazingly as you look back at the tree, the hornets are swarming wildly around another branch.  Their activity grows in intensity and soon you can see nothing but a large mass of hornets all moving together.  [para]After a few moments, the activity ceases, most of the hornets retreat into a new nest that is now hanging from another branch.";
 
 
 to say bug-killer-drop-description:
