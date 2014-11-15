@@ -23,21 +23,24 @@ The story creation year is 2014.
 Release along with a website.
 Release along with an interpreter.
 
+
+
+
 Volume - Mechanics
 
 Book - Extensions
 
 Include Small Kindnesses by Aaron Reed.
-Include Trinity Inventory by Mikael Segercrantz.
-Include Basic Screen Effects by Emily Short.
+[Include Trinity Inventory by Mikael Segercrantz.]
+[Include Basic Screen Effects by Emily Short.]
 
 Book - Extensions - Not for release 
 
-[Include Object Response Tests by Juhana Leinonen.
-Include Property Checking by Emily Short.
-Include Debugging by Al Golden.
-Include Basic Screen Effects by Emily Short.
-]
+[Include Object Response Tests by Juhana Leinonen.]
+[Include Property Checking by Emily Short.]
+[Include Debugging by Al Golden.]
+[Include Basic Screen Effects by Emily Short.]
+
  Include Response Assistant by Aaron Reed.
 
 Book - Extension overrides
@@ -71,6 +74,8 @@ To set the/-- pronoun it to (O - an object): (- LanguagePronouns-->3 = {O}; -).
 To set the/-- pronoun him to (O - an object): (- LanguagePronouns-->6 = {O}; -).
 To set the/-- pronoun her to (O - an object): (- LanguagePronouns-->9 = {O}; -).
 To set the/-- pronoun them to (O - an object): (- LanguagePronouns-->12 = {O}; -).
+
+Part - Relations
 
 
 
@@ -114,18 +119,9 @@ sanity-check waiting:
 		say "What are you waiting on?  You're running out of time." instead.
 
 
-
-
-
 Part - Flimsy
 
 A flimsy is a kind of thing.  A flimsy has some text called the action-refusal.  The action-refusal of a flimsy is usually "".  A flimsy is usually fixed in place, undescribed.
-
-To say brush-off of (n - a thing):
-	say "You don't need to worry about [regarding the noun][those]."
-
-Rule for writing a paragraph about a flimsy (called xx):
-	now xx is mentioned.
 
 Instead of examining a flimsy:
 	if the initial appearance of the noun is "", say "[brush-off of noun]";
@@ -135,8 +131,13 @@ instead of doing anything to a flimsy:
 	if the action-refusal of the noun is "", say "[brush-off of noun]";
 	otherwise say "[action-refusal of the noun][para]".
 
-Part - Blind Text	
+To say brush-off of (n - a thing):
+	say "You don't need to worry about [regarding the noun][those]."
 
+Rule for writing a paragraph about a flimsy (called xx):
+	now xx is mentioned.
+
+Part - Blind Text	
 
 instead of examining something when the player is blinded:
 	if the blind-text of the noun is "":
@@ -154,7 +155,7 @@ before searching the location when blinded:
 	say "All you find are vague shapes and colors." instead;
 
 instead of going somewhere when the player is blinded and the location is up-the-tree:
-	say "You start to move, but not seeing clearly,  you misjudge the next rung on the ladder and manage to fall, not to gently to the ground.";
+	say "You start to move, but not seeing clearly, you misjudge the next rung on the ladder and manage to fall, not to gently to the ground.";
 	now the player is in under-the-tree.
 
 instead of going somewhere when the player is blinded:
@@ -190,11 +191,6 @@ understand the command "capture" as "collect".
 
 understand "jump up" as jumping.
 understand "leap" as jumping.
-
-
-
-
-
 
 Part - New actions
 
@@ -315,39 +311,72 @@ Report shaking the bug killer:
 
 Chapter - Leaning
 
+Resting on relates one thing to another.
+The verb to rest on means the resting on relation.
+
 Leaning it on is an action applying to two visible things.
 understand "lean [something] on/against [something]" as leaning it on.
 understand "lean [something]" as leaning it on.
 understand "set [something]" as leaning it on.
 understand "set [something] on/against [something]" as leaning it on.
 understand "put [something] on/against [something]" as leaning it on.
+understand "rest [something] on/against [something]" as leaning it on.
+understand "lean on/against [something]" as leaning it on.
+understand "rest on/against [something]" as leaning it on.
+	
+Rule for supplying a missing second noun while leaning something on:
+	if the noun is not the ladder:
+		now the second noun is the noun;
+		now the noun is the player;
+	otherwise:
+		if location is under-the-tree:
+			now the second noun is the tree;
+		if location is on-the-porch:
+			now the second noun is the house;
 
-Rule for supplying a missing noun while leaning (this is the leaning on rule):
-	now the noun is the player.
-	
-Rule for supplying a missing second noun while leaning:
-	if location is under-the-tree:
-		now the second noun is the tree;
-	if location is on-the-porch:
-		now the second noun is the house;
-	
 Check leaning:
 	if the noun is:
 		-- myself:
 			if the second noun is the tree:
 				say "You lean against the tree nonchalantly...well that didn't work, the hornets notice you and become a bit agitated.";
 		-- ladder:
-			if the second noun is the tree:
-				say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
-				now the ladder is on the tree;
-			if the second noun is the shed:
-				say "You don't think the shed would hold you if you managed to climb up on top of it.  You decide to hold on to the ladder.";
+			if the second noun is:
+				--  the tree:
+					if the location is under-the-tree:
+						say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
+						if the ladder is not in under-the-tree:
+							try silently dropping ladder;
+						now the ladder rests on the tree;
+					otherwise:
+						say "[lean-ladder-to-far-away]";
+				-- the shed:
+					if the location is outside-the-shed:
+						say "You don't think the shed would hold you if you managed to climb up on top of it.  You decide to hold on to the ladder.";
+						now the player carries the ladder;
+					else if the location is in-the-shed:
+						if the player carries the ladder:
+							say "You lean the ladder back where you found it.";
+							try silently dropping the ladder;
+						otherwise:
+							say "The ladder is already leaning in the corner.";
+					otherwise:
+						say "[lean-ladder-to-far-away]";
+				-- the house:
+					if the location is under-the-tree or the location is on-the-porch:
+						say "You lean the ladder against the house. You can climb onto the roof now.";
+						if the ladder is not in under-the-tree:
+							now the ladder is in under-the-tree;
+						now the ladder is resting on the house;
+				-- otherwise:
+					say "[lean-ladder-to-far-away]";
 		-- otherwise:
 			say "You lean [the noun] against thin air and [they] promptly leans all the way to the ground.";
-			now the noun is in the location.
+			try silently dropping ladder;
 
 
-			
+to say lean-ladder-to-far-away:
+	say "The ladder is not long enough to lean it against [the second noun] from here.".
+
 Before putting something on the tree: 
 	if the noun is not the ladder:
 		say "You try to put [the noun] on the tree, but [they] won't stay." instead.
@@ -389,6 +418,10 @@ Check spraying:
 	if the second noun is not the bug killer , say "You could try spraying [regarding the noun][them] with [the second noun] but I don't think you would be very successful." instead;
 	if player is not carrying the bug killer, say "You have nothing to spray with." instead;
 	if bug killer is empty, say "Well, the can is empty now, so spraying [regarding the noun][them] won't help much now." instead;		
+	if the noun is fire:
+		continue the action;
+	if the noun is twigs and the twigs are flaming:
+		try spraying the fire with the bug killer instead;
 	if noun is the large spider:
 		say "You read the back of the can and it doesn't mention spiders as something it is effective on, so you don't bother as there is not much spray left." instead;
 	if noun is the horsefly:
@@ -398,24 +431,49 @@ Check spraying:
 			if noun is hornets or noun is hornets-nest:
 				say "You'll need to get closer to the nest before attempting to spray [regarding the noun][them]." instead;
 			otherwise:
-				say "Bug spray is used to kill bugs not [the noun]." instead;
+				say "[spray-rejection]." instead;
+		otherwise:
+			if the noun is hornets or noun is hornets-nest:
+				continue the action;
+			otherwise:
+				say "[spray-rejection]." instead;
 	
 spray-count is a number that varies. spray-count is 0.
 
+to say spray-the-fire:
+	say "Spraying the fire will result in a large explosion";
+
+To say spray-rejection:
+	say "[one of]You wouldn't want to waste precious spray on [the noun][or]Bug spray is used to kill bugs not [the noun][then at random]";
+	
+To spray-the-can:
+	now spray-count is spray-count plus 1;
+	if the bug killer is full:
+		now the bug killer is half-full;
+	otherwise:
+		if the bug killer is half-full:
+			now the bug killer is empty;
+	
+To empty-the-can:
+	now the bug killer is empty;
+
 Carry out spraying:
+	if the noun is the fire:
+		say "Boom.";
+		spray-the-can;			
+		stop the action;
 	if location is under-the-tree:	
 		if noun is hornets-nest or noun is hornets:
-			now the bug killer is half-full;
 			now the hornets are angry;
 			if spray-count is 0:
-				now spray-count is spray-count plus one;
+				spray-the-can;
 				say "You take careful aim....and spray.....and the stream falls a foot short of the nest.  You take a second look at the can and see it says, 'Sprays up to 8 feet!'...well crap, I've got to get closer.[para]You shake the can one more time and you seem to have just a little left." instead;
 			otherwise:
 				say "You really should try to get closer to the nest." instead;
 	if location is up-the-tree:
 		say "You are close enough now, there is no way you'll miss.  You'll have these damn hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[para]";
-		now the bug killer is empty;
-		now spray-count is spray-count plus one;
+		spray-the-can;
+		empty-the-can;
 		say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets' attention.  They begin to mass an attack.";
 		hornets attack in 1 turn from now;
 		now spray-the-nest is completed;
@@ -442,6 +500,8 @@ sanity-check jumping:
 		say "You prepare to leap off the ladder, only to realize that it's probably just as easy to climb down safely." instead;
 	else if location is under-the-tree:
 		say "You jump as high as you can trying reach the nearest branch, but it is just out of your reach." instead;
+	else if location is on-the-roof:
+		say "You could jump off the roof, but that sounds like the recipie for a broken neck." instead;
 	otherwise:
 		say "You do your best impression of a basketball player (or is it a ballerina)?" instead.
 
@@ -508,7 +568,13 @@ Check attacking it with:
 		if the location is up-the-tree:
 			say "You take a test swing with [the second noun] but realize that you don't have the coordination to swing with enough force to be effective without knocking yourself off the ladder and down to the ground.";
 		otherwise:
-			say "You swing [the printed name of the second noun] at the nest over and over but you're not tall enough to hit it and the wind generated from your incessant swinging does little.";
+			if the second noun is the ladder:
+				say "The ladder is awkward, but you manage to take a swing at the nest with it and bump it hard enough to make the hornets angry but not hard enough to knock the nest out of the tree.";
+				hornets attack in 1 turn from now;
+				now hit-nest-with-ladder is completed;
+				now the last-puzzle-completed of the player is hit-nest-with-ladder;
+			otherwise:
+				say "You swing [the printed name of the second noun] at the nest over and over but you're not tall enough to hit it and the wind generated from your incessant swinging does little.";
 	otherwise if the noun is the large spider:
 		say "You swat at the large spider with [the second noun], but each time it ducks into a crevice where you can't reach it.  The spider resumes it's place on the web, glaring at you with very little sympathy.";
 	otherwise: 
@@ -551,10 +617,11 @@ Check throwing:
 	if the noun is the ladder:
 		if the location is under-the-tree:
 			say "You give the ladder a heave and if by magic it lands upright leaning against the tree.";
-			now ladder is on the tree instead;
+			now ladder is resting on the tree;
+			try silently dropping the ladder instead;
 		otherwise:
 			say "You awkwardly throw the ladder and it falls just as awkwardly to the ground.";
-			now the ladder is in the location instead;
+			try silently dropping the ladder instead;
 	if the noun is the horsefly:
 		if the second noun is web:
 			try putting the horsefly on the web instead;
@@ -663,6 +730,32 @@ return (gg_scriptstr ~= 0);
 ];
 -).
  
+Include (-
+
+! Wait for a safe non navigating key. The user might press Down/PgDn or use the mouse scroll wheel to scroll a page of text, so we will stop those key codes from continuing.
+[ KeyPause key; 
+	while ( 1 )
+	{
+		key = VM_KeyChar();
+		#Ifdef TARGET_ZCODE;
+		if ( key == 63 or 129 or 130 or 132 )
+		{
+			continue;
+		}
+		#Ifnot; ! TARGET_GLULX
+		if ( key == -4 or -5 or -10 or -11 or -12 or -13 )
+		{
+			continue;
+		}
+		#Endif; ! TARGET_
+		rfalse;
+	}
+];
+-). 
+
+To wait for any key:
+	(- KeyPause(); -).
+	 
 To decide whether currently transcripting: (- CheckTranscriptStatus() -)
  
 ignore-transcript-nag is a truth state that varies.
@@ -699,23 +792,7 @@ The time of day is 6:05 AM.
 When play begins:
 	now the left hand status line is "[the player's surroundings] ";  [number of uncompleted puzzles]
 	now the right hand status line is "Time: [time of day]";
-	say "You pause to hide behind a tree.  You can hear the orc crashing through the underbrush searching for its prey, you.  Eluding them since they attacked your village, you hoped to lead them away from the others while trying to keep out of their cooking pot yourself.  You try to control your breathing as you rest for a moment, but you doubt it can hear it through all the noise it's making.
 
-Suddenly from behind, two arms like tree branches reach out and grab for you.  You slice out with your hunting the knife, the only weapon you managed to grab on your flight out, cutting deeply but not doing any real damage.  The orc keeps hold and slings you over its shoulder and begins to traipse back through the forest.
-
-Suddenly it stops, sniffing the air when suddenly you smell something too.  A smell you know oh too well. A flowery scent, one that strikes fear into the heart of any creature, large or small.  The orc drops you where he stands and runs off in a panic, leaving you lying there.  
-
-The world begins to blur as the smell becomes stronger, you suddenly realize that it's all been a dream and the orc attacking your village was nothing more than a result of some late night tacos.  But that smell is one all too real.  The perfume your wife wears every day, announcing her presence as she enters the bedroom you share.
-
-'Will you get out of bed!!!' she screeches.  
-
-'You promised you'd get rid of that hornets['] nest before my mother got here.  You know she's allergic.'
-
-You slowly roll out of bed, you had secretly hoped that perhaps your mother-in-law would get stung and never come back.  But your fear of your wife is stronger than your desire to see her mother disappear. 
-
-Getting up you manage to pull on your shorts and a t-shirt before she shoves you out the door.
-
-'Now don't come back until it's gone,' she demands as she slams and locks the door behind you."
 
 
 
@@ -839,16 +916,21 @@ To say say-fire-is-out:
 	if fire-is-out is true:
 		say "[para]The fire appears to have gone out since you were gone.";
 		now fire-is-out is false;
-		
+
+After deciding the scope of the player while the location is under-the-tree: 
+	place the ladder in scope.		
 		
 To say other-stuff-in-area:
 	let need_period be false;
-	if ladder is on tree:
+	if ladder is resting on tree:
 		now need_period is true;
 		say  "The ladder is leaning against the tree";
+	if ladder is resting on the house:
+		now need_period is true;
+		say "The ladder is leaning on the house";
 	if cut branch is in under-the-tree:
 		now need_period is true;
-		if ladder is on tree:
+		if ladder is resting on tree:
 			say " and the ";
 		otherwise:
 			say "The ";
@@ -859,8 +941,12 @@ To say other-stuff-in-area:
 Before going up from under-the-tree:
 	if the player is carrying ladder:
 		try leaning ladder on tree;
-	if ladder is not on the tree:
-		say " You never were much of a tree climber.  Besides it wouldn't be pretty if the hornets attack while you were trying to pull yourself up the tree." instead.
+	if the ladder is resting on the house:
+		now the player is in on-the-roof instead;
+	else if the ladder is resting on the tree:
+		now the player is in up-the-tree instead;
+	otherwise:	
+		say "You never were much of a tree climber.  Besides it wouldn't be pretty if the hornets attack while you were trying to pull yourself up the tree." instead.
 	
 Chapter - Pile of ashes
 
@@ -917,16 +1003,45 @@ The blind-text of in-the-shed is "Everything is dark except for a faint glow com
 before going north in in-the-shed:
 	try exiting instead;
 
-A dirty window is in in-the-shed.  The dirty window is scenery. The description of the dirty window is "The window is covered in cobwebs and dust.  It doesn't look like it's been cleaned for decades, if ever.  [if horsefly is in in-the-shed]In the corner of the window is a large horsefly, buzzing up against the window trying to get out.[end if]"
 
-instead of kicking the window:
-	say "You start to kick the window but then realize that it would probably be easier to just exit through the open doorway."
+instead of searching anything when the player is blinded and the location is in-the-shed:
+	say "You search and search but see only vague shapes."
+	
+Understand "look out [something]" as searching.
+
+Chapter - Junk
+
+Junk is scenery in in-the-shed.  The description of junk is "Just piles of stuff that has collected here over the years.  [if the bug killer is not found]You could try searching it to see if there is anything to help you current dilemma.[end if]".  Understand "piles" or "mess" as junk when the location is in-the-shed.
 
 sanity-check rubbing up:
 	try rubbing the junk instead.
 	
 sanity-check rubbing shed:
 	try rubbing the junk instead.
+
+sanity-check rubbing the junk:
+	say "Cleaning would be a hopeless task." instead.
+
+Instead of taking junk:
+	say "[if the bug killer is not found]There is really no need to take all of this, but perhaps if you searched the junk you could find something useful.[otherwise]You've looked through the junk and couldn't find anything useful, so you'll just leave it all here for another day.[end if]"
+
+
+Before searching junk:
+	try searching shelf instead.
+
+before overly elaborate looking:
+	try searching the location instead.
+	
+Before searching while location is in-the-shed and the noun is not the window:
+	try searching junk instead.
+
+
+Chapter - Window
+
+A dirty window is in in-the-shed.  The dirty window is scenery. The description of the dirty window is "The window is covered in cobwebs and dust.  It doesn't look like it's been cleaned for decades, if ever.  [if horsefly is in in-the-shed]In the corner of the window is a large horsefly, buzzing up against the window trying to get out.[end if]"
+
+instead of kicking the window:
+	say "You start to kick the window but then realize that it would probably be easier to just exit through the open doorway."
 
 Sanity-check rubbing the window:
 	say "You rub and rub the window but it doesn't look much cleaner." instead.
@@ -937,39 +1052,12 @@ Before opening the window:
 Before attacking the window when the location is in-the-shed:
 	say "You wouldn't want to break the window, you'd just have to replace it." instead.
 
-A shelf is scenery supporter in in-the-shed.  The description of the shelf is "The shelf is just inside the door and looks to be where things were just thrown.  There are piles of junk on it."
-
-Junk is scenery in in-the-shed.  The description of junk is "Just piles of stuff that has collected here over the years.  [if the bug killer is not found]You could try searching it to see if there is anything to help you current dilemma.[end if]".  Understand "piles" or "mess" as junk when the location is in-the-shed.
-
-sanity-check rubbing the junk:
-	say "Cleaning would be a hopeless task." instead.
-
-Instead of taking junk:
-	say "[if the bug killer is not found]There is really no need to take all of this, but perhaps if you searched the junk you could find something useful.[otherwise]You've looked through the junk and couldn't find anything useful, so you'll just leave it all here for another day.[end if]"
-
-instead of searching anything when the player is blinded and the location is in-the-shed:
-	say "You search and search but see only vague shapes."
-
-Before searching junk:
-	try searching shelf instead.
-
-before overly elaborate looking:
-	try searching the location instead.
-	
-Before searching while location is in-the-shed and the noun is not the window:
-	try searching junk instead.
-	
-Understand "look out [something]" as searching.
 
 Instead of looking north when location is in-the-shed:
 	try searching the window.
 
 Instead of searching the window:
 	say "Looking out the hazy window[if the hornets-nest is part of the tree], you barely make out the hornets in the tree.  [view-hornets-out-window][else] you can see the tree.[end if]".
-
-To say describe-the-hand-saw:
-	if the hand-saw is hanging and the hand-saw is found:
-		say "Hanging on the wall near the back is a handsaw.[run paragraph on]";
 
 To say view-hornets-out-window:
 	if the hornets are swarming:
@@ -981,6 +1069,11 @@ To say view-hornets-out-window:
 	if the hornets are subdued:
 		say "You can see the nest still in the tree, but through the dust and haze of the window you can't make out much more."
 
+
+Chapter - Shelf
+	
+A shelf is scenery supporter in in-the-shed.  The description of the shelf is "The shelf is just inside the door and looks to be where things were just thrown.  There are piles of junk on it."
+
 Instead of examining the shelf for the first time:
 	try searching the shelf.
 
@@ -991,7 +1084,8 @@ Before searching the shelf:
 		now the bug killer is found instead;
 	otherwise:
 		say "You find nothing that looks useful to your current plight." instead.
-	
+
+
 Chapter - Can of Bug Killer
 
 The bug killer is a thing.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" or "spray" as bug killer.   the bug killer is flammable.
@@ -1015,7 +1109,7 @@ before kicking the bug killer:
 
 Understand "kick the can" or "kick can" as a mistake("Dying may be preferable to seeing your inlaws, but that's not a viable option, so back to getting rid of the nest.").	
 
-Chapter  - Hand saw	
+Chapter - Hand saw	
 
 The hand-saw is an undescribed thing in in-the-shed.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" or "hand saw" as hand-saw.  
 The description of hand-saw is "Nope, you didn't use this much either.  The saw is new and shiny." 	
@@ -1029,23 +1123,49 @@ Before kicking the hand-saw:
 	
 Rule for deciding whether all includes the hand-saw: it does.
 
+To say describe-the-hand-saw:
+	if the hand-saw is hanging and the hand-saw is found:
+		say "Hanging on the wall near the back is a handsaw.[run paragraph on]";
+
+
 Chapter - Ladder
 
 A ladder is a thing.  A ladder is in in-the-shed.  The description is "It's a cheap aluminum step ladder your Dad gave you for a house warming gift when you moved in twenty years ago[one of][if location is in-the-shed and player is not carrying the ladder] is still laying where you left it.....oh....twenty years ago[end if][or][stopping]."
 
 Before climbing the ladder:
+	if location is on-the-roof:
+		if the ladder is resting on the house:
+			try going down instead;
+	if location is on-the-porch:
+		if the ladder is resting on the house:
+			say "You climb slowly up the ladder and onto the roof.";
+			now the player is in on-the-roof instead;
 	if location is under-the-tree:
-		if the ladder is on the tree:
+		if the ladder is resting on the house:
+			say "You climb slowly up the ladder and onto the roof.";
+			now the player is in on-the-roof instead;
+		if the ladder is resting on the tree:
 			say "You climb as quietly as possible up the ladder until you are just a few feet away from the nest.  The hornets didn't see you coming, but now a few start to buzz around your head.";
+			try going up instead;
 		otherwise:
 			try leaning the ladder on the tree;
-		try going up instead.
+			try going up instead.
 
 instead of kicking the ladder:
 	say "You kick the ladder and manage to hurt your toe in the process.  The ladder doesn't appear to have noticed."
 	
 Instead of putting the ladder on something (called the leaned-on):
 	try leaning the ladder on the leaned-on instead.
+
+before taking the ladder:
+	if location is up-the-tree:
+		say "That would be quite a feat to take the very ladder your standing on." instead;
+	otherwise:
+		now the ladder is not resting on anything;
+		now the ladder is not scenery.
+		
+after leaning the ladder on something:
+	now the ladder is scenery.
 	
 The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.
 The examine supporters rule is not listed in any rulebook.
@@ -1130,7 +1250,7 @@ before doing anything to the horsefly while the horsefly is off-stage:
 	
 Part - Outside the shed
 
-Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However, it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
+Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However, it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is resting on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
 
 The blind-text of outside-the-shed is "The large shape that is your shed is to the south and you can make out the blur that is your house and you can hear the buzz of the hornets from the tree to the north."
 
@@ -1286,12 +1406,46 @@ After deciding the scope of the player when location is outside-the-shed and the
 				
 Part - On the porch
 
-On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the [porch-swing] and drinking a [beer].  To the east right off the porch is the large tree and to the southeast is your shed."  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
+On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the [porch-swing] and drinking a [beer].  To the east right off the porch is the large tree and to the southeast is your shed. [other-stuff-on-the-porch]".  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
+
+To say other-stuff-on-the-porch:
+	let need_period be false;
+	if ladder is resting on the house:
+		now need_period is true;
+		say "The ladder is leaning on the house";
+	if need_period is true:
+		say ".".
+
+After deciding the scope of the player while the location is On-the-porch: 
+	place the ladder in scope
 
 The porch is a backdrop.  The porch is everywhere.  The description of the porch is "The front porch is large and roomy.  Plenty of space to sit and relax...if it wasn't for those hornets."
 
 Instead of taking the porch:
 	say "[one of]The thought had crossed your mind that if you could just move the porch to the back of the house, then you could sit out there free of the hornets.  Alas, if you could you probably would.[or]Moving the porch anywhere just isn't possible.[stopping]".
+
+before going inside in on-the-porch:
+	try opening the front door instead.
+
+before going up when the player is in on-the-porch:
+	if the ladder is resting on the house:
+		now the player is in on-the-roof instead.
+
+before going up when the player is on the porch-swing:
+	if player is on the porch-swing:
+		try getting off the porch-swing instead.
+
+Chapter - Flimsies
+
+Section - Beer 
+
+The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."  The initial appearance of the beer is "Oh trust me, if you had a beer right now, you'd be doing more than just looking at it."
+
+Section - Front Door
+
+The front door is a flimsy in on-the-porch. "The front door leading into your house, in fact it's the only way into your house and your wife locked the door behind you when you left this morning.  Her exact words were 'Don[']t bother coming back until that nest is gone.'".  The action-refusal is "You told your wife you were not coming in until the nest was gone (actually, she told you that, but you won't admit that out loud, will you?)".
+
+Chapter - Porch Swing
 
 The porch-swing is a enterable supporter in on-the-porch.  The porch-swing is scenery.  The printed name of porch-swing is "porch swing".  The description of porch-swing is "The porch swing sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
 Understand "swing" or "porch swing" or "glider" as porch-swing.
@@ -1302,20 +1456,10 @@ Instead of swinging the porch-swing:
 	otherwise:
 		say "You give the porch swing a soft kick and it rocks back and forth for a bit." 
 
-The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."  The initial appearance of the beer is "Oh trust me, if you had a beer right now, you'd be doing more than just looking at it."
-
-The front door is a flimsy in on-the-porch. "The front door leading into your house, in fact it's the only way into your house and your wife locked the door behind you when you left this morning.  Her exact words were 'Don[']t bother coming back until that nest is gone.'".  The action-refusal is "You told your wife you were not coming in until the nest was gone (actually, she told you that, but you won't admit that out loud, will you?)".
-
-before going inside in on-the-porch:
-	try opening the front door instead.
-
-before going up when the player is on the porch-swing:
-	if player is on the porch-swing:
-		try getting off the porch-swing instead.
-
 Does the player mean entering the porch-swing when the player is in on-the-porch: it is likely.
 Does the player mean swinging the porch-swing when the player is in on-the-porch: it is likely.
 Does the player mean swinging the porch-swing when the player is on the  porch-swing: it is likely.
+
 
 Chapter - Shovel
 
@@ -1331,6 +1475,9 @@ Up-the-tree is a room.  The printed name is "Up the Tree".  The description is "
 Check dropping something while location is up-the-tree:
 	say "[The noun] falls to the ground.";
 	move the noun to under-the-tree instead;
+
+After deciding the scope of the player while the location is up-the-tree: 
+	place the ladder in scope
 
 Chapter - Hornets Nest
 
@@ -1409,7 +1556,26 @@ Before attacking hornets:
 before kissing the hornets:
 	say "Why???   Do you want big red lips?" instead.
 	
+
+Part - On The Roof
+
+On-the-roof is a room.  The printed name of on-the-roof is "On the Roof".  The description of on-the-roof is "You're perched on the roof of your house.  From here you can climb back down the ladder."
+
+Before going down in on-the-roof:
+	if the ladder rests on the house:
+		now the player is in under-the-tree instead.
 		
+Before going west in on-the-roof:
+	if the ladder rests on the house:
+		now the player is in under-the-tree instead.
+		
+After deciding the scope of the player while the location is on-the-roof:
+	if the ladder rests on the house:
+		place the ladder in scope.
+		
+before taking the ladder in on-the-roof:
+	say "To ensure a way back down, you'll leave the ladder stay." instead.
+
 Book - Things
 
 Chapter - Fire
@@ -1480,7 +1646,7 @@ Book - Backdrops
 
 Chapter - Tree
 
-The shade tree is a supporter which is in under-the-tree. The tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]Hanging from a branch is the largest hornet's nest you've ever seen.[end if][if ladder is on the tree] The ladder is leaning against the tree.[end if]".
+The shade tree is a supporter which is in under-the-tree. The tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]Hanging from a branch is the largest hornet's nest you've ever seen.[end if][if ladder is resting on the tree] The ladder is leaning against the tree.[end if]".
 
 The think-text of the shade tree is "You wonder how old this tree really is.  It would be a shame to damage it in any way getting the hornets['] out."
 
@@ -1591,7 +1757,8 @@ instead of kicking the sun:
 
 Chapter - House
 
-The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got its problems....but it's home."  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
+The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got its problems....but it's home.[if ladder is resting on the house]  The ladder is leaning against the house.[end if]".  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
+
 
 Chapter - Shed
 
@@ -1643,14 +1810,24 @@ spray-the-nest is a puzzle.  The printed name of spray-the-nest is "spraying the
 smoke-the-nest is a puzzle.  The printed name of smoke-the-nest is "using heavy smoke to remove the hornets".
 cut-the-branch is a puzzle.  The printed name of cut-the-branch is "cutting the branch the nest is on out of the tree".
 fire-the-missle is a puzzle.  The printed name of fire-the-missle is "blowing up the can of spray".
+hit-nest-with-ladder is a puzzle.  the printed name of hit-nest-with-ladder is "hitting the nest with the ladder".
+use-spray-as-flamethrower is a puzzle.  the printed name of use-spray-as-flamethrower is "using bug spray as flamethrower".
 
 [puzzle activation rules]
 Every turn:
-[	if build-a-fire is uncompleted and build-a-fire is not impossible:
-		if twigs are on-stage:
-			now build-a-fire is active;
+	if use-spray-as-flamethrower is uncompleted and use-spray-as-flamethrower is not impossible:
+		if the bug killer is empty:
+			now use-spray-as-flamethrower is impossible;
 		otherwise:
-			now build-a-fire is inactive;]
+			if the player carries the bug killer and the twigs are flaming:
+				now use-spray-as-flamethrower is active;
+			otherwise:
+				now use-spray-as-flamethrower is inactive;
+	if hit-nest-with-ladder is uncompleted and hit-nest-with-ladder is not impossible:
+		if (the ladder is in under-the-tree and the location is under-the-tree) or (the location is under-the-tree and the player carries the ladder):
+			now hit-nest-with-ladder is active;
+		otherwise:
+			now hit-nest-with-ladder is inactive;
 	if spray-the-nest is uncompleted and spray-the-nest is not impossible:
 		if bug killer is not empty and the player carries the bug killer:
 			now spray-the-nest is active;
