@@ -8,7 +8,7 @@ Volume - Metadata
 Book - License
 
 To say the license:
-say "Copyright (c) 2014 Jason Lautzenheiser
+say "Copyright (c) 2015 Jason Lautzenheiser
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
@@ -106,8 +106,8 @@ sanity-check eating an inedible thing:
 sanity-check wearing something which is not wearable:
 	say  "How in the world would you go about wearing [the noun]?" instead.
 	
-sanity-check taking something that is flaming:
-	say "[regarding the noun][They're] way too hot to carry around." instead.
+[sanity-check taking something that is flaming:
+	say "[regarding the noun][They're] way too hot to carry around." instead.]
 	
 sanity-check sleeping:
 	say "Sleeping before the job is done?  I don't think so." instead.
@@ -418,7 +418,7 @@ Check spraying:
 	if the second noun is not the bug killer , say "You could try spraying [regarding the noun][them] with [the second noun] but I don't think you would be very successful." instead;
 	if player is not carrying the bug killer, say "You have nothing to spray with." instead;
 	if bug killer is empty, say "Well, the can is empty now, so spraying [regarding the noun][them] won't help much now." instead;		
-	if the noun is fire:
+	if the noun is fire or the noun is torch:
 		continue the action;
 	if the noun is twigs and the twigs are flaming:
 		try spraying the fire with the bug killer instead;
@@ -459,9 +459,11 @@ To empty-the-can:
 
 Carry out spraying:
 	if the noun is the fire:
-		say "Boom.";
+		if the player does not carry the fire:
+			say "The spray ignites as it hits the flames causing the fire to grow substantially for a few moments.";
+	if the noun is the torch:
+		say "As you spray the bug killer onto the flaming twig that you are holding, the flames shoot out in front of you.  You've effectively created a flame thrower.";
 		spray-the-can;			
-		stop the action;
 	if location is under-the-tree:	
 		if noun is hornets-nest or noun is hornets:
 			now the hornets are angry;
@@ -873,6 +875,10 @@ Rule for printing the name of the baseball cap:
 Instead of dropping the baseball cap, say "You're pretty self-conscious about your hair, or lack of, so you'll just keep it on."
 Instead of taking off the baseball cap:
 	try dropping the baseball cap instead.
+
+instead of inserting something into the cap:
+	say "This is your favorite hat, you wouldn't want to get it all dirty by putting [the noun] in it."
+	
 	
 Chapter - Jean shorts
 
@@ -1274,9 +1280,28 @@ To say described-shed-door:
 	if we have not examined the shed-door and shed-door-first-seen is false:
 		say "The shed door has fallen off years ago and you never bothered to replace it.  ".
 		
+
+Chapter - Torch
+
+A torch is a thing.  The description of the torch is "A long thin stick which has caught on fire."  Understand "twig/stick/flaming/thin/fire/flames" or "flaming stick" as torch when the player carries the torch.  The printed name of torch is "flaming stick";
+
+Before dropping the torch:
+	if the location is under-the-tree:
+		if the twigs are flaming:
+			say "You throw the hot stick you're carrying back into the fire." instead;
+		otherwise:
+			say "You throw the hot stick into the pile of ash left from the fire." instead;
+	
+
+
 Chapter - Some twigs	
 
-Some twigs is a thing.  The description of some twigs is "[describe-twigs]".  Understand "wood/pile/piles" as some twigs when spider is off-stage and the location is not in-the-shed.  Some twigs are flammable.  
+Some twigs is a thing.  The description of some twigs is "[describe-twigs]".  
+
+Understand "wood/pile/piles/kindling" as some twigs when spider is off-stage and the location is not in-the-shed. 
+
+Some twigs are flammable.  
+
 The indefinite article of the twigs is "a small pile of".	
 
 To say describe-twigs:
@@ -1295,8 +1320,12 @@ after doing something with the twigs:
 	continue the action.
 
 before taking some twigs:
+	if the twigs are flaming:
+		say "You carefully pick up one of the longer twigs that are on fire.";
+		now the player carries the torch instead;
 	if the player is carrying some twigs:
 		say "You have enough wood for right now." instead;
+		
 
 after dropping:
 	if the noun is the twigs and the location is under-the-tree:
@@ -1316,9 +1345,10 @@ Instead of kicking the twigs:
 
 Chapter - Pile of wood
 
-The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  Understand "wood/pile" as woodpile.  The woodpile is in outside-the-shed.
+The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  The woodpile is in outside-the-shed.
 
-
+Understand "wood/pile" as woodpile.  
+understand "twigs/kindling" as woodpile when the twigs are off-stage.
 
 Before taking woodpile:
 	if large spider is on-stage:
@@ -1476,6 +1506,9 @@ Check dropping something while location is up-the-tree:
 	say "[The noun] falls to the ground.";
 	move the noun to under-the-tree instead;
 
+instead of going up in up-the-tree:
+	say "You are as high as you dare to go."
+
 After deciding the scope of the player while the location is up-the-tree: 
 	place the ladder in scope
 
@@ -1612,10 +1645,11 @@ after kicking the fire:
 	now the twigs are new;
 	now the twigs are off-stage.
 	
-	
 instead of examining the fire:
 	say "The fire is small but hot and [if smoke is light]not putting out much smoke[otherwise]putting out quite a bit of smoke[end if]."
 
+instead of taking the fire:
+	try taking the twigs instead.
 
 Chapter - Hole
 
