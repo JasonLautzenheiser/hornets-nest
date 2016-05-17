@@ -19,12 +19,9 @@ The story genre is "Comedy".
 The story headline is "An Interactive Experience in Pest Removal".
 The story description is "You weren't going to let the hornet's nest in the shade tree out front stop you from enjoying your summer."
 The release number is 1.
-The story creation year is 2014.
+The story creation year is 2015.
 Release along with a website.
 Release along with an interpreter.
-
-
-
 
 Volume - Mechanics
 
@@ -41,11 +38,13 @@ Book - Extensions - Not for release
 [Include Debugging by Al Golden.]
 [Include Basic Screen Effects by Emily Short.]
 
- Include Response Assistant by Aaron Reed.
+[ Include Response Assistant by Aaron Reed.]
 
 Book - Extension overrides
 
 Chapter - No valid directions showing (in place of Chapter - Show valid directions after going nowhere in Small Kindnesses by Aaron Reed)
+
+
 
 
 Book - Objects
@@ -86,6 +85,7 @@ Rule for printing room description details: stop.
 The can't take scenery rule response (A) is "[The noun] can't be taken anywhere."
 The block attacking rule response (A) is "[if the noun is hornets]Yes that is your ultimate goal, but it's not going to be that easy.[otherwise]Really no need to do that.[end if]".
 The can't put onto what's not a supporter rule response (A) is "Putting [the noun] on [the second noun] wouldn't do anything exciting."
+
 
 Rule for printing a parser error when the latest parser error is the I beg your pardon error:
   say "[one of]Bzzzzzzz.[or]The hornets laugh at your indecision.[or]Ahhh...if only I had a beer.[or]Daydreaming again?[or]Your blood pressure is rising.[or]What?[or]Come again?[or]Prithee, pardon?[in random order]"
@@ -192,6 +192,11 @@ understand the command "capture" as "collect".
 understand "jump up" as jumping.
 understand "leap" as jumping.
 
+Chapter - General Actions the player can perform
+
+instead of going nowhere:
+	say "As much as you want to shirk your responsibility, you promised to get those hornets out of the tree."
+
 Part - New actions
 
 Chapter - Misc
@@ -201,13 +206,13 @@ Instead of looking under something carried by the player:
 	
 Instead of looking under something (called the underling) worn by the player:
 	if underling is the baseball cap:
-		say "Well you can't really bend your eyes in a way to see the top of your head, but you suspect it is relatively hairless.";
+		say "Well [we] can't really bend [our] eyes in a way to see the top of [our] head, but [we] suspect it is relatively hairless.";
 	if underling is the glasses:
-		say "Well considering your eyes are under your glasses, you try to recursively look at your eyes through your eyes, but only manage to give yourself a headache from the eye strain.";
+		say "Well considering [our] eyes are under [our] glasses, [we] try to recursively look at [our] eyes through [our] eyes, but only manage to give [ourselves] a headache from the eye strain.";
 	if underling is the t-shirt:
-		say "You look underneath your shirt just to find your hairy chest just like you left it.";
+		say "[We] look underneath [our] shirt just to find [our] hairy chest just like [we] left it.";
 	if underling is the jean shorts:
-		say "Well now, I think you know what's under there.".
+		say "Well now, I think [we] know what's under there.".
 		
 
 Chapter - Knocking on
@@ -524,19 +529,37 @@ Instead of thinking:
 
 Chapter - Cutting with
 
+
+understand the command "cut" as something new.
+
 Cutting with is an action applying to two things.
 
 understand "cut [something] with/using  [something preferably held]" as cutting with.
 understand "saw [something] with/using [something preferably held]" as cutting with.
 
-[Check cutting with:
-	say "[We] don't need to cut [regarding the second noun][those]." instead.
-]
-instead of cutting with:
+understand "cut [something]" as cutting with.
+
+before cutting with:
+	if the noun is the player:
+		say "Cutting [ourselves] wouldn't be an effective use of [our] time." instead;
 	if the second noun is the hand-saw:
-		try cutting the noun;
+		try cutting the noun instead;
 	otherwise:
-		say "[We] try to cut [the noun] with [the second noun], but [they] [are] not very effective."
+		say "[We] try to cut [the noun] with [the second noun], but [they] [are] not very effective." instead.
+
+Understand "saw [something]" as cutting with.
+Understand "cut [something]" as cutting with.
+Understand "chop [something]" as cutting with.
+
+rule for supplying a missing second noun while cutting with:
+	if the player carries the hand-saw:
+		now the second noun is the hand-saw;
+	otherwise: 
+		say "[We] will need something other than [our] hand to cut [the noun] with." instead.
+	
+
+
+
 
 
 Chapter - Putting
@@ -703,7 +726,7 @@ Understand "about" as abouting.
 Understand the command "credits" or "info" as "about".
 
 Report abouting:
-	say "[italic type][Story title][roman type] is copyright © 2014 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[para]";
+	say "[italic type][Story title][roman type] is copyright © 2015 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[para]";
 	say "This work was created just for the fun of it beginning in early 2014.  This release is made for the IntroComp 2014 contest.  Special thanks to my great testers (in no particular order):  Andrew Schultz, Daniel Stelzer, Hanon Ondricek and Marshal Tenner Winter.  Also special thanks to my wife Holly and my four children, all of whom I was able to bounce ideas off of.[para]"; 
 
 After printing the banner text:
@@ -788,7 +811,7 @@ Volume - The World
 
 Book - Startup
 
-After printing the banner text, say "Copyright © 2014, Jason Lautzenheiser."
+After printing the banner text, say "Copyright © 2015, Jason Lautzenheiser."
 The time of day is 6:05 AM.
 
 When play begins:
@@ -835,10 +858,7 @@ before taking wife:
 	
 
 
-Chapter - General Actions the player can perform
 
-instead of going nowhere:
-	say "As much as you want to shirk your responsibility, you promised to get those hornets out of the tree."
 
 Chapter - Reading glasses
 
@@ -864,7 +884,7 @@ report wearing the glasses:
 	
 Chapter - Baseball cap
 
-A baseball cap is a wearable thing.  The description of baseball cap is "You never really liked baseball, but this hat is very comfortable and it conveniently hides your slightly balding head." The indefinite article is "a".   Understand "hat" as baseball cap.  the printed name of baseball cap is "your baseball cap".
+A baseball cap is a wearable  container.  The description of baseball cap is "You never really liked baseball, but this hat is very comfortable and it conveniently hides your slightly balding head." The indefinite article is "a".   Understand "hat" as baseball cap.  the printed name of baseball cap is "your baseball cap".
 
 Rule for printing the name of the baseball cap when taking inventory:
 	say "a baseball cap".
@@ -1006,8 +1026,20 @@ In-the-shed is inside from outside-the-shed.
 
 The blind-text of in-the-shed is "Everything is dark except for a faint glow coming from the window and the slightly brighter glow of the doorway to the north."
 
-before going north in in-the-shed:
-	try exiting instead;
+before going a direction (called which-way) in in-the-shed:
+	if which-way is north:
+		try exiting instead;
+	if which-way is outside:
+		continue the action;
+	if which-way is down:
+		say "Despite the general disrepair of the shed, the floor is actually intact and there is no way to get under it from here." instead;
+	if which-way is up:
+		say "There is a second story to the shed, but the steps have since rotted away." instead;
+	otherwise:
+		say "There is no exit to [the which-way]." instead.
+
+before climbing the tree in in-the-shed:
+	say "That would be quite difficult to do from inside the shed." instead.
 
 
 instead of searching anything when the player is blinded and the location is in-the-shed:
@@ -1037,7 +1069,7 @@ Before searching junk:
 
 before overly elaborate looking:
 	try searching the location instead.
-	
+		
 Before searching while location is in-the-shed and the noun is not the window:
 	try searching junk instead.
 
@@ -1712,8 +1744,8 @@ Before examining tree:
 		
 does the player mean climbing the tree when the player is in under-the-tree: it is very likely.
 
-before climbing the tree:
-	try going up instead;
+[before climbing the tree:
+	try going up instead;]
 	
 instead of taking the tree:
 	say "[one of]You think that if you could just move the tree to the other side of the yard your problem will be solved.  You wrap your arms as far as you can around the tree and lift.  Nothing happens except for an inaudible pop that comes from your back.[or]You're back is still sore from your last attempt at moving the large tree, so you'll try to think of some other way to move the nest from the front yard.[stopping]";
@@ -1744,7 +1776,6 @@ instead of attacking or kicking the tree:
 	say "It's really not the tree's fault [if the hornets-nest is part of the tree]that it has that hornet's nest in there[end if].";
 
 
-Understand "saw [something]" as cutting.
 
 Instead of cutting the tree:
 	if player carries the hand-saw:
@@ -1814,9 +1845,21 @@ Volume - Scenes
 
 Book - Puzzles
 
+The list writer internal rule response (Y) is "None"
+
 Requesting puzzle status is an action out of world.
 Report requesting puzzle status: 
-	repeat with puzzle-status running through all running puzzles:
+	say "Puzzles in process: [list of running puzzles].";
+	say "Puzzles not completed: [list of uncompleted inactive puzzles].";
+	say "Active puzzles: [list of active uncompleted puzzles].";
+	say "Completed puzzles: [list of completed puzzles].";
+	say "Puzzles now impossible: [list of impossible puzzles].";
+	if the last-puzzle-completed of the player is not no-puzzle:
+		say "The last completed puzzle is [last-puzzle-completed of the player].";
+	say "You have completed [the number of completed puzzles] puzzles.";
+	say "You currently have [the number of running puzzles] puzzles that are running.";
+
+[	repeat with puzzle-status running through all running puzzles:
 		say "[puzzle-status] is now running.";
 	repeat with puzzle-status running through all active uncompleted puzzles:
 		say "[puzzle-status] is active.";
@@ -1830,7 +1873,7 @@ Report requesting puzzle status:
 		say "The last completed puzzle is [last-puzzle-completed of the player].";
 	say "Not completed: [number of uncompleted inactive puzzles].";
 	say "Active: [number of active uncompleted puzzles].";
-	say "Running: [number of running puzzles].";
+	say "Running: [number of running puzzles].";]
 
 Understand "puzzles" as requesting puzzle status.
 
@@ -2010,7 +2053,7 @@ As they begin to swarm around your head, you notice there is something different
 Book - Scene - Running the Game 
 
 Running-the-game is a scene.  running-the-game begins when play begins.  
-Running-the-game ends when the number of uncompleted inactive puzzles is 0 and the number of active uncompleted puzzles is 0 and the number of running puzzles is 0 and aggressive-hornets is not happening:
+Running-the-game ends when the number of uncompleted inactive puzzles is 0 and the number of active uncompleted puzzles is 0 and the number of running puzzles is 0 and aggressive-hornets is not happening.
 
 When running-the-game ends:
 	end the story saying "Here ends the intro to Hornet's Nest.  I hope you enjoyed this introduction to this piece.  I plan to add more ways to try and achieve your goal of removing the nest from the tree.  [para]You've managed to annoy the hornets in the following ways: [list of completed puzzles].";

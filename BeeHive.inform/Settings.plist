@@ -16,8 +16,6 @@
 	</dict>
 	<key>IFMiscSettings</key>
 	<dict>
-		<key>IFSettingElasticTabs</key>
-		<true/>
 		<key>IFSettingInfix</key>
 		<false/>
 	</dict>
