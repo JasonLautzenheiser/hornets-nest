@@ -3,9 +3,9 @@
 Use full-length room descriptions. 
 Use American dialect.
 
-Volume - Metadata
+Volume 1 - Metadata
 
-Book - License
+Book 1 - License
 
 To say the license:
 say "Copyright (c) 2015 Jason Lautzenheiser
@@ -13,25 +13,25 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
 
-Book - Bibliography
+Book 2 - Bibliography
 
 The story genre is "Comedy".
 The story headline is "An Interactive Experience in Pest Removal".
 The story description is "You weren't going to let the hornet's nest in the shade tree out front stop you from enjoying your summer."
 The release number is 1.
-The story creation year is 2015.
+The story creation year is 2016.
 Release along with a website.
 Release along with an interpreter.
 
-Volume - Mechanics
+Volume 2 - Mechanics
 
-Book - Extensions
+Book 1 - Extensions
 
 Include Small Kindnesses by Aaron Reed.
-[Include Trinity Inventory by Mikael Segercrantz.]
+Include Trinity Inventory by Mikael Segercrantz.
 [Include Basic Screen Effects by Emily Short.]
 
-Book - Extensions - Not for release 
+Book 2 - Extensions - Not for release 
 
 [Include Object Response Tests by Juhana Leinonen.]
 [Include Property Checking by Emily Short.]
@@ -40,18 +40,19 @@ Book - Extensions - Not for release
 
 [ Include Response Assistant by Aaron Reed.]
 
-Book - Extension overrides
+Book 3 - Extension overrides
 
-Chapter - No valid directions showing (in place of Chapter - Show valid directions after going nowhere in Small Kindnesses by Aaron Reed)
+[ had to comment this out due to a bug in latest Inform http://inform7.com/mantis/view.php?id=1841]
+[Chapter - No valid directions showing (in place of Chapter - Show valid directions after going nowhere in Small Kindnesses by Aaron Reed)]
 
 
 
 
-Book - Objects
+Book 4 - Objects
 
-Part - Things
+Part 1 - Things
 
-Chapter - Properties
+Chapter 1 - Properties
 
 A room can be a safe-zone.
 A thing can be lost or found.  A thing is usually found.
@@ -64,7 +65,7 @@ Everything has some text called the blind-text.  The blind-text is usually "".
 A room has some text called the blind-text.  The blind-text of a room is usually "".
 
 
-Book - General
+Book 5 - General
 
 To say para -- running on: 
 	(- DivideParagraphPoint(); new_line; -). 
@@ -74,11 +75,11 @@ To set the/-- pronoun him to (O - an object): (- LanguagePronouns-->6 = {O}; -).
 To set the/-- pronoun her to (O - an object): (- LanguagePronouns-->9 = {O}; -).
 To set the/-- pronoun them to (O - an object): (- LanguagePronouns-->12 = {O}; -).
 
-Part - Relations
+Part 1 - Relations
 
 
 
-Part - Rules
+Part 2 - Rules
 
 Rule for printing room description details: stop.
 
@@ -91,7 +92,7 @@ Rule for printing a parser error when the latest parser error is the I beg your 
   say "[one of]Bzzzzzzz.[or]The hornets laugh at your indecision.[or]Ahhh...if only I had a beer.[or]Daydreaming again?[or]Your blood pressure is rising.[or]What?[or]Come again?[or]Prithee, pardon?[in random order]"
 
 
-Part - Sanity Checks
+Part 3 - Sanity Checks
 
 The sanity-check rules are a rulebook.
 
@@ -119,7 +120,7 @@ sanity-check waiting:
 		say "What are you waiting on?  You're running out of time." instead.
 
 
-Part - Flimsy
+Part 4 - Flimsy
 
 A flimsy is a kind of thing.  A flimsy has some text called the action-refusal.  The action-refusal of a flimsy is usually "".  A flimsy is usually fixed in place, undescribed.
 
@@ -137,7 +138,7 @@ To say brush-off of (n - a thing):
 Rule for writing a paragraph about a flimsy (called xx):
 	now xx is mentioned.
 
-Part - Blind Text	
+Part 5 - Blind Text	
 
 instead of examining something when the player is blinded:
 	if the blind-text of the noun is "":
@@ -168,17 +169,17 @@ to say blind-going-reject:
 	say "[one of]trip[or]stumble[or]fall[or]go in circles[then at random]".
 	
 
-Book - Easter Eggs
+Book 6 - Easter Eggs
 
 understand "xyzzy" as a mistake("You face the tree and wave your fingers at the nest while chanting 'xyzzy, xyzzy, xyzzy ....' Nothing happens.").
 understand "cut the cheese" or "cut cheese" or "pass gas" or "fart" as a mistake("You pass a little gas.   The hornets seem somewhat amused.").
 
 
-Book - Actions
+Book 7 - Actions
 
-Part - Standard Actions
+Part 1 - Standard Actions
 
-Chapter - Synonyms
+Chapter 1 - Synonyms
 
 Understand "climb [direction]" as going.
 Understand "escape"  as exiting.
@@ -192,14 +193,14 @@ understand the command "capture" as "collect".
 understand "jump up" as jumping.
 understand "leap" as jumping.
 
-Chapter - General Actions the player can perform
+Chapter 2 - General Actions the player can perform
 
 instead of going nowhere:
 	say "As much as you want to shirk your responsibility, you promised to get those hornets out of the tree."
 
-Part - New actions
+Part 2 - New actions
 
-Chapter - Misc
+Chapter 1 - Misc
 
 Instead of looking under something carried by the player:
 	say "It should be pretty obvious what is under [the noun] since [we] are carrying [it], but [we] can't help but to take a look anyway."
@@ -215,13 +216,13 @@ Instead of looking under something (called the underling) worn by the player:
 		say "Well now, I think [we] know what's under there.".
 		
 
-Chapter - Knocking on
+Chapter 2 - Knocking on
 
 Knocking on is an action applying to one thing.
 Understand "knock on [something]" or "knock [something]" as knocking on.
 understand the commands "bang" and "tap" and "rap" as "knock".
 
-Chapter - Dancing
+Chapter 3 - Dancing
 
 Dancing is an action applying to nothing.
 Understand "dance" as dancing.
@@ -232,7 +233,7 @@ instead of dancing:
 	otherwise:
 		say "You dance a little jig.  Perhaps you managed to entertain the hornets, but they aren't any closer to being gone."
 
-Chapter - Kicking
+Chapter 4 - Kicking
 
 Kicking is an action applying to one thing.  
 Understand "kick [something]" as kicking.
@@ -244,20 +245,20 @@ Report kicking something (called the booted-item):
 	say "You kick [the booted-item] and you now feel a bit better."
 	
 
-Chapter - Praying
+Chapter 5 - Praying
 
 Praying is an action applying to nothing.  Understand "pray" as praying.
 sanity-check praying:
 	say "You kneel down, close your eyes and pray that the nest will be gone.  You open your eyes and [if location is in-the-shed]look out the window expectantly[else]look up hopefully[end if], only to be disappointed to still see the nest in the tree."
 
-Chapter - Singing
+Chapter 6 - Singing
 
 Singing is an action applying to nothing.  Understand "sing", "hum" as singing.
 
 sanity-check singing:
 	say "You start to [verbword] a simple tune, but that only seems to agitate the hornets more." instead;
 
-Chapter - Scoring
+Chapter 7 - Scoring
 
 carry out requesting the score:
 	if number of completed puzzles is 0:
@@ -268,7 +269,7 @@ carry out requesting the score:
 		say "The ways you've annoyed the hornets so far are: [list of completed puzzles].";
 	stop the action.
 
-Chapter - Digging
+Chapter 8 - Digging
 
 Digging is an action applying to nothing. Understand "dig", "dig hole", "dig a hole", "dig a", "dig in ground", "dig a hole in the ground", "dig hole in ground", "dig a hole in ground", and "dig hole in the ground" as digging.
 
@@ -287,7 +288,7 @@ Instead of digging:
 	otherwise:
 		say "Digging with your hands just doesn't sound like a good use of your time."
 
-Chapter - Shaking
+Chapter 9 - Shaking
 
 Shaking is an action applying to one visible thing.
 Understand "shake [something]" as shaking.
@@ -314,7 +315,7 @@ Carry out shaking:
 Report shaking the bug killer:
 	say "You shake the can listening to that little ball inside bounce on the inside[if bug killer is full]. There seems to be some spray left[otherwise if bug killer is half-full].  There seems to be very little spray left[otherwise], but the can feels empty[end if]."
 
-Chapter - Leaning
+Chapter 10 - Leaning
 
 Resting on relates one thing to another.
 The verb to rest on means the resting on relation.
@@ -386,7 +387,7 @@ Before putting something on the tree:
 	if the noun is not the ladder:
 		say "You try to put [the noun] on the tree, but [they] won't stay." instead.
 
-Chapter - Catching
+Chapter 11 - Catching
 		
 Catching it is an action applying to one visible thing.
 Understand "catch [something]" as catching it.
@@ -403,7 +404,7 @@ Carry out catching:
 		
 		
 
-Chapter - Spraying
+Chapter 12 - Spraying
 
 Spraying it with is an action applying to two visible things.
 understand "spray [something] with [something]" as spraying it with.
@@ -466,10 +467,16 @@ Carry out spraying:
 	if the noun is the fire:
 		if the player does not carry the fire:
 			say "The spray ignites as it hits the flames causing the fire to grow substantially for a few moments.";
-	if the noun is the torch:
+	if the noun is the torch and location is not under-the-tree and location is not up-the-tree:
 		say "As you spray the bug killer onto the flaming twig that you are holding, the flames shoot out in front of you.  You've effectively created a flame thrower.";
 		spray-the-can;			
 	if location is under-the-tree:	
+		if the noun is the torch:
+			say "As you spray the bug killer onto the flaming twig that you are holding, the flames shoot out towards the nest.  It catches on fire and is quickly burnt to a crisp.  The hornets somehow have managed to evade the fire and are cleary upset.";
+			hornets attack in 1 turn from now;
+			now use-spray-as-flamethrower is completed;
+			now the last-puzzle-completed of the player is use-spray-as-flamethrower;
+			empty-the-can;
 		if noun is hornets-nest or noun is hornets:
 			now the hornets are angry;
 			if spray-count is 0:
@@ -486,7 +493,7 @@ Carry out spraying:
 		now spray-the-nest is completed;
 		now the last-puzzle-completed of the player is spray-the-nest;
 	
-Chapter - counting
+Chapter 13 counting
 
 Counting is an action applying to one visible thing.  Understand "count [something]" as counting.
 
@@ -500,7 +507,7 @@ Carry out counting:
 Understand "count blessings" or "count your blessings" or "count my blessings" as a mistake("Well for one you haven't been stung yet...")
 
 
-Chapter - Jump
+Chapter 14 - Jump
 
 sanity-check jumping:
 	if location is up-the-tree:
@@ -512,7 +519,7 @@ sanity-check jumping:
 	otherwise:
 		say "You do your best impression of a basketball player (or is it a ballerina)?" instead.
 
-Chapter - Thinking
+Chapter 15 - Thinking
 
 Thinking about is an action applying to one thing.
 Understand "think about [something]" as thinking about.
@@ -527,7 +534,7 @@ instead of thinking about:
 Instead of thinking:
 	say "Yep, that's a strong talent of yours, sitting around, drinking a beer and thinking."
 
-Chapter - Cutting with
+Chapter 16 - Cutting with
 
 
 understand the command "cut" as something new.
@@ -562,7 +569,7 @@ rule for supplying a missing second noun while cutting with:
 
 
 
-Chapter - Putting
+Chapter 17 - Putting
 
 Putting under is an action applying to two things.
 Understand "put [something] under [something]" as putting under.
@@ -570,11 +577,11 @@ Understand "put [something] under [something]" as putting under.
 instead of putting under:
 	try dropping the noun instead.
 
-Chapter - Taking
+Chapter 18 - Taking
 
 understand the command "grab" as "take".
 
-Chapter - Attacking it with
+Chapter 19 - Attacking it with
 
 Understand the commands "attack" and "punch" and "destroy" and "kill" and "murder" and "hit" and "thump" and "break" and "smash" and "torture" and "wreck" as something new.
 
@@ -610,7 +617,7 @@ Understand "swing [something preferably held] at [something]" as attacking it wi
 A thing can be attackable.
 
 
-Chapter - Throwing
+Chapter 20 - Throwing
 
 [Get rid of those few rules I don't need]
 The futile to throw things at inanimate objects rule is not listed in the check throwing it at rules.
@@ -658,7 +665,7 @@ Check throwing:
 
 
 
-Chapter - Burning
+Chapter 21 - Burning
 
 Everything has some text called the burn-reject.  The burn-reject is usually "".
 burn-with-glasses is a truth state that varies.  burn-with-glasses is false.
@@ -717,9 +724,9 @@ rule for supplying a missing second noun when burn-with-glasses is true:
 
 
 	
-Part - Out of world
+Part 3 - Out of world
 
-Chapter - Credits
+Chapter 1 - Credits
 
 Abouting is an action out of world applying to nothing.
 Understand "about" as abouting.
@@ -733,14 +740,14 @@ After printing the banner text:
 	say "ABOUT for more information[para]".
 
 
-Chapter - License
+Chapter 2 - License
 
 Requesting the license is an action out of world.
 Understand "license" and "lisense" and "lisence" as requesting the license.
 Carry out requesting the license:
 	say the license.
 	
-Chapter - Transcripting
+Chapter 3 - Transcripting
 
 To say email:
 	say "lautzenheiser.jason@gmail.com".
@@ -807,23 +814,23 @@ check quitting the game when currently transcripting:
 	
 	
 
-Volume - The World
+Volume 3 - The World
 
-Book - Startup
+Book 1 - Startup
 
 After printing the banner text, say "Copyright © 2015, Jason Lautzenheiser."
 The time of day is 6:05 AM.
 
 When play begins:
-	now the left hand status line is "[the player's surroundings] ";  [number of uncompleted puzzles]
+	now the left hand status line is "[the player's surroundings] - [number of uncompleted puzzles] ";  
 	now the right hand status line is "Time: [time of day]";
 
 
 
 
-Book - Characters
+Book 2 - Characters
 
-Part  - Player Character
+Part 1 - Player Character
 
 Myself is a male person.  The player is myself.  
 The description of the player is "You're a third generation farmer who is.....no not really, you bought this old farm house because it was falling down and you got it and the land cheap."
@@ -840,9 +847,9 @@ The player is wearing reading glasses, t-shirt, jean shorts and baseball cap.
 
 
 
-Chapter - wife
+Chapter 1 - wife
 
-Wife is a female person.  The description of wife is "Your wife is a very beautiful and smart woman.  Someone she has managed to put up with you for all these years and still stick around.  Maybe she just feels sorry for you."  The printed name of wife is "wife".
+Wife is a female person.  The description of wife is "Your wife is a very beautiful and smart woman.  Somehow she has managed to put up with you for all these years and still stick around.  Maybe she just feels sorry for you."  The printed name of wife is "wife".
 
 After deciding the scope of the player: 
 	place the wife in scope.
@@ -860,7 +867,7 @@ before taking wife:
 
 
 
-Chapter - Reading glasses
+Chapter 2 - Reading glasses
 
 The reading glasses are a wearable thing.  The description of reading glasses is "A pair of very thick glasses, you like to call them reading glasses, but in fact you're quite blind without them on."	Understand "spectacles" as reading glasses.  The printed name of reading glasses is "your glasses".
 
@@ -882,7 +889,7 @@ report wearing the glasses:
 	try looking;
 	stop the action.
 	
-Chapter - Baseball cap
+Chapter 3 - Baseball cap
 
 A baseball cap is a wearable  container.  The description of baseball cap is "You never really liked baseball, but this hat is very comfortable and it conveniently hides your slightly balding head." The indefinite article is "a".   Understand "hat" as baseball cap.  the printed name of baseball cap is "your baseball cap".
 
@@ -900,7 +907,7 @@ instead of inserting something into the cap:
 	say "This is your favorite hat, you wouldn't want to get it all dirty by putting [the noun] in it."
 	
 	
-Chapter - Jean shorts
+Chapter 4 - Jean shorts
 
 The jean shorts is a wearable thing.  The description of jean shorts is "Your wife is always trying to throw these shorts out...she says they are too tight on you.  You don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts.  The printed name of jean shorts is "your shorts".  jean shorts is plural-named.
 
@@ -918,7 +925,7 @@ Rule for printing the name of the jean shorts when taking inventory:
 
 	
 
-Chapter - T-shirt
+Chapter 5 - T-shirt
 
 The t-shirt is a wearable thing.  The description of the t-shirt is "Just a plain white t-shirt, nothing fancy." The indefinite article is "a".   the printed name of t-shirt is "your t-shirt".
 Understand "tshirt/shirt/tee/tee-shirt/teeshirt" as t-shirt.
@@ -929,9 +936,9 @@ Rule for printing the name of the t-shirt:
 	say "a t-shirt".
 		
 
-Book - Map
+Book 3 - Map
 
-Part - Under the Tree
+Part 1 - Under the Tree
 
 Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wondrous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area][say-fire-is-out]".
 
@@ -974,12 +981,12 @@ Before going up from under-the-tree:
 	otherwise:	
 		say "You never were much of a tree climber.  Besides it wouldn't be pretty if the hornets attack while you were trying to pull yourself up the tree." instead.
 	
-Chapter - Pile of ashes
+Chapter 1 - Pile of ashes
 
 The pile of ashes is a fixed in place flimsy.  "Just the remains of your wood, now just a pile of grey ashes."  The pile of ashes is described.  Pile of ashes is plural-named.   
 
 
-Chapter - Leaves
+Chapter 2 - Leaves
 
 Some leaves are in under-the-tree.  Some leaves are undescribed.  The description of some leaves is "The leaves are starting to come down and cover the ground around the tree."  The burn-reject of the leaves is "You gather a pile of leaves and try to light them with your glasses.  They begin to smoke profusely but quickly go out as they are too wet from a recent rain to ignite on their own."
 Some leaves is plural-named.
@@ -1019,7 +1026,7 @@ Before putting some leaves on the fire-top:
 		
 
 	
-Part - In the shed
+Part 2 - In the shed
 
 In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway to the north.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug spray.[end if]  [describe-the-hand-saw]".  
 In-the-shed is inside from outside-the-shed.  
@@ -1047,7 +1054,7 @@ instead of searching anything when the player is blinded and the location is in-
 	
 Understand "look out [something]" as searching.
 
-Chapter - Junk
+Chapter 1 - Junk
 
 Junk is scenery in in-the-shed.  The description of junk is "Just piles of stuff that has collected here over the years.  [if the bug killer is not found]You could try searching it to see if there is anything to help you current dilemma.[end if]".  Understand "piles" or "mess" as junk when the location is in-the-shed.
 
@@ -1074,7 +1081,7 @@ Before searching while location is in-the-shed and the noun is not the window:
 	try searching junk instead.
 
 
-Chapter - Window
+Chapter 2 - Window
 
 A dirty window is in in-the-shed.  The dirty window is scenery. The description of the dirty window is "The window is covered in cobwebs and dust.  It doesn't look like it's been cleaned for decades, if ever.  [if horsefly is in in-the-shed]In the corner of the window is a large horsefly, buzzing up against the window trying to get out.[end if]"
 
@@ -1108,7 +1115,7 @@ To say view-hornets-out-window:
 		say "You can see the nest still in the tree, but through the dust and haze of the window you can't make out much more."
 
 
-Chapter - Shelf
+Chapter 3 - Shelf
 	
 A shelf is scenery supporter in in-the-shed.  The description of the shelf is "The shelf is just inside the door and looks to be where things were just thrown.  There are piles of junk on it."
 
@@ -1124,7 +1131,7 @@ Before searching the shelf:
 		say "You find nothing that looks useful to your current plight." instead.
 
 
-Chapter - Can of Bug Killer
+Chapter 4 - Can of Bug Killer
 
 The bug killer is a thing.  The description of bug killer is "The can of bug killer has been laying in the shed for a number of years." The indefinite article of bug killer is "a can of".  understand "can" or "spray" as bug killer.   the bug killer is flammable.
 
@@ -1147,7 +1154,7 @@ before kicking the bug killer:
 
 Understand "kick the can" or "kick can" as a mistake("Dying may be preferable to seeing your inlaws, but that's not a viable option, so back to getting rid of the nest.").	
 
-Chapter - Hand saw	
+Chapter 5 - Hand saw	
 
 The hand-saw is an undescribed thing in in-the-shed.  The printed name of hand-saw is "hand saw".  Understand "saw/handsaw" or "hand saw" as hand-saw.  
 The description of hand-saw is "Nope, you didn't use this much either.  The saw is new and shiny." 	
@@ -1166,7 +1173,7 @@ To say describe-the-hand-saw:
 		say "Hanging on the wall near the back is a handsaw.[run paragraph on]";
 
 
-Chapter - Ladder
+Chapter 6 - Ladder
 
 A ladder is a thing.  A ladder is in in-the-shed.  The description is "It's a cheap aluminum step ladder your Dad gave you for a house warming gift when you moved in twenty years ago[one of][if location is in-the-shed and player is not carrying the ladder] is still laying where you left it.....oh....twenty years ago[end if][or][stopping]."
 
@@ -1208,7 +1215,7 @@ after leaning the ladder on something:
 The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.
 The examine supporters rule is not listed in any rulebook.
 
-Chapter - horsefly
+Chapter 7 - horsefly
 
 [http://inform7.com/learn/man/ex1.html]
 Every turn when the player is in in-the-shed and the horsefly is on-stage and the player does not carry the horsefly and the noun part of the current action is not the horsefly:
@@ -1286,7 +1293,7 @@ before doing anything to the horsefly while the horsefly is off-stage:
 
 	
 	
-Part - Outside the shed
+Part 3 - Outside the shed
 
 Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However, it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is resting on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
 
@@ -1298,7 +1305,7 @@ before going south in outside-the-shed when the player is blinded:
 before going south in outside-the-shed:
 	try going inside instead.
 	
-Chapter - Shed Door
+Chapter 1 - Shed Door
 
 The shed-door is a backdrop.  The shed-door is in outside-the-shed and in-the-shed.  The description of shed-door is "The shed door has fallen off it's hinges long ago and you used it for firewood soon after.  You've never bothered to replace it."  Understand "door" as shed-door when the location is outside-the-shed or the location is in-the-shed.
 
@@ -1313,7 +1320,7 @@ To say described-shed-door:
 		say "The shed door has fallen off years ago and you never bothered to replace it.  ".
 		
 
-Chapter - Torch
+Chapter 2 - Torch
 
 A torch is a thing.  The description of the torch is "A long thin stick which has caught on fire."  Understand "twig/stick/flaming/thin/fire/flames" or "flaming stick" as torch when the player carries the torch.  The printed name of torch is "flaming stick";
 
@@ -1326,7 +1333,7 @@ Before dropping the torch:
 	
 
 
-Chapter - Some twigs	
+Chapter 3 - Some twigs	
 
 Some twigs is a thing.  The description of some twigs is "[describe-twigs]".  
 
@@ -1375,7 +1382,7 @@ Instead of kicking the twigs:
 		say "You kick the twigs scattering them throughout the yard.";
 		now the twigs are off-stage.
 
-Chapter - Pile of wood
+Chapter 4 - Pile of wood
 
 The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  The woodpile is in outside-the-shed.
 
@@ -1422,7 +1429,7 @@ instead of cutting the woodpile:
 	say "You break up some of the wood into pieces small enough to stand in for toothpicks, but you wisely decide that they may better serve as kindling so you leave the rest intact."
 
 
-Section - Spider web
+Section 1 - Spider web
 
 The web is a container on the woodpile.  The web is open.  The web is not openable.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've ever seen[end if]."
 
@@ -1442,7 +1449,7 @@ before taking the web:
 		increase the time of day by 10 minutes instead.
 
 
-Section - spider	
+Section 2 - spider	
 
 The large spider is a animal in the web.  The  description of large spider is "The spider is as large as the palm of your hand.  It's black with large yellow streaks.  It sits in the middle of the web waiting for dinner.  It looks hungry."  Understand "spider" as the large spider.   The spider is undescribed.
 The spider is attackable.
@@ -1466,7 +1473,7 @@ After deciding the scope of the player when location is outside-the-shed and the
 	place the spider in scope.
 		
 				
-Part - On the porch
+Part 4 - On the porch
 
 On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if the player is hiding]Hiding on[otherwise]On[end if] the Porch".  The description is "The front porch is where you spend most of your evenings after work in the summer, sitting on the [porch-swing] and drinking a [beer].  To the east right off the porch is the large tree and to the southeast is your shed. [other-stuff-on-the-porch]".  The on-the-porch is west of under-the-tree and northwest of outside-the-shed.
 
@@ -1497,17 +1504,17 @@ before going up when the player is on the porch-swing:
 	if player is on the porch-swing:
 		try getting off the porch-swing instead.
 
-Chapter - Flimsies
+Chapter 1 - Flimsies
 
-Section - Beer 
+Section 1 - Beer 
 
 The beer is a flimsy in on-the-porch. The action-refusal is "You wish you had some beer right now, but you need to keep focused on the task at hand."  The initial appearance of the beer is "Oh trust me, if you had a beer right now, you'd be doing more than just looking at it."
 
-Section - Front Door
+Section 2 - Front Door
 
 The front door is a flimsy in on-the-porch. "The front door leading into your house, in fact it's the only way into your house and your wife locked the door behind you when you left this morning.  Her exact words were 'Don[']t bother coming back until that nest is gone.'".  The action-refusal is "You told your wife you were not coming in until the nest was gone (actually, she told you that, but you won't admit that out loud, will you?)".
 
-Chapter - Porch Swing
+Chapter 2 - Porch Swing
 
 The porch-swing is a enterable supporter in on-the-porch.  The porch-swing is scenery.  The printed name of porch-swing is "porch swing".  The description of porch-swing is "The porch swing sits in the corner of the porch.  Close enough to the door so it's easy enough to get up and get another beer."
 Understand "swing" or "porch swing" or "glider" as porch-swing.
@@ -1523,14 +1530,14 @@ Does the player mean swinging the porch-swing when the player is in on-the-porch
 Does the player mean swinging the porch-swing when the player is on the  porch-swing: it is likely.
 
 
-Chapter - Shovel
+Chapter 3 - Shovel
 
 The shovel is a thing.  The description of shovel is "[if the shovel is in on-the-porch and the shovel is not carried by the player]The shovel is handy for cleaning up the dog-doo.  That's why you just leave it laying around on the porch within easy reach.[otherwise]Simple spade wth long wooden handle.  You've only ever used it to clean up the mess the dog leaves in the yard.[end if]"
 
 Understand "spade" as shovel.
 
 	
-Part - Up the tree
+Part 5 - Up the tree
 
 Up-the-tree is a room.  The printed name is "Up the Tree".  The description is "You are standing near the top of the ladder near the nest.  The hornets are beginning to become aware of your presence and starting to buzz your head.  The only way is down."  Up-the-tree is up from under-the-tree.
 
@@ -1544,7 +1551,7 @@ instead of going up in up-the-tree:
 After deciding the scope of the player while the location is up-the-tree: 
 	place the ladder in scope
 
-Chapter - Hornets Nest
+Chapter 1 - Hornets Nest
 
 The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [if bug killer is part of the hornets-nest]Stuck in the bottom of the nest is the can of bug spray.[end if][one of]You promised your wife you wouldn't come back until the nest was gone or you wouldn't come back at all.[or][stopping]". The printed name is "hornet's nest".  The indefinite article is "a".  The hornets-nest is attackable.
 
@@ -1582,7 +1589,7 @@ Instead of cutting the hornets-nest:
 	otherwise:
 		say "The nest is too far away to effectively cut up into little pieces."
 		
-Chapter - Hornets	
+Chapter 2 - Hornets	
 
 Some hornets are an animal in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets][if the smoke is on-stage and the smoke is heavy]They appear to be wearing miniature gas masks.[end if]".  The hornets are attackable.
 The hornets can be grabbed.
@@ -1622,7 +1629,7 @@ before kissing the hornets:
 	say "Why???   Do you want big red lips?" instead.
 	
 
-Part - On The Roof
+Part 6 - On The Roof
 
 On-the-roof is a room.  The printed name of on-the-roof is "On the Roof".  The description of on-the-roof is "You're perched on the roof of your house.  From here you can climb back down the ladder."
 
@@ -1641,9 +1648,9 @@ After deciding the scope of the player while the location is on-the-roof:
 before taking the ladder in on-the-roof:
 	say "To ensure a way back down, you'll leave the ladder stay." instead.
 
-Book - Things
+Book 4 - Things
 
-Chapter - Fire
+Chapter 1 - Fire
 
 The fire is a container.  The fire-top is a supporter.  The printed name of fire-top is "fire".  The fire-top is part of the fire.  The fire is scenery.
 Understand "flame" as fire.
@@ -1683,7 +1690,7 @@ instead of examining the fire:
 instead of taking the fire:
 	try taking the twigs instead.
 
-Chapter - Hole
+Chapter 2 - Hole
 
 The hole is a fixed in place container.   The description is "The hole isn't very deep, but you think it is big enough for the nest to fit into."
 
@@ -1691,7 +1698,7 @@ Instead of taking the hole:
 	say "Really, did you really just try to pick up the hole?"
 	
 	
-Chapter - Smoke
+Chapter 3 - Smoke
 
 The smoke is scenery.  The smoke is undescribed.  The smoke can be heavy or light.  The smoke is light.
 
@@ -1708,9 +1715,9 @@ Instead of examining the smoke:
 
 
 
-Book - Backdrops
+Book 5 - Backdrops
 
-Chapter - Tree
+Chapter 1 - Tree
 
 The shade tree is a supporter which is in under-the-tree. The tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]Hanging from a branch is the largest hornet's nest you've ever seen.[end if][if ladder is resting on the tree] The ladder is leaning against the tree.[end if]".
 
@@ -1813,19 +1820,19 @@ instead of taking the cut branch:
 [instead of doing anything with the cut branch:
 	say "It is much too heavy."]
 
-Chapter - Sun
+Chapter 2 - Sun
 
 The sun is a backdrop which is everywhere.  The description of the sun is "You start to stare at the sun, but realize that is probably why your eye sight is not so good anymore.  It's very bright and very hot."
 
 instead of kicking the sun:
 	say "Really??"
 
-Chapter - House
+Chapter 3 - House
 
 The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got its problems....but it's home.[if ladder is resting on the house]  The ladder is leaning against the house.[end if]".  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
 
 
-Chapter - Shed
+Chapter 4 - Shed
 
 The shed is a backdrop which is everywhere.  The description of the shed is "The tool shed was built back in the 1860s and is falling down, however it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard."
 
@@ -1836,14 +1843,12 @@ before entering shed:
 
 	
 
-Chapter - wood-burner
+Chapter 5 - wood-burner
 
 The wood-burner is a backdrop which is everywhere.  The description of wood-burner is "The wood burner was in the house when you bought it and you thought for sure you would use it every winter.  Then came that first year of chopping wood....that was too much like work, so you stacked that little pile by the shed and never thought about it again."  Understand "woodburner/burner" or "wood burner" as wood-burner.
 
 
-Volume - Scenes
-
-Book - Puzzles
+Volume 4 - Puzzles
 
 The list writer internal rule response (Y) is "None"
 
@@ -1858,22 +1863,6 @@ Report requesting puzzle status:
 		say "The last completed puzzle is [last-puzzle-completed of the player].";
 	say "You have completed [the number of completed puzzles] puzzles.";
 	say "You currently have [the number of running puzzles] puzzles that are running.";
-
-[	repeat with puzzle-status running through all running puzzles:
-		say "[puzzle-status] is now running.";
-	repeat with puzzle-status running through all active uncompleted puzzles:
-		say "[puzzle-status] is active.";
-	repeat with puzzle-status running through all uncompleted inactive puzzles:
-		say "[puzzle-status] is not completed.";
-	repeat with puzzle-status running through all completed puzzles:
-		say "[puzzle-status] is completed.";
-	repeat with puzzle-status running through all impossible puzzles:
-		say "[puzzle-status] is now impossible.";
-	if the last-puzzle-completed of the player is not no-puzzle:
-		say "The last completed puzzle is [last-puzzle-completed of the player].";
-	say "Not completed: [number of uncompleted inactive puzzles].";
-	say "Active: [number of active uncompleted puzzles].";
-	say "Running: [number of running puzzles].";]
 
 Understand "puzzles" as requesting puzzle status.
 
@@ -1927,38 +1916,10 @@ Every turn:
 			now fire-the-missle is inactive;
 	if fire-the-missle is completed:
 		if spray-the-nest is uncompleted:
-			now spray-the-nest is impossible.
-
-Book - Recurring events
-
-Part  - Flame goes out
-
-at the time when the flame goes out:
-	if location is under-the-tree:
-		say "You notice that your fire has gone out.";
-	otherwise:	
-		now fire-is-out is true;
-	now the fire is off-stage;
-	now the smoke is off-stage;
-	now the smoke is light;
-	now the twigs are new;
-	now the twigs are off-stage.
-
-Part - Hornets Attack
-
-at the time when the hornets attack:
-	if location is up-the-tree or location is under-the-tree:
-		if the last-puzzle-completed of the player is fire-the-missle:
-			say "With the can stuck in the opening of the nest, the nest begins to expand as the hornets attempt to escape.  Finally in a large explosion of pieces of nest and angry hornets, they escape and begin to swarm around you aggressively.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[para]";
-		otherwise:
-			say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[para]";
-		now the player is hiding;
-		now the hornets are aggressive;
-		now the player is in a random safe-zone room;
-		if the end-text of the last-puzzle-completed of the player is not "":
-			say "[end-text of the last-puzzle-completed of the player]";
-		suggest next puzzle;
-		Hornets calm down in two turns from now.
+			now spray-the-nest is impossible;
+			now use-spray-as-flamethrower is impossible.
+			
+Chapter 1 - Suggest Next Puzzle
 
 to suggest next puzzle:
 	if spray-the-nest is uncompleted and spray-the-nest is not impossible:
@@ -1978,6 +1939,40 @@ to suggest spray the nest:
 			say "You think you saw some bug spray around here somewhere.";
 		else:
 			say "Perhaps there is something to be found in the shed."
+
+Volume 5 - Scenes
+
+Book 1 - Recurring events
+
+Part 1 - Flame goes out
+
+at the time when the flame goes out:
+	if location is under-the-tree:
+		say "You notice that your fire has gone out.";
+	otherwise:	
+		now fire-is-out is true;
+	now the fire is off-stage;
+	now the smoke is off-stage;
+	now the smoke is light;
+	now the twigs are new;
+	now the twigs are off-stage.
+
+Part 2 - Hornets Attack
+
+at the time when the hornets attack:
+	if location is up-the-tree or location is under-the-tree:
+		if the last-puzzle-completed of the player is fire-the-missle:
+			say "With the can stuck in the opening of the nest, the nest begins to expand as the hornets attempt to escape.  Finally in a large explosion of pieces of nest and angry hornets, they escape and begin to swarm around you aggressively.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[para]";
+		otherwise:
+			say "The hornets swarm around you aggressively, diving in and trying to penetrate through the wall of your flailing arms.  You[if location is up-the-tree] jump out of the tree and[end if] run around screaming wildly.[para]";
+		now the player is hiding;
+		now the hornets are aggressive;
+		now the player is in a random safe-zone room;
+		if the end-text of the last-puzzle-completed of the player is not "":
+			say "[end-text of the last-puzzle-completed of the player]";
+		suggest next puzzle;
+		Hornets calm down in two turns from now.
+
 
 at the time when the hornets calm down:
 	now the hornets are swarming;
@@ -2000,7 +1995,7 @@ to say clue-next-puzzle:
 		say "As you pause to catch your breath, you wonder what to do.   Maybe if you try cutting it down, they'll just pick up and leave."
 		
 	
-Book - Aggressive Hornets
+Book 2 - Aggressive Hornets
 
 Aggressive-hornets is a recurring scene.   Aggressive-hornets begins when hornets are aggressive.  Aggressive-hornets ends when hornets are not aggressive.
 
@@ -2019,7 +2014,7 @@ Every turn while aggressive-hornets is happening:
 
 
 
-Book - Exploding Can
+Book 3 - Exploding Can
 
 Exploding Can is a scene.  Exploding Can begins when fire-the-missle is running.  Exploding Can ends when fire-the-missle is completed.
 When exploding can begins:
@@ -2035,7 +2030,7 @@ When exploding can begins:
 
 
 	
-Book - Smoking them out
+Book 4 - Smoking them out
 
 Smoking-them-out is a scene.  Smoking-them-out begins when smoke is heavy.  Smoking-them-out ends when smoke-the-nest is completed.	
 
@@ -2050,7 +2045,7 @@ As they begin to swarm around your head, you notice there is something different
 	now smoke-the-nest is completed;
 	
 
-Book - Scene - Running the Game 
+Book 5 - Scene - Running the Game 
 
 Running-the-game is a scene.  running-the-game begins when play begins.  
 Running-the-game ends when the number of uncompleted inactive puzzles is 0 and the number of active uncompleted puzzles is 0 and the number of running puzzles is 0 and aggressive-hornets is not happening.
@@ -2063,7 +2058,7 @@ When running-the-game ends:
 
 
 
-Volume - Hints
+Volume 6 - Hints
 
 
 [Part 1 - Hint Tables
@@ -2096,7 +2091,7 @@ When play begins: activate the Table of Getting Started Hints.]
 
 
 
-Volume - Looking from Supplemental Actions by Al Golden
+Volume 7 - Looking from Supplemental Actions by Al Golden
 
 looking north is an action applying to nothing.
 looking south is an action applying to nothing.
@@ -2159,7 +2154,7 @@ report looking down
 say "You can't look down.".
 
 
-Volume - Throwing from Supplemental Actions by Al Golden
+Volume 8 - Throwing from Supplemental Actions by Al Golden
 
 To say verbword: (- print (address) verb_word; -).
 
@@ -2280,14 +2275,17 @@ report throwing something out of a second noun (this is the throwing something o
 	say "You can't [verbword] [the noun] out of [the second noun]."
 
 
-Volume - Testing & Debugging
+Volume 9 - Testing & Debugging
 
-Book - Test commands - Not for release
+Book 1 - Test commands - Not for release
 	 
-Book - Tests - Not for release
+Book 2 - Tests - Not for release
 
+test get-can with "s/in/search shelf/take can".
 test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tree/u/spray/z/z".
-test wood with "test spray/s/catch fly/n/throw fly in web/get wood".
-test fire with "test wood/n/drop wood/take leaves/burn wood with glasses/drop leaves on fire".
-test cut with "test fire/s/in/take saw/n/n/climb ladder/cut tree/d/z/n".
-test rocket with "s/in/search junk/take can/take fly/n/give fly to spider/take wood/n/drop wood/burn wood with glasses/put can in fire".
+test wood with "s/s/catch fly/n/throw fly in web/get wood".
+test fire with "test wood/n/drop wood/burn wood with glasses".
+test smoke with "test wood/n/drop wood/take leaves/burn wood with glasses/drop leaves on fire".
+test cut with "s/in/take saw/n/n/climb ladder/cut tree/d/z/n".
+test rocket with "test get-can/take fly/n/give fly to spider/take wood/n/drop wood/burn wood with glasses/put can in fire".
+test flamethrower with "test get-can/catch fly/n/throw fly in web/get wood/n/drop wood/burn wood with glasses/take torch".
