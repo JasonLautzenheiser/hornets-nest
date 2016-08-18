@@ -8,7 +8,7 @@ Volume 1 - Metadata
 Book 1 - License
 
 To say the license:
-say "Copyright (c) 2015 Jason Lautzenheiser
+say "Copyright (c) 2016 Jason Lautzenheiser
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
@@ -61,8 +61,6 @@ A thing can be throwable.
 Flame-state is a kind of value. The flame-states are burnt, flaming, and new. Understand "burning" or "lit" as flaming.   A thing has a flame-state.  A thing is usually new.
 
 Everything has some text called the think-text.  The think-text is usually "".
-Everything has some text called the blind-text.  The blind-text is usually "".
-A room has some text called the blind-text.  The blind-text of a room is usually "".
 
 
 Book 5 - General
@@ -141,16 +139,16 @@ Rule for writing a paragraph about a flimsy (called xx):
 Part 5 - Blind Text	
 
 instead of examining something when the player is blinded:
-	if the blind-text of the noun is "":
-		say "Without your glasses on, everything is a big blur.";
+	if there is a blind-text corresponding to the object of the noun in the Table of Blind Text:
+		say "[blind-text corresponding to the object of the noun in the Table of Blind Text].";
 	otherwise:
-		say "[blind-text of the noun][para]".
+		say "Without your glasses on, everything is a big blur.";
 
 instead of looking when the player is blinded:
-	if the blind-text of the location is "":
-		say "Without your glasses on, everything is a big blur.";
+	if there is a blind-text corresponding to the object of location in the Table of Blind Text:
+		say "[blind-text corresponding to the object of location in the Table of Blind Text].";
 	otherwise:
-		say "[blind-text of the location][para]".
+		say "Without your glasses on, everything is a big blur.";
 
 before searching the location when blinded:
 	say "All you find are vague shapes and colors." instead;
@@ -168,6 +166,12 @@ instead of going nowhere when the player is blinded:
 to say blind-going-reject:
 	say "[one of]trip[or]stumble[or]fall[or]go in circles[then at random]".
 	
+Table of Blind Text
+object	blind-text
+under-the-tree	"You can make out the faint blur of the tree and the shadows created by the leaves.  You can definitely hear the hornets in their nest above you"
+outside-the-shed	"The shadow of the shed appears to fill your vision.  The hum of the nest can be heard in the distance"
+shed	"The shadow of the shed appears very large in it's blurred state"
+in-the-shed	"Everything is dark except for a faint glow coming from the window and the slightly brighter glow of the doorway to the north"
 
 Book 6 - Easter Eggs
 
@@ -197,6 +201,21 @@ Chapter 2 - General Actions the player can perform
 
 instead of going nowhere:
 	say "As much as you want to shirk your responsibility, you promised to get those hornets out of the tree."
+	
+Chapter 3 - Listening
+
+instead of listening:
+	if location is under-the-tree:
+		try listening to the tree;
+	if location is outside-the-shed:
+		say "The buzz of the nest in the tree, while lessened here is still the only noise you can hear.";
+	if location is in-the-shed:
+		if the horsefly is on-stage and the player does not carry the horsefly:
+			say "The buzzing of the horsefly in the window drowns out any other noises.";
+		otherwise:
+			say "Even from within the shed, you can hear the faint sounds of the hornet's nest.";
+	if location is on-the-porch:
+		say "Though you can't see the nest from here, you can hear it."
 
 Part 2 - New actions
 
@@ -339,45 +358,62 @@ Rule for supplying a missing second noun while leaning something on:
 			now the second noun is the tree;
 		if location is on-the-porch:
 			now the second noun is the house;
+		if location is outside-the-shed:
+			now the second noun is the shed.
 
 Check leaning:
+	if the noun is:
+		-- myself: 
+			continue the action;
+		-- ladder:
+			if the ladder is not contained by the player and the location of the ladder is not the location of the player:
+				say "You can't lean what you don't have.";
+			otherwise:
+				if the second noun is:
+					--  the tree:
+						if the location is under-the-tree:
+							say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
+							if the ladder is not in under-the-tree:
+								try silently dropping ladder;
+							now the ladder rests on the tree;
+						otherwise:
+							say "[lean-ladder-to-far-away]";
+					-- the shed:
+						if the location is outside-the-shed:
+							say "You don't think the shed would hold you if you managed to climb up on top of it.  You decide to hold on to the ladder.";
+							now the player carries the ladder;
+						else if the location is in-the-shed:
+							if the player carries the ladder:
+								say "You lean the ladder back where you found it.";
+								try silently dropping the ladder;
+							otherwise:
+								say "The ladder is already leaning in the corner.";
+						otherwise:
+							say "[lean-ladder-to-far-away]";
+					-- the house:
+						if the location is under-the-tree or the location is on-the-porch:
+							say "You lean the ladder against the house. You can climb onto the roof now.";
+							if the ladder is not in under-the-tree:
+								now the ladder is in under-the-tree;
+							now the ladder is resting on the house;
+					-- otherwise:
+						say "[lean-ladder-to-far-away]";
+		-- otherwise:
+			now the noun rests on the second noun;
+			continue the action.
+
+Report leaning:
 	if the noun is:
 		-- myself:
 			if the second noun is the tree:
 				say "You lean against the tree nonchalantly...well that didn't work, the hornets notice you and become a bit agitated.";
 		-- ladder:
-			if the second noun is:
-				--  the tree:
-					if the location is under-the-tree:
-						say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
-						if the ladder is not in under-the-tree:
-							try silently dropping ladder;
-						now the ladder rests on the tree;
-					otherwise:
-						say "[lean-ladder-to-far-away]";
-				-- the shed:
-					if the location is outside-the-shed:
-						say "You don't think the shed would hold you if you managed to climb up on top of it.  You decide to hold on to the ladder.";
-						now the player carries the ladder;
-					else if the location is in-the-shed:
-						if the player carries the ladder:
-							say "You lean the ladder back where you found it.";
-							try silently dropping the ladder;
-						otherwise:
-							say "The ladder is already leaning in the corner.";
-					otherwise:
-						say "[lean-ladder-to-far-away]";
-				-- the house:
-					if the location is under-the-tree or the location is on-the-porch:
-						say "You lean the ladder against the house. You can climb onto the roof now.";
-						if the ladder is not in under-the-tree:
-							now the ladder is in under-the-tree;
-						now the ladder is resting on the house;
-				-- otherwise:
-					say "[lean-ladder-to-far-away]";
+			say "blah";
 		-- otherwise:
-			say "You lean [the noun] against thin air and [they] promptly leans all the way to the ground.";
-			try silently dropping ladder;
+				if the second noun is missing:
+					say "You lean [the noun] against thin air and [they] promptly leans all the way to the ground.";
+				otherwise:
+					say "You lean [the noun] against the [second noun].";
 
 
 to say lean-ladder-to-far-away:
@@ -493,7 +529,7 @@ Carry out spraying:
 		now spray-the-nest is completed;
 		now the last-puzzle-completed of the player is spray-the-nest;
 	
-Chapter 13 counting
+Chapter 13 - counting
 
 Counting is an action applying to one visible thing.  Understand "count [something]" as counting.
 
@@ -521,7 +557,7 @@ sanity-check jumping:
 
 Chapter 15 - Thinking
 
-Thinking about is an action applying to one thing.
+Thinking about is an action applying to one visible thing.
 Understand "think about [something]" as thinking about.
 Understand "think [something]" as thinking about.
 
@@ -733,7 +769,7 @@ Understand "about" as abouting.
 Understand the command "credits" or "info" as "about".
 
 Report abouting:
-	say "[italic type][Story title][roman type] is copyright © 2015 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[para]";
+	say "[italic type][Story title][roman type] is copyright © 2016 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[para]";
 	say "This work was created just for the fun of it beginning in early 2014.  This release is made for the IntroComp 2014 contest.  Special thanks to my great testers (in no particular order):  Andrew Schultz, Daniel Stelzer, Hanon Ondricek and Marshal Tenner Winter.  Also special thanks to my wife Holly and my four children, all of whom I was able to bounce ideas off of.[para]"; 
 
 After printing the banner text:
@@ -846,25 +882,15 @@ Check going when the player is hiding:
 The player is wearing reading glasses, t-shirt, jean shorts and baseball cap.
 
 
-
 Chapter 1 - wife
 
-Wife is a female person.  The description of wife is "Your wife is a very beautiful and smart woman.  Somehow she has managed to put up with you for all these years and still stick around.  Maybe she just feels sorry for you."  The printed name of wife is "wife".
+Wife is a female person.  The description of wife is "Your wife is a very beautiful and smart woman.  Somehow she has managed to put up with you for all these years and still stick around.  Maybe she just feels sorry for you."  The printed name of wife is "wife".  The think-text is "She's made it abundantly clear that you're not to show your face until that nest is out of the tree."
 
 After deciding the scope of the player: 
 	place the wife in scope.
 	
-before doing anything to wife:
-	if examining wife:
-		say "[description of wife][para]" instead;
-	otherwise:
-		say "You're not going to [verbword] her until the nest is out of the tree.  She's made that abundantly clear." instead.
-
-before taking wife:
-	say "You're not going to take her anywhere until the nest is out of the tree.  She's made that abundantly clear." instead.
-	
-
-
+before doing anything except examining or thinking about or taking to wife:
+	say "You're not going to [verbword] her until the nest is out of the tree.  She's made that abundantly clear." instead.
 
 
 Chapter 2 - Reading glasses
@@ -942,8 +968,6 @@ Part 1 - Under the Tree
 
 Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wondrous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area][say-fire-is-out]".
 
-
-The blind-text of under-the-tree is "You can make out the faint blur of the tree and the shadows created by the leaves.  You can definitely hear the hornets in their nest above you."
 
 To say say-fire-is-out:
 	if fire-is-out is true:
@@ -1030,8 +1054,6 @@ Part 2 - In the shed
 
 In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway to the north.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug spray.[end if]  [describe-the-hand-saw]".  
 In-the-shed is inside from outside-the-shed.  
-
-The blind-text of in-the-shed is "Everything is dark except for a faint glow coming from the window and the slightly brighter glow of the doorway to the north."
 
 before going a direction (called which-way) in in-the-shed:
 	if which-way is north:
@@ -1297,7 +1319,6 @@ Part 3 - Outside the shed
 
 Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However, it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is resting on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
 
-The blind-text of outside-the-shed is "The large shape that is your shed is to the south and you can make out the blur that is your house and you can hear the buzz of the hornets from the tree to the north."
 
 before going south in outside-the-shed when the player is blinded:
 	say "You start to head south into your shed, but you manage to miss the door and run into the side of the building." instead.
@@ -1760,18 +1781,7 @@ instead of taking the tree:
 instead of listening to the tree:
 	say "You hear the buzz of the hornets as the fly around the nest."
 	
-instead of listening:
-	if location is under-the-tree:
-		try listening to the tree;
-	if location is outside-the-shed:
-		say "The buzz of the nest in the tree, while lessened here is still the only noise you can hear.";
-	if location is in-the-shed:
-		if the horsefly is on-stage and the player does not carry the horsefly:
-			say "The buzzing of the horsefly in the window drowns out any other noises.";
-		otherwise:
-			say "Even from within the shed, you can hear the faint sounds of the hornet's nest.";
-	if location is on-the-porch:
-		say "Though you can't see the nest from here, you can hear it."
+
 		
 Instead of looking under the tree:
 	say "Throughout the [yard] you see the tree's [roots] that stretch out from its base."
@@ -1781,8 +1791,6 @@ Instead of pushing the tree:
 
 instead of attacking or kicking the tree:
 	say "It's really not the tree's fault [if the hornets-nest is part of the tree]that it has that hornet's nest in there[end if].";
-
-
 
 Instead of cutting the tree:
 	if player carries the hand-saw:
@@ -1817,8 +1825,6 @@ The cut branch is scenery.  The description of cut branch is "The large branch y
 instead of taking the cut branch:
 	say "It is much too heavy.";
 
-[instead of doing anything with the cut branch:
-	say "It is much too heavy."]
 
 Chapter 2 - Sun
 
