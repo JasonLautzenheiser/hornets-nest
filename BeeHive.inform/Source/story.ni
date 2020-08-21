@@ -8,7 +8,7 @@ Volume 1 - Metadata
 Book 1 - License
 
 To say the license:
-say "Copyright (c) 2016 Jason Lautzenheiser
+say "Copyright (c) 2016-2020 Jason Lautzenheiser
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
@@ -28,7 +28,8 @@ Volume 2 - Mechanics
 Book 1 - Extensions
 
 Include Small Kindnesses by Aaron Reed.
-Include Trinity Inventory by Mikael Segercrantz.
+
+[Include Trinity Inventory by Mikael Segercrantz.]
 [Include Basic Screen Effects by Emily Short.]
 
 Book 2 - Extensions - Not for release 
@@ -36,9 +37,9 @@ Book 2 - Extensions - Not for release
 [Include Object Response Tests by Juhana Leinonen.]
 [Include Property Checking by Emily Short.]
 [Include Debugging by Al Golden.]
-[Include Basic Screen Effects by Emily Short.]
 
-[ Include Response Assistant by Aaron Reed.]
+
+ Include Response Assistant by Aaron Reed.
 
 Book 3 - Extension overrides
 
@@ -279,14 +280,18 @@ sanity-check singing:
 
 Chapter 7 - Scoring
 
-carry out requesting the score:
+use scoring.
+The maximum score is 100.
+
+
+[carry out requesting the score:
 	if number of completed puzzles is 0:
 		say "You have not managed to annoy the hornets yet.";
 	otherwise:
 		let left-ways be number of not default puzzles minus number of completed puzzles;
 		say "You have annoyed the hornets [number of completed puzzles] way[if number of completed puzzles is greater than 1]s[end if].  Maybe you can find [left-ways] more.[para]";
 		say "The ways you've annoyed the hornets so far are: [list of completed puzzles].";
-	stop the action.
+	stop the action.]
 
 Chapter 8 - Digging
 
@@ -410,11 +415,10 @@ Report leaning:
 		-- ladder:
 			say "blah";
 		-- otherwise:
-				if the second noun is missing:
-					say "You lean [the noun] against thin air and [they] promptly leans all the way to the ground.";
-				otherwise:
-					say "You lean [the noun] against the [second noun].";
+			say "You lean [the noun] against the [second noun].";
 
+Rule for supplying a missing second noun while leaning:
+	say "You lean [the noun] against thin air and [they] promptly leans all the way to the ground.";
 
 to say lean-ladder-to-far-away:
 	say "The ladder is not long enough to lean it against [the second noun] from here.".
@@ -512,6 +516,7 @@ Carry out spraying:
 			hornets attack in 1 turn from now;
 			now use-spray-as-flamethrower is completed;
 			now the last-puzzle-completed of the player is use-spray-as-flamethrower;
+			increment-puzzle-score;
 			empty-the-can;
 		if noun is hornets-nest or noun is hornets:
 			now the hornets are angry;
@@ -528,6 +533,7 @@ Carry out spraying:
 		hornets attack in 1 turn from now;
 		now spray-the-nest is completed;
 		now the last-puzzle-completed of the player is spray-the-nest;
+		increment-puzzle-score.
 	
 Chapter 13 - counting
 
@@ -584,7 +590,7 @@ understand "cut [something]" as cutting with.
 
 before cutting with:
 	if the noun is the player:
-		say "Cutting [ourselves] wouldn't be an effective use of [our] time." instead;
+		say "You put the saw to your arm, but then think that cutting [ourselves] wouldn't be an effective use of [our] time." instead;
 	if the second noun is the hand-saw:
 		try cutting the noun instead;
 	otherwise:
@@ -641,6 +647,7 @@ Check attacking it with:
 				hornets attack in 1 turn from now;
 				now hit-nest-with-ladder is completed;
 				now the last-puzzle-completed of the player is hit-nest-with-ladder;
+				increment-puzzle-score;
 			otherwise:
 				say "You swing [the printed name of the second noun] at the nest over and over but you're not tall enough to hit it and the wind generated from your incessant swinging does little.";
 	otherwise if the noun is the large spider:
@@ -858,11 +865,15 @@ After printing the banner text, say "Copyright © 2015, Jason Lautzenheiser."
 The time of day is 6:05 AM.
 
 When play begins:
-	now the left hand status line is "[the player's surroundings] - [number of uncompleted puzzles] ";  
+	now the left hand status line is "[the player's surroundings] - [score]/[maximum score] ";  
 	now the right hand status line is "Time: [time of day]";
-
-
-
+[	now use-spray-as-flamethrower is completed;
+	now hit-nest-with-ladder is completed;
+	now fire-the-missle is completed;
+	now cut-the-branch is completed;
+	now smoke-the-nest is completed;
+	now spray-the-nest is completed;]
+	
 
 Book 2 - Characters
 
@@ -1808,6 +1819,7 @@ Instead of cutting the tree:
 					say "[para]As the nest hits the ground, it bursts into pieces and the hornets scatter in all directions.......only to regroup high up in the tree where they hover for a moment, then as if shot from a pistol, head in your direction.";
 					now the cut branch is in under-the-tree;
 					now the last-puzzle-completed of the player is cut-the-branch;
+					increment-puzzle-score;
 					hornets attack in 1 turn from now;
 				now cut-the-branch is completed;
 		otherwise:
@@ -1858,22 +1870,14 @@ Volume 4 - Puzzles
 
 The list writer internal rule response (Y) is "None"
 
-Requesting puzzle status is an action out of world.
-Report requesting puzzle status: 
-	say "Puzzles in process: [list of running puzzles].";
-	say "Puzzles not completed: [list of uncompleted inactive puzzles].";
-	say "Active puzzles: [list of active uncompleted puzzles].";
-	say "Completed puzzles: [list of completed puzzles].";
-	say "Puzzles now impossible: [list of impossible puzzles].";
-	if the last-puzzle-completed of the player is not no-puzzle:
-		say "The last completed puzzle is [last-puzzle-completed of the player].";
-	say "You have completed [the number of completed puzzles] puzzles.";
-	say "You currently have [the number of running puzzles] puzzles that are running.";
 
-Understand "puzzles" as requesting puzzle status.
 
 A puzzle is a kind of thing.  A puzzle is always undescribed.  A puzzle can be completed, uncompleted, running, default or impossible.  A puzzle is usually uncompleted.   A puzzle can be active or inactive.  A puzzle are usually inactive.
 A puzzle has some text called end-text. The end-text is usually "".
+A puzzle has a number called puzzle-score.  The puzzle-score is usually 10.
+
+To increment-puzzle-score:
+	increase the score by the puzzle-score of the last-puzzle-completed of the player.
 
 The player has a puzzle called last-puzzle-completed.  The last-puzzle-completed of the player is usually no-puzzle.
 
@@ -2027,6 +2031,7 @@ When exploding can begins:
 	say "The can sits in the fire for a few moments and then it starts to turn a hot red as it heats up.  As the sides of the can start to bulge out at the center, you quickly decide it's time to hide behind the tree.  Just as you retreat behind the tree, you hear a large explosion and you hit the ground.  You hear a whistle as the exploded can flies towards the nest hitting it right in the bottom, plugging up the entrance to the nest.";
 	now the last-puzzle-completed of the player is fire-the-missle;
 	now fire-the-missle is completed;
+	increment-puzzle-score;
 	hornets attack in 1 turn from now;
 	now the bug killer is a part of the hornets-nest;
 	
@@ -2049,6 +2054,7 @@ As they begin to swarm around your head, you notice there is something different
 	now the last-puzzle-completed of the player is smoke-the-nest;
 	hornets attack in 0 turn from now;
 	now smoke-the-nest is completed;
+	increment-puzzle-score.
 	
 
 Book 5 - Scene - Running the Game 
@@ -2064,36 +2070,8 @@ When running-the-game ends:
 
 
 
-Volume 6 - Hints
+Volume 6 - Amusing
 
-
-[Part 1 - Hint Tables
-
-Table of Potential Hints (continued)
-title	subtable
-"What do I do to get started?"	Table of Getting Started Hints
-"What can I do in the Shed?"	Table of Shed Hints
-
-Table of Getting Started Hints
-hint	used
-"Try exploring a bit."	a number
-"Then trying exploring a bit more."
-"Have you explored enough yet?"
-"OK, find your way to the shed."
-
-Table of Shed Hints
-hint	used
-"Search it thoroughly."
-"What did you find?"
-"Perhaps that tall cabinet is worth investigating."
-
-A hint deactivation rule:
-	if the number of visited rooms is the number of rooms - 1,
-		deactivate the Table of Getting Started Hints.
-
-
-Understand "help" as asking for hints.
-When play begins: activate the Table of Getting Started Hints.]
 
 
 
@@ -2284,6 +2262,21 @@ report throwing something out of a second noun (this is the throwing something o
 Volume 9 - Testing & Debugging
 
 Book 1 - Test commands - Not for release
+
+Requesting puzzle status is an action out of world.
+Report requesting puzzle status: 
+	say "Puzzles in process: [list of running puzzles].";
+	say "Puzzles not completed: [list of uncompleted inactive puzzles].";
+	say "Active puzzles: [list of active uncompleted puzzles].";
+	say "Completed puzzles: [list of completed puzzles].";
+	say "Puzzles now impossible: [list of impossible puzzles].";
+	if the last-puzzle-completed of the player is not no-puzzle:
+		say "The last completed puzzle is [last-puzzle-completed of the player].";
+	say "You have completed [the number of completed puzzles] puzzles.";
+	say "You currently have [the number of running puzzles] puzzles that are running.";
+
+Understand "puzzles" as requesting puzzle status.
+
 	 
 Book 2 - Tests - Not for release
 
@@ -2292,6 +2285,6 @@ test spray with "s/in/take ladder/search shelf/take can/out/n/lean ladder on tre
 test wood with "s/s/catch fly/n/throw fly in web/get wood".
 test fire with "test wood/n/drop wood/burn wood with glasses".
 test smoke with "test wood/n/drop wood/take leaves/burn wood with glasses/drop leaves on fire".
-test cut with "s/in/take saw/n/n/climb ladder/cut tree/d/z/n".
+test cut with "s/in/take saw/take ladder/n/n/climb ladder/cut tree/d/z/n".
 test rocket with "test get-can/take fly/n/give fly to spider/take wood/n/drop wood/burn wood with glasses/put can in fire".
 test flamethrower with "test get-can/catch fly/n/throw fly in web/get wood/n/drop wood/burn wood with glasses/take torch".
