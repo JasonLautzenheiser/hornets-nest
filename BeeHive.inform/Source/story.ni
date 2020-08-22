@@ -526,7 +526,7 @@ Carry out spraying:
 			otherwise:
 				say "You really should try to get closer to the nest." instead;
 	if location is up-the-tree:
-		say "You are close enough now, there is no way you'll miss.  You'll have these damn hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[para]";
+		say "You are close enough now, there is no way you'll miss.  You'll have these darn hornets out of your hair in no time.  You shake the can one last time, more of a nervous habit than out of necessity, take careful aim.....and spray....[para]";
 		spray-the-can;
 		empty-the-can;
 		say "...you shake the can and look at it in horror as just a little spray dribbles out ....just enough to grab the hornets' attention.  They begin to mass an attack.";
@@ -893,7 +893,7 @@ Check going when the player is hiding:
 The player is wearing reading glasses, t-shirt, jean shorts and baseball cap.
 
 
-Chapter 1 - wife
+Chapter 1 - Wife
 
 Wife is a female person.  The description of wife is "Your wife is a very beautiful and smart woman.  Somehow she has managed to put up with you for all these years and still stick around.  Maybe she just feels sorry for you."  The printed name of wife is "wife".  The think-text is "She's made it abundantly clear that you're not to show your face until that nest is out of the tree."
 
@@ -1329,7 +1329,7 @@ before doing anything to the horsefly while the horsefly is off-stage:
 	
 Part 3 - Outside the shed
 
-Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However, it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is resting on the shed]The ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
+Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However, it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is resting on the shed]A ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
 
 
 before going south in outside-the-shed when the player is blinded:
@@ -1633,7 +1633,7 @@ To say description-of-hornets:
 	if the hornets are swarming:
 		say "The hornets are swarming around the nest, workers headed in and out, soldiers perched on the nest as if expecting a full frontal assault.";
 	if the hornets are angry:
-		say "The hornets look pissed, more so than usual.  None are going back in the nest, they are steadily pouring out and if you look closely enough, they appear to be readying an all-out assault.";
+		say "The hornets look pretty angry, more so than usual.  None are going back in the nest, they are steadily pouring out and if you look closely enough, they appear to be readying an all-out assault.";
 	if the hornets are aggressive:
 		say "Oh boy, you better move it.....they are flying every which way that looks chaotic yet orchestrated at the same time. [if location is under-the-tree]It would be wise to move quickly, they are headed your way[otherwise if location is up-the-tree]They are dive-bombing you in a synchronized pattern that would be strangely beautiful if they weren't out to make you hurt[end if].";
 	if the hornets are subdued:
@@ -1869,68 +1869,25 @@ The wood-burner is a backdrop which is everywhere.  The description of wood-burn
 
 Volume 4 - Puzzles
 
+Book 1 - Puzzle Meta
+
+Part 1 - Definitions
+
 The list writer internal rule response (Y) is "None"
-
-
 
 A puzzle is a kind of thing.  A puzzle is always undescribed.  A puzzle can be completed, uncompleted, running, default or impossible.  A puzzle is usually uncompleted.   A puzzle can be active or inactive.  A puzzle are usually inactive.
 A puzzle has some text called end-text. The end-text is usually "".
-A puzzle has a number called puzzle-score.  The puzzle-score is usually 10.
 
+The player has a puzzle called last-puzzle-completed.  The last-puzzle-completed of the player is usually no-puzzle.
+no-puzzle is a default puzzle.
+
+Part 2 - Puzzle scoring
+
+A puzzle has a number called puzzle-score.  The puzzle-score is usually 10.
 To increment-puzzle-score:
 	increase the score by the puzzle-score of the last-puzzle-completed of the player.
 
-The player has a puzzle called last-puzzle-completed.  The last-puzzle-completed of the player is usually no-puzzle.
-
-no-puzzle is a default puzzle.
-spray-the-nest is a puzzle.  The printed name of spray-the-nest is "spraying the nest with bug spray".  The end-text of spray-the-nest is "Well that didn't work too well.  [bug-killer-drop-description][line break]".
-smoke-the-nest is a puzzle.  The printed name of smoke-the-nest is "using heavy smoke to remove the hornets".
-cut-the-branch is a puzzle.  The printed name of cut-the-branch is "cutting the branch the nest is on out of the tree".
-fire-the-missle is a puzzle.  The printed name of fire-the-missle is "blowing up the can of spray".
-hit-nest-with-ladder is a puzzle.  the printed name of hit-nest-with-ladder is "hitting the nest with the ladder".
-use-spray-as-flamethrower is a puzzle.  the printed name of use-spray-as-flamethrower is "using bug spray as flamethrower".
-
-[puzzle activation rules]
-Every turn:
-	if use-spray-as-flamethrower is uncompleted and use-spray-as-flamethrower is not impossible:
-		if the bug killer is empty:
-			now use-spray-as-flamethrower is impossible;
-		otherwise:
-			if the player carries the bug killer and the twigs are flaming:
-				now use-spray-as-flamethrower is active;
-			otherwise:
-				now use-spray-as-flamethrower is inactive;
-	if hit-nest-with-ladder is uncompleted and hit-nest-with-ladder is not impossible:
-		if (the ladder is in under-the-tree and the location is under-the-tree) or (the location is under-the-tree and the player carries the ladder):
-			now hit-nest-with-ladder is active;
-		otherwise:
-			now hit-nest-with-ladder is inactive;
-	if spray-the-nest is uncompleted and spray-the-nest is not impossible:
-		if bug killer is not empty and the player carries the bug killer:
-			now spray-the-nest is active;
-		otherwise:
-			now spray-the-nest is inactive;
-	if smoke-the-nest is uncompleted:
-		if the twigs are flaming:
-			now smoke-the-nest is active;
-		otherwise:
-			now smoke-the-nest is inactive;
-	if cut-the-branch is uncompleted:
-		if the player carries the hand-saw:
-			now cut-the-branch is active;
-		otherwise:
-			now cut-the-branch is inactive;
-	if fire-the-missle is uncompleted:
-		if the the player carries the bug killer and the twigs are on-stage:
-			now fire-the-missle is active;
-		otherwise:
-			now fire-the-missle is inactive;
-	if fire-the-missle is completed:
-		if spray-the-nest is uncompleted:
-			now spray-the-nest is impossible;
-			now use-spray-as-flamethrower is impossible.
-			
-Chapter 1 - Suggest Next Puzzle
+Part 3 - Suggest Next Puzzle
 
 to suggest next puzzle:
 	if spray-the-nest is uncompleted and spray-the-nest is not impossible:
@@ -1939,8 +1896,12 @@ to suggest next puzzle:
 		suggest smoke the nest;
 
 
-to suggest smoke the nest:
-	say "As you look on in disbelief, a thought comes to you: hornets don't like smoke.  Why don't you try smoking them out?".
+
+Book 2 - Spray the Nest
+
+spray-the-nest is a puzzle.  The printed name of spray-the-nest is "spraying the nest with bug spray".  The end-text of spray-the-nest is "Well that didn't work too well.  [bug-killer-drop-description][line break]".
+
+Part 1 - Suggest This Puzzle
 
 to suggest spray the nest:
 	if player carries bug killer:
@@ -1950,6 +1911,64 @@ to suggest spray the nest:
 			say "You think you saw some bug spray around here somewhere.";
 		else:
 			say "Perhaps there is something to be found in the shed."
+
+Book 3 - Smoke the Nest
+
+smoke-the-nest is a puzzle.  The printed name of smoke-the-nest is "using heavy smoke to remove the hornets".
+
+Part 1 - Suggest This Puzzle
+
+to suggest smoke the nest:
+	say "As you look on in disbelief, a thought comes to you: hornets don't like smoke.  Why don't you try smoking them out?".
+
+Part 3 - Scene - Smoking them out
+
+Smoking-them-out is a scene.  Smoking-them-out begins when smoke is heavy.  Smoking-them-out ends when smoke-the-nest is completed.	
+
+When smoking-them-out begins:
+	say "As the smoke rises it slowly begins to engulf the nest.  At first the hornets look confused as they their activity increases slightly, then suddenly they all retreat back into the nest.  Now the smoke is so heavy that you can't make out the nest at all.  You are feeling a little bit proud of yourself as you figure this will be the end of them all.
+	
+What is that noise?  You hear a faint buzz coming from the tree.  Looking up, the smoke begins to clear and you see a mass of hornets around the entrance to the nest.  Just as you see them, they see you and attack.
+
+As they begin to swarm around your head, you notice there is something different about them.... they are now wearing miniature gas masks.";
+	now the last-puzzle-completed of the player is smoke-the-nest;
+	hornets attack in 0 turn from now;
+	now smoke-the-nest is completed;
+	increment-puzzle-score.
+
+Book 4 - Cut the Branch
+
+cut-the-branch is a puzzle.  The printed name of cut-the-branch is "cutting the branch the nest is on out of the tree".
+
+Book 5 - Fire the Missle
+
+fire-the-missle is a puzzle.  The printed name of fire-the-missle is "blowing up the can of spray".
+
+Part 2 - Scene - Exploding Can 
+
+Exploding Can is a scene.  Exploding Can begins when fire-the-missle is running.  Exploding Can ends when fire-the-missle is completed.
+
+When exploding can begins:
+	say "The can sits in the fire for a few moments and then it starts to turn a hot red as it heats up.  As the sides of the can start to bulge out at the center, you quickly decide it's time to hide behind the tree.  Just as you retreat behind the tree, you hear a large explosion and you hit the ground.  You hear a whistle as the exploded can flies towards the nest hitting it right in the bottom, plugging up the entrance to the nest.";
+	now the last-puzzle-completed of the player is fire-the-missle;
+	now fire-the-missle is completed;
+	increment-puzzle-score;
+	hornets attack in 1 turn from now;
+	now the bug killer is a part of the hornets-nest;
+
+Book 6 - Hit Nest with Ladder
+
+hit-nest-with-ladder is a puzzle.  the printed name of hit-nest-with-ladder is "hitting the nest with the ladder".
+
+Book 7 - Use Spray as Flamethrower
+
+use-spray-as-flamethrower is a puzzle.  the printed name of use-spray-as-flamethrower is "using bug spray as flamethrower".
+
+
+			
+
+
+
 
 Volume 5 - Scenes
 
@@ -2006,7 +2025,7 @@ to say clue-next-puzzle:
 		say "As you pause to catch your breath, you wonder what to do.   Maybe if you try cutting it down, they'll just pick up and leave."
 		
 	
-Book 2 - Aggressive Hornets
+Part 3 - Aggressive Hornets
 
 Aggressive-hornets is a recurring scene.   Aggressive-hornets begins when hornets are aggressive.  Aggressive-hornets ends when hornets are not aggressive.
 
@@ -2025,16 +2044,7 @@ Every turn while aggressive-hornets is happening:
 
 
 
-Book 3 - Exploding Can
 
-Exploding Can is a scene.  Exploding Can begins when fire-the-missle is running.  Exploding Can ends when fire-the-missle is completed.
-When exploding can begins:
-	say "The can sits in the fire for a few moments and then it starts to turn a hot red as it heats up.  As the sides of the can start to bulge out at the center, you quickly decide it's time to hide behind the tree.  Just as you retreat behind the tree, you hear a large explosion and you hit the ground.  You hear a whistle as the exploded can flies towards the nest hitting it right in the bottom, plugging up the entrance to the nest.";
-	now the last-puzzle-completed of the player is fire-the-missle;
-	now fire-the-missle is completed;
-	increment-puzzle-score;
-	hornets attack in 1 turn from now;
-	now the bug killer is a part of the hornets-nest;
 	
 	
 
@@ -2042,23 +2052,10 @@ When exploding can begins:
 
 
 	
-Book 4 - Smoking them out
 
-Smoking-them-out is a scene.  Smoking-them-out begins when smoke is heavy.  Smoking-them-out ends when smoke-the-nest is completed.	
-
-When smoking-them-out begins:
-	say "As the smoke rises it slowly begins to engulf the nest.  At first the hornets look confused as they their activity increases slightly, then suddenly they all retreat back into the nest.  Now the smoke is so heavy that you can't make out the nest at all.  You are feeling a little bit proud of yourself as you figure this will be the end of them all.
-	
-What is that noise?  You hear a faint buzz coming from the tree.  Looking up, the smoke begins to clear and you see a mass of hornets around the entrance to the nest.  Just as you see them, they see you and attack.
-
-As they begin to swarm around your head, you notice there is something different about them.... they are now wearing miniature gas masks.";
-	now the last-puzzle-completed of the player is smoke-the-nest;
-	hornets attack in 0 turn from now;
-	now smoke-the-nest is completed;
-	increment-puzzle-score.
 	
 
-Book 5 - Scene - Running the Game 
+Book 4 - Scene - Running the Game 
 
 Running-the-game is a scene.  running-the-game begins when play begins.  
 Running-the-game ends when the number of uncompleted inactive puzzles is 0 and the number of active uncompleted puzzles is 0 and the number of running puzzles is 0 and aggressive-hornets is not happening.
