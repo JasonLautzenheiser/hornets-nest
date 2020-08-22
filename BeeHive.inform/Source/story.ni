@@ -1277,6 +1277,7 @@ before putting the horsefly on anything:
 Before putting the horsefly on the web-top:
 	if player is carrying horsefly:
 		say "You toss the fly into the web and the spider instantly pounces on it and begins to wrap it up.  When it's done, it drags the fly off the web and underneath the wood pile.";
+		increase the score by 8;		
 		now spider is off-stage;
 		now horsefly is off-stage instead;
 	otherwise:
@@ -2288,3 +2289,19 @@ test smoke with "test wood/n/drop wood/take leaves/burn wood with glasses/drop l
 test cut with "s/in/take saw/take ladder/n/n/climb ladder/cut tree/d/z/n".
 test rocket with "test get-can/take fly/n/give fly to spider/take wood/n/drop wood/burn wood with glasses/put can in fire".
 test flamethrower with "test get-can/catch fly/n/throw fly in web/get wood/n/drop wood/burn wood with glasses/take torch".
+
+Book 3 - Possible scores - Not for release
+
+Requesting scoring table is an action out of world.
+Report requesting scoring table:
+	say "[bold type]Main puzzles[roman type][line break]";
+	say "Spray the nest ([bold type]10[roman type])[line break]";
+	say "Smoke the nest ([bold type]10[roman type])[line break]";
+	say "Hit nest with ladder ([bold type]10[roman type])[line break]";
+	say "Fire the missle ([bold type]10[roman type])[line break]";
+	say "Cut the branch ([bold type]10[roman type])[line break]";
+	say "Use spray as flamethrower ([bold type]10[roman type])[paragraph break]";
+	say "[bold type]Misc.[roman type][line break]";
+	say "Feed the fly to spider ([bold type]8[roman type])[line break]";
+	
+Understand "scoring" as requesting scoring table.
