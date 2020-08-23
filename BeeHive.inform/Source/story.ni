@@ -411,7 +411,10 @@ Report leaning:
 	if the noun is:
 		-- myself:
 			if the second noun is the tree:
-				say "You lean against the tree nonchalantly...well that didn't work, the hornets notice you and become a bit agitated.";
+				if location is under-the-tree:
+					say "You lean against the tree nonchalantly...well that didn't work, the hornets notice you and become a bit agitated.";
+				otherwise: 
+					say "That would be a neat trick from here.";
 		-- ladder:
 			say "blah";
 		-- otherwise:
