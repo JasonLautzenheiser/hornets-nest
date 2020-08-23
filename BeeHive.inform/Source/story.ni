@@ -643,11 +643,14 @@ Check attacking it with:
 			say "You take a test swing with [the second noun] but realize that you don't have the coordination to swing with enough force to be effective without knocking yourself off the ladder and down to the ground.";
 		otherwise:
 			if the second noun is the ladder:
-				say "The ladder is awkward, but you manage to take a swing at the nest with it and bump it hard enough to make the hornets angry but not hard enough to knock the nest out of the tree.";
-				hornets attack in 1 turn from now;
-				now hit-nest-with-ladder is completed;
-				now the last-puzzle-completed of the player is hit-nest-with-ladder;
-				increment-puzzle-score;
+				if hit-nest-with-ladder is not completed:
+					say "The ladder is awkward, but you manage to take a swing at the nest with it and bump it hard enough to make the hornets angry but not hard enough to knock the nest out of the tree.";
+					hornets attack in 1 turn from now;
+					now hit-nest-with-ladder is completed;
+					now the last-puzzle-completed of the player is hit-nest-with-ladder;
+					increment-puzzle-score;
+				otherwise:
+					say "You think about using the ladder to hit the nest again, but last time didn't turn out so well so you think better of it.";
 			otherwise:
 				say "You swing [the printed name of the second noun] at the nest over and over but you're not tall enough to hit it and the wind generated from your incessant swinging does little.";
 	otherwise if the noun is the large spider:
@@ -2284,6 +2287,7 @@ test smoke with "test wood/n/drop wood/take leaves/burn wood with glasses/drop l
 test cut with "s/in/take saw/take ladder/n/n/climb ladder/cut tree/d/z/n".
 test rocket with "test get-can/take fly/n/give fly to spider/take wood/n/drop wood/burn wood with glasses/put can in fire".
 test flamethrower with "test get-can/catch fly/n/throw fly in web/get wood/n/drop wood/burn wood with glasses/take torch".
+test hit-with-ladder with "s/in/take ladder/out/n/hit nest with ladder"
 
 Book 3 - Possible scores - Not for release
 
