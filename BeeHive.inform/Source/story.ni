@@ -1624,7 +1624,7 @@ Instead of cutting the hornets-nest:
 		
 Chapter 2 - Hornets	
 
-Some hornets are an animal in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets][if the smoke is on-stage and the smoke is heavy]They appear to be wearing miniature gas masks.[end if]".  The hornets are attackable.
+Some hornets are an animal in the hornets-nest. It is plural-named. The printed name is "hornets". The indefinite article is "some".  The description is "[description-of-hornets]".  The hornets are attackable.
 The hornets can be grabbed.
 
 understand "hornet/bee/bees/soldiers/workers" as hornets.
@@ -1928,9 +1928,7 @@ Smoking-them-out is a scene.  Smoking-them-out begins when smoke is heavy.  Smok
 When smoking-them-out begins:
 	say "As the smoke rises it slowly begins to engulf the nest.  At first the hornets look confused as they their activity increases slightly, then suddenly they all retreat back into the nest.  Now the smoke is so heavy that you can't make out the nest at all.  You are feeling a little bit proud of yourself as you figure this will be the end of them all.
 	
-What is that noise?  You hear a faint buzz coming from the tree.  Looking up, the smoke begins to clear and you see a mass of hornets around the entrance to the nest.  Just as you see them, they see you and attack.
-
-As they begin to swarm around your head, you notice there is something different about them.... they are now wearing miniature gas masks.";
+What is that noise?  You hear a faint buzz coming from the tree.  Looking up, the smoke begins to clear and you see a mass of hornets around the entrance to the nest.  Just as you see them, they see you and attack.";
 	now the last-puzzle-completed of the player is smoke-the-nest;
 	hornets attack in 0 turn from now;
 	now smoke-the-nest is completed;
