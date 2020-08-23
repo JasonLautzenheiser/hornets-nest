@@ -626,6 +626,7 @@ Chapter 18 - Taking
 
 understand the command "grab" as "take".
 
+
 Chapter 19 - Attacking it with
 
 Understand the commands "attack" and "punch" and "destroy" and "kill" and "murder" and "hit" and "thump" and "break" and "smash" and "torture" and "wreck" as something new.
@@ -1423,9 +1424,9 @@ Instead of kicking the twigs:
 
 Chapter 4 - Pile of wood
 
-The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked."  The woodpile is in outside-the-shed.
+The woodpile is a supporter. The woodpile is undescribed. The woodpile is fixed in place. The description of woodpile is "You stacked this woodpile here years ago in the misguided thought that you would actually use the [wood-burner] in the house to save on heating costs in the winter.  Well here it still is, neatly stacked.[if web is on-stage]  There is a large spider web covering much of the woodpile.[end if]". The woodpile is in outside-the-shed.
 
-Understand "wood/pile" as woodpile.  
+Understand "wood/pile" and "wood pile" as woodpile.  
 understand "twigs/kindling" as woodpile when the twigs are off-stage.
 
 Before taking woodpile:
@@ -1472,6 +1473,8 @@ Section 1 - Spider web
 
 The web is a container on the woodpile.  The web is open.  The web is not openable.  The description of web is "A large web covers much of the pile of wood[if spider is on-stage] and in the center is the largest spider you've ever seen[end if]."
 
+Understand "spider web" and "webs" as web.
+
 The web-top is a supporter.  The web-top is a part of the web.
 Instead of attacking the web:
 	try attacking the large spider.
@@ -1481,7 +1484,7 @@ instead of kicking the web:
 	
 before taking the web:
 	if spider is on-stage:
-		try taking the spider instead;
+		say "You start to reach for the web to brush it out of the way, but as your hand approaches, the spider which calls the web home, actually turns and rears up at you ready to bite." instead;
 	otherwise:
 		say "You brush the web aside only to have some of it stick to your hand.  You then spend the next ten minutes trying to get the web off your hand, first transferring it to your shorts, then back to your other hand until you finally manage to wipe most of it off on the ground.";
 		now the web is off-stage;
