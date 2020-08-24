@@ -13,7 +13,9 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
 
-Book 2 - Bibliography
+Book 2 - Changelog
+
+Book 3 - Bibliography
 
 The story genre is "Comedy".
 The story headline is "An Interactive Experience in Pest Removal".
@@ -23,37 +25,32 @@ The story creation year is 2016.
 Release along with a website.
 Release along with an interpreter.
 
-Volume 2 - Mechanics
-
-Book 1 - Extensions
+Book 4 - Extensions
 
 Include Small Kindnesses by Aaron Reed.
 
 [Include Trinity Inventory by Mikael Segercrantz.]
 [Include Basic Screen Effects by Emily Short.]
 
-Book 2 - Extensions - Not for release 
+Part 1 - Extensions - Not for release 
 
 [Include Object Response Tests by Juhana Leinonen.]
-[Include Property Checking by Emily Short.]
+Include Property Checking by Emily Short.
 [Include Debugging by Al Golden.]
+Include Response Assistant by Aaron Reed.
+
+Book 5 - Releasing
+
+Volume 2 - Mechanics
+
+Book 1 - Commands
 
 
- Include Response Assistant by Aaron Reed.
+Understand "[something]" as examining.
 
-Book 3 - Extension overrides
+Book 2 - New Kinds
 
-[ had to comment this out due to a bug in latest Inform http://inform7.com/mantis/view.php?id=1841]
-[Chapter - No valid directions showing (in place of Chapter - Show valid directions after going nowhere in Small Kindnesses by Aaron Reed)]
-
-
-
-
-Book 4 - Objects
-
-Part 1 - Things
-
-Chapter 1 - Properties
+Part 1 - Properties
 
 A room can be a safe-zone.
 A thing can be lost or found.  A thing is usually found.
@@ -63,81 +60,7 @@ Flame-state is a kind of value. The flame-states are burnt, flaming, and new. Un
 
 Everything has some text called the think-text.  The think-text is usually "".
 
-
-Book 5 - General
-
-To say para -- running on: 
-	(- DivideParagraphPoint(); new_line; -). 
-
-To set the/-- pronoun it to (O - an object): (- LanguagePronouns-->3 = {O}; -).
-To set the/-- pronoun him to (O - an object): (- LanguagePronouns-->6 = {O}; -).
-To set the/-- pronoun her to (O - an object): (- LanguagePronouns-->9 = {O}; -).
-To set the/-- pronoun them to (O - an object): (- LanguagePronouns-->12 = {O}; -).
-
-Part 1 - Relations
-
-
-
-Part 2 - Rules
-
-Rule for printing room description details: stop.
-
-The can't take scenery rule response (A) is "[The noun] can't be taken anywhere."
-The block attacking rule response (A) is "[if the noun is hornets]Yes that is your ultimate goal, but it's not going to be that easy.[otherwise]Really no need to do that.[end if]".
-The can't put onto what's not a supporter rule response (A) is "Putting [the noun] on [the second noun] wouldn't do anything exciting."
-
-
-Rule for printing a parser error when the latest parser error is the I beg your pardon error:
-  say "[one of]Bzzzzzzz.[or]The hornets laugh at your indecision.[or]Ahhh...if only I had a beer.[or]Daydreaming again?[or]Your blood pressure is rising.[or]What?[or]Come again?[or]Prithee, pardon?[in random order]"
-
-
-Part 3 - Sanity Checks
-
-The sanity-check rules are a rulebook.
-
-This is the sanity-check stage rule:
-	abide by the sanity-check rules.
-
-The sanity-check stage rule is listed before the before stage rule  in the action-processing rules.
-
-sanity-check eating an inedible thing:
-	say "Even if [the noun] looked appetizing, you don't have time to eat anything." instead.
-
-sanity-check wearing something which is not wearable:
-	say  "How in the world would you go about wearing [the noun]?" instead.
-	
-[sanity-check taking something that is flaming:
-	say "[regarding the noun][They're] way too hot to carry around." instead.]
-	
-sanity-check sleeping:
-	say "Sleeping before the job is done?  I don't think so." instead.
-
-sanity-check waiting:
-	if hornets are aggressive:
-		say "Probably not a bad idea to wait and let the hornets calm down a bit before venturing back out there." instead;
-	otherwise:
-		say "What are you waiting on?  You're running out of time." instead.
-
-
-Part 4 - Flimsy
-
-A flimsy is a kind of thing.  A flimsy has some text called the action-refusal.  The action-refusal of a flimsy is usually "".  A flimsy is usually fixed in place, undescribed.
-
-Instead of examining a flimsy:
-	if the initial appearance of the noun is "", say "[brush-off of noun]";
-	otherwise say "[initial appearance of the noun][para]".
-
-instead of doing anything to a flimsy:
-	if the action-refusal of the noun is "", say "[brush-off of noun]";
-	otherwise say "[action-refusal of the noun][para]".
-
-To say brush-off of (n - a thing):
-	say "You don't need to worry about [regarding the noun][those]."
-
-Rule for writing a paragraph about a flimsy (called xx):
-	now xx is mentioned.
-
-Part 5 - Blind Text	
+Chapter 1 - Blind Text	
 
 instead of examining something when the player is blinded:
 	if there is a blind-text corresponding to the object of the noun in the Table of Blind Text:
@@ -174,15 +97,88 @@ outside-the-shed	"The shadow of the shed appears to fill your vision.  The hum o
 shed	"The shadow of the shed appears very large in it's blurred state"
 in-the-shed	"Everything is dark except for a faint glow coming from the window and the slightly brighter glow of the doorway to the north"
 
-Book 6 - Easter Eggs
+Part 2 - Flimsy
+
+A flimsy is a kind of thing.  A flimsy has some text called the action-refusal.  The action-refusal of a flimsy is usually "".  A flimsy is usually fixed in place, undescribed.
+
+Instead of examining a flimsy:
+	if the initial appearance of the noun is "", say "[brush-off of noun]";
+	otherwise say "[initial appearance of the noun][para]".
+
+instead of doing anything to a flimsy:
+	if the action-refusal of the noun is "", say "[brush-off of noun]";
+	otherwise say "[action-refusal of the noun][para]".
+
+To say brush-off of (n - a thing):
+	say "You don't need to worry about [regarding the noun][those]."
+
+Rule for writing a paragraph about a flimsy (called xx):
+	now xx is mentioned.
+
+Book 3 - General
+
+To say para -- running on: 
+	(- DivideParagraphPoint(); new_line; -). 
+
+To set the/-- pronoun it to (O - an object): (- LanguagePronouns-->3 = {O}; -).
+To set the/-- pronoun him to (O - an object): (- LanguagePronouns-->6 = {O}; -).
+To set the/-- pronoun her to (O - an object): (- LanguagePronouns-->9 = {O}; -).
+To set the/-- pronoun them to (O - an object): (- LanguagePronouns-->12 = {O}; -).
+
+Book 4 - Rules
+
+Rule for printing room description details: stop.
+
+The can't take scenery rule response (A) is "[The noun] can't be taken anywhere."
+The block attacking rule response (A) is "[if the noun is hornets]Yes that is your ultimate goal, but it's not going to be that easy.[otherwise]Really no need to do that.[end if]".
+The can't put onto what's not a supporter rule response (A) is "Putting [the noun] on [the second noun] wouldn't do anything exciting."
+
+
+Rule for printing a parser error when the latest parser error is the I beg your pardon error:
+  say "[one of]Bzzzzzzz.[or]The hornets laugh at your indecision.[or]Ahhh...if only I had a beer.[or]Daydreaming again?[or]Your blood pressure is rising.[or]What?[or]Come again?[or]Prithee, pardon?[in random order]"
+
+
+Part 1 - Sanity Check Rules
+
+The sanity-check rules are a rulebook.
+
+This is the sanity-check stage rule:
+	abide by the sanity-check rules.
+
+The sanity-check stage rule is listed before the before stage rule  in the action-processing rules.
+
+sanity-check eating an inedible thing:
+	say "Even if [the noun] looked appetizing, you don't have time to eat anything." instead.
+
+sanity-check wearing something which is not wearable:
+	say  "How in the world would you go about wearing [the noun]?" instead.
+	
+[sanity-check taking something that is flaming:
+	say "[regarding the noun][They're] way too hot to carry around." instead.]
+	
+sanity-check sleeping:
+	say "Sleeping before the job is done?  I don't think so." instead.
+
+sanity-check waiting:
+	if hornets are aggressive:
+		say "Probably not a bad idea to wait and let the hornets calm down a bit before venturing back out there." instead;
+	otherwise:
+		say "What are you waiting on?  You're running out of time." instead.
+
+
+
+
+
+
+Book 5 - Easter Eggs
 
 understand "xyzzy" as a mistake("You face the tree and wave your fingers at the nest while chanting 'xyzzy, xyzzy, xyzzy ....' Nothing happens.").
 understand "cut the cheese" or "cut cheese" or "pass gas" or "fart" as a mistake("You pass a little gas.   The hornets seem somewhat amused.").
 
 
-Book 7 - Actions
+Book 6 - Commands
 
-Part 1 - Standard Actions
+Part 1 - Standard Commands
 
 Chapter 1 - Synonyms
 
@@ -198,7 +194,7 @@ understand the command "capture" as "collect".
 understand "jump up" as jumping.
 understand "leap" as jumping.
 
-Chapter 2 - General Actions the player can perform
+Chapter 2 - General Commands the player can perform
 
 instead of going nowhere:
 	say "As much as you want to shirk your responsibility, you promised to get those hornets out of the tree."
@@ -218,7 +214,7 @@ instead of listening:
 	if location is on-the-porch:
 		say "Though you can't see the nest from here, you can hear it."
 
-Part 2 - New actions
+Part 2 - New Commands
 
 Chapter 1 - Misc
 
@@ -776,7 +772,21 @@ rule for supplying a missing second noun when burn-with-glasses is true:
 	
 Part 3 - Out of world
 
-Chapter 1 - Credits
+Chapter 1 - scl - Not for release
+
+scling is an action out of world.
+
+understand the command “scl” as something new.
+
+understand “scl” as scling.
+
+carry out scling:
+	say “List of scenery:[line break]”;
+	repeat with QQ running through visible scenery:
+		say “–[QQ][line break]”;
+	the rule succeeds;
+
+Chapter 2 - Credits
 
 Abouting is an action out of world applying to nothing.
 Understand "about" as abouting.
@@ -790,14 +800,14 @@ After printing the banner text:
 	say "ABOUT for more information[para]".
 
 
-Chapter 2 - License
+Chapter 3 - License
 
 Requesting the license is an action out of world.
 Understand "license" and "lisense" and "lisence" as requesting the license.
 Carry out requesting the license:
 	say the license.
 	
-Chapter 3 - Transcripting
+Chapter 4 - Transcripting
 
 To say email:
 	say "lautzenheiser.jason@gmail.com".
@@ -866,7 +876,7 @@ check quitting the game when currently transcripting:
 
 Volume 3 - The World
 
-Book 1 - Startup
+Book 1 - Intro
 
 After printing the banner text, say "Copyright © 2015, Jason Lautzenheiser."
 The time of day is 6:05 AM.
@@ -900,18 +910,9 @@ Check going when the player is hiding:
 The player is wearing reading glasses, t-shirt, jean shorts and baseball cap.
 
 
-Chapter 1 - Wife
-
-Wife is a female person.  The description of wife is "Your wife is a very beautiful and smart woman.  Somehow she has managed to put up with you for all these years and still stick around.  Maybe she just feels sorry for you."  The printed name of wife is "wife".  The think-text is "She's made it abundantly clear that you're not to show your face until that nest is out of the tree."
-
-After deciding the scope of the player: 
-	place the wife in scope.
-	
-before doing anything except examining or thinking about or taking to wife:
-	say "You're not going to [verbword] her until the nest is out of the tree.  She's made that abundantly clear." instead.
 
 
-Chapter 2 - Reading glasses
+Chapter 1 - Reading glasses
 
 The reading glasses are a wearable thing.  The description of reading glasses is "A pair of very thick glasses, you like to call them reading glasses, but in fact you're quite blind without them on."	Understand "spectacles" as reading glasses.  The printed name of reading glasses is "your glasses".
 
@@ -933,7 +934,7 @@ report wearing the glasses:
 	try looking;
 	stop the action.
 	
-Chapter 3 - Baseball cap
+Chapter 2 - Baseball cap
 
 A baseball cap is a wearable  container.  The description of baseball cap is "You never really liked baseball, but this hat is very comfortable and it conveniently hides your slightly balding head." The indefinite article is "a".   Understand "hat" as baseball cap.  the printed name of baseball cap is "your baseball cap".
 
@@ -951,7 +952,7 @@ instead of inserting something into the cap:
 	say "This is your favorite hat, you wouldn't want to get it all dirty by putting [the noun] in it."
 	
 	
-Chapter 4 - Jean shorts
+Chapter 3 - Jean shorts
 
 The jean shorts is a wearable thing.  The description of jean shorts is "Your wife is always trying to throw these shorts out...she says they are too tight on you.  You don't know what she's talking about, these are so well broken in they feel like wearing nothing at all." The indefinite article is "some".   Understand "pants/trousers/bottoms" as jean shorts.  The printed name of jean shorts is "your shorts".  jean shorts is plural-named.
 
@@ -969,7 +970,7 @@ Rule for printing the name of the jean shorts when taking inventory:
 
 	
 
-Chapter 5 - T-shirt
+Chapter 4 - T-shirt
 
 The t-shirt is a wearable thing.  The description of the t-shirt is "Just a plain white t-shirt, nothing fancy." The indefinite article is "a".   the printed name of t-shirt is "your t-shirt".
 Understand "tshirt/shirt/tee/tee-shirt/teeshirt" as t-shirt.
@@ -978,6 +979,17 @@ Instead of taking off the t-shirt:
 	try dropping the t-shirt instead.
 Rule for printing the name of the t-shirt:
 	say "a t-shirt".
+
+
+Part 2 - Wife
+
+Wife is a female person.  The description of wife is "Your wife is a very beautiful and smart woman.  Somehow she has managed to put up with you for all these years and still stick around.  Maybe she just feels sorry for you."  The printed name of wife is "wife".  The think-text is "She's made it abundantly clear that you're not to show your face until that nest is out of the tree."
+
+After deciding the scope of the player: 
+	place the wife in scope.
+	
+before doing anything except examining or thinking about or taking to wife:
+	say "You're not going to [verbword] her until the nest is out of the tree.  She's made that abundantly clear." instead.
 		
 
 Book 3 - Map
@@ -1070,7 +1082,7 @@ Before putting some leaves on the fire-top:
 	
 Part 2 - In the shed
 
-In-the-shed is a room.  In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway to the north.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug spray.[end if]  [describe-the-hand-saw]".  
+[In-the-shed is a room. ] In-the-shed is a safe-zone. The printed name is "[if the player is hiding]Hiding in[otherwise]In[end if] the Shed".  The description is "You're inside your shed.  It is a complete mess.  There is a dirty window in the north wall that looks back towards your front yard and a shelf covered in junk just inside the doorway to the north.[if the bug killer is found and the bug killer is on the shelf]  On the shelf is a can of bug spray.[end if]  [describe-the-hand-saw]".  
 In-the-shed is inside from outside-the-shed.  
 
 before going a direction (called which-way) in in-the-shed:
@@ -1930,7 +1942,7 @@ Part 1 - Suggest This Puzzle
 to suggest smoke the nest:
 	say "As you look on in disbelief, a thought comes to you: hornets don't like smoke.  Why don't you try smoking them out?".
 
-Part 3 - Scene - Smoking them out
+Part 2 - Scene - Smoking them out
 
 Smoking-them-out is a scene.  Smoking-them-out begins when smoke is heavy.  Smoking-them-out ends when smoke-the-nest is completed.	
 
@@ -1951,7 +1963,7 @@ Book 5 - Fire the Missle
 
 fire-the-missle is a puzzle.  The printed name of fire-the-missle is "blowing up the can of spray".
 
-Part 2 - Scene - Exploding Can 
+Part 1 - Scene - Exploding Can 
 
 Exploding Can is a scene.  Exploding Can begins when fire-the-missle is running.  Exploding Can ends when fire-the-missle is completed.
 
@@ -2062,7 +2074,7 @@ Every turn while aggressive-hornets is happening:
 
 	
 
-Book 4 - Scene - Running the Game 
+Book 2 - Scene - Running the Game 
 
 Running-the-game is a scene.  running-the-game begins when play begins.  
 Running-the-game ends when the number of uncompleted inactive puzzles is 0 and the number of active uncompleted puzzles is 0 and the number of running puzzles is 0 and aggressive-hornets is not happening.
