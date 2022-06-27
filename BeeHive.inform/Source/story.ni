@@ -8,7 +8,7 @@ Volume 1 - Metadata
 Book 1 - License
 
 To say the license:
-say "Copyright (c) 2016-2020 Jason Lautzenheiser
+say "Copyright (c) 2016-2022 Jason Lautzenheiser
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
@@ -17,7 +17,7 @@ Book 2 - Changelog
 
 Book 3 - Bibliography
 
-The story genre is "Comedy".
+The story genre is "Slice of Life".
 The story headline is "An Interactive Experience in Pest Removal".
 The story description is "You weren't going to let the hornet's nest in the shade tree out front stop you from enjoying your summer."
 The release number is 1.
@@ -29,23 +29,23 @@ Book 4 - Extensions
 
 Include Small Kindnesses by Aaron Reed.
 
-[Include Trinity Inventory by Mikael Segercrantz.]
-[Include Basic Screen Effects by Emily Short.]
-
 Part 1 - Extensions - Not for release 
 
-[Include Object Response Tests by Juhana Leinonen.]
 Include Property Checking by Emily Short.
-[Include Debugging by Al Golden.]
 Include Response Assistant by Aaron Reed.
 
 Book 5 - Releasing
+
+Release along with the source text.
+Release along with the library card.
+
+
 
 Volume 2 - Mechanics
 
 Book 1 - Commands
 
-
+[Allows us to just type the name of an object to examine it.]
 Understand "[something]" as examining.
 
 Book 2 - New Kinds
@@ -166,10 +166,6 @@ sanity-check waiting:
 		say "What are you waiting on?  You're running out of time." instead.
 
 
-
-
-
-
 Book 5 - Easter Eggs
 
 understand "xyzzy" as a mistake("You face the tree and wave your fingers at the nest while chanting 'xyzzy, xyzzy, xyzzy ....' Nothing happens.").
@@ -280,14 +276,14 @@ use scoring.
 The maximum score is 100.
 
 
-[carry out requesting the score:
+carry out requesting the score:
 	if number of completed puzzles is 0:
 		say "You have not managed to annoy the hornets yet.";
 	otherwise:
 		let left-ways be number of not default puzzles minus number of completed puzzles;
 		say "You have annoyed the hornets [number of completed puzzles] way[if number of completed puzzles is greater than 1]s[end if].  Maybe you can find [left-ways] more.[para]";
 		say "The ways you've annoyed the hornets so far are: [list of completed puzzles].";
-	stop the action.]
+	stop the action.
 
 Chapter 8 - Digging
 
@@ -605,11 +601,6 @@ rule for supplying a missing second noun while cutting with:
 	otherwise: 
 		say "[We] will need something other than [our] hand to cut [the noun] with." instead.
 	
-
-
-
-
-
 Chapter 17 - Putting
 
 Putting under is an action applying to two things.
@@ -708,9 +699,6 @@ Check throwing:
 	otherwise:
 		say "As frustrated as you are, throwing [the noun] will not help." instead.
 
-
-
-
 Chapter 21 - Burning
 
 Everything has some text called the burn-reject.  The burn-reject is usually "".
@@ -768,8 +756,6 @@ Carry out burning something with something:
 rule for supplying a missing second noun when burn-with-glasses is true: 
 	now second noun is glasses
 
-
-	
 Part 3 - Out of world
 
 Chapter 1 - scl - Not for release
@@ -878,7 +864,7 @@ Volume 3 - The World
 
 Book 1 - Intro
 
-After printing the banner text, say "Copyright © 2015, Jason Lautzenheiser."
+After printing the banner text, say "Copyright © 2015-2022, Jason Lautzenheiser."
 The time of day is 6:05 AM.
 
 When play begins:
@@ -1005,7 +991,8 @@ To say say-fire-is-out:
 		now fire-is-out is false;
 
 After deciding the scope of the player while the location is under-the-tree: 
-	place the ladder in scope.		
+	if the ladder is resting on the tree: 
+		place the ladder in scope.		
 		
 To say other-stuff-in-area:
 	let need_period be false;
@@ -1257,9 +1244,15 @@ Instead of putting the ladder on something (called the leaned-on):
 before taking the ladder:
 	if location is up-the-tree:
 		say "That would be quite a feat to take the very ladder your standing on." instead;
-	otherwise:
+	else if location is on-the-roof:
+		now the ladder is not scenery;
 		now the ladder is not resting on anything;
-		now the ladder is not scenery.
+		say "Pulling the ladder up on the roof with you is a careful balancing act trying to make sure you don't fall off.";
+		now the player carries the ladder instead;
+	otherwise:
+		if the ladder is in location:
+			now the ladder is not resting on anything;
+			now the ladder is not scenery.
 		
 after leaning the ladder on something:
 	now the ladder is scenery.
@@ -1540,7 +1533,8 @@ To say other-stuff-on-the-porch:
 		say ".".
 
 After deciding the scope of the player while the location is On-the-porch: 
-	place the ladder in scope
+	if the ladder is resting on the tree or the ladder is resting on the house:
+		place the ladder in scope
 
 The porch is a backdrop.  The porch is everywhere.  The description of the porch is "The front porch is large and roomy.  Plenty of space to sit and relax...if it wasn't for those hornets."
 
@@ -1698,9 +1692,6 @@ Before going west in on-the-roof:
 After deciding the scope of the player while the location is on-the-roof:
 	if the ladder rests on the house:
 		place the ladder in scope.
-		
-before taking the ladder in on-the-roof:
-	say "To ensure a way back down, you'll leave the ladder stay." instead.
 
 Book 4 - Things
 
