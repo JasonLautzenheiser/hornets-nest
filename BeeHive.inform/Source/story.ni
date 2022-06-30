@@ -359,58 +359,48 @@ Rule for supplying a missing second noun while leaning something on:
 			now the second noun is the shed.
 
 Check leaning:
-	if the noun is:
-		-- myself: 
-			continue the action;
-		-- ladder:
-			if the ladder is not contained by the player and the location of the ladder is not the location of the player:
-				say "You can't lean what you don't have.";
-			otherwise:
-				if the second noun is:
-					--  the tree:
-						if the location is under-the-tree:
-							say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
-							if the ladder is not in under-the-tree:
-								try silently dropping ladder;
-							now the ladder rests on the tree;
-						otherwise:
-							say "[lean-ladder-to-far-away]";
-					-- the shed:
-						if the location is outside-the-shed:
-							say "You don't think the shed would hold you if you managed to climb up on top of it.  You decide to hold on to the ladder.";
-							now the player carries the ladder;
-						else if the location is in-the-shed:
-							if the player carries the ladder:
-								say "You lean the ladder back where you found it.";
-								try silently dropping the ladder;
-							otherwise:
-								say "The ladder is already leaning in the corner.";
-						otherwise:
-							say "[lean-ladder-to-far-away]";
-					-- the house:
-						if the location is under-the-tree or the location is on-the-porch:
-							say "You lean the ladder against the house. You can climb onto the roof now.";
-							if the ladder is not in under-the-tree:
-								now the ladder is in under-the-tree;
-							now the ladder is resting on the house;
-					-- otherwise:
-						say "[lean-ladder-to-far-away]";
-		-- otherwise:
-			now the noun rests on the second noun;
-			continue the action.
+	if the location of the second noun is not the location of the player and the noun is not the player:
+		say "The [noun] is not long enough to lean it against [the second noun] from here.";
+		stop the action;
+		
+Check leaning:
+	if the noun is myself and the second noun is the tree:
+		if location is under-the-tree:
+			say "You lean against the tree nonchalantly...well that didn't work, the hornets notice you and become a bit agitated.";
+		otherwise: 
+			say "That would be a neat trick from here.";
+		stop the action;
 
-Report leaning:
-	if the noun is:
-		-- myself:
-			if the second noun is the tree:
-				if location is under-the-tree:
-					say "You lean against the tree nonchalantly...well that didn't work, the hornets notice you and become a bit agitated.";
-				otherwise: 
-					say "That would be a neat trick from here.";
-		-- ladder:
-			say "blah";
-		-- otherwise:
-			say "You lean [the noun] against the [second noun].";
+
+Check leaning:
+	if the noun is ladder and the second noun is the tree:
+		if the location is under-the-tree:
+			say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
+			
+Check leaning:
+	if the noun is ladder and the second noun is the shed:
+		if the location is outside-the-shed:
+			say "You don't think the shed would hold you if you managed to climb up on top of it.  You decide to hold on to the ladder.";
+			stop the action;
+		else if the location is in-the-shed:
+			if the player carries the ladder:
+				say "You lean the ladder back where you found it.";
+			otherwise:
+				say "The ladder is already leaning in the corner.";
+				stop the action;
+				
+Check leaning:
+	if the noun is the ladder and the second noun is the house:
+		if the location is under-the-tree or the location is on-the-porch:
+			say "You lean the ladder against the house. You can climb onto the roof now.";
+			if the ladder is not in under-the-tree:
+				now the ladder is in under-the-tree;
+
+carry out leaning:
+	now the noun rests on the second noun;
+	try silently dropping the noun;
+	continue the action.
+
 
 Rule for supplying a missing second noun while leaning:
 	say "You lean [the noun] against thin air and [they] promptly leans all the way to the ground.";
