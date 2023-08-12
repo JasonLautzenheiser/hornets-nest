@@ -8,7 +8,7 @@ Volume 1 - Metadata
 Book 1 - License
 
 To say the license:
-say "Copyright (c) 2016-2022 Jason Lautzenheiser
+say "Copyright (c) 2016-2023 Jason Lautzenheiser
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
@@ -38,8 +38,6 @@ Book 5 - Releasing
 
 Release along with the source text.
 Release along with the library card.
-
-
 
 Volume 2 - Mechanics
 
@@ -137,6 +135,11 @@ The can't put onto what's not a supporter rule response (A) is "Putting [the nou
 Rule for printing a parser error when the latest parser error is the I beg your pardon error:
   say "[one of]Bzzzzzzz.[or]The hornets laugh at your indecision.[or]Ahhh...if only I had a beer.[or]Daydreaming again?[or]Your blood pressure is rising.[or]What?[or]Come again?[or]Prithee, pardon?[in random order]"
 
+after printing the name of something (called the item) when looking:
+	if the item rests on something (called the item2):
+		say " leaning on the [printed name of item2]";
+		
+	
 
 Part 1 - Sanity Check Rules
 
@@ -199,7 +202,7 @@ Chapter 3 - Listening
 
 instead of listening:
 	if location is under-the-tree:
-		try listening to the tree;
+		try listening to the shade-tree;
 	if location is outside-the-shed:
 		say "The buzz of the nest in the tree, while lessened here is still the only noise you can hear.";
 	if location is in-the-shed:
@@ -317,7 +320,7 @@ Check shaking:
 	if the noun is:
 		-- myself:
 			say "You shake your entire body like a dog climbing out of the water, but the hornets don't seem impressed.";
-		-- the tree:
+		-- the shade-tree:
 			say "You try to shake the tree, but luckily for you, it is too large and you can't budge it.";
 		-- the bug killer:
 			do nothing;
@@ -333,10 +336,11 @@ Report shaking the bug killer:
 
 Chapter 10 - Leaning
 
-Resting on relates one thing to another.
-The verb to rest on means the resting on relation.
+Resting relates a thing to another (called restee).
+The verb to rest on means the resting  relation.
 
 Leaning it on is an action applying to two visible things.
+
 understand "lean [something] on/against [something]" as leaning it on.
 understand "lean [something]" as leaning it on.
 understand "set [something]" as leaning it on.
@@ -352,7 +356,7 @@ Rule for supplying a missing second noun while leaning something on:
 		now the noun is the player;
 	otherwise:
 		if location is under-the-tree:
-			now the second noun is the tree;
+			now the second noun is the shade-tree;
 		if location is on-the-porch:
 			now the second noun is the house;
 		if location is outside-the-shed:
@@ -364,7 +368,7 @@ Check leaning:
 		stop the action;
 		
 Check leaning:
-	if the noun is myself and the second noun is the tree:
+	if the noun is myself and the second noun is the shade-tree:
 		if location is under-the-tree:
 			say "You lean against the tree nonchalantly...well that didn't work, the hornets notice you and become a bit agitated.";
 		otherwise: 
@@ -373,7 +377,7 @@ Check leaning:
 
 
 Check leaning:
-	if the noun is ladder and the second noun is the tree:
+	if the noun is ladder and the second noun is the shade-tree:
 		if the location is under-the-tree:
 			say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
 			
@@ -395,12 +399,16 @@ Check leaning:
 			say "You lean the ladder against the house. You can climb onto the roof now.";
 			if the ladder is not in under-the-tree:
 				now the ladder is in under-the-tree;
-
+				
 carry out leaning:
 	now the noun rests on the second noun;
-	try silently dropping the noun;
+	if the player carries the noun:
+		try silently dropping the noun;
 	continue the action.
 
+report leaning:
+	if the noun is not the ladder:
+		say "You lean [the noun] on the [second noun]."
 
 Rule for supplying a missing second noun while leaning:
 	say "You lean [the noun] against thin air and [they] promptly leans all the way to the ground.";
@@ -408,9 +416,14 @@ Rule for supplying a missing second noun while leaning:
 to say lean-ladder-to-far-away:
 	say "The ladder is not long enough to lean it against [the second noun] from here.".
 
-Before putting something on the tree: 
+Before putting something on the shade-tree: 
 	if the noun is not the ladder:
 		say "You try to put [the noun] on the tree, but [they] won't stay." instead.
+		
+after taking something (called the thing):
+	if the thing rests on something:
+		now the thing does not rest on anything;
+	continue the action.
 
 Chapter 11 - Catching
 		
@@ -666,7 +679,7 @@ Understand "throw [something] at [something]" as throwing it at.
 
 Check throwing:
 	if the noun is bug killer:
-		if the second noun is the tree:
+		if the second noun is the shade-tree:
 			say "You throw [the noun] at [the second noun] and miss horribly.";
 			now bug killer is in under-the-tree instead;
 		if the second noun is the house:
@@ -676,7 +689,7 @@ Check throwing:
 	if the noun is the ladder:
 		if the location is under-the-tree:
 			say "You give the ladder a heave and if by magic it lands upright leaning against the tree.";
-			now ladder is resting on the tree;
+			now ladder rests on the shade-tree;
 			try silently dropping the ladder instead;
 		otherwise:
 			say "You awkwardly throw the ladder and it falls just as awkwardly to the ground.";
@@ -748,19 +761,7 @@ rule for supplying a missing second noun when burn-with-glasses is true:
 
 Part 3 - Out of world
 
-Chapter 1 - scl - Not for release
 
-scling is an action out of world.
-
-understand the command “scl” as something new.
-
-understand “scl” as scling.
-
-carry out scling:
-	say “List of scenery:[line break]”;
-	repeat with QQ running through visible scenery:
-		say “–[QQ][line break]”;
-	the rule succeeds;
 
 Chapter 2 - Credits
 
@@ -769,7 +770,7 @@ Understand "about" as abouting.
 Understand the command "credits" or "info" as "about".
 
 Report abouting:
-	say "[italic type][Story title][roman type] is copyright © 2016 by Jason Lautzenheiser (jlautz@sssnet.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[para]";
+	say "[italic type][Story title][roman type] is copyright © 2016-2022 by Jason Lautzenheiser (lautzenheiser.jason@gmail.com or visit by blog at http://lautzofif.wordpress.com/). It may be distributed for free, but not sold or included in any for-profit collection without written permission from the author.[para]";
 	say "This work was created just for the fun of it beginning in early 2014.  This release is made for the IntroComp 2014 contest.  Special thanks to my great testers (in no particular order):  Andrew Schultz, Daniel Stelzer, Hanon Ondricek and Marshal Tenner Winter.  Also special thanks to my wife Holly and my four children, all of whom I was able to bounce ideas off of.[para]"; 
 
 After printing the banner text:
@@ -972,7 +973,7 @@ Book 3 - Map
 
 Part 1 - Under the Tree
 
-Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wondrous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area][say-fire-is-out]".
+Under-the-tree is a room.  The printed name is "Under the Tree".   The description is "You are standing under the large shade tree in the front yard.  The tree provides wondrous shade during the summer months that you take advantage of whenever you can.  However, now as fall is in full swing and winter is approaching, the leaves are beginning to fall and pile up under the tree.  The leaves are becoming sparse in the tree[if the hornets-nest is part of the shade-tree] and you can see a hornet's nest about ten feet up on a branch[end if].  [if pile of ashes is on-stage]There is a pile of ashes under the tree.  [end if]To the south is your ancient utility shed where you store all the essentials.  You can go west to get on your porch.  [other-stuff-in-area][say-fire-is-out]".
 
 
 To say say-fire-is-out:
@@ -981,20 +982,20 @@ To say say-fire-is-out:
 		now fire-is-out is false;
 
 After deciding the scope of the player while the location is under-the-tree: 
-	if the ladder is resting on the tree: 
+	if the ladder rests on the shade-tree: 
 		place the ladder in scope.		
 		
 To say other-stuff-in-area:
 	let need_period be false;
-	if ladder is resting on tree:
+	if ladder rests on the shade-tree:
 		now need_period is true;
 		say  "The ladder is leaning against the tree";
-	if ladder is resting on the house:
+	if ladder rests on the house:
 		now need_period is true;
 		say "The ladder is leaning on the house";
 	if cut branch is in under-the-tree:
 		now need_period is true;
-		if ladder is resting on tree:
+		if ladder rests on shade-tree:
 			say " and the ";
 		otherwise:
 			say "The ";
@@ -1004,10 +1005,10 @@ To say other-stuff-in-area:
 		
 Before going up from under-the-tree:
 	if the player is carrying ladder:
-		try leaning ladder on tree;
-	if the ladder is resting on the house:
+		try leaning ladder on shade-tree;
+	if the ladder rests on the house:
 		now the player is in on-the-roof instead;
-	else if the ladder is resting on the tree:
+	else if the ladder rests on the shade-tree:
 		now the player is in up-the-tree instead;
 	otherwise:	
 		say "You never were much of a tree climber.  Besides it wouldn't be pretty if the hornets attack while you were trying to pull yourself up the tree." instead.
@@ -1074,7 +1075,7 @@ before going a direction (called which-way) in in-the-shed:
 	otherwise:
 		say "There is no exit to [the which-way]." instead.
 
-before climbing the tree in in-the-shed:
+before climbing the shade-tree in in-the-shed:
 	say "That would be quite difficult to do from inside the shed." instead.
 
 
@@ -1131,7 +1132,7 @@ Instead of looking north when location is in-the-shed:
 	try searching the window.
 
 Instead of searching the window:
-	say "Looking out the hazy window[if the hornets-nest is part of the tree], you barely make out the hornets in the tree.  [view-hornets-out-window][else] you can see the tree.[end if]".
+	say "Looking out the hazy window[if the hornets-nest is part of the shade-tree], you barely make out the hornets in the tree.  [view-hornets-out-window][else] you can see the tree.[end if]".
 
 To say view-hornets-out-window:
 	if the hornets are swarming:
@@ -1208,21 +1209,21 @@ A ladder is a thing.  A ladder is in in-the-shed.  The description is "It's a ch
 
 Before climbing the ladder:
 	if location is on-the-roof:
-		if the ladder is resting on the house:
+		if the ladder rests on the house:
 			try going down instead;
 	if location is on-the-porch:
-		if the ladder is resting on the house:
+		if the ladder rests on the house:
 			say "You climb slowly up the ladder and onto the roof.";
 			now the player is in on-the-roof instead;
 	if location is under-the-tree:
-		if the ladder is resting on the house:
+		if the ladder rests on the house:
 			say "You climb slowly up the ladder and onto the roof.";
 			now the player is in on-the-roof instead;
-		if the ladder is resting on the tree:
+		if the ladder rests on the shade-tree:
 			say "You climb as quietly as possible up the ladder until you are just a few feet away from the nest.  The hornets didn't see you coming, but now a few start to buzz around your head.";
 			try going up instead;
 		otherwise:
-			try leaning the ladder on the tree;
+			try leaning the ladder on the shade-tree;
 			try going up instead.
 
 instead of kicking the ladder:
@@ -1236,12 +1237,12 @@ before taking the ladder:
 		say "That would be quite a feat to take the very ladder your standing on." instead;
 	else if location is on-the-roof:
 		now the ladder is not scenery;
-		now the ladder is not resting on anything;
+		now the ladder does not rest on anything;
 		say "Pulling the ladder up on the roof with you is a careful balancing act trying to make sure you don't fall off.";
 		now the player carries the ladder instead;
 	otherwise:
 		if the ladder is in location:
-			now the ladder is not resting on anything;
+			now the ladder does not rest on anything;
 			now the ladder is not scenery.
 		
 after leaning the ladder on something:
@@ -1331,7 +1332,7 @@ before doing anything to the horsefly while the horsefly is off-stage:
 	
 Part 3 - Outside the shed
 
-Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However, it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder is resting on the shed]A ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
+Outside-the-shed is a room.   The printed name is "[if the player is hiding]Hiding outside[otherwise]Outside[end if] the Shed".  The description is "Your utility shed was built back in the 1860s and is falling down.  However, it[']s close to the house, easy to get to and large enough to store just about anything you need around the yard.  Your large tree is to the north and to the northwest is the front porch of your house.  [if woodpile is on-stage]Stacked to one side of the shed is a [woodpile].[end if] [if ladder rests on the shed]A ladder is leaning against the shed.[end if]".  Outside-the-shed is south of under-the-tree and southeast of on-the-porch.
 
 
 before going south in outside-the-shed when the player is blinded:
@@ -1516,14 +1517,14 @@ On-the-porch is a room.  on-the-porch is a safe-zone.  The printed name is "[if 
 
 To say other-stuff-on-the-porch:
 	let need_period be false;
-	if ladder is resting on the house:
+	if ladder rests on the house:
 		now need_period is true;
 		say "The ladder is leaning on the house";
 	if need_period is true:
 		say ".".
 
 After deciding the scope of the player while the location is On-the-porch: 
-	if the ladder is resting on the tree or the ladder is resting on the house:
+	if the ladder rests on the shade-tree or the ladder rests on the house:
 		place the ladder in scope
 
 The porch is a backdrop.  The porch is everywhere.  The description of the porch is "The front porch is large and roomy.  Plenty of space to sit and relax...if it wasn't for those hornets."
@@ -1535,7 +1536,7 @@ before going inside in on-the-porch:
 	try opening the front door instead.
 
 before going up when the player is in on-the-porch:
-	if the ladder is resting on the house:
+	if the ladder rests on the house:
 		now the player is in on-the-roof instead.
 
 before going up when the player is on the porch-swing:
@@ -1591,7 +1592,7 @@ After deciding the scope of the player while the location is up-the-tree:
 
 Chapter 1 - Hornets Nest
 
-The hornets-nest is a container.  It is part of the shade tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [if bug killer is part of the hornets-nest]Stuck in the bottom of the nest is the can of bug spray.[end if][one of]You promised your wife you wouldn't come back until the nest was gone or you wouldn't come back at all.[or][stopping]". The printed name is "hornet's nest".  The indefinite article is "a".  The hornets-nest is attackable.
+The hornets-nest is a container.  It is part of the shade-tree.  It is fixed in place. The description is "You see a gigantic hornet's nest hanging from the branch of your shade tree.  [if bug killer is part of the hornets-nest]Stuck in the bottom of the nest is the can of bug spray.[end if][one of]You promised your wife you wouldn't come back until the nest was gone or you wouldn't come back at all.[or][stopping]". The printed name is "hornet's nest".  The indefinite article is "a".  The hornets-nest is attackable.
 
 The burn-reject of the hornets-nest is "The nest is up too high to set on fire without setting the whole tree ablaze."
 
@@ -1754,21 +1755,21 @@ Book 5 - Backdrops
 
 Chapter 1 - Tree
 
-The shade tree is a supporter which is in under-the-tree. The tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade tree]Hanging from a branch is the largest hornet's nest you've ever seen.[end if][if ladder is resting on the tree] The ladder is leaning against the tree.[end if]".
+The shade-tree is a supporter which is in under-the-tree. The shade-tree is scenery. The description is "The large shade tree stands majestically in your front yard.  It is well over fifty feet tall and a hundred years old.  The tree branches spread over the front porch and shade the house from the morning sun.  [if hornets-nest is part of the shade-tree]Hanging from a branch is the largest hornet's nest you've ever seen.[end if][if ladder rests on the shade-tree] The ladder is leaning against the tree.[end if]".
 
-The think-text of the shade tree is "You wonder how old this tree really is.  It would be a shame to damage it in any way getting the hornets['] out."
+The think-text of the shade-tree is "You wonder how old this tree really is.  It would be a shame to damage it in any way getting the hornets['] out."
 
-The burn-reject of the shade tree is "Burning the tree is a bit overkill to remove the hornets."
+The burn-reject of the shade-tree is "Burning the tree is a bit overkill to remove the hornets."
 
-understand "branch" as tree when cut branch is not in under-the-tree.
-understand "branches" or "branchs" as tree.
+understand "branch" as shade-tree when cut branch is not in under-the-tree.
+understand "branches" or "branchs" or "tree" or "shade tree" or "shade" as shade-tree.
 
 after deciding the scope of the player:
-	place the tree in scope;
+	place the shade-tree in scope;
 
 Rule for reaching inside a room:
 	if the location is up-the-tree:
-		if the noun is the shade tree or the noun is the hornets or the noun is the hornets-nest:
+		if the noun is the shade-tree or the noun is the hornets or the noun is the hornets-nest:
 			allow access;
 		otherwise:
 			say "You can only look at [the noun] from a distance.";
@@ -1777,36 +1778,33 @@ Rule for reaching inside a room:
 		say "You can only look at [the noun] from a distance.";
 		deny access.
 	
-instead of touching the tree:
+instead of touching the shade-tree:
 	say "You affectionately touch the tree."
 
-Before examining tree:
+Before examining shade-tree:
 	if location is in-the-shed:
 		say "You look out the window and see the tree in front of your house." instead.
 		
-does the player mean climbing the tree when the player is in under-the-tree: it is very likely.
-
-[before climbing the tree:
-	try going up instead;]
+does the player mean climbing the shade-tree when the player is in under-the-tree: it is very likely.
 	
-instead of taking the tree:
+instead of taking the shade-tree:
 	say "[one of]You think that if you could just move the tree to the other side of the yard your problem will be solved.  You wrap your arms as far as you can around the tree and lift.  Nothing happens except for an inaudible pop that comes from your back.[or]You're back is still sore from your last attempt at moving the large tree, so you'll try to think of some other way to move the nest from the front yard.[stopping]";
 	
-instead of listening to the tree:
+instead of listening to the shade-tree:
 	say "You hear the buzz of the hornets as the fly around the nest."
 	
 
 		
-Instead of looking under the tree:
+Instead of looking under the shade-tree:
 	say "Throughout the [yard] you see the tree's [roots] that stretch out from its base."
 	
-Instead of pushing the tree:
+Instead of pushing the shade-tree:
 	say "You strain against the tree but you fail to budge it."
 
-instead of attacking or kicking the tree:
-	say "It's really not the tree's fault [if the hornets-nest is part of the tree]that it has that hornet's nest in there[end if].";
+instead of attacking or kicking the shade-tree:
+	say "It's really not the tree's fault [if the hornets-nest is part of the shade-tree]that it has that hornet's nest in there[end if].";
 
-Instead of cutting the tree:
+Instead of cutting the shade-tree:
 	if player carries the hand-saw:
 		if location is up-the-tree:
 			if cut branch is in under-the-tree:
@@ -1830,8 +1828,8 @@ Instead of cutting the tree:
 	otherwise:
 		say "You make a cutting motion on the tree with your hand and succeed in nothing more than scraping up the side of your hand.";
 		
-The bark is a flimsy.  The bark is part of the shade tree.
-The roots are a flimsy.  The roots are part of the shade tree.  the action-refusal is  "The roots are pretty necessary to the health of the tree.  You don't want to risk anything."
+The bark is a flimsy.  The bark is part of the shade-tree.
+The roots are a flimsy.  The roots are part of the shade-tree.  the action-refusal is  "The roots are pretty necessary to the health of the tree.  You don't want to risk anything."
 
 The yard is a backdrop which is everywhere.  The description is "A large yard and you take care of it as well as you can."
 
@@ -1850,7 +1848,7 @@ instead of kicking the sun:
 
 Chapter 3 - House
 
-The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got its problems....but it's home.[if ladder is resting on the house]  The ladder is leaning against the house.[end if]".  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
+The house is a backdrop which is everywhere.  The description of the house is "Your century old farm house sits in the middle of your farm.  It's old, it's got its problems....but it's home.[if ladder rests on the house]  The ladder is leaning against the house.[end if]".  Understand "farm house" or "century old farm house" or "old farm house" or "home/farm/farmhouse" as house.
 
 
 Chapter 4 - Shed
@@ -2261,6 +2259,14 @@ Volume 9 - Testing & Debugging
 
 Book 1 - Test commands - Not for release
 
+[Before printing the locale description (this is the dump locale table rule):
+	say "Locale Priority list:";
+	repeat through Table of Locale Priorities:
+		let the flag be whether or not the notable-object entry is mentioned;
+		say "[line break] [notable-object entry]: [locale description priority entry]";
+		if the flag is false, now the notable-object entry is not mentioned;
+	say line break.]
+
 Requesting puzzle status is an action out of world.
 Report requesting puzzle status: 
 	say "Puzzles in process: [list of running puzzles].";
@@ -2275,6 +2281,20 @@ Report requesting puzzle status:
 
 Understand "puzzles" as requesting puzzle status.
 
+Chapter 1 - scl  (list of scenery)
+
+scling is an action out of world.
+
+understand the command “scl” as something new.
+
+understand “scl” as scling.
+
+carry out scling:
+	say “List of scenery:[line break]”;
+	repeat with QQ running through visible scenery:
+		say “–[QQ][line break]”;
+	the rule succeeds;
+
 	 
 Book 2 - Tests - Not for release
 
@@ -2286,7 +2306,8 @@ test smoke with "test wood/n/drop wood/take leaves/burn wood with glasses/drop l
 test cut with "s/in/take saw/take ladder/n/n/climb ladder/cut tree/d/z/n".
 test rocket with "test get-can/take fly/n/give fly to spider/take wood/n/drop wood/burn wood with glasses/put can in fire".
 test flamethrower with "test get-can/catch fly/n/throw fly in web/get wood/n/drop wood/burn wood with glasses/take torch".
-test hit-with-ladder with "s/in/take ladder/out/n/hit nest with ladder"
+test hit-with-ladder with "s/in/take ladder/out/n/hit nest with ladder".
+test blah with "restart/y/s".
 
 Book 3 - Possible scores - Not for release
 
