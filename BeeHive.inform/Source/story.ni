@@ -336,7 +336,7 @@ Report shaking the bug killer:
 
 Chapter 10 - Leaning
 
-Resting relates a thing to another (called restee).
+Resting relates various things to one thing (called restee).
 The verb to rest on means the resting  relation.
 
 Leaning it on is an action applying to two visible things.
@@ -350,24 +350,27 @@ understand "rest [something] on/against [something]" as leaning it on.
 understand "lean on/against [something]" as leaning it on.
 understand "rest on/against [something]" as leaning it on.
 	
-Rule for supplying a missing second noun while leaning something on:
-	if the noun is not the ladder:
-		now the second noun is the noun;
-		now the noun is the player;
-	otherwise:
-		if location is under-the-tree:
-			now the second noun is the shade-tree;
-		if location is on-the-porch:
-			now the second noun is the house;
-		if location is outside-the-shed:
-			now the second noun is the shed.
+Rule for supplying a missing second noun while leaning something on (this is the ambigous lean on rule):
+	if the noun is:
+		-- the ladder:
+			if location is: 
+				-- under-the-tree:
+					now the second noun is the shade-tree;
+				-- on-the-porch:
+					now the second noun is the house;
+				-- outside-the-shed:
+					now the second noun is the shed;
+				-- in-the-shed:
+					now the second noun is shed;
+		-- otherwise: 
+			now the second noun is the noun;
+			now the noun is the player;	
 
-Check leaning:
+Check leaning it on (this is the check leaning on something not in current location rule):
 	if the location of the second noun is not the location of the player and the noun is not the player:
-		say "The [noun] is not long enough to lean it against [the second noun] from here.";
-		stop the action;
+		say "The [noun] is not long enough to lean it against [the second noun] from here." instead;
 		
-Check leaning:
+Check leaning it on (this is the check leaning myself on something rule):
 	if the noun is myself and the second noun is the shade-tree:
 		if location is under-the-tree:
 			say "You lean against the tree nonchalantly...well that didn't work, the hornets notice you and become a bit agitated.";
@@ -376,39 +379,44 @@ Check leaning:
 		stop the action;
 
 
-Check leaning:
+Check leaning it on (this is the check lean ladder on tree rule):
 	if the noun is ladder and the second noun is the shade-tree:
-		if the location is under-the-tree:
-			say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
+		if the location is not under-the-tree:
+			say "[lean-ladder-to-far-away]" instead.
 			
-Check leaning:
+Check leaning it on (this is the check lean ladder on shed rule):
 	if the noun is ladder and the second noun is the shed:
 		if the location is outside-the-shed:
-			say "You don't think the shed would hold you if you managed to climb up on top of it.  You decide to hold on to the ladder.";
-			stop the action;
+			say "You don't think the shed would hold you if you managed to climb up on top of it.  You decide to hold on to the ladder." instead;
 		else if the location is in-the-shed:
 			if the player carries the ladder:
-				say "You lean the ladder back where you found it.";
+				say "You lean the ladder back where you found it." instead;
 			otherwise:
-				say "The ladder is already leaning in the corner.";
+				say "The ladder is already leaning in the corner." instead;
 				stop the action;
 				
-Check leaning:
+Check leaning it on (this is the check lean ladder on house rule):
 	if the noun is the ladder and the second noun is the house:
-		if the location is under-the-tree or the location is on-the-porch:
-			say "You lean the ladder against the house. You can climb onto the roof now.";
-			if the ladder is not in under-the-tree:
-				now the ladder is in under-the-tree;
-				
-carry out leaning:
+		if the location is not under-the-tree and the location is not on-the-porch:
+			say "[lean-ladder-to-far-away]" instead.
+
+carry out leaning it on:
 	now the noun rests on the second noun;
 	if the player carries the noun:
-		try silently dropping the noun;
+		try silently dropping the noun.
+
+after leaning the ladder on something:
+	now the ladder is scenery;
 	continue the action.
 
-report leaning:
-	if the noun is not the ladder:
-		say "You lean [the noun] on the [second noun]."
+report leaning (this is the report leaning on rule):
+	if the noun is ladder and the second noun is the shade-tree :
+		say "You lean the ladder against the tree, being careful not to bump the nest in the process.";
+		stop the action;
+	if the noun is ladder and the second noun is house:
+		say "You lean the ladder against the house. You can climb onto the roof now.";	
+		stop the action;
+	say "You lean [the noun] on the [second noun]."
 
 Rule for supplying a missing second noun while leaning:
 	say "You lean [the noun] against thin air and [they] promptly leans all the way to the ground.";
@@ -419,7 +427,12 @@ to say lean-ladder-to-far-away:
 Before putting something on the shade-tree: 
 	if the noun is not the ladder:
 		say "You try to put [the noun] on the tree, but [they] won't stay." instead.
-		
+
+[the check leaning on something not in current location rule is listed in the leaning on rulebook.		
+the check lean ladder on tree rule is listed in the leaning on rulebook.
+the check leaning myself on something rule is listed in the leaning on rulebook.
+the check lean ladder on shed rule is listed in the leaning on rulebook.]
+
 after taking something (called the thing):
 	if the thing rests on something:
 		now the thing does not rest on anything;
@@ -1245,9 +1258,6 @@ before taking the ladder:
 			now the ladder does not rest on anything;
 			now the ladder is not scenery.
 		
-after leaning the ladder on something:
-	now the ladder is scenery.
-	
 The describe what's on scenery supporters in room descriptions rule is not listed in any rulebook.
 The examine supporters rule is not listed in any rulebook.
 
