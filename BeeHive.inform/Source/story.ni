@@ -371,13 +371,11 @@ Check leaning it on (this is the check leaning on something not in current locat
 		say "The [noun] is not long enough to lean it against [the second noun] from here." instead;
 		
 Check leaning it on (this is the check leaning myself on something rule):
-	if the noun is myself and the second noun is the shade-tree:
-		if location is under-the-tree:
-			say "You lean against the tree nonchalantly...well that didn't work, the hornets notice you and become a bit agitated.";
+	if the noun is myself:
+		if the location of the second noun is the location of the player:
+			say "You lean against the [second noun] nonchalantly...well that didn't work, the hornets notice you and become a bit agitated." instead;
 		otherwise: 
-			say "That would be a neat trick from here.";
-		stop the action;
-
+			say "That would be a neat trick from here." instead;
 
 Check leaning it on (this is the check lean ladder on tree rule):
 	if the noun is ladder and the second noun is the shade-tree:
@@ -393,7 +391,6 @@ Check leaning it on (this is the check lean ladder on shed rule):
 				say "You lean the ladder back where you found it." instead;
 			otherwise:
 				say "The ladder is already leaning in the corner." instead;
-				stop the action;
 				
 Check leaning it on (this is the check lean ladder on house rule):
 	if the noun is the ladder and the second noun is the house:
@@ -427,11 +424,6 @@ to say lean-ladder-to-far-away:
 Before putting something on the shade-tree: 
 	if the noun is not the ladder:
 		say "You try to put [the noun] on the tree, but [they] won't stay." instead.
-
-[the check leaning on something not in current location rule is listed in the leaning on rulebook.		
-the check lean ladder on tree rule is listed in the leaning on rulebook.
-the check leaning myself on something rule is listed in the leaning on rulebook.
-the check lean ladder on shed rule is listed in the leaning on rulebook.]
 
 after taking something (called the thing):
 	if the thing rests on something:
