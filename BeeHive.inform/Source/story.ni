@@ -386,11 +386,11 @@ Check leaning it on (this is the check lean ladder on shed rule):
 	if the noun is ladder and the second noun is the shed:
 		if the location is outside-the-shed:
 			say "You don't think the shed would hold you if you managed to climb up on top of it.  You decide to hold on to the ladder." instead;
-		else if the location is in-the-shed:
-			if the player carries the ladder:
-				say "You lean the ladder back where you found it." instead;
-			otherwise:
-				say "The ladder is already leaning in the corner." instead;
+		else if the location is in-the-shed and the player carries the ladder:
+			try silently dropping the noun;
+			say "You lean the ladder back where you found it." instead;
+		else if the location is in-the-shed and the player does not carry the ladder:
+			say "The ladder is already leaning in the corner." instead;
 				
 Check leaning it on (this is the check lean ladder on house rule):
 	if the noun is the ladder and the second noun is the house:
@@ -2310,6 +2310,10 @@ test rocket with "test get-can/take fly/n/give fly to spider/take wood/n/drop wo
 test flamethrower with "test get-can/catch fly/n/throw fly in web/get wood/n/drop wood/burn wood with glasses/take torch".
 test hit-with-ladder with "s/in/take ladder/out/n/hit nest with ladder".
 test blah with "restart/y/s".
+
+chapter 1 - Ladder
+
+test lean-ladder-in-shed with "s/s/lean ladder/i/take ladder/i/lean ladder/i".
 
 Book 3 - Possible scores - Not for release
 
